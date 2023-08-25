@@ -22,6 +22,14 @@ namespace SmartEdu.Data
             //modelBuilder.Entity<BlogPost>().HasKey(x => new { x.BlogsId, x.PostsId });
             
         }
-        
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<ExtraClass> ExtraClasses { get; set; }
+        public DbSet<MainClass> MainClasses { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Parent> Parents { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+
+
     }
 }
