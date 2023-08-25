@@ -14,8 +14,7 @@ namespace SmartEdu.Entities
         public int ParentId { get; set; }
         public Parent Parent { get; set; } // moi hoc sinh chi thuoc ve 1 phu huynh
         [ForeignKey("MainClass")]
-
-        public MainClass MainClassId { get; set; }
+        public int MainClassId { get; set; }
         public MainClass MainClass { get; set; }
 
         public ICollection<ExtraClass> ExtraClasses { get; set; }
