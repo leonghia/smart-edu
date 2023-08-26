@@ -33,7 +33,8 @@ namespace SmartEdu.Configurations
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            //var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Environment.GetEnvironmentVariable("SE_DB");
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
         }
 
