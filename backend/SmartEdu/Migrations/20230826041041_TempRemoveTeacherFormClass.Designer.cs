@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartEdu.Data;
 
@@ -11,9 +12,11 @@ using SmartEdu.Data;
 namespace SmartEdu.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230826041041_TempRemoveTeacherFormClass")]
+    partial class TempRemoveTeacherFormClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,15 +69,15 @@ namespace SmartEdu.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b0c43766-5c55-4a82-a9ac-91d04eb79cef",
-                            ConcurrencyStamp = "6306f168-ffd9-4fcd-903b-eb2aebdb8a7b",
+                            Id = "4c35255c-274e-499f-93e1-1180f7272315",
+                            ConcurrencyStamp = "c6fa7d39-4d52-494c-be5a-bf74f7ac4f83",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "df899bfe-f156-4cd2-8872-14c02fe24166",
-                            ConcurrencyStamp = "bd03de2d-8858-4faf-bda1-6f37a0ee9919",
+                            Id = "72ff2f12-ffa5-4774-b67a-8d0215d84550",
+                            ConcurrencyStamp = "b37c72de-70e3-4b98-9eca-21b03eaa666d",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -281,58 +284,6 @@ namespace SmartEdu.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MainClasses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "10A"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "10B"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "10C"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "10D"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "10E"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "10G"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "10H"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "10I"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "10K"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "10M"
-                        });
                 });
 
             modelBuilder.Entity("SmartEdu.Entities.Parent", b =>
