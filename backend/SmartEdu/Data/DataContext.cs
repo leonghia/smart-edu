@@ -15,13 +15,14 @@ namespace SmartEdu.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            //modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
             //modelBuilder.Entity<Blog>().HasMany(x => x.BlogPosts).WithOne(x => x.Blog).HasForeignKey(x => x.BlogsId);
             //modelBuilder.Entity<Post>().HasMany(x => x.BlogPosts).WithOne(x => x.Post).HasForeignKey(x => x.PostsId);
             //modelBuilder.Entity<BlogPost>().HasKey(x => new { x.BlogsId, x.PostsId });
             
             modelBuilder.ApplyConfiguration(new MainClassConfiguration());
+            modelBuilder.ApplyConfiguration(new ExtraClassConfiguration());
 
         }
         public DbSet<Document> Documents { get; set; }

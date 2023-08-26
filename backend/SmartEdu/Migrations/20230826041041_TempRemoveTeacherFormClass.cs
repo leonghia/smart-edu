@@ -24,15 +24,15 @@ namespace SmartEdu.Migrations
                 name: "IX_MainClasses_TeacherId",
                 table: "MainClasses");
 
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "ac67196b-3d4a-44ed-9b49-b35343e57bb0");
+            //migrationBuilder.DeleteData(
+            //    table: "AspNetRoles",
+            //    keyColumn: "Id",
+            //    keyValue: "ac67196b-3d4a-44ed-9b49-b35343e57bb0");
 
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "f91facd7-5027-4c85-828a-3c9a0994f2ba");
+            //migrationBuilder.DeleteData(
+            //    table: "AspNetRoles",
+            //    keyColumn: "Id",
+            //    keyValue: "f91facd7-5027-4c85-828a-3c9a0994f2ba");
 
             migrationBuilder.DropColumn(
                 name: "TeacherId",
@@ -51,14 +51,14 @@ namespace SmartEdu.Migrations
                 oldClrType: typeof(int),
                 oldType: "int");
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "4c35255c-274e-499f-93e1-1180f7272315", "c6fa7d39-4d52-494c-be5a-bf74f7ac4f83", "Admin", "ADMIN" },
-                    { "72ff2f12-ffa5-4774-b67a-8d0215d84550", "b37c72de-70e3-4b98-9eca-21b03eaa666d", "User", "USER" }
-                });
+            //migrationBuilder.InsertData(
+            //    table: "AspNetRoles",
+            //    columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+            //    values: new object[,]
+            //    {
+            //        { "4c35255c-274e-499f-93e1-1180f7272315", "c6fa7d39-4d52-494c-be5a-bf74f7ac4f83", "Admin", "ADMIN" },
+            //        { "72ff2f12-ffa5-4774-b67a-8d0215d84550", "b37c72de-70e3-4b98-9eca-21b03eaa666d", "User", "USER" }
+            //    });
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ExtraClasses_Teachers_TeacherId",
