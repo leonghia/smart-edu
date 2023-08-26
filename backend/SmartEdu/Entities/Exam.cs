@@ -8,7 +8,7 @@ namespace SmartEdu.Entities
         public string Subject { get; set; }
         public double Score { get; set; }
 
-        public byte type { get; set; }
+        public byte Type { get; set; }
 
         [ForeignKey("Student")]
         public int StudentId { get; set; }
