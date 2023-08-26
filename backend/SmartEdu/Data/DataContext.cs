@@ -21,6 +21,8 @@ namespace SmartEdu.Data
             //modelBuilder.Entity<Post>().HasMany(x => x.BlogPosts).WithOne(x => x.Post).HasForeignKey(x => x.PostsId);
             //modelBuilder.Entity<BlogPost>().HasKey(x => new { x.BlogsId, x.PostsId });
             
+            modelBuilder.ApplyConfiguration(new MainClassConfiguration());
+
         }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ExtraClass> ExtraClasses { get; set; }
