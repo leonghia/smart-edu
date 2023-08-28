@@ -14,5 +14,9 @@ namespace SmartEdu.Entities
         //public ICollection<ExtraClass> ExtraClasses { get; set; }
         public ICollection<Document> Documents { get; set; }
 
+        [ForeignKey("Subject")]
+        public int SubjectId { get; set; }
+        public Subject Subject { get; set; }
+
     }
 }
