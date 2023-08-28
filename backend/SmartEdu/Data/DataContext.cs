@@ -23,6 +23,7 @@ namespace SmartEdu.Data
             
             modelBuilder.ApplyConfiguration(new MainClassConfiguration());
             modelBuilder.ApplyConfiguration(new ExtraClassConfiguration());
+            modelBuilder.ApplyConfiguration(new SubjectConfiguration());
 
         }
         public DbSet<Document> Documents { get; set; }
