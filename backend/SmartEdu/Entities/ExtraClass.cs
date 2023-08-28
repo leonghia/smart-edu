@@ -15,6 +15,6 @@ namespace SmartEdu.Entities
 
         [ForeignKey("Subject")]
         public int SubjectId { get; set; }
-        public Subject Subject { get; set; }
+        public Subject? Subject { get; set; }
     }
 }
