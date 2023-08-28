@@ -28,5 +28,7 @@ namespace SmartEdu.Services.AccountService
         Task<ServerResponse<AuthResponseUserDTO>> GoogleLogin(GoogleAuthUserDTO googleAuthUserDTO);
         Task<ServerResponse<AuthResponseUserDTO>> FacebookLogin(FacebookAuthUserDTO facebookAuthUserDTO);
         Task<ServerResponse<GetUserDTO>> UpdateProfileImage(MultipleFilesModel model, ModelStateDictionary modelState);
+
+        Task<ServerResponse<object>> SeedingUsers();
     }
 }

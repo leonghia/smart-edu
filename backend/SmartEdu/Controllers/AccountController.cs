@@ -25,7 +25,18 @@ namespace SmartEdu.Controllers
         {
             _userManager = userManager;
             _mapper = mapper;
-            _accountService = accountService;           
+            _accountService = accountService;    
+        }
+        /// <summary>
+        /// Seeding data(after re-create database).
+        /// </summary>
+        /// <returns></returns>  
+
+        [HttpPost("seeding-data")]
+        public async Task<IActionResult> Seeding()
+        {
+            var serverResponse = await _accountService.SeedingUsers();
+            return Ok(serverResponse);
         }
 
         /// <summary>
