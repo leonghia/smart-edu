@@ -1,0 +1,34 @@
+Huong dan Git
+
+I. Cach xoa ban sao (sau khi code da duoc duyet)
+git checkout main
+git fetch
+git add .
+git stash
+git fetch
+git pull
+git branch
+git branch -d ten_ban_sao
+git push origin -d ten_ban_sao
+
+II. Code first
+dotnet-ef migrations add noidungcommit
+dotnet-ef database update
+
+III. Cach nop ban sao len github (cho truong nhom duyet)
+git status
+git add .
+git commit -m "Fix two files in Migrations"
+git push origin head
+vao github tao pull request
+
+IV. Cach tao ban sao
+git checkout -b ten_ban_sao
+
+V. Cach lay ban goc moi nhat ve
+git checkout main
+git fetch
+git add .
+git stash
+git fetch 
+git pull
