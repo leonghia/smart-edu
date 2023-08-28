@@ -581,5 +581,54 @@ namespace SmartEdu.Services.AccountService
             }        
 
         }
+
+        public async Task<ServerResponse<object>> SeedingUsers()
+        {
+            var serverResponse = new ServerResponse<object>();
+
+            var roles = new List<string> { "User" };
+
+            var registerUserDTOs =new List<RegisterUserDTO>
+            {
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Giang",
+                    UserName = "giang",
+                    Email = "giang@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Pham Thi Nguyet Anh",
+                    UserName = "anhpham",
+                    Email = "anh.pham@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Dam Thuy Duong",
+                    UserName = "duong",
+                    Email = "duong@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles
+                }
+            };
+
+            foreach (var registerUserDTO in registerUserDTOs)
+            {
+                var user = _mapper.Map<User>(registerUserDTO);
+                // tao tai khoan cho mooi giao vien va them vao trong DB
+
+                await _userManager.CreateAsync(user,
+                    registerUserDTO.Password);
+                await _userManager.AddToRolesAsync(user,
+                    roles);
+            }
+
+            serverResponse.Message = "Seeding users successfully";
+            return serverResponse;
+        }
     }
 }

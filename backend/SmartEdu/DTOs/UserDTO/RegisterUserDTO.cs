@@ -23,5 +23,7 @@ namespace SmartEdu.DTOs.UserDTO
 
         [Required]
         public ICollection<string> Roles { get; set; }      
+
+        //public int SubjectId { get; set; }
     }
 }
