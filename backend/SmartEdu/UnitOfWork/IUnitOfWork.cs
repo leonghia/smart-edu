@@ -8,6 +8,7 @@ namespace SmartEdu.UnitOfWork
         IGenericRepository<Teacher> TeacherRepository { get; }
         IGenericRepository<Student> StudentRepository { get; }
         IGenericRepository<Parent> ParentRepository { get; }
+        IGenericRepository<Document> DocumentRepository { get; }
         Task Save();
     }
 }
