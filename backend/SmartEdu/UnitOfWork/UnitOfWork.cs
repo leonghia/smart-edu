@@ -6,12 +6,20 @@ namespace SmartEdu.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DataContext _context;             
-
+        private readonly DataContext _context;
+        private IGenericRepository<Teacher> _teacherRepository;
+        private IGenericRepository<Student> _studentRepository;
+        private IGenericRepository<Parent> _parentRepository;
         public UnitOfWork(DataContext context)
         {
             _context = context;
-        }          
+        }
+
+        public IGenericRepository<Teacher> TeacherRepository => _teacherRepository ??= new GenericRepository<Teacher>(_context);
+
+        public IGenericRepository<Student> StudentRepository => _studentRepository ??= new GenericRepository<Student>(_context);
+
+        public IGenericRepository<Parent> ParentRepository => _parentRepository ??= new GenericRepository<Parent>(_context);
 
         public void Dispose()
         {

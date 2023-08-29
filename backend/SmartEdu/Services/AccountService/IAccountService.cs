@@ -30,5 +30,8 @@ namespace SmartEdu.Services.AccountService
         Task<ServerResponse<GetUserDTO>> UpdateProfileImage(MultipleFilesModel model, ModelStateDictionary modelState);
 
         Task<ServerResponse<object>> SeedingUsers();
+        Task<ServerResponse<object>> SeedingTeachers();
+        Task<ServerResponse<object>> SeedingStudents();
+        Task<ServerResponse<object>> SeedingParents();
     }
 }
