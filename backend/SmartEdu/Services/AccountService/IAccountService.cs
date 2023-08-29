@@ -33,5 +33,6 @@ namespace SmartEdu.Services.AccountService
         Task<ServerResponse<object>> SeedingTeachers();
         Task<ServerResponse<object>> SeedingStudents();
         Task<ServerResponse<object>> SeedingParents();
+        Task<ServerResponse<object>> SeedingData();
     }
 }
