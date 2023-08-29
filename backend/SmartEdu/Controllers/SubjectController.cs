@@ -18,21 +18,21 @@ namespace SmartEdu.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
-            return await base.GetAll<GetSubjectDTO>(requestParams,null,null,new List<string>{"Name"});
+            return await base.GetAll<GetSubjectDTO>(requestParams,null,null,null);
         }
 
         [HttpGet("{id:int}", Name = "GetSubjectById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             return await base.GetSingle<GetSubjectDTO>(sub => sub.Id == id,
-                new List<string> { "Subject" });
+                null);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddSubjectDTO addSubjectDTO)
         {
-            return await base.Add<AddSubjectDTO>(addSubjectDTO, "GetParentById");
+            return await base.Add<AddSubjectDTO>(addSubjectDTO, "GetSubjectById");
         }
 
 

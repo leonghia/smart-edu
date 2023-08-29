@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.ParentDTO;
+using SmartEdu.DTOs.StudentDTO;
 using SmartEdu.DTOs.SubjectDTO;
 using SmartEdu.DTOs.TeacherDTO;
 using SmartEdu.DTOs.UserDTO;
@@ -31,6 +32,10 @@ namespace SmartEdu.Configurations
             CreateMap<AddSubjectDTO, Subject>();
             CreateMap<Subject, GetSubjectDTO>();
             CreateMap<UpdateSubjectDTO, Subject>();
+
+            CreateMap<AddStudentDTO, Student>();
+            CreateMap<Student, GetStudentDTO>();
+            CreateMap<UpdateStudentDTO, Student>();
 
         }
     }
