@@ -26,7 +26,7 @@ namespace SmartEdu.Controllers
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             return await base.GetSingle<GetParentDTO>(p => p.Id == id,
-                new List<string> { "Parent" });
+                new List<string> { "User" });
         }
 
 
