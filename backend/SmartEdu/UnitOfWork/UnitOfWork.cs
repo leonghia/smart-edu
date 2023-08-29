@@ -10,6 +10,7 @@ namespace SmartEdu.UnitOfWork
         private IGenericRepository<Teacher> _teacherRepository;
         private IGenericRepository<Student> _studentRepository;
         private IGenericRepository<Parent> _parentRepository;
+        private IGenericRepository<Document> _documentRepository;
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -20,6 +21,8 @@ namespace SmartEdu.UnitOfWork
         public IGenericRepository<Student> StudentRepository => _studentRepository ??= new GenericRepository<Student>(_context);
 
         public IGenericRepository<Parent> ParentRepository => _parentRepository ??= new GenericRepository<Parent>(_context);
+
+        public IGenericRepository<Document> DocumentRepository => _documentRepository ??= new GenericRepository<Document>(_context);
 
         public void Dispose()
         {
