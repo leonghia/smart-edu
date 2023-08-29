@@ -34,21 +34,21 @@ namespace SmartEdu.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddTeacherDTO addTeacherDTO)
         {
-            return await base.Add(addTeacherDTO, "GetTeacherById");
+            return await base.Add<AddTeacherDTO>(addTeacherDTO, "GetTeacherById");
         }
 
 
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateTeacherDTO updateTeacherDTO)
         {
-            return await base.Update<UpdateTeacherDTO>(d => d.Id == id, updateTeacherDTO);
+            return await base.Update<UpdateTeacherDTO>(t => t.Id == id, updateTeacherDTO);
         }
 
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return await base.Delete(d => d.Id == id, id);
+            return await base.Delete(t => t.Id == id, id);
         }
     }
 }
