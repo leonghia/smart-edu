@@ -1332,7 +1332,6 @@ namespace SmartEdu.Services.AccountService
                 {
                     var t = new Teacher
                     {
-                        Id = id,
                         UserId = user.Id,
                         MainClassId = mainClassId,
                         SubjectId = 1
@@ -1374,7 +1373,6 @@ namespace SmartEdu.Services.AccountService
                     }
                     var student = new Student
                     {
-                        Id = id,
                         UserId = user.Id,
                         ParentId = id,
                         MainClassId = mainClassId,
@@ -1408,7 +1406,6 @@ namespace SmartEdu.Services.AccountService
                 {
                     var parent = new Parent
                     {
-                        Id = id,
                         UserId = user.Id,
                     };
                     parents.Add(parent);
