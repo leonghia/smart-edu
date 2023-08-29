@@ -22,8 +22,8 @@ namespace SmartEdu.DTOs.UserDTO
         public string Password { get; set; }
 
         [Required]
-        public ICollection<string> Roles { get; set; }      
+        public ICollection<string> Roles { get; set; }
 
-        //public int SubjectId { get; set; }
+        public byte Type { get; set; }
     }
 }
