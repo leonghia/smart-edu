@@ -720,7 +720,7 @@ namespace SmartEdu.Services.AccountService
                 {
                     FullName = "Nguyen Thuy Duong",
                     UserName = "duong0133058338",
-                    Email = "duy0133058338@gmail.com",
+                    Email = "duong0133058338@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1
@@ -957,6 +957,331 @@ namespace SmartEdu.Services.AccountService
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1
+                },
+
+                // Parents
+                new RegisterUserDTO // 1
+                {
+                    FullName = "Leu Minh Duc",
+                    UserName = "duc0149107377",
+                    Email = "duc0149107377@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 2
+                {
+                    FullName = "Nguyen Ngoc Bao",
+                    UserName = "bao0116701758",
+                    Email = "bao0116701758@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 3
+                {
+                    FullName = "Pham Viet Hung",
+                    UserName = "hung0133530105",
+                    Email = "hung0133530105@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 4
+                {
+                    FullName = "Bui Thi Quynh Mai",
+                    UserName = "mai3616460199",
+                    Email = "mai3616460199@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 5
+                {
+                    FullName = "Vu Tuan Minh ",
+                    UserName = "minh1734705112",
+                    Email = "minh1734705112@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 6
+                {
+                    FullName = "Nguyen The Toan",
+                    UserName = "toan0149107460",
+                    Email = "toan0149107460@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 7
+                {
+                    FullName = "Duong My Hanh",
+                    UserName = "hanh0116989583",
+                    Email = "hanh0116989583@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 8
+                {
+                    FullName = "Nguyen Manh Dung",
+                    UserName = "dung0150499677",
+                    Email = "dung0150499677@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 9
+                {
+                    FullName = "Pham Phuong Thuy",
+                    UserName = "thuy0116479556",
+                    Email = "thuy0116479556@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 10
+                {
+                    FullName = "Nguyen Thuy Dung",
+                    UserName = "dung0133058338",
+                    Email = "dung0133058338@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 11
+                {
+                    FullName = "Luu Thi Hong",
+                    UserName = "hong0116971907",
+                    Email = "hong0116971907@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 12
+                {
+                    FullName = "Nguyen Huu Minh",
+                    UserName = "minh0116952467",
+                    Email = "minh0116952467@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 13
+                {
+                    FullName = "Nguyen Huy Long",
+                    UserName = "long0149107469",
+                    Email = "long0149107469@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 14
+                {
+                    FullName = "Nguyen Duc Toan",
+                    UserName = "toan0116575041",
+                    Email = "toan0116575041@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 15
+                {
+                    FullName = "Vu Duc Dam",
+                    UserName = "dam0116701214",
+                    Email = "dam0116701214@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 16
+                {
+                    FullName = "Nguyen Trung Thanh",
+                    UserName = "thanh3316697828",
+                    Email = "thanh3316697828@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 17
+                {
+                    FullName = "Le Duy Khanh",
+                    UserName = "khanh0137566271",
+                    Email = "khanh0137566271@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO // 18
+                {
+                    FullName = "Nguyen Minh Ngoc",
+                    UserName = "ngoc0150707773",
+                    Email = "ngoc0150707773@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //19
+                {
+                    FullName = "Bui Hai Luong",
+                    UserName = "luong0134001874",
+                    Email = "luong0134001874@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //20
+                {
+                    FullName = "Nguyen Gia Bao",
+                    UserName = "bao0116973081",
+                    Email = "bao0116973081@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //21
+                {
+                    FullName = "Nguyen Phuc Duc",
+                    UserName = "duc0116574901",
+                    Email = "duc0116574901@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //22
+                {
+                    FullName = "Hoang Huong Nhung",
+                    UserName = "nhung0150498659",
+                    Email = "nhung0150498659@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //23
+                {
+                    FullName = "Trinh Xuan Thanh",
+                    UserName = "thanh0155210714",
+                    Email = "thanh0155210714@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //24
+                {
+                    FullName = "Nguyen Vu Tien",
+                    UserName = "tien0116695176",
+                    Email = "tien0116695176@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //25
+                {
+                    FullName = "Pham Thi Hang",
+                    UserName = "hang0134705129",
+                    Email = "hang0134705129@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //26
+                {
+                    FullName = "Hoang Kim Trang",
+                    UserName = "trang0133530178",
+                    Email = "trang0133530178@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //27
+                {
+                    FullName = "Hoang Thi Men",
+                    UserName = "men0134705133",
+                    Email = "men0134705133@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //28
+                {
+                    FullName = "Mai Thien Hoang",
+                    UserName = "hoang0134705135",
+                    Email = "hoang0134705135@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //29
+                {
+                    FullName = "Le Tien Tuan",
+                    UserName = "tuan0100712147",
+                    Email = "tuan0100712147@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //30
+                {
+                    FullName = "Tran Xuan Linh",
+                    UserName = "linh0133487571",
+                    Email = "linh0133487571@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },new RegisterUserDTO //31
+                {
+                    FullName = "Le Minh Quan",
+                    UserName = "quan0133530254",
+                    Email = "quan0133530254@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //32
+                {
+                    FullName = "Duong Tat Phuc",
+                    UserName = "phuc0134100841",
+                    Email = "phuc0134100841@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //33
+                {
+                    FullName = "Le Cao Duc",
+                    UserName = "duc0155203520",
+                    Email = "duc0155203520@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //34
+                {
+                    FullName = "Dang Phuong Linh",
+                    UserName = "linh0144525596",
+                    Email = "linh0144525596@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //35
+                {
+                    FullName = "Nguyen Le Thu",
+                    UserName = "thu0134100853",
+                    Email = "thu0134100853@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //36
+                {
+                    FullName = "Nguyen  Thi Thuy",
+                    UserName = "thuy0134100856",
+                    Email = "thuy0134100856@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
                 },
             };
 
