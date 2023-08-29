@@ -1303,6 +1303,47 @@ namespace SmartEdu.Services.AccountService
         public async Task<ServerResponse<object>> SeedingTeachers()
         {
             var serverResponse = new ServerResponse<object>();
+
+            var users = await _userManager.Users.ToListAsync();
+
+            Teacher teacher = null;
+
+            //for (var i = 0; i < users.Count; i++)
+            //{
+            //    var user = users.ElementAt(i);
+            //    if (user.Type == 3)
+            //    {
+            //        teacher = new Teacher
+            //        {
+            //            Id = 1,
+            //            UserId = user.Id,
+            //            MainClassId = i + 1,
+            //            SubjectId = 1
+            //        };
+            //    }
+            //}
+
+            var mainClassId = 1;
+            var id = 1;
+            var teachers = new List<Teacher>();
+            foreach (var user in users)
+            {
+                if (user.Type == 3)
+                {
+                    var t = new Teacher
+                    {
+                        Id = id,
+                        UserId = user.Id,
+                        MainClassId = mainClassId,
+                        SubjectId = 1
+                    };
+                    teachers.Add(t);
+                    id++;
+                    mainClassId++;
+                }
+                
+            }
+            await _unitOfWork.TeacherRepository.AddRange(teachers);
             
             await _unitOfWork.Save();
 
@@ -1314,7 +1355,39 @@ namespace SmartEdu.Services.AccountService
         public async Task<ServerResponse<object>> SeedingStudents()
         {
             var serverResponse = new ServerResponse<object>();
-            
+
+            var users = await _userManager.Users.ToListAsync();
+            var students = new List<Student>();
+            var id = 1;
+            var count = 0;
+            var mainClassId = 1;
+
+            foreach (var user in users)
+            {
+                if (user.Type == 1)
+                {
+
+                    if (count == 36)
+                    {
+                        mainClassId++;
+                        count = 0;
+                    }
+                    var student = new Student
+                    {
+                        Id = id,
+                        UserId = user.Id,
+                        ParentId = id,
+                        MainClassId = mainClassId,
+                    };
+                    students.Add(student);
+                    count++;
+                    id++;
+                }
+            }
+
+            await _unitOfWork.StudentRepository.AddRange(students);
+            await _unitOfWork.Save();
+
             serverResponse.Message = "Add students successfully";
             return serverResponse;
         }
@@ -1322,9 +1395,44 @@ namespace SmartEdu.Services.AccountService
         public async Task<ServerResponse<object>> SeedingParents()
         {
             var serverResponse = new ServerResponse<object>();
+
+            var users = await _userManager.Users.ToListAsync();
+
+            var parents = new List<Parent>();
+
+            var id = 1;
             
+            foreach(var user in users)
+            {
+                if (user.Type == 2)
+                {
+                    var parent = new Parent
+                    {
+                        Id = id,
+                        UserId = user.Id,
+                    };
+                    parents.Add(parent);
+                    id++;
+                }
+                
+            }
+            
+            await _unitOfWork.ParentRepository.AddRange(parents);
+
             await _unitOfWork.Save();
             serverResponse.Message = "Seeding parents successfully.";
+            return serverResponse;
+        }
+
+        public async Task<ServerResponse<object>> SeedingData()
+        {
+            await SeedingUsers();
+            await SeedingTeachers();
+            await SeedingParents();
+            await SeedingStudents();
+
+            var serverResponse = new ServerResponse<object>();
+            serverResponse.Message = "Seeding data successfully";
             return serverResponse;
         }
     }

@@ -35,7 +35,7 @@ namespace SmartEdu.Controllers
         [HttpPost("seeding-data")]
         public async Task<IActionResult> Seeding()
         {
-            var serverResponse = await _accountService.SeedingUsers();
+            var serverResponse = await _accountService.SeedingData();
             return Ok(serverResponse);
         }
 
