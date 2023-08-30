@@ -13,6 +13,7 @@ namespace SmartEdu.UnitOfWork
         private IGenericRepository<Document> _documentRepository;
         private IGenericRepository<Exam> _examRepository;
         private IGenericRepository<ExtraClass> _extraClassRepository;
+        private IGenericRepository<MainClass> _mainClassRepository;
         public UnitOfWork(DataContext context)
         {
             _context = context;
