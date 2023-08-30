@@ -35,7 +35,7 @@ namespace SmartEdu.Controllers
         [HttpGet("{id:int}", Name = "GetExtraClassById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await base.GetSingle<GetExtraClassDTO>(e => e.Id == id, new List<string> { "Subject" });
+            return await base.GetSingle<GetExtraClassDTO>(ec => ec.Id == id, new List<string> { "Subject" });
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace SmartEdu.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateExtraClassDTO updateExtraClassDTO)
         {
-            return await base.Update<UpdateExtraClassDTO>(e => e.Id == id, updateExtraClassDTO);
+            return await base.Update<UpdateExtraClassDTO>(ec => ec.Id == id, updateExtraClassDTO);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace SmartEdu.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return await base.Delete(e => e.Id == id, id);
+            return await base.Delete(ec => ec.Id == id, id);
         }
     }
 }
