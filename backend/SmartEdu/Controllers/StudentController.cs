@@ -16,12 +16,24 @@ namespace SmartEdu.Controllers
         {
         }
 
+
+        /// <summary>
+        /// Truy xuất toàn bộ Student.
+        /// </summary>
+        /// <param name="requestParams"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
             return await base.GetAll<GetStudentDTO>(requestParams, null, null,new List<string> { "User","Parent", "MainClass", });
         }
 
+
+        /// <summary>
+        /// Truy xuất 1 Student.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}", Name = "GetStudentById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
@@ -29,7 +41,11 @@ namespace SmartEdu.Controllers
                 new List<string> { "User", "Parent", "MainClass", });
         }
 
-
+        /// <summary>
+        /// Thêm mới một Student.
+        /// </summary>
+        /// <param name="addStudentDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddStudentDTO addStudentDTO)
         {
@@ -37,6 +53,12 @@ namespace SmartEdu.Controllers
         }
 
 
+        /// <summary>
+        /// Cập nhật một Student.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updateStudentDTO"></param>
+        /// <returns></returns>
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStudentDTO updateStudentDTO)
         {
@@ -44,6 +66,11 @@ namespace SmartEdu.Controllers
         }
 
 
+        /// <summary>
+        /// Xóa một Student.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
