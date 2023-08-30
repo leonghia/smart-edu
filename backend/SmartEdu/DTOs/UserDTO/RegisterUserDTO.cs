@@ -25,5 +25,8 @@ namespace SmartEdu.DTOs.UserDTO
         public ICollection<string> Roles { get; set; }
 
         public byte Type { get; set; }
+        public int SubjectId { get; set; } = 0;
+        public int ParentId { get; set; } = 0;
+        public int MainClassId { get; set; } = 0;
     }
 }
