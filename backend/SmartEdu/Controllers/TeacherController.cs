@@ -29,7 +29,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Truy xuất 1 Teacher.
+        /// Truy xuất 1 giáo viên.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Thêm mới một Teacher.
+        /// Thêm mới một giáo viên.
         /// </summary>
         /// <param name="addTeacherDTO"></param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Cập nhật một Teacher.
+        /// Cập nhật một giáo viên.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateTeacherDTO"></param>
@@ -65,7 +65,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Xóa một Teacher.
+        /// Xóa một giáo viên.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

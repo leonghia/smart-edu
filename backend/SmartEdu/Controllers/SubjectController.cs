@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SmartEdu.DTOs.ParentDTO;
-using SmartEdu.DTOs.TeacherDTO;
+using SmartEdu.DTOs.SubjectDTO;
 using SmartEdu.Entities;
 using SmartEdu.Models;
 using SmartEdu.UnitOfWork;
@@ -10,68 +9,71 @@ namespace SmartEdu.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ParentController : BaseController<Parent>
+    public class SubjectController : BaseController<Subject>
     {
-        public ParentController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        public SubjectController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
         }
 
         /// <summary>
-        /// Truy xuất toàn bộ phụ huynh.
+        /// Truy xuất toàn bộ Subject
         /// </summary>
         /// <param name="requestParams"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
-            return await base.GetAll<GetParentDTO>(requestParams,null,null,new List<string> { "User" });
+            return await base.GetAll<GetSubjectDTO>(requestParams, null, null,null);
         }
 
+
         /// <summary>
-        /// Truy xuất một phụ huynh.
+        /// Truy xuất một Subject.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id:int}", Name = "GetParentById")]
+        [HttpGet("{id:int}", Name = "GetSubjectById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await base.GetSingle<GetParentDTO>(p => p.Id == id,
-                new List<string> { "User" });
+            return await base.GetSingle<GetSubjectDTO>(sub => sub.Id == id, null);
         }
 
+
         /// <summary>
-        /// Thêm một phụ huynh.
+        /// Thêm mới một môn học.
         /// </summary>
-        /// <param name="addParentDTO"></param>
+        /// <param name="addSubjectDTO"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddParentDTO addParentDTO)
+        public async Task<IActionResult> Add([FromBody] AddSubjectDTO addSubjectDTO)
         {
-            return await base.Add<AddParentDTO>(addParentDTO, "GetParentById");
+            return await base.Add(addSubjectDTO, "GetSubjectById");
         }
 
+
         /// <summary>
-        /// Cập nhật một phụ huynh.
+        /// Cập nhật môn học theo Id
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="updateParentDTO"></param>
+        /// <param name="updateSubjectDTO"></param>
         /// <returns></returns>
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateParentDTO updateParentDTO)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateSubjectDTO updateSubjectDTO)
         {
-            return await base.Update<UpdateParentDTO>(p => p.Id == id, updateParentDTO);
+            return await base.Update<UpdateSubjectDTO>(sub => sub.Id == id, updateSubjectDTO);
         }
 
         /// <summary>
-        /// Xóa một phụ huynh.
+        /// Xóa một môn học.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return await base.Delete(p => p.Id == id, id);
+            return await base.Delete(sub => sub.Id == id, id);
         }
+
 
     }
 }

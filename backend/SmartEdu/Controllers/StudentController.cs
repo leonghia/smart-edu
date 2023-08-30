@@ -18,7 +18,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Truy xuất toàn bộ Student.
+        /// Truy xuất toàn bộ học sinh.
         /// </summary>
         /// <param name="requestParams"></param>
         /// <returns></returns>
@@ -30,7 +30,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Truy xuất 1 Student.
+        /// Truy xuất 1 học sinh.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Thêm mới một Student.
+        /// Thêm mới một học sinh.
         /// </summary>
         /// <param name="addStudentDTO"></param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Cập nhật một Student.
+        /// Cập nhật một học sinh.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateStudentDTO"></param>
@@ -67,7 +67,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Xóa một Student.
+        /// Xóa một học sinh.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
