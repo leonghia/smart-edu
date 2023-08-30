@@ -24,6 +24,8 @@ namespace SmartEdu.Configurations
             CreateMap<AddExtraClassDTO, ExtraClass>();
             CreateMap<ExtraClass, GetExtraClassDTO>();
             CreateMap<UpdateExtraClassDTO, ExtraClass>();
+            CreateMap<AddMainClassDTO, MainClass>();
+            CreateMap<MainClass, GetMainClassDTO>();
             CreateMap<UpdateMainClassDTO, MainClass>();
         }
     }

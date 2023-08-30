@@ -31,6 +31,8 @@ namespace SmartEdu.UnitOfWork
 
         public IGenericRepository<ExtraClass> ExtraClassRepository => _extraClassRepository ??= new GenericRepository<ExtraClass>(_context);
 
+        public IGenericRepository<MainClass> MainClassRepository => _mainClassRepository ??= new GenericRepository<MainClass>(_context);
+
         public void Dispose()
         {
             _context.Dispose();
