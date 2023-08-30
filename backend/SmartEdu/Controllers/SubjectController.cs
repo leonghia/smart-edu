@@ -16,7 +16,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Truy xuất toàn bộ Subject
+        /// Truy xuất toàn bộ môn học 
         /// </summary>
         /// <param name="requestParams"></param>
         /// <returns></returns>
@@ -28,7 +28,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Truy xuất một Subject.
+        /// Truy xuất một môn học hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,7 +52,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Cập nhật môn học theo Id
+        /// Cập nhật môn học hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateSubjectDTO"></param>
@@ -64,7 +64,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Xóa một môn học.
+        /// Xóa một môn học hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

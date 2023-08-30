@@ -30,7 +30,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Truy xuất 1 học sinh.
+        /// Truy xuất 1 học sinh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Cập nhật một học sinh.
+        /// Cập nhật một học sinh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateStudentDTO"></param>
@@ -67,7 +67,7 @@ namespace SmartEdu.Controllers
 
 
         /// <summary>
-        /// Xóa một học sinh.
+        /// Xóa một học sinh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

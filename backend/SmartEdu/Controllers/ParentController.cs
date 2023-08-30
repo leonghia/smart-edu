@@ -28,7 +28,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Truy xuất một phụ huynh.
+        /// Truy xuất một phụ huynh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -51,7 +51,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Cập nhật một phụ huynh.
+        /// Cập nhật một phụ huynh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateParentDTO"></param>
@@ -63,7 +63,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Xóa một phụ huynh.
+        /// Xóa một phụ huynh hiện có theo Id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
