@@ -2,6 +2,7 @@
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.ExamDTO;
 using SmartEdu.DTOs.ExtraClassDTO;
+using SmartEdu.DTOs.MainClassDTO;
 using SmartEdu.DTOs.UserDTO;
 using SmartEdu.Entities;
 
@@ -23,6 +24,7 @@ namespace SmartEdu.Configurations
             CreateMap<AddExtraClassDTO, ExtraClass>();
             CreateMap<ExtraClass, GetExtraClassDTO>();
             CreateMap<UpdateExtraClassDTO, ExtraClass>();
+            CreateMap<UpdateMainClassDTO, MainClass>();
         }
     }
 }
