@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SmartEdu.DTOs.DocumentDTO;
+using SmartEdu.DTOs.ExamDTO;
 using SmartEdu.DTOs.UserDTO;
 using SmartEdu.Entities;
 
@@ -15,6 +16,9 @@ namespace SmartEdu.Configurations
             CreateMap<AddDocumentDTO, Document>();
             CreateMap<Document, GetDocumentDTO>();
             CreateMap<UpdateDocumentDTO, Document>();
+            CreateMap<AddExamDTO, Exam>();
+            CreateMap<Exam, GetExamDTO>();
+            CreateMap<UpdateExamDTO, Exam>();
         }
     }
 }
