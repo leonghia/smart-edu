@@ -16,7 +16,7 @@ namespace SmartEdu.Controllers
         {
         }
         /// <summary>
-        /// Truy xuất toàn bộ dữ liệu 
+        /// Truy xuất toàn bộ bài kiểm tra.
         /// </summary>
         /// <param name="requestParams"></param>
         /// <returns></returns>
@@ -27,7 +27,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Truy xuất dữ liệu theo id
+        /// Truy xuất bài kiểm tra theo ID.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -38,18 +38,18 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Thêm mới 1 dữ liệu
+        /// Thêm mới 1 bài kiểm tra.
         /// </summary>
         /// <param name="addExamDTO"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddExamDTO addExamDTO)
         {
-            return await base.Add(addExamDTO, "GetExamById");
+            return await base.Add<AddExamDTO>(addExamDTO, "GetExamById");
         }
 
         /// <summary>
-        /// Cập nhật 1 tài liệu hiện có theo ID
+        /// Cập nhật 1 bài kiểm tra hiện có theo ID.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updateExamDTO"></param>
@@ -60,10 +60,16 @@ namespace SmartEdu.Controllers
             return await base.Update<UpdateExamDTO>(d => d.Id == id, updateExamDTO);
         }
 
+        /// <summary>
+        /// Xóa 1 bài kiểm tra hiện có theo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return await base.Delete(d => d.Id == id, id);
+
         }
     }
 }
