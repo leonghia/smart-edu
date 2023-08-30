@@ -46,7 +46,7 @@ namespace SmartEdu.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AddExtraClassDTO addExtraClassDTO)
         {
-            return await base.Add(addExtraClassDTO, "GetExtraClassById");
+            return await base.Add<AddExtraClassDTO>(addExtraClassDTO, "GetExtraClassById");
         }
 
         /// <summary>
