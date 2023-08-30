@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using SmartEdu.DTOs.DocumentDTO;
+using SmartEdu.DTOs.ExamDTO;
+using SmartEdu.DTOs.ExtraClassDTO;
+using SmartEdu.DTOs.MainClassDTO;
 using SmartEdu.DTOs.ParentDTO;
 using SmartEdu.DTOs.StudentDTO;
 using SmartEdu.DTOs.SubjectDTO;
@@ -20,23 +23,27 @@ namespace SmartEdu.Configurations
             CreateMap<AddDocumentDTO, Document>();
             CreateMap<Document, GetDocumentDTO>();
             CreateMap<UpdateDocumentDTO, Document>();
-
+            CreateMap<AddExamDTO, Exam>();
+            CreateMap<Exam, GetExamDTO>();
+            CreateMap<UpdateExamDTO, Exam>();
+            CreateMap<AddExtraClassDTO, ExtraClass>();
+            CreateMap<ExtraClass, GetExtraClassDTO>();
+            CreateMap<UpdateExtraClassDTO, ExtraClass>();
+            CreateMap<AddMainClassDTO, MainClass>();
+            CreateMap<MainClass, GetMainClassDTO>();
+            CreateMap<UpdateMainClassDTO, MainClass>();
             CreateMap<AddTeacherDTO, Teacher>();
             CreateMap<Teacher, GetTeacherDTO>();
             CreateMap<UpdateTeacherDTO, Teacher>();
-
             CreateMap<AddParentDTO, Parent>();
             CreateMap<Parent, GetParentDTO>();
             CreateMap<UpdateParentDTO, Parent>();
-
             CreateMap<AddStudentDTO, Student>();
             CreateMap<Student, GetStudentDTO>();
             CreateMap<UpdateStudentDTO, Student>();
-
             CreateMap<AddSubjectDTO, Subject>();
             CreateMap<Subject, GetSubjectDTO>();
             CreateMap<UpdateSubjectDTO, Subject>();
-
         }
     }
 }
