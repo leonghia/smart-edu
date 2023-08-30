@@ -20,14 +20,14 @@ namespace SmartEdu.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
-            return await base.GetAll<GetTeacherDTO>(requestParams,null ,null,new List<string> { "User", "MainClass", "Subject" });
+            return await base.GetAll<GetTeacherDTO>(requestParams,null ,null, new List<string> { "User", "MainClass", "Subject" });
         }
 
         [HttpGet("{id:int}", Name = "GetTeacherById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             return await base.GetSingle<GetTeacherDTO>(t => t.Id == id,
-                new List<string> { "Teacher"});
+                new List<string> { "User", "MainClass", "Subject" });
         }
 
 
