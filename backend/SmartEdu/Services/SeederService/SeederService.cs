@@ -17,6 +17,7 @@ namespace SmartEdu.Services.SeederService
         {
             _userManager = userManager;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ServerResponse<object>> SeedingData()
@@ -47,7 +48,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 3,
                     SubjectId = 1
-                },
+                },              
                 new RegisterUserDTO
                 {
                     FullName = "Pham Thi Nguyet Anh",
@@ -825,6 +826,7 @@ namespace SmartEdu.Services.SeederService
 
             await SeedingUsers(registerUserDTOs);
             await SeedingTeachers(registerUserDTOs);
+            await SeedingMainClasses();
             await SeedingParents(registerUserDTOs);
             await SeedingStudents(registerUserDTOs);
 
@@ -832,9 +834,8 @@ namespace SmartEdu.Services.SeederService
             return serverResponse;
         }
 
-        public async Task<ServerResponse<object>> SeedingTeachers(List<RegisterUserDTO> registerUserDTOs)
-        {
-            var serverResponse = new ServerResponse<object>();                  
+        public async Task SeedingTeachers(List<RegisterUserDTO> registerUserDTOs)
+        {                 
             var teachers = new List<Teacher>();
 
             foreach (var registerUserDTO in registerUserDTOs)
@@ -853,13 +854,10 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.TeacherRepository.AddRange(teachers);
             await _unitOfWork.Save();
-            serverResponse.Message = "Seeding teachers successfully.";
-            return serverResponse;
         }
 
-        public async Task<ServerResponse<object>> SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
-        {
-            var serverResponse = new ServerResponse<object>();
+        public async Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
+        {           
             var students = new List<Student>();
 
             foreach (var registerUserDTO in registerUserDTOs)
@@ -879,13 +877,10 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.StudentRepository.AddRange(students);
             await _unitOfWork.Save();
-            serverResponse.Message = "Seeding students successfully.";
-            return serverResponse;
         }
 
-        public async Task<ServerResponse<object>> SeedingParents(List<RegisterUserDTO> registerUserDTOs)
+        public async Task SeedingParents(List<RegisterUserDTO> registerUserDTOs)
         {
-            var serverResponse = new ServerResponse<object>();
             var parents = new List<Parent>();
 
             foreach (var registerUserDTO in registerUserDTOs)
@@ -903,11 +898,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.ParentRepository.AddRange(parents);
             await _unitOfWork.Save();
-            serverResponse.Message = "Seeding parents successfully.";
-            return serverResponse;
         }
 
-        public async Task<ServerResponse<object>> SeedingUsers(List<RegisterUserDTO> registerUserDTOs)
+        public async Task SeedingUsers(List<RegisterUserDTO> registerUserDTOs)
         {
             foreach (var registerUserDTO in registerUserDTOs)
             {
@@ -915,10 +908,30 @@ namespace SmartEdu.Services.SeederService
                 await _userManager.CreateAsync(user, registerUserDTO.Password);
                 await _userManager.AddToRolesAsync(user, registerUserDTO.Roles);
             }
+        }
 
-            var serverResponse = new ServerResponse<object>();
-            serverResponse.Message = "Seeding users successfully.";
-            return serverResponse;
+        public async Task SeedingMainClasses()
+        {
+            var mainClasses = new List<MainClass>
+            {
+                new MainClass
+                {
+                    Name = "10A",
+                    TeacherId = 1
+                },
+                new MainClass
+                {
+                    Name = "10B",
+                    TeacherId = 2,
+                },
+                new MainClass
+                {
+                    Name = "10C",
+                    TeacherId = 3
+                }
+            };
+            await _unitOfWork.MainClassRepository.AddRange(mainClasses);
+            await _unitOfWork.Save();
         }
     }
 }

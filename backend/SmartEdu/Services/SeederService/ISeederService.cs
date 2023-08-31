@@ -8,12 +8,14 @@ namespace SmartEdu.Services.SeederService
         Task<ServerResponse<object>> SeedingData();
 
         // Them du lieu nguoi dung
-        Task<ServerResponse<object>> SeedingUsers(List<RegisterUserDTO> registerUserDTOs);
+        Task SeedingUsers(List<RegisterUserDTO> registerUserDTOs);
         // Them du lieu giao vien
-        Task<ServerResponse<object>> SeedingTeachers(List<RegisterUserDTO> registerUserDTOs);
+        Task SeedingTeachers(List<RegisterUserDTO> registerUserDTOs);
         // Them du lieu phu huynh
-        Task<ServerResponse<object>> SeedingParents(List<RegisterUserDTO> registerUserDTOs);
+        Task SeedingParents(List<RegisterUserDTO> registerUserDTOs);
         // Them du lieu hoc sinh
-        Task<ServerResponse<object>> SeedingStudents(List<RegisterUserDTO> registerUserDTOs);
+        Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs);
+        // Them du lieu lop hoc chinh khoa
+        Task SeedingMainClasses();
     }
 }
