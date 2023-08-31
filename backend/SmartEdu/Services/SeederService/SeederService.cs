@@ -22,6 +22,15 @@ namespace SmartEdu.Services.SeederService
         public async Task<ServerResponse<object>> SeedingData()
         {
             var serverResponse = new ServerResponse<object>();
+            
+            var count = await _userManager.Users.CountAsync();
+
+            if (count > 0)
+            {
+                serverResponse.Succeeded = false;
+                serverResponse.Message = "Data had been seeded before. No need to seed anymore.";
+                return serverResponse;
+            }
 
             var roles = new List<string> { "User" };
 
@@ -744,7 +753,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingParents();
             await SeedingStudents(registerUserDTOs);
 
-            serverResponse.Message = "Seeding users successfully";
+            serverResponse.Message = "Seeding data successfully.";
             return serverResponse;
         }
 
