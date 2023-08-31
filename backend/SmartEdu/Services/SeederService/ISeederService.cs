@@ -17,5 +17,7 @@ namespace SmartEdu.Services.SeederService
         Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs);
         // Them du lieu lop hoc chinh khoa
         Task SeedingMainClasses();
+        // Them du lieu lop hoc them
+        Task SeedingExtraClasses();
     }
 }

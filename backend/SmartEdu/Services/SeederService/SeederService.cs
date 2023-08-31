@@ -827,6 +827,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingUsers(registerUserDTOs);
             await SeedingTeachers(registerUserDTOs);
             await SeedingMainClasses();
+            await SeedingExtraClasses();
             await SeedingParents(registerUserDTOs);
             await SeedingStudents(registerUserDTOs);
 
@@ -931,6 +932,34 @@ namespace SmartEdu.Services.SeederService
                 }
             };
             await _unitOfWork.MainClassRepository.AddRange(mainClasses);
+            await _unitOfWork.Save();
+        }
+
+        public async Task SeedingExtraClasses()
+        {
+            var extraClasses = new List<ExtraClass>
+            {
+                new ExtraClass
+                {
+                    Name = "Maths M2208-10",
+                    SubjectId = 1,
+                    TeacherId = 1
+                },
+                new ExtraClass
+                {
+                    Name = "Literature A2208-10",
+                    SubjectId = 2,
+                    TeacherId = 2
+                },
+                new ExtraClass
+                {
+                    Name = "English M2208-10",
+                    SubjectId = 3,
+                    TeacherId = 3
+                }
+            };
+
+            await _unitOfWork.ExtraClassRepository.AddRange(extraClasses);
             await _unitOfWork.Save();
         }
     }
