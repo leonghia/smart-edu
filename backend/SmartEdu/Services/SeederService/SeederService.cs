@@ -36,6 +36,8 @@ namespace SmartEdu.Services.SeederService
 
             var registerUserDTOs = new List<RegisterUserDTO>
             {
+
+                // Teachers users
                 new RegisterUserDTO
                 {
                     FullName = "Nguyen Thi Giang",
@@ -44,8 +46,7 @@ namespace SmartEdu.Services.SeederService
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 3,
-                    SubjectId = 1,
-                    MainClassId = 1
+                    SubjectId = 1
                 },
                 new RegisterUserDTO
                 {
@@ -55,8 +56,7 @@ namespace SmartEdu.Services.SeederService
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 3,
-                    SubjectId = 2,
-                    MainClassId = 2
+                    SubjectId = 2
                 },
                 new RegisterUserDTO
                 {
@@ -66,13 +66,14 @@ namespace SmartEdu.Services.SeederService
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 3,
-                    SubjectId = 3,
-                    MainClassId = 3
+                    SubjectId = 3
                 },
+
+                // Admins users
                 new RegisterUserDTO
                 {
                     FullName = "Nguyen Thi Huong",
-                    UserName = "huong",
+                    UserName = "huongadmin",
                     Email = "nguyenhuongg1104@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = new List<string> { "Admin" },
@@ -81,12 +82,14 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO
                 {
                     FullName = "Trinh Van Phuc",
-                    UserName = "phuc",
+                    UserName = "phucadmin",
                     Email = "phuctv1112004@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = new List<string> { "Admin" },
                     Type = 0
                 },
+
+                // Students users
                 new RegisterUserDTO // 1
                 {
                     FullName = "Leu Ngoc An",
@@ -94,7 +97,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "an0149107377@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 1,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 2
                 {
@@ -103,7 +108,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "anh0116701758@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 2,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 3
                 {
@@ -112,7 +119,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "anh0133530105@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 3,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 4
                 {
@@ -121,7 +130,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "anh3616460199@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 4,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 5
                 {
@@ -130,7 +141,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "anh1734705112@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 5,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 6
                 {
@@ -139,7 +152,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "chi0149107460@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 6,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 7
                 {
@@ -148,7 +163,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "dung0116989583@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 7,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 8
                 {
@@ -157,7 +174,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "duy0150499677@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 8,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 9
                 {
@@ -166,7 +185,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "duy0116479556@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 9,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 10
                 {
@@ -175,7 +196,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "duong0133058338@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 10,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 11
                 {
@@ -184,7 +207,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "hang0116971907@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 11,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 12
                 {
@@ -193,7 +218,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "hoang0116952467@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 12,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 13
                 {
@@ -202,7 +229,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "hoang0149107469@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 13,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 14
                 {
@@ -211,7 +240,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "huy0116575041@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 14,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 15
                 {
@@ -220,7 +251,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "huy0116701214@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 15,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 16
                 {
@@ -229,7 +262,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "kien3316697828@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 16,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 17
                 {
@@ -238,7 +273,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "khiem0137566271@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 17,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO // 18
                 {
@@ -247,7 +284,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "khue0150707773@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 18,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //19
                 {
@@ -256,7 +295,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "lam0134001874@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 19,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //20
                 {
@@ -265,7 +306,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "linh0116973081@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 20,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //21
                 {
@@ -274,7 +317,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "loc0116574901@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 21,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //22
                 {
@@ -283,7 +328,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "ly0150498659@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 22,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //23
                 {
@@ -292,7 +339,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "minh0155210714@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 23,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //24
                 {
@@ -301,7 +350,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "nam0116695176@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 24,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //25
                 {
@@ -310,7 +361,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "nga0134705129@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 25,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //26
                 {
@@ -319,7 +372,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "ngan0133530178@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 26,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //27
                 {
@@ -328,7 +383,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "nhi0134705133@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 27,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //28
                 {
@@ -337,7 +394,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "phu0134705135@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 28,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //29
                 {
@@ -346,7 +405,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "tam0100712147@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 29,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //30
                 {
@@ -355,15 +416,20 @@ namespace SmartEdu.Services.SeederService
                     Email = "toan0133487571@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
-                },new RegisterUserDTO //31
+                    Type = 1,
+                    ParentId = 30,
+                    MainClassId = 1
+                },
+                new RegisterUserDTO //31
                 {
                     FullName = "Le Minh Tuan",
                     UserName = "tuan0133530254",
                     Email = "tuan0133530254@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 31,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //32
                 {
@@ -372,7 +438,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "thanh0134100841@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 32,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //33
                 {
@@ -381,7 +449,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "thang0155203520@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 33,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //34
                 {
@@ -390,7 +460,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "thuy0144525596@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 34,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //35
                 {
@@ -399,7 +471,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "trang0134100853@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 35,
+                    MainClassId = 1
                 },
                 new RegisterUserDTO //36
                 {
@@ -408,7 +482,9 @@ namespace SmartEdu.Services.SeederService
                     Email = "trang0134100856@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
-                    Type = 1
+                    Type = 1,
+                    ParentId = 36,
+                    MainClassId = 1
                 },
 
                 // Parents
@@ -740,7 +816,6 @@ namespace SmartEdu.Services.SeederService
             foreach (var registerUserDTO in registerUserDTOs)
             {
                 var user = _mapper.Map<User>(registerUserDTO);
-                // tao tai khoan cho mooi giao vien va them vao trong DB
 
                 await _userManager.CreateAsync(user,
                     registerUserDTO.Password);
@@ -750,7 +825,7 @@ namespace SmartEdu.Services.SeederService
 
             await SeedingUsers(registerUserDTOs);
             await SeedingTeachers(registerUserDTOs);
-            await SeedingParents();
+            await SeedingParents(registerUserDTOs);
             await SeedingStudents(registerUserDTOs);
 
             serverResponse.Message = "Seeding data successfully.";
@@ -759,119 +834,74 @@ namespace SmartEdu.Services.SeederService
 
         public async Task<ServerResponse<object>> SeedingTeachers(List<RegisterUserDTO> registerUserDTOs)
         {
-            var serverResponse = new ServerResponse<object>();
-
-            var users = await _userManager.Users.ToListAsync();
-
-
-            //for (var i = 0; i < users.Count; i++)
-            //{
-            //    var user = users.ElementAt(i);
-            //    if (user.Type == 3)
-            //    {
-            //        teacher = new Teacher
-            //        {
-            //            Id = 1,
-            //            UserId = user.Id,
-            //            MainClassId = i + 1,
-            //            SubjectId = 1
-            //        };
-            //    }
-            //}
-
-            var mainClassId = 1;
-            var id = 1;
+            var serverResponse = new ServerResponse<object>();                  
             var teachers = new List<Teacher>();
+
             foreach (var registerUserDTO in registerUserDTOs)
             {
-                if (registerUserDTO.SubjectId != 0)
+                if (registerUserDTO.Type == 3 && registerUserDTO.SubjectId > 0)
                 {
                     var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
-                    var userId = user.Id;
                     var teacher = new Teacher
                     {
-                        UserId = userId,
-                        MainClassId = registerUserDTO.MainClassId,
+                        UserId = user.Id,                      
                         SubjectId = registerUserDTO.SubjectId
                     };
                     teachers.Add(teacher);
                 }
-
             }
+
             await _unitOfWork.TeacherRepository.AddRange(teachers);
-
             await _unitOfWork.Save();
-
-            serverResponse.Message = "Seeding Teachers successfully";
-
+            serverResponse.Message = "Seeding teachers successfully.";
             return serverResponse;
         }
 
         public async Task<ServerResponse<object>> SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
         {
             var serverResponse = new ServerResponse<object>();
-
-            var users = await _userManager.Users.ToListAsync();
             var students = new List<Student>();
-            var id = 1;
-            var count = 0;
-            var mainClassId = 1;
 
-            foreach (var user in users)
+            foreach (var registerUserDTO in registerUserDTOs)
             {
-                if (user.Type == 1)
+                if (registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0)
                 {
-
-                    if (count == 36)
-                    {
-                        mainClassId++;
-                        count = 0;
-                    }
+                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
                     var student = new Student
                     {
                         UserId = user.Id,
-                        ParentId = id,
-                        MainClassId = mainClassId,
+                        ParentId = registerUserDTO.ParentId,
+                        MainClassId = registerUserDTO.MainClassId
                     };
                     students.Add(student);
-                    count++;
-                    id++;
                 }
             }
 
             await _unitOfWork.StudentRepository.AddRange(students);
             await _unitOfWork.Save();
-
-            serverResponse.Message = "Add students successfully";
+            serverResponse.Message = "Seeding students successfully.";
             return serverResponse;
         }
 
-        public async Task<ServerResponse<object>> SeedingParents()
+        public async Task<ServerResponse<object>> SeedingParents(List<RegisterUserDTO> registerUserDTOs)
         {
             var serverResponse = new ServerResponse<object>();
-
-            var users = await _userManager.Users.ToListAsync();
-
             var parents = new List<Parent>();
 
-            var id = 1;
-
-            foreach (var user in users)
+            foreach (var registerUserDTO in registerUserDTOs)
             {
-                if (user.Type == 2)
+                if (registerUserDTO.Type == 2)
                 {
+                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
                     var parent = new Parent
                     {
-                        UserId = user.Id,
+                        UserId = user.Id
                     };
                     parents.Add(parent);
-                    id++;
                 }
-
             }
 
             await _unitOfWork.ParentRepository.AddRange(parents);
-
             await _unitOfWork.Save();
             serverResponse.Message = "Seeding parents successfully.";
             return serverResponse;
@@ -886,19 +916,9 @@ namespace SmartEdu.Services.SeederService
                 await _userManager.AddToRolesAsync(user, registerUserDTO.Roles);
             }
 
-            var serverResponse = new ServerResponse<Object>();
+            var serverResponse = new ServerResponse<object>();
             serverResponse.Message = "Seeding users successfully.";
             return serverResponse;
         }
-
-        //public async Task<ServerResponse<object>> SeedingData()
-        //{
-        //    await SeedingUsers();
-        //    await SeedingParents();
-
-        //    var serverResponse = new ServerResponse<object>();
-        //    serverResponse.Message = "Seeding data successfully";
-        //    return serverResponse;
-        //}
     }
 }
