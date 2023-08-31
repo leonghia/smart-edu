@@ -24,6 +24,7 @@ using AspNetCoreRateLimit;
 using System.Reflection;
 using SmartEdu.Entities;
 using SmartEdu.Services.BunnyService;
+using SmartEdu.Services.SeederService;
 
 namespace SmartEdu.Configurations
 {
@@ -100,6 +101,7 @@ namespace SmartEdu.Configurations
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ISmsService, SmsService>();
             services.AddScoped<IBunnyService, BunnyService>();
+            services.AddScoped<ISeederService, SeederService>();
             services.AddHttpClient();
         }
 
