@@ -23,6 +23,31 @@ namespace SmartEdu.Configurations
                 {
                     Id = 3,
                     Name = "English",
+                },
+                new Subject
+                {
+                    Id = 4,
+                    Name = "Physics"
+                },
+                new Subject
+                {
+                    Id = 5,
+                    Name = "Chemistry"
+                },
+                new Subject
+                {
+                    Id = 6,
+                    Name = "Biology"
+                },
+                new Subject
+                {
+                    Id = 7,
+                    Name = "History"
+                },
+                new Subject
+                {
+                    Id = 8,
+                    Name = "Geography"
                 }
                 );
         }

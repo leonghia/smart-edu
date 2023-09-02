@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartEdu.Data;
 
@@ -11,9 +12,11 @@ using SmartEdu.Data;
 namespace SmartEdu.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230831142023_MakeSomeChangesToTeacher")]
+    partial class MakeSomeChangesToTeacher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,8 +276,7 @@ namespace SmartEdu.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId")
-                        .IsUnique();
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("MainClasses");
                 });
@@ -369,7 +371,10 @@ namespace SmartEdu.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("SubjectId")
+                    b.Property<int?>("MainClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -377,6 +382,8 @@ namespace SmartEdu.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MainClassId");
 
                     b.HasIndex("SubjectId");
 
@@ -585,8 +592,8 @@ namespace SmartEdu.Migrations
             modelBuilder.Entity("SmartEdu.Entities.MainClass", b =>
                 {
                     b.HasOne("SmartEdu.Entities.Teacher", "Teacher")
-                        .WithOne("MainClass")
-                        .HasForeignKey("SmartEdu.Entities.MainClass", "TeacherId")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -633,15 +640,23 @@ namespace SmartEdu.Migrations
 
             modelBuilder.Entity("SmartEdu.Entities.Teacher", b =>
                 {
+                    b.HasOne("SmartEdu.Entities.MainClass", "MainClass")
+                        .WithMany()
+                        .HasForeignKey("MainClassId");
+
                     b.HasOne("SmartEdu.Entities.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SmartEdu.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("MainClass");
 
                     b.Navigation("Subject");
 
@@ -668,8 +683,6 @@ namespace SmartEdu.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("ExtraClasses");
-
-                    b.Navigation("MainClass");
                 });
 #pragma warning restore 612, 618
         }
