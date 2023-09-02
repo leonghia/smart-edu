@@ -25,6 +25,10 @@ namespace SmartEdu.Data
             //modelBuilder.ApplyConfiguration(new ExtraClassConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectConfiguration());
 
+            modelBuilder.Entity<Student>()
+                .HasIndex(s => s.Identifier)
+                .IsUnique();
+
         }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ExtraClass> ExtraClasses { get; set; }

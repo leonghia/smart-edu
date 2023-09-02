@@ -40,5 +40,6 @@ namespace SmartEdu.DTOs.UserDTO
         public int ParentId { get; set; } = 0;
 
         public int MainClassId { get; set; } = 0;
+        public string Identifier { get; set; }
     }
 }
