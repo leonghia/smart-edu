@@ -669,6 +669,76 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Thanh Binh",
+                    UserName = "binhnguyen",
+                    Email = "binh.nguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Minh Ha",
+                    UserName = "hanguyen",
+                    Email = "ha.nguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Vo Thi My Hanh",
+                    UserName = "hanhvo",
+                    Email = "hanh.vo@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Thu Ha",
+                    UserName = "hasinh",
+                    Email = "hasinh@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Thanh Huyen",
+                    UserName = "huyennguyen",
+                    Email = "huyen.nguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Nguyen Thi Phuong Thanh",
+                    UserName = "thanh",
+                    Email = "thanh@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
+                new RegisterUserDTO
+                {
+                    FullName = "Pham Thi Hai Van",
+                    UserName = "van",
+                    Email = "van@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 6
+                },
                 // Admins users
                 new RegisterUserDTO
                 {
