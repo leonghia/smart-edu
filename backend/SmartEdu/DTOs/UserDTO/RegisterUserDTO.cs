@@ -21,6 +21,13 @@ namespace SmartEdu.DTOs.UserDTO
         [StringLength(64, ErrorMessage = "Your password is limited to 6 to 64 characters.", MinimumLength = 6)]
         public string Password { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(14, ErrorMessage = "Your phone number is limited to 14 digits.")]
+        public string? PhoneNumber { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? DateOfBirth { get; set; }
+
         [Required]
         public ICollection<string> Roles { get; set; }
 
@@ -33,5 +40,6 @@ namespace SmartEdu.DTOs.UserDTO
         public int ParentId { get; set; } = 0;
 
         public int MainClassId { get; set; } = 0;
+        public string Identifier { get; set; }
     }
 }

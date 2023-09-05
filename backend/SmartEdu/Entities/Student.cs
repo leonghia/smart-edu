@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartEdu.Entities
@@ -9,6 +11,9 @@ namespace SmartEdu.Entities
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }
+
+        [StringLength(20)]
+        public string Identifier { get; set; }
 
         [ForeignKey("Parent")]
         public int ParentId { get; set; }

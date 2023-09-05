@@ -883,9 +883,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 1
                 {
                     FullName = "Leu Ngoc An",
-                    UserName = "an0149107377",
-                    Email = "an0149107377@gmail.com",
+                    UserName = "an04003228",
+                    Email = "an04003228@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003228",
+                    DateOfBirth = new DateTime(2008, 9, 21),
                     Roles = roles,
                     Type = 1,
                     ParentId = 1,
@@ -894,9 +896,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 2
                 {
                     FullName = "Nguyen Ngoc Tram Anh",
-                    UserName = "anh0116701758",
-                    Email = "anh0116701758@gmail.com",
+                    UserName = "anh04003229",
+                    Email = "anh04003229@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003229",
+                    DateOfBirth = new DateTime(2008, 11, 27),
                     Roles = roles,
                     Type = 1,
                     ParentId = 2,
@@ -905,9 +909,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 3
                 {
                     FullName = "Pham Viet Anh",
-                    UserName = "anh0133530105",
-                    Email = "anh0133530105@gmail.com",
+                    UserName = "anh04003230",
+                    Email = "anh04003230@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003230",
+                    DateOfBirth = new DateTime(2008, 12, 8),
                     Roles = roles,
                     Type = 1,
                     ParentId = 3,
@@ -916,9 +922,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 4
                 {
                     FullName = "Bui Thi Quynh Anh",
-                    UserName = "anh3616460199",
-                    Email = "anh3616460199@gmail.com",
+                    UserName = "anh04003231",
+                    Email = "anh04003231@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003231",
+                    DateOfBirth = new DateTime(2008, 10, 15),
                     Roles = roles,
                     Type = 1,
                     ParentId = 4,
@@ -927,9 +935,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 5
                 {
                     FullName = "Vu Duc Anh",
-                    UserName = "anh1734705112",
-                    Email = "anh1734705112@gmail.com",
+                    UserName = "anh04003232",
+                    Email = "anhanh04003232@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003232",
+                    DateOfBirth = new DateTime(2008, 3, 1),
                     Roles = roles,
                     Type = 1,
                     ParentId = 5,
@@ -938,9 +948,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 6
                 {
                     FullName = "Nguyen Phung Linh Chi",
-                    UserName = "chi0149107460",
-                    Email = "chi0149107460@gmail.com",
+                    UserName = "chi04003233",
+                    Email = "chi04003233@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003233",
+                    DateOfBirth = new DateTime(2008, 12, 14),
                     Roles = roles,
                     Type = 1,
                     ParentId = 6,
@@ -949,9 +961,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 7
                 {
                     FullName = "Duong My Dung",
-                    UserName = "dung0116989583",
-                    Email = "dung0116989583@gmail.com",
+                    UserName = "dung04003234",
+                    Email = "dung04003234@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003234",
+                    DateOfBirth = new DateTime(2008, 12, 5),
                     Roles = roles,
                     Type = 1,
                     ParentId = 7,
@@ -960,9 +974,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 8
                 {
                     FullName = "Nguyen Manh Duy",
-                    UserName = "duy0150499677",
-                    Email = "duy0150499677@gmail.com",
+                    UserName = "duy04003235",
+                    Email = "duy04003235@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003235",
+                    DateOfBirth = new DateTime(2008, 8, 10),
                     Roles = roles,
                     Type = 1,
                     ParentId = 8,
@@ -971,9 +987,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 9
                 {
                     FullName = "Pham Phuong Duy",
-                    UserName = "duy0116479556",
-                    Email = "duy0116479556@gmail.com",
+                    UserName = "duy04003236",
+                    Email = "duy04003236@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003236",
+                    DateOfBirth = new DateTime(2008, 11, 30),
                     Roles = roles,
                     Type = 1,
                     ParentId = 9,
@@ -982,9 +1000,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 10
                 {
                     FullName = "Nguyen Thuy Duong",
-                    UserName = "duong0133058338",
-                    Email = "duong0133058338@gmail.com",
+                    UserName = "duong04003237",
+                    Email = "duong04003237@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003237",
+                    DateOfBirth = new DateTime(2008, 1, 4),
                     Roles = roles,
                     Type = 1,
                     ParentId = 10,
@@ -993,9 +1013,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 11
                 {
                     FullName = "Luu Minh Hang",
-                    UserName = "hang0116971907",
-                    Email = "hang0116971907@gmail.com",
+                    UserName = "hang04003238",
+                    Email = "hang04003238@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003238",
+                    DateOfBirth = new DateTime(2008, 11, 24),
                     Roles = roles,
                     Type = 1,
                     ParentId = 11,
@@ -1004,9 +1026,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 12
                 {
                     FullName = "Nguyen Huu Minh Hoang",
-                    UserName = "hoang0116952467",
-                    Email = "hoang0116952467@gmail.com",
+                    UserName = "hoang04003239",
+                    Email = "hoang04003239@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003239",
+                    DateOfBirth = new DateTime(2008, 5, 7),
                     Roles = roles,
                     Type = 1,
                     ParentId = 12,
@@ -1015,9 +1039,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 13
                 {
                     FullName = "Nguyen Huy Hoang",
-                    UserName = "hoang0149107469",
-                    Email = "hoang0149107469@gmail.com",
+                    UserName = "hoang04003240",
+                    Email = "hoang04003240@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003240",
+                    DateOfBirth = new DateTime(2008, 11, 27),
                     Roles = roles,
                     Type = 1,
                     ParentId = 13,
@@ -1026,9 +1052,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 14
                 {
                     FullName = "Nguyen Duc Huy",
-                    UserName = "huy0116575041",
-                    Email = "huy0116575041@gmail.com",
+                    UserName = "huy04003241",
+                    Email = "huy04003241@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003241",
+                    DateOfBirth = new DateTime(2008, 2, 2),
                     Roles = roles,
                     Type = 1,
                     ParentId = 14,
@@ -1037,9 +1065,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 15
                 {
                     FullName = "Vu Duc Huy",
-                    UserName = "huy0116701214",
-                    Email = "huy0116701214@gmail.com",
+                    UserName = "huy04003242",
+                    Email = "huy04003242@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003242",
+                    DateOfBirth = new DateTime(2008, 3, 7),
                     Roles = roles,
                     Type = 1,
                     ParentId = 15,
@@ -1048,9 +1078,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 16
                 {
                     FullName = "Nguyen Trung Kien",
-                    UserName = "kien3316697828",
-                    Email = "kien3316697828@gmail.com",
+                    UserName = "kien04003243",
+                    Email = "kien04003243@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003243",
+                    DateOfBirth = new DateTime(2008, 7, 12),
                     Roles = roles,
                     Type = 1,
                     ParentId = 16,
@@ -1059,9 +1091,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 17
                 {
                     FullName = "Le Duy Khiem",
-                    UserName = "khiem0137566271",
-                    Email = "khiem0137566271@gmail.com",
+                    UserName = "khiem04003244",
+                    Email = "khiem04003244@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003244",
+                    DateOfBirth = new DateTime(2008, 8, 5),
                     Roles = roles,
                     Type = 1,
                     ParentId = 17,
@@ -1070,9 +1104,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO // 18
                 {
                     FullName = "Nguyen Minh Khue",
-                    UserName = "khue0150707773",
-                    Email = "khue0150707773@gmail.com",
+                    UserName = "khue04003245",
+                    Email = "khue04003245@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.003245",
+                    DateOfBirth = new DateTime(2008, 12, 9),
                     Roles = roles,
                     Type = 1,
                     ParentId = 18,
@@ -1081,9 +1117,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //19
                 {
                     FullName = "Bui Hai Lam",
-                    UserName = "lam0134001874",
-                    Email = "lam0134001874@gmail.com",
+                    UserName = "lam04002587",
+                    Email = "lam04002587@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002587",
+                    DateOfBirth = new DateTime(2008, 8, 11),
                     Roles = roles,
                     Type = 1,
                     ParentId = 19,
@@ -1092,9 +1130,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //20
                 {
                     FullName = "Nguyen Ha Gia Linh",
-                    UserName = "linh0116973081",
-                    Email = "linh0116973081@gmail.com",
+                    UserName = "linh04002588",
+                    Email = "linh04002588@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002588",
+                    DateOfBirth = new DateTime(2008, 12, 5),
                     Roles = roles,
                     Type = 1,
                     ParentId = 20,
@@ -1103,9 +1143,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //21
                 {
                     FullName = "Nguyen Phuc Loc",
-                    UserName = "loc0116574901",
-                    Email = "loc0116574901@gmail.com",
+                    UserName = "loc04002590",
+                    Email = "loc04002590@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002590",
+                    DateOfBirth = new DateTime(2008, 6, 26),
                     Roles = roles,
                     Type = 1,
                     ParentId = 21,
@@ -1114,9 +1156,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //22
                 {
                     FullName = "Hoang Huong Ly",
-                    UserName = "ly0150498659",
-                    Email = "ly0150498659@gmail.com",
+                    UserName = "ly04002591",
+                    Email = "ly04002591@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002591",
+                    DateOfBirth = new DateTime(2008, 1, 10),
                     Roles = roles,
                     Type = 1,
                     ParentId = 22,
@@ -1125,9 +1169,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //23
                 {
                     FullName = "Trinh Xuan Minh",
-                    UserName = "minh0155210714",
-                    Email = "minh0155210714@gmail.com",
+                    UserName = "minh04002589",
+                    Email = "minh04002589@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002589",
+                    DateOfBirth = new DateTime(2008, 2, 25),
                     Roles = roles,
                     Type = 1,
                     ParentId = 23,
@@ -1136,9 +1182,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //24
                 {
                     FullName = "Nguyen Vu Tien Nam",
-                    UserName = "nam0116695176",
-                    Email = "nam0116695176@gmail.com",
+                    UserName = "nam04002592",
+                    Email = "nam04002592@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002592",
+                    DateOfBirth = new DateTime(2008, 12, 1),
                     Roles = roles,
                     Type = 1,
                     ParentId = 24,
@@ -1147,9 +1195,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //25
                 {
                     FullName = "Pham Thi Hang Nga",
-                    UserName = "nga0134705129",
-                    Email = "nga0134705129@gmail.com",
+                    UserName = "nga04002593",
+                    Email = "nga04002593@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002593",
+                    DateOfBirth = new DateTime(2008, 7, 6),
                     Roles = roles,
                     Type = 1,
                     ParentId = 25,
@@ -1158,9 +1208,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //26
                 {
                     FullName = "Hoang Kim Ngan",
-                    UserName = "ngan0133530178",
-                    Email = "ngan0133530178@gmail.com",
+                    UserName = "ngan04002594",
+                    Email = "ngan04002594@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002594",
+                    DateOfBirth = new DateTime(2008, 1, 31),
                     Roles = roles,
                     Type = 1,
                     ParentId = 26,
@@ -1169,8 +1221,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //27
                 {
                     FullName = "Hoang Yen Nhi",
-                    UserName = "nhi0134705133",
-                    Email = "nhi0134705133@gmail.com",
+                    UserName = "nhi04002595",
+                    Email = "nhi04002595@gmail.com",
+                    Identifier = "STU04.002595",
+                    DateOfBirth = new DateTime(2008, 1, 20),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1180,9 +1234,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //28
                 {
                     FullName = "Mai Ngo Thien Phu",
-                    UserName = "phu0134705135",
-                    Email = "phu0134705135@gmail.com",
+                    UserName = "phu04002596",
+                    Email = "phu04002596@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002596",
+                    DateOfBirth = new DateTime(2008, 9, 10),
                     Roles = roles,
                     Type = 1,
                     ParentId = 28,
@@ -1191,9 +1247,11 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //29
                 {
                     FullName = "Le Tien Tam",
-                    UserName = "tam0100712147",
-                    Email = "tam0100712147@gmail.com",
+                    UserName = "tam04002597",
+                    Email = "tam04002597@gmail.com",
                     Password = "Sm@rtEdu1",
+                    Identifier = "STU04.002597",
+                    DateOfBirth = new DateTime(2008, 7, 11),
                     Roles = roles,
                     Type = 1,
                     ParentId = 29,
@@ -1202,8 +1260,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //30
                 {
                     FullName = "Tran Xuan Toan",
-                    UserName = "toan0133487571",
-                    Email = "toan0133487571@gmail.com",
+                    UserName = "toan04002599",
+                    Email = "toan04002599@gmail.com",
+                    Identifier = "STU04.002599",
+                    DateOfBirth = new DateTime(2008, 11, 10),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1213,8 +1273,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //31
                 {
                     FullName = "Le Minh Tuan",
-                    UserName = "tuan0133530254",
-                    Email = "tuan0133530254@gmail.com",
+                    UserName = "tuan04002598",
+                    Email = "tuan04002598@gmail.com",
+                    Identifier = "STU04.002598",
+                    DateOfBirth = new DateTime(2008, 2, 13),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1224,8 +1286,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //32
                 {
                     FullName = "Duong Tat Thanh",
-                    UserName = "thanh0134100841",
-                    Email = "thanh0134100841@gmail.com",
+                    UserName = "thanh04002603",
+                    Email = "thanh04002603@gmail.com",
+                    Identifier = "STU04.002603",
+                    DateOfBirth = new DateTime(2008, 8, 1),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1235,8 +1299,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //33
                 {
                     FullName = "Le Cao Thang",
-                    UserName = "thang0155203520",
-                    Email = "thang0155203520@gmail.com",
+                    UserName = "thang04002602",
+                    Email = "thang04002602@gmail.com",
+                    Identifier = "STU04.002602",
+                    DateOfBirth = new DateTime(2008, 1, 3),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1246,8 +1312,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //34
                 {
                     FullName = "Dang Phuong Thuy",
-                    UserName = "thuy0144525596",
-                    Email = "thuy0144525596@gmail.com",
+                    UserName = "thuy04002601",
+                    Email = "thuy04002601@gmail.com",
+                    Identifier = "STU04.002601",
+                    DateOfBirth = new DateTime(2008, 12, 31),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1257,8 +1325,10 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //35
                 {
                     FullName = "Nguyen Thu Trang",
-                    UserName = "trang0134100853",
+                    UserName = "trang04002600",
                     Email = "trang0134100853@gmail.com",
+                    Identifier = "STU04002600",
+                    DateOfBirth = new DateTime(2008, 3, 30),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
@@ -1268,15 +1338,198 @@ namespace SmartEdu.Services.SeederService
                 new RegisterUserDTO //36
                 {
                     FullName = "Nguyen Thuy Trang",
-                    UserName = "trang0134100856",
-                    Email = "trang0134100856@gmail.com",
+                    UserName = "trang04002608",
+                    Email = "trang04002608@gmail.com",
+                    Identifier = "STU04.002608",
+                    DateOfBirth = new DateTime(2008, 10, 22),
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 1,
                     ParentId = 36,
                     MainClassId = 1
                 },
-
+                new RegisterUserDTO //37
+                {
+                    FullName = "Le Dinh Phong",
+                    UserName = "phong04002605",
+                    Email = "phong04002605@gmail.com",
+                    Identifier = "STU04.002605",
+                    DateOfBirth = new DateTime(2008, 6, 6),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 37,
+                    MainClassId = 1
+                },
+                new RegisterUserDTO //38
+                {
+                    FullName = "Bui Ta Phuong",
+                    UserName = "phuong04002604",
+                    Email = "phuong04002604@gmail.com",
+                    Identifier = "STU04.002604",
+                    DateOfBirth = new DateTime(2008, 9, 22),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 38,
+                    MainClassId = 1
+                },
+                new RegisterUserDTO //39
+                {
+                    FullName = "Nguyen Van Thanh",
+                    UserName = "thanh04002607",
+                    Email = "thanh04002607@gmail.com",
+                    Identifier = "STU04.002607",
+                    DateOfBirth = new DateTime(2008, 8, 14),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 39,
+                    MainClassId = 1
+                },
+                new RegisterUserDTO //40
+                {
+                    FullName = "Nguyen Ngoc Tuyen",
+                    UserName = "tuyen04002606",
+                    Email = "thanh04002606@gmail.com",
+                    Identifier = "STU04.002606",
+                    DateOfBirth = new DateTime(2008, 12, 18),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 40,
+                    MainClassId = 1
+                },
+                new RegisterUserDTO //41
+                {
+                    FullName = "Dao Tuan Anh",
+                    UserName = "anh04002610",
+                    Email = "anh04002610@gmail.com",
+                    Identifier = "STU04.002610",
+                    DateOfBirth = new DateTime(2008, 10, 14),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 41,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //42
+                {
+                    FullName = "Dang Ngoc Chieu",
+                    UserName = "chieu04002609",
+                    Email = "chieu04002609@gmail.com",
+                    Identifier = "STU04.002609",
+                    DateOfBirth = new DateTime(2008, 12, 7),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 42,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //43
+                {
+                    FullName = "Tran Tien Dung",
+                    UserName = "dung04002616",
+                    Email = "dung04002616@gmail.com",
+                    Identifier = "STU04.002616",
+                    DateOfBirth = new DateTime(2008, 3, 27),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 43,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //44
+                {
+                    FullName = "Tran Minh Duong",
+                    UserName = "duong04002615",
+                    Email = "duong04002615@gmail.com",
+                    Identifier = "STU04.002615",
+                    DateOfBirth = new DateTime(2008, 9, 23),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 44,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //45
+                {
+                    FullName = "Nguyen Minh Hieu",
+                    UserName = "hieu04002614",
+                    Email = "hieu04002614@gmail.com",
+                    Identifier = "STU04.002614",
+                    DateOfBirth = new DateTime(2008, 10, 14),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 45,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //46
+                {
+                    FullName = "Le Van Oai",
+                    UserName = "oai04002612",
+                    Email = "oai04002612@gmail.com",
+                    Identifier = "STU04.002612",
+                    DateOfBirth = new DateTime(2008, 10, 3),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 46,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //47
+                {
+                    FullName = "Le Ngoc Quang",
+                    UserName = "quang04002611",
+                    Email = "quang04002611@gmail.com",
+                    Identifier = "STU04.002611",
+                    DateOfBirth = new DateTime(2008, 11, 29),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 47,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //48
+                {
+                    FullName = "Nguyen Khac Tho",
+                    UserName = "tho04002613",
+                    Email = "tho04002613@gmail.com",
+                    Identifier = "STU04.002613",
+                    DateOfBirth = new DateTime(2008, 9, 5),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 48,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //49
+                {
+                    FullName = "Pham Quang Dai",
+                    UserName = "dai04002620",
+                    Email = "dai04002620@gmail.com",
+                    Identifier = "STU04.002620",
+                    DateOfBirth = new DateTime(2008, 6, 2),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 49,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //50
+                {
+                    FullName = "Nguyen Van Hung",
+                    UserName = "hung04002618",
+                    Email = "hung04002618@gmail.com",
+                    Identifier = "STU04.002618",
+                    DateOfBirth = new DateTime(2008, 11, 4),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 50,
+                    MainClassId = 2
+                },
                 // Parents
                 new RegisterUserDTO // 1
                 {
@@ -1659,7 +1912,8 @@ namespace SmartEdu.Services.SeederService
                     {
                         UserId = user.Id,
                         ParentId = registerUserDTO.ParentId,
-                        MainClassId = registerUserDTO.MainClassId
+                        MainClassId = registerUserDTO.MainClassId,
+                        Identifier = registerUserDTO.Identifier
                     };
                     students.Add(student);
                 }
