@@ -1543,6 +1543,385 @@ namespace SmartEdu.Services.SeederService
                     ParentId = 51,
                     MainClassId = 2
                 },
+                new RegisterUserDTO //52
+                {
+                    FullName = "Nguyen Van Quan",
+                    UserName = "quan04002619 ",
+                    Email = "quan04002619@gmail.com",
+                    Identifier = "STU04.002619",
+                    DateOfBirth = new DateTime(2008, 7, 22),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 52,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //53
+                {
+                    FullName = "Can Van Thang",
+                    UserName = "thang04002617  ",
+                    Email = "thang04002617@gmail.com",
+                    Identifier = "STU04.002617",
+                    DateOfBirth = new DateTime(2008, 2, 12),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 53,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //54
+                {
+                    FullName = "Nguyen Van Ban",
+                    UserName = "ban04002627   ",
+                    Email = "ban04002627@gmail.com",
+                    Identifier = "STU04.002627",
+                    DateOfBirth = new DateTime(2008, 3, 18),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 54,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //55
+                {
+                    FullName = "Nguyen Van Ha",
+                    UserName = "ha04002630",
+                    Email = "ha04002630@gmail.com",
+                    Identifier = "STU04.002630",
+                    DateOfBirth = new DateTime(2008, 9, 8),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 55,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //56
+                {
+                    FullName = "Nguyen Quang Huy",
+                    UserName = "huy04002628",
+                    Email = "huy04002628@gmail.com",
+                    Identifier = "STU04.002628 ",
+                    DateOfBirth = new DateTime(2008, 9, 20),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 56,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //57
+                {
+                    FullName = "Doan Xuan Khang",
+                    UserName = "khang04002624",
+                    Email = "khang04002624@gmail.com",
+                    Identifier = "STU04.002624",
+                    DateOfBirth = new DateTime(2008, 4, 30),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 57,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //58
+                {
+                    FullName = "Le Dinh Lam",
+                    UserName = "lam04002626",
+                    Email = "lam04002626@gmail.com",
+                    Identifier = "STU04.002626",
+                    DateOfBirth = new DateTime(2008, 11, 5),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 58,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //59
+                {
+                    FullName = "Nguyen Tung Lam",
+                    UserName = "lam04002629",
+                    Email = "lam04002629@gmail.com",
+                    Identifier = "STU04.002629",
+                    DateOfBirth = new DateTime(2008, 10, 10),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 59,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //60
+                {
+                    FullName = "Hoang Cong Quyet",
+                    UserName = "quyet04002625",
+                    Email = "quyet04002625@gmail.com",
+                    Identifier = "STU04.002625",
+                    DateOfBirth = new DateTime(2008, 09, 25),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 60,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //61
+                {
+                    FullName = "Vu Truong Sinh",
+                    UserName = "sinh04002632",
+                    Email = "sinh04002632@gmail.com",
+                    Identifier = "STU04.002632",
+                    DateOfBirth = new DateTime(2008, 8, 4),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 61,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //62
+                {
+                    FullName = "Dao Phuc Son",
+                    UserName = "son04002622",
+                    Email = "son04002622@gmail.com",
+                    Identifier = "STU04.002622",
+                    DateOfBirth = new DateTime(2008, 11, 16),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 62,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //63
+                {
+                    FullName = "Doan Van Trieu",
+                    UserName = "trieu04002623",
+                    Email = "trieu04002623@gmail.com",
+                    Identifier = "STU04.002623",
+                    DateOfBirth = new DateTime(2008, 5, 12),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 63,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //64
+                {
+                    FullName = "Nguyen Van Thai",
+                    UserName = "thai04002623",
+                    Email = "thai04002623@gmail.com",
+                    Identifier = "STU04.002623",
+                    DateOfBirth = new DateTime(2008, 6, 2),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 64,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //65
+                {
+                    FullName = "Dang Van Anh",
+                    UserName = "anh04002634",
+                    Email = "anh04002634@gmail.com",
+                    Identifier = "STU04.002634",
+                    DateOfBirth = new DateTime(2008, 10, 5),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 65,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //66
+                {
+                    FullName = "Dang Van Anh",
+                    UserName = "anh04002639",
+                    Email = "anh04002639@gmail.com",
+                    Identifier = "STU04.002639",
+                    DateOfBirth = new DateTime(2008, 10, 10),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 66,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //67
+                {
+                    FullName = "Tran Trung Hieu",
+                    UserName = "hieu04002638",
+                    Email = "hieu04002638@gmail.com",
+                    Identifier = "STU04.002638",
+                    DateOfBirth = new DateTime(2008, 1, 24),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 67,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //68
+                {
+                    FullName = "Nguyen Quang Hung",
+                    UserName = "hung04002637",
+                    Email = "hung04002637@gmail.com",
+                    Identifier = "STU04.002637",
+                    DateOfBirth = new DateTime(2008, 4, 24),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 68,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //69
+                {
+                    FullName = "Ngo Duc Manh",
+                    UserName = "manh04002635",
+                    Email = "manh04002635@gmail.com",
+                    Identifier = "STU04.002635",
+                    DateOfBirth = new DateTime(2008, 9, 24),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 69,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //70
+                {
+                    FullName = "Nguyen Duc Manh",
+                    UserName = "manh04002636",
+                    Email = "manh04002636@gmail.com",
+                    Identifier = "STU04.002636",
+                    DateOfBirth = new DateTime(2008, 8, 26),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 70,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //71
+                {
+                    FullName = "Bui Van Tai",
+                    UserName = "tai04002633",
+                    Email = "tai04002633@gmail.com",
+                    Identifier = "STU04.002633",
+                    DateOfBirth = new DateTime(2008, 10, 31),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 71,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //72
+                {
+                    FullName = "Nguyen Van Cong",
+                    UserName = "cong04002640",
+                    Email = "cong04002640@gmail.com",
+                    Identifier = "STU04.002640",
+                    DateOfBirth = new DateTime(2008, 5, 6),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 72,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //73
+                {
+                    FullName = "Vu Trung Hieu",
+                    UserName = "hieu04002643",
+                    Email = "hieu04002643@gmail.com",
+                    Identifier = "STU04.002643",
+                    DateOfBirth = new DateTime(2008, 7, 5),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 73,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //74
+                {
+                    FullName = "Vu Quanh Minh",
+                    UserName = "minh04002642",
+                    Email = "minh04002642@gmail.com",
+                    Identifier = "STU04.002642",
+                    DateOfBirth = new DateTime(2008, 12, 5),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 74,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //75
+                {
+                    FullName = "Van Hai Nam",
+                    UserName = "nam04002641",
+                    Email = "nam04002641@gmail.com",
+                    Identifier = "STU04.002641",
+                    DateOfBirth = new DateTime(2008, 12, 17),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 75,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //76
+                {
+                    FullName = "Van Van Tung",
+                    UserName = "tung04002644",
+                    Email = "tung04002644@gmail.com",
+                    Identifier = "STU04.002644",
+                    DateOfBirth = new DateTime(2008, 4, 28),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 76,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //77
+                {
+                    FullName = "Lam Duc Dat",
+                    UserName = "dat04002645",
+                    Email = "dat04002645@gmail.com",
+                    Identifier = "STU04.002645",
+                    DateOfBirth = new DateTime(2008, 1, 26),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 77,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //78
+                {
+                    FullName = "Lam Tuan Vu",
+                    UserName = "vu04002646",
+                    Email = "vu04002646@gmail.com",
+                    Identifier = "STU04.002646",
+                    DateOfBirth = new DateTime(2008, 8, 28),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 78,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //79
+                {
+                    FullName = "Pham Ding Cuong",
+                    UserName = "cuong04002647",
+                    Email = "cuong04002647@gmail.com",
+                    Identifier = "STU04.002647",
+                    DateOfBirth = new DateTime(2008, 3, 19),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 79,
+                    MainClassId = 2
+                },
+                new RegisterUserDTO //80
+                {
+                    FullName = "Phung Duc Long",
+                    UserName = "long04002649",
+                    Email = "long04002649@gmail.com",
+                    Identifier = "STU04.002649",
+                    DateOfBirth = new DateTime(2008, 9, 30),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 80,
+                    MainClassId = 2
+                },
+
+
                 // Parents
                 new RegisterUserDTO // 1
                 {
