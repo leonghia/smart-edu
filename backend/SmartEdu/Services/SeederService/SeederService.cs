@@ -39,7 +39,7 @@ namespace SmartEdu.Services.SeederService
             {
 
                 // Teachers users
-                new RegisterUserDTO
+                new RegisterUserDTO // 1
                 {
                     FullName = "Nguyen Thi Giang",
                     UserName = "giang",
@@ -49,7 +49,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },              
-                new RegisterUserDTO
+                new RegisterUserDTO // 2
                 {
                     FullName = "Pham Thi Nguyet Anh",
                     UserName = "anhpham",
@@ -59,7 +59,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 3
                 {
                     FullName = "Nguyen Dam Thuy Duong",
                     UserName = "duong",
@@ -69,7 +69,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 4
                 {
                     FullName = "Le Thi Thuy Ha",
                     UserName = "hale",
@@ -79,7 +79,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 5
                 {
                     FullName = "Nguyen Ngoc Hai",
                     UserName = "hain",
@@ -89,7 +89,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO //6
                 {
                     FullName = "Nguyen Thi Hong Phuong",
                     UserName = "hphuong",
@@ -99,7 +99,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 7
                 {
                     FullName = "Luong Thi Hai Yen",
                     UserName = "hyen",
@@ -109,7 +109,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 8
                 {
                     FullName = "Dam Thi Lan Anh",
                     UserName = "lananh",
@@ -119,7 +119,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 9
                 {
                     FullName = "Nguyen Duc Manh",
                     UserName = "manhnguyenduc",
@@ -129,7 +129,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 10
                 {
                     FullName = "Pham Thi Kim Oanh",
                     UserName = "oanhphamkim",
@@ -139,7 +139,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 11
                 {
                     FullName = "Phung Thi Kim Oanh",
                     UserName = "oanh",
@@ -149,7 +149,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 12
                 {
                     FullName = "Do Thi Thuy Trang",
                     UserName = "trangdo",
@@ -159,7 +159,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 13
                 {
                     FullName = "Ngo Thi Thu Trang",
                     UserName = "trangngo",
@@ -169,7 +169,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 14
                 {
                     FullName = "Nguyen Ba Tuan",
                     UserName = "tuan",
@@ -179,17 +179,17 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 15
                 {
                     FullName = "Do Thi Anh Van",
-                    UserName = "van",
-                    Email = "van@c3chuvanan.edu",
+                    UserName = "vant",
+                    Email = "vant@c3chuvanan.edu",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 16
                 {
                     FullName = "Trinh Duy Tien",
                     UserName = "tien",
@@ -199,7 +199,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 1
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 17
                 {
                     FullName = "Dang Thi Dinh",
                     UserName = "dinh",
@@ -209,7 +209,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 18
                 {
                     FullName = "Phan Hong Hanh",
                     UserName = "hanhphanhong",
@@ -219,7 +219,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 19
                 {
                     FullName = "Tran Thi Thu Hien",
                     UserName = "hientran",
@@ -229,7 +229,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 20
                 {
                     FullName = "Phung Thi Thanh Huyen",
                     UserName = "huyenphung",
@@ -239,7 +239,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 21
                 {
                     FullName = "Pham Mai Huyen",
                     UserName = "huyen",
@@ -249,7 +249,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 22
                 {
                     FullName = "Dao Thi Huong Lan",
                     UserName = "lanvan",
@@ -259,7 +259,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 23
                 {
                     FullName = "Pham Thi Thuy Linh",
                     UserName = "linhpham",
@@ -269,7 +269,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 24
                 {
                     FullName = "Le Thi Thanh Loan",
                     UserName = "loan",
@@ -279,7 +279,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 25
                 {
                     FullName = "Nguyen Thi Thanh Mai",
                     UserName = "mainguyen",
@@ -289,7 +289,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 26
                 {
                     FullName = "Mai Thi Nguyet",
                     UserName = "nguyet",
@@ -299,7 +299,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 27
                 {
                     FullName = "Tran Thi Phuong",
                     UserName = "phuongtran",
@@ -309,7 +309,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 28
                 {
                     FullName = "Nguyen Thi Thanh Tam",
                     UserName = "tamh",
@@ -319,7 +319,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 29
                 {
                     FullName = "Nguyen Thi Huong Thuy",
                     UserName = "thuy",
@@ -329,7 +329,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 30
                 {
                     FullName = "Vu Van Thang",
                     UserName = "vuthang",
@@ -339,7 +339,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 2
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 31
                 {
                     FullName = "Giap Thi Hai Chi",
                     UserName = "gchi",
@@ -349,7 +349,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 32
                 {
                     FullName = "Nguyen Thi Lien",
                     UserName = "lien",
@@ -359,7 +359,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 33
                 {
                     FullName = "Thai Thi Phuong Nga",
                     UserName = "nga",
@@ -369,7 +369,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 34
                 {
                     FullName = "Nguyen Le Hong Nhung",
                     UserName = "nhung",
@@ -379,7 +379,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 35
                 {
                     FullName = "Nguyen Van Thao",
                     UserName = "thaonguyenvan",
@@ -389,7 +389,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 36
                 {
                     FullName = "Nguyen Bao Tram",
                     UserName = "tram",
@@ -399,7 +399,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId= 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 37
                 {
                     FullName = "Mai Thi Thu Trang",
                     UserName = "trangmai",
@@ -409,7 +409,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 38
                 {
                     FullName = "Nguyen Thi Mai Trang",
                     UserName = "trangnguyen",
@@ -419,7 +419,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 39
                 {
                     FullName = "Trinh Thu Trang",
                     UserName = "trangtrinh",
@@ -429,7 +429,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 40
                 {
                     FullName = "Nong Thi Khanh Van",
                     UserName = "vannongkhanh",
@@ -439,17 +439,17 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 41
                 {
                     FullName = "Vu Dieu Linh",
                     UserName = "vudlinh",
-                    Email = "vudlinh@gmail.com",
+                    Email = "vudlinh@c3chuvanan.edu.vn",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 3,
                     SubjectId = 3
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 42
                 {
                     FullName = "Pham Tuat Dat",
                     UserName = "dat",
@@ -459,7 +459,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 43
                 {
                     FullName = "Tran Thi Kieu Giang",
                     UserName = "giangly",
@@ -469,7 +469,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 44
                 {
                     FullName = "Nguyen Thuy Hang",
                     UserName = "hang",
@@ -479,7 +479,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 45
                 {
                     FullName = "Trinh Thi Huong",
                     UserName = "huongtrinhthi",
@@ -489,7 +489,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 46
                 {
                     FullName = "Nguyen Thi Lan",
                     UserName = "lan",
@@ -499,7 +499,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 47
                 {
                     FullName = "Tran Thi Ngoan",
                     UserName = "ngoan",
@@ -509,7 +509,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 48
                 {
                     FullName = "Bui Thi Quynh Anh",
                     UserName = "quynhanh",
@@ -519,7 +519,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 49
                 {
                     FullName = "Pham Ngoc Thang",
                     UserName = "thangpham",
@@ -529,7 +529,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 50
                 {
                     FullName = "Dao Tri Thuc",
                     UserName = "thuc",
@@ -539,7 +539,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 51
                 {
                     FullName = "Tran Thanh Thuy",
                     UserName = "thuytranthanh",
@@ -549,7 +549,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 4
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 52
                 {
                     FullName = "Nguyen Kim Chi",
                     UserName = "chi",
@@ -559,7 +559,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 53
                 {
                     FullName = "Nguyen Thi Hanh",
                     UserName = "hanh",
@@ -569,7 +569,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 54
                 {
                     FullName = "Nguyen Thi Kim Hoa",
                     UserName = "hoa",
@@ -579,7 +579,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 55
                 {
                     FullName = "Le Thi Thu Huong",
                     UserName = "huongle",
@@ -589,7 +589,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 56
                 {
                     FullName = "Phan Thi Phuong Khanh",
                     UserName = "khanh",
@@ -599,7 +599,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 57
                 {
                     FullName = "Nguyen Van Kien",
                     UserName = "kien",
@@ -609,7 +609,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 58
                 {
                     FullName = "Vo Thi Hai Ly",
                     UserName = "ly",
@@ -619,7 +619,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 59
                 {
                     FullName = "Do Thi Ngoc Mai",
                     UserName = "maido",
@@ -629,7 +629,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO //60
                 {
                     FullName = "Phan Huy Minh",
                     UserName = "minh",
@@ -639,7 +639,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 61
                 {
                     FullName = "Nguyen Thi Nhung",
                     UserName = "nguyennhung",
@@ -649,7 +649,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 62
                 {
                     FullName = "Trinh Kim Thu",
                     UserName = "thutrinh",
@@ -659,7 +659,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 63
                 {
                     FullName = "Dao Huu Toan",
                     UserName = "toan",
@@ -669,7 +669,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 5
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 64
                 {
                     FullName = "Nguyen Thi Thanh Binh",
                     UserName = "binhnguyen",
@@ -679,7 +679,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 65
                 {
                     FullName = "Nguyen Thi Minh Ha",
                     UserName = "hanguyen",
@@ -689,7 +689,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 66
                 {
                     FullName = "Vo Thi My Hanh",
                     UserName = "hanhvo",
@@ -699,7 +699,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 67
                 {
                     FullName = "Nguyen Thi Thu Ha",
                     UserName = "hasinh",
@@ -709,7 +709,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 68
                 {
                     FullName = "Nguyen Thi Thanh Huyen",
                     UserName = "huyennguyen",
@@ -719,7 +719,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 69
                 {
                     FullName = "Nguyen Thi Phuong Thanh",
                     UserName = "thanh",
@@ -729,7 +729,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 70
                 {
                     FullName = "Pham Thi Hai Van",
                     UserName = "van",
@@ -739,7 +739,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 6
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 71
                 {
                     FullName = "Nguyen Thi Thu Hien",
                     UserName = "hiennguyen",
@@ -749,7 +749,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 72
                 {
                     FullName = "Nguyen Thi Hoan",
                     UserName = "hoan",
@@ -759,7 +759,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 73
                 {
                     FullName = "Hoang Thi Lan Huong",
                     UserName = "huonghoang",
@@ -769,7 +769,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 74
                 {
                     FullName = "Le Thi Mai Huong",
                     UserName = "huong",
@@ -779,7 +779,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 75
                 {
                     FullName = "Tran Thi Mai",
                     UserName = "mai",
@@ -789,7 +789,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 76
                 {
                     FullName = "Pham Thi Minh Quyen",
                     UserName = "quyen",
@@ -799,7 +799,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 7
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 77
                 {
                     FullName = "Dinh Thi Gia",
                     UserName = "gia",
@@ -809,7 +809,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 8
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 78
                 {
                     FullName = "Nguyen Thi Tu Hong",
                     UserName = "hong",
@@ -819,7 +819,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 8
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 79
                 {
                     FullName = "Pham Thi Thu Huyen",
                     UserName = "huyenpham",
@@ -829,7 +829,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 8
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 80
                 {
                     FullName = "Ha Thi Lien",
                     UserName = "lienha",
@@ -839,7 +839,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 8
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 81
                 {
                     FullName = "Hoang Thi Lien",
                     UserName = "lienhoangthi",
@@ -849,7 +849,7 @@ namespace SmartEdu.Services.SeederService
                     Type = 3,
                     SubjectId = 8
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO // 82
                 {
                     FullName = "Do Thi Thanh Nga",
                     UserName = "ngado",
@@ -869,7 +869,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = new List<string> { "Admin" },
                     Type = 0
                 },
-                new RegisterUserDTO
+                new RegisterUserDTO 
                 {
                     FullName = "Trinh Van Phuc",
                     UserName = "phucadmin",
@@ -2013,16 +2013,6 @@ namespace SmartEdu.Services.SeederService
                 },
             };
 
-            foreach (var registerUserDTO in registerUserDTOs)
-            {
-                var user = _mapper.Map<User>(registerUserDTO);
-
-                await _userManager.CreateAsync(user,
-                    registerUserDTO.Password);
-                await _userManager.AddToRolesAsync(user,
-                    roles);
-            }
-
             await SeedingUsers(registerUserDTOs);
             await SeedingTeachers(registerUserDTOs);
             await SeedingMainClasses();
@@ -2043,6 +2033,7 @@ namespace SmartEdu.Services.SeederService
                 if (registerUserDTO.Type == 3 && registerUserDTO.SubjectId > 0)
                 {
                     var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
+                    Console.WriteLine("DFSDFDSFSDFSDFSDFSDFSDFSDFSDFSDF" + user.FullName);
                     var teacher = new Teacher
                     {
                         UserId = user.Id,                      
