@@ -1530,6 +1530,19 @@ namespace SmartEdu.Services.SeederService
                     ParentId = 50,
                     MainClassId = 2
                 },
+                new RegisterUserDTO //51
+                {
+                    FullName = "Vu Tuan Huy",
+                    UserName = "huy04002621",
+                    Email = "huy04002621@gmail.com",
+                    Identifier = "STU04.002621",
+                    DateOfBirth = new DateTime(2008, 4, 29),
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 1,
+                    ParentId = 51,
+                    MainClassId = 2
+                },
                 // Parents
                 new RegisterUserDTO // 1
                 {
@@ -1847,9 +1860,153 @@ namespace SmartEdu.Services.SeederService
                 },
                 new RegisterUserDTO //36
                 {
-                    FullName = "Nguyen  Thi Thuy",
+                    FullName = "Nguyen Thi Thuy",
                     UserName = "thuy0134100856",
                     Email = "thuy0134100856@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //37
+                {
+                    FullName = "Nguyen Thi Tu Quyen",
+                    UserName = "quyen03000833",
+                    Email = "quyen03000833@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //38
+                {
+                    FullName = "Nguyen Thi Nhu Quynh",
+                    UserName = "quynh03000830",
+                    Email = "quynh03000830@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //39
+                {
+                    FullName = "Vu Thanh Thuy",
+                    UserName = "thuy03000839",
+                    Email = "thuy03000839@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //40
+                {
+                    FullName = "Vu Thi Huyen Trang",
+                    UserName = "trang03000840",
+                    Email = "trang03000840@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //41
+                {
+                    FullName = "Pham Thi Thu Uyen",
+                    UserName = "uyen03000836",
+                    Email = "uyen03000836@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //42
+                {
+                    FullName = "Nguyen Hong Van",
+                    UserName = "van03000825",
+                    Email = "van03000825@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //43
+                {
+                    FullName = "Nguyen Thi Yen Anh",
+                    UserName = "yen03000851",
+                    Email = "yen03000851@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //44
+                {
+                    FullName = "Tran Thi Hai Anh",
+                    UserName = "anh03000854",
+                    Email = "hai03000854@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //45
+                {
+                    FullName = "Pham Kim Chi",
+                    UserName = "chi03000852",
+                    Email = "chi03000852@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //46
+                {
+                    FullName = "Nguyen Minh Hoang",
+                    UserName = "hoang03000845",
+                    Email = "hoang03000845@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //47
+                {
+                    FullName = "Nguyen Thi Truc Linh",
+                    UserName = "linh03000850",
+                    Email = "linh03000850@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //47
+                {
+                    FullName = "Vu My Linh",
+                    UserName = "linh03000856",
+                    Email = "linh03000856@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //48
+                {
+                    FullName = "Le Thi Bich Loan",
+                    UserName = "loan03000842",
+                    Email = "loan03000842@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //49
+                {
+                    FullName = "Nguyen Thi Minh Ly",
+                    UserName = "ly03000847",
+                    Email = "ly03000847@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //50
+                {
+                    FullName = "Ngo Tra My",
+                    UserName = "my03000844",
+                    Email = "my03000844@gmail.com",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 2
+                },
+                new RegisterUserDTO //51
+                {
+                    FullName = "Nguyen Thi Tra My",
+                    UserName = "my03000849",
+                    Email = "my03000849@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 2
