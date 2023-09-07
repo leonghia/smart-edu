@@ -21,7 +21,7 @@ class AuthService {
     // GET,POST, PUT,DELETE
     async getCurentUser(){ //async vaf await luon di cung voi nhau
          // AJAX : la 1 ky thuat dung de ket noi ma khong can load lai trang
-        const response = await fetch(`${BASE_URL}}/Account/user`,{
+        const response = await fetch(`${BASE_URL}/Account/user`,{
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -43,7 +43,7 @@ class AuthService {
         }
        
         */
-        const response = await fetch(`${BASE_URL}}/Account/login`,{
+        const response = await fetch(`${BASE_URL}/Account/login`,{
             method: "POST", // tai sao loogin phai dung phuong thuc POST chu khong phai GET
             mode: "cors",
             cache: "no-cache",
