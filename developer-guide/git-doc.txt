@@ -26,9 +26,8 @@ IV. Cach tao ban sao
 git checkout -b ten_ban_sao
 
 V. Cach lay ban goc moi nhat ve
+git restore .
+git clean -fd
 git checkout main
 git fetch
-git add .
-git stash
-git fetch 
-git pull
+git pull (neu git pull bi error thi git restore . -> git clean -fd -> git pull)

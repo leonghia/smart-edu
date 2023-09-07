@@ -1,32 +1,50 @@
 import authService from "./services/auth.service.js";
 
-export class AppComponent extends HTMLElement{
+export class AppComponent extends HTMLElement {
 
     // Dung de tao ra the <app-root> chua duoc dua vao DOM
-    constructor(){
+    constructor() {
         super();  // super là contructor trong class cha (HTMLlement)
     }
 
     // Kich hoat khi <app-root> duoc dua vao DOM
-    async connectedCallback(){
-        if (!authService.checkToken()){
+    connectedCallback() {
+        if (!authService.checkToken()) {
             // neu token khon ton tai
             this.innerHTML = `<app-login></app-login>`;
-        }else{
-            try{
-                const data = await authService.getCurentUser();
-                console.log(data.data);
-            }catch(err){
-                this.innerHTML = `<app-login></app-login>`;// hien thi trang dang nhap
-            }
+        } else {
+            authService.getCurentUser()
+                .then(res => {
+                    const user = res.data;
+                    switch (user.type) {
+                        case 0:
+                            this.innerHTML = "<admin-dashboard></admin-dashboard>";
+                            break;
+                        case 1:
+                            this.innerHTML = "<student-dashboard></student-dashboard>";
+                            break;
+                        case 2:
+                            this.innerHTML = "<parent-dashboard></parent-dashboard>";
+                            break;
+                        case 3:
+                            this.innerHTML = "<teacher-dashboard></teacher-dashboard>";
+                            break;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
         }
     }
 
     // Kich hoat khi <app-root> bi xoa khoi DOM
-    disconnectedCallback(){
+    disconnectedCallback() {
 
     }
 
+    renderAdminDashboard() {
+        
+    }
 }
 
-customElements.define("app-root",AppComponent);
+customElements.define("app-root", AppComponent);
