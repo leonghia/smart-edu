@@ -1,7 +1,6 @@
 import dataService from "../../../services/data.service";
 
 export class AdminDashboardComponent extends HTMLElement {
-
     constructor() {
         super();
     }
