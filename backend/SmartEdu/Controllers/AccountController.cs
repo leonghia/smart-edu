@@ -32,7 +32,7 @@ namespace SmartEdu.Controllers
         /// Retrieve the currently logged-in user.
         /// </summary>
         /// <returns></returns>       
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("user")]
         public async Task<IActionResult> GetCurrent()
         {
@@ -45,10 +45,10 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Retrieve all the users (Administrator required).
+        /// Retrieve all the users (Admin required).
         /// </summary>
         /// <returns></returns>
-        //[Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
@@ -59,7 +59,7 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Register a new user. Roles should be "Administrator" or "User". Only administrator can register another administrator. After register, a confirmation link would be sent to the registered email.
+        /// Register a new user. Roles should be "Admin" or "User". Only Admin can register another Admin. After register, a confirmation link would be sent to the registered email.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -79,7 +79,7 @@ namespace SmartEdu.Controllers
         /// Send a confirmation link to the email of the current-logged in user.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpGet]
         [Route("verify-email")]
         public async Task<IActionResult> VerifyEmail()
@@ -111,7 +111,7 @@ namespace SmartEdu.Controllers
         /// Request a verification code to be send to the specified phone number.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         [Route("verify-phone")]
         public async Task<IActionResult> VerifyPhone([FromBody] VerifyPhoneUserDTO verifyPhoneUserDTO)
@@ -129,7 +129,7 @@ namespace SmartEdu.Controllers
         /// Confirm the phone number with the specified verification code.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         [Route("confirm-phone")]
         public async Task<IActionResult> ConfirmPhone([FromBody] ConfirmPhoneUserDTO confirmPhoneUserDTO)
@@ -196,10 +196,10 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
-        /// Delete a user (Administrator required). 
+        /// Delete a user (Admin required). 
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteUserDTO deleteUserDTO)
         {
@@ -216,7 +216,7 @@ namespace SmartEdu.Controllers
         /// Update a user. Since this is a PUT method, client would need to fill all the required properties in the request body.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateUserDTO updateUserDTO)
         {
@@ -269,7 +269,7 @@ namespace SmartEdu.Controllers
         /// Update profile image for the current logged-in user.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Administrator,User")]
+        [Authorize(Roles = "Admin,User")]
         [HttpPut]
         [Route("profile-image")]
         public async Task<IActionResult> UpdateProfileImage([FromForm] MultipleFilesModel model)
