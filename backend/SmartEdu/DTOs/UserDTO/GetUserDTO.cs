@@ -14,5 +14,6 @@ namespace SmartEdu.DTOs.UserDTO
         public string ProfileImage { get; set; }
         public string? Address { get; set; }
         public ICollection<string> Roles { get; set; }
+		public byte Type { get; set; }
     }
 }
