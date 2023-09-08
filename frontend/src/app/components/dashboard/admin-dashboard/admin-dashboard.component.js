@@ -1,4 +1,5 @@
 import dataService from "../../../services/data.service";
+import { formatDatetime } from "../../../helpers/datetime.helper.js";
 
 export class AdminDashboardComponent extends HTMLElement {
     constructor() {
@@ -390,7 +391,7 @@ export class AdminDashboardComponent extends HTMLElement {
                     markup = `
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">${currentValue.fullName}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${currentValue.dateOfBirth}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${formatDatetime(currentValue.dateOfBirth)}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${currentValue.email}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Student</td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
