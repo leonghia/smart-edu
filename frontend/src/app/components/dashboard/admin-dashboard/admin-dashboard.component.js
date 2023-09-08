@@ -176,7 +176,7 @@ export class AdminDashboardComponent extends HTMLElement {
 
             <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
 
-                <div class="rounded-lg flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
+                <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
                     <div class="flex h-16 shrink-0 items-center">
                         <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=fuchsia&shade=500"
                             alt="Your Company">
@@ -317,7 +317,7 @@ export class AdminDashboardComponent extends HTMLElement {
                     </button>
 
                     <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                        <form class="flex flex-1" action="#" method="GET">
+                        <form class="flex flex-1">
                             <label for="search-field" class="sr-only">Search</label>
                             <div class="relative w-full">
                                 <svg class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500"
@@ -347,13 +347,13 @@ export class AdminDashboardComponent extends HTMLElement {
     #renderStudentsMenu() {
         return `
         <div class="h-full">
-            <div class="mx-auto max-w-7xl h-full">
+            <div class="mx-auto max-w-full h-full">
                 <div class="py-10 h-full">
                     <div class="px-4 sm:px-6 lg:px-8 h-full">
                         <div class="sm:flex sm:items-center h-16">
                             <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-white">Students</h1>
-                            <p class="mt-2 text-sm text-gray-300">A list of all the students in your application including their name, date of birth, email and role.</p>
+                            <p class="mt-2 text-sm text-gray-300">A list of all the students in your application including their identifiers, names, dates of birth, emails, classes and parents.</p>
                             </div>
                             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             <button type="button" class="block rounded-md bg-fuchsia-500 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-fuchsia-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500">Add Student</button>
@@ -365,8 +365,8 @@ export class AdminDashboardComponent extends HTMLElement {
                                     <table class="min-w-full divide-y divide-gray-700">
                                     <thead>
                                         <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Name</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date of birth</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date Of Birth</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Role</th>
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
