@@ -1,7 +1,9 @@
 import dataService from "../../../services/data.service";
 import { formatDatetime } from "../../../helpers/datetime.helper.js";
+import { searchByName } from "../../../helpers/search.helper.js";
 
 export class AdminDashboardComponent extends HTMLElement {
+    #students;
     constructor() {
         super();
     }
@@ -14,6 +16,10 @@ export class AdminDashboardComponent extends HTMLElement {
         const main = document.querySelector("main");
         main.insertAdjacentHTML("beforeend", this.#renderStudentsMenu());
         this.#renderStudentRows();
+
+        const students = this.#students;
+
+
     }
 
     disconnectedCallback() {
@@ -335,7 +341,7 @@ export class AdminDashboardComponent extends HTMLElement {
     }
 
     #toggleTab() {
-        
+
     }
 
     #renderStudentsMenu() {
@@ -385,7 +391,46 @@ export class AdminDashboardComponent extends HTMLElement {
     #renderStudentRows() {
         dataService.getStudents()
             .then(data => {
+
+                //Buoc1: Xac dinh phan tu: thanh tim kiem
+                const form = document.querySelector("form");
+                const searchField = document.querySelector("#search-field");
                 const tableBody = document.querySelector("tbody");
+
+                //Buoc 2: Gan su kien nhan Enter vao form
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+
+                    //Buoc 3: Hien thi ket qua tim kiem
+
+                    const results = searchByName(data, searchField.value);
+                    console.log(data);
+                    console.log(searchField.value);
+
+                    //Buoc 3.1: Xoa bang hien tai 
+                    tableBody.innerHTML = "";
+                    //Buoc 3.2: 
+                    let resultMarkup;
+                    results.forEach(currentValue => {
+                        resultMarkup = `
+                    <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">${currentValue.fullName}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${formatDatetime(currentValue.dateOfBirth)}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${currentValue.email}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Student</td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <a href="#" class="text-fuchsia-400 hover:text-fuchsia-300">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                        </td>
+                    </tr>
+                    `;
+                        tableBody.insertAdjacentHTML("beforeend", resultMarkup);
+                    })
+
+                });
+
+                this.#students = data;
+
                 let markup;
                 data.forEach(currentValue => {
                     markup = `

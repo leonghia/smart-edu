@@ -17,7 +17,7 @@ class DataService {
         });
         const data = await response.json();
         const students = data.data.filter(user => user.type === 1);
-        console.log(students);
+        
         return students;
     }
 }
