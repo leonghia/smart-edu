@@ -4,6 +4,7 @@ import { searchByName } from "../../../helpers/search.helper.js";
 
 export class AdminDashboardComponent extends HTMLElement {
     #students;
+
     constructor() {
         super();
     }
@@ -16,10 +17,6 @@ export class AdminDashboardComponent extends HTMLElement {
         const main = document.querySelector("main");
         main.insertAdjacentHTML("beforeend", this.#renderStudentsMenu());
         this.#renderStudentRows();
-
-        const students = this.#students;
-
-
     }
 
     disconnectedCallback() {
@@ -145,26 +142,33 @@ export class AdminDashboardComponent extends HTMLElement {
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="-mx-6 mt-auto">
-                                        <a href="#"
+                                    <li class="-mx-6 mt-auto mb-2">
+                                        <div
                                             class="flex items-center justify-between px-6 py-3 text-sm font-semibold leading-6 text-white">
-                                            <span class="flex items-center gap-x-4">
+                                            <div class="flex items-center gap-x-4">
                                                 <img class="h-8 w-8 rounded-full bg-gray-800"
                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                 alt="">
                                                 <span class="sr-only">Your profile</span>
-                                                <span aria-hidden="true">Hello, Quoc 👋</span>
-                                            </span>                                     
-                                            <span class="text-gray-400 hover:text-white">
-                                                <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                </svg>
-                                            </span>
-                                        </a>
+                                                <span aria-hidden="true">Hi, Quoc 👋</span>
+                                            </div>
+                                            <div class="flex items-center gap-x-3">
+                                                <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#d946ef" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 shrink-0">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                                                    </svg>                                              
+                                                </span>
+                                                <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                                    <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                </span>
+                                            </div>                                      
+                                        </div>
                                     </li>
                                 </ul>
                             </nav>
@@ -277,26 +281,33 @@ export class AdminDashboardComponent extends HTMLElement {
                                     </li>
                                 </ul>
                             </li>
-                            <li class="-mx-6 mt-auto">
-                                <a href="#"
+                            <li class="-mx-6 mt-auto mb-2">
+                                <div
                                     class="flex items-center justify-between px-6 py-3 text-sm font-semibold leading-6 text-white">
-                                    <span class="flex items-center gap-x-4">
+                                    <div class="flex items-center gap-x-4">
                                         <img class="h-8 w-8 rounded-full bg-gray-800"
                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                         alt="">
                                         <span class="sr-only">Your profile</span>
-                                        <span aria-hidden="true">Hello, Quoc 👋</span>
-                                    </span>
-                                    <span class="text-gray-400 hover:text-white">
-                                        <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                    </span>
-                                </a>
+                                        <span aria-hidden="true">Hi, Quoc 👋</span>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#d946ef" viewBox="0 0 24 24" stroke-width="0" stroke="currentColor" class="w-6 h-6 shrink-0">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                                            </svg>                                      
+                                        </span>
+                                        <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                            <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </span>
+                                    </div>                                
+                                </div>
                             </li>
                         </ul>
                     </nav>
@@ -365,12 +376,19 @@ export class AdminDashboardComponent extends HTMLElement {
                                     <table class="min-w-full divide-y divide-gray-700">
                                     <thead>
                                         <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">No.</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Student ID</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Class</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date Of Birth</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Role</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Parent</th>
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                             <span class="sr-only">Edit</span>
+                                        </th>
+                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                            <span class="sr-only">Delete</span>
                                         </th>
                                         </tr>
                                     </thead>
@@ -389,9 +407,11 @@ export class AdminDashboardComponent extends HTMLElement {
     }
 
     #renderStudentRows() {
-        dataService.getStudents()
+        Promise.resolve(new Array())
             .then(data => {
-
+                for (let i = 0; i < 100; i++) {
+                    data.push(i);
+                }
                 //Buoc1: Xac dinh phan tu: thanh tim kiem
                 const form = document.querySelector("form");
                 const searchField = document.querySelector("#search-field");
@@ -415,12 +435,15 @@ export class AdminDashboardComponent extends HTMLElement {
                     results.forEach(currentValue => {
                         resultMarkup = `
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">${currentValue.fullName}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${formatDatetime(currentValue.dateOfBirth)}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${currentValue.email}</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0"><span class="hover:text-fuchsia-500 cursor-pointer">${"Trinh Dinh Quoc"}</span></td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${formatDatetime("2004-03-26T00:00:00")}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${"no1hoatieu@gmail.com"}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Student</td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a href="#" class="text-fuchsia-400 hover:text-fuchsia-300">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                            <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
+                        </td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
                         </td>
                     </tr>
                     `;
@@ -429,18 +452,35 @@ export class AdminDashboardComponent extends HTMLElement {
 
                 });
 
-                this.#students = data;
-
                 let markup;
-                data.forEach(currentValue => {
+                data.forEach((currentValue, currentIndex) => {
                     markup = `
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">${currentValue.fullName}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${formatDatetime(currentValue.dateOfBirth)}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">${currentValue.email}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">Student</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-300">${currentIndex + 1}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white sm:pl-0">
+                            <div class="flex items-center gap-x-4">
+                            <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${"Trinh Dinh Quoc"}" class="h-8 w-8 rounded-full bg-gray-800">
+                            <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${"Trinh Dinh Quoc"}</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-400">${"STU04.002589"}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm leading-6">
+                            <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                                <div class="flex-none rounded-full p-1 ${true ? "text-green-400 bg-green-400/10" : "text-gray-500 bg-gray-100/10"}">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                </div>
+                                <div class="hidden text-white sm:block">${true ? "Online" : "Offline"}</div>
+                            </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"10A"}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDatetime("2004-03-26T00:00:00")}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"no1hoatieu@gmail.com"}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${"La Trong Nghia"}</span></td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                            <a href="#" class="text-fuchsia-400 hover:text-fuchsia-300">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                            <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
+                        </td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
                         </td>
                     </tr>
                     `;
