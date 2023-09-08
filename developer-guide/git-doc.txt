@@ -26,8 +26,10 @@ IV. Cach tao ban sao
 git checkout -b ten_ban_sao
 
 V. Cach lay ban goc moi nhat ve
-git restore .
-git clean -fd
-git checkout main
-git fetch
-git pull (neu git pull bi error thi git restore . -> git clean -fd -> git pull)
+git status        : ktra xem minh da sua nhung gi;
+git restore .     : xoa nhung cai dax sua;
+git clean -fd     : xoa nhung file minh da tao;
+git checkout main : de chuyen sang ban main;
+git fetch         : tai nhung cap nhat moi nhat ve nhung chua cai vao may;
+git status        : hien thi cap nhat tren main;
+git pull:         : cai nhung cap nhat moi nhatve may tinh;
