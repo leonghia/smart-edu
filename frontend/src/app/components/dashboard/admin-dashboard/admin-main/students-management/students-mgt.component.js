@@ -1,24 +1,40 @@
 import { formatDate } from "../../../../../helpers/datetime.helper.js";
+import { refreshStudents, getStudents } from "../../../../../app.store.js";
+import searchBarService from "../../../../search-bar/search-bar.service.js";
 
 export class StudentsMgtComponent extends HTMLElement {
     constructor() {
         super();
+
+        searchBarService.subscribe("search", {
+            component: this,
+            eventHandler: this.handleSearch
+        })
     }
+
+    #tableBody;
 
     connectedCallback() {
         this.innerHTML = this.#render();
-        const tableBody = document.querySelector("tbody");
-        Promise.resolve(new Array())
-            .then(data => {
-                for (let i = 0; i < 100; i++) {
-                    data.push(i);    
-                }
-                
-                data.forEach((currentValue, currentIndex) => {
-                    tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
+        this.#tableBody = document.querySelector("tbody");
+        if (getStudents().length === 0) {
+            refreshStudents()
+                .then(() => {
+                    this.#displayStudents(getStudents());
                 });
-            });
+        }
     }
+
+    handleSearch(data) {
+        this.#tableBody.innerHTML = "";
+        this.#displayStudents(data);
+    }
+
+    #displayStudents(students) {
+        students.forEach((currentValue, currentIndex) => {
+            this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
+        });
+    } 
 
     disconnectedCallback() {
 
@@ -81,8 +97,8 @@ export class StudentsMgtComponent extends HTMLElement {
             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-300">${currentIndex + 1}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white sm:pl-0">
                 <div class="flex items-center gap-x-4">
-                    <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${"Trinh Dinh Quoc"}" class="h-8 w-8 rounded-full bg-gray-800">
-                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${"Trinh Dinh Quoc"}</div>
+                    <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${currentValue.fullName}" class="h-8 w-8 rounded-full bg-gray-800">
+                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${currentValue.fullName}</div>
                 </div>
             </td>
             <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-400">${"STU04.002589"}</td>
@@ -95,86 +111,17 @@ export class StudentsMgtComponent extends HTMLElement {
                 </div>
             </td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"10A"}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDate("2004-03-26T00:00:00")}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"no1hoatieu@gmail.com"}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDate(currentValue.dateOfBirth)}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.email}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${"La Trong Nghia"}</span></td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
+                <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${currentValue.fullName}</span></a>
             </td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
+                <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${currentValue.fullName}</span></a>
             </td>
         </tr>
         `;
-        Promise.resolve(new Array())
-            .then(data => {
-                for (let i = 0; i < 100; i++) {
-                    data.push(i);
-                }
-                //Buoc1: Xac dinh phan tu: thanh tim kiem
-                const form = document.querySelector("form");
-                const searchField = document.querySelector("#search-field");
-                const tableBody = document.querySelector("tbody");
-
-                //Buoc 2: Gan su kien nhan Enter vao form
-                form.addEventListener("submit", function (event) {
-                    event.preventDefault();
-
-
-                    //Buoc 3: Hien thi ket qua tim kiem
-
-                    const results = searchByName(data, searchField.value);
-                    console.log(data);
-                    console.log(searchField.value);
-
-                    //Buoc 3.1: Xoa bang hien tai 
-                    tableBody.innerHTML = "";
-                    //Buoc 3.2: 
-                    let resultMarkup;
-                    results.forEach(currentValue => {
-                        resultMarkup = `
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-300">${currentIndex + 1}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white sm:pl-0">
-                                <div class="flex items-center gap-x-4">
-                                <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${"Trinh Dinh Quoc"}" class="h-8 w-8 rounded-full bg-gray-800">
-                                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${"Trinh Dinh Quoc"}</div>
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-400">${"STU04.002589"}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6">
-                                <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                                    <div class="flex-none rounded-full p-1 ${true ? "text-green-400 bg-green-400/10" : "text-gray-500 bg-gray-100/10"}">
-                                        <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                                    </div>
-                                    <div class="hidden text-sm leading-6 text-gray-400 sm:block">${true ? "Online" : "Offline"}</div>
-                                </div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"10A"}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDatetime("2004-03-26T00:00:00")}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"no1hoatieu@gmail.com"}</td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${"La Trong Nghia"}</span></td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
-                            </td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${"Trinh Dinh Quoc"}</span></a>
-                            </td>
-                        </tr>
-                        `;
-                        tableBody.insertAdjacentHTML("beforeend", resultMarkup);
-                    })
-
-                });
-
-                let markup;
-                data.forEach((currentValue, currentIndex) => {
-                    markup = `
-                    
-                    `;
-                    tableBody.insertAdjacentHTML("beforeend", markup);
-                })
-            });
     }
 }
 

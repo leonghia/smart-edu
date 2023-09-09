@@ -1,4 +1,5 @@
 export class AdminSidebarComponent extends HTMLElement {
+
     constructor() {
         super();
     }
@@ -165,7 +166,7 @@ export class AdminSidebarComponent extends HTMLElement {
                 </div>
             </div>
 
-        <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+        <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col se-sidebar">
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
                 <div class="flex h-16 shrink-0 items-center">
                     <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=fuchsia&shade=500"
@@ -301,6 +302,7 @@ export class AdminSidebarComponent extends HTMLElement {
         </div>
         `;
     }
+
 }
 
 customElements.define("admin-sidebar", AdminSidebarComponent);

@@ -15,7 +15,7 @@ export class AdminMainComponent extends HTMLElement {
         return `
         <div class="xl:pl-72 se-right-container h-full">
             <search-bar></search-bar>
-            <main class="" style="height: calc(100% - 4rem);">
+            <main class="" style="height: calc(100% - 5rem);">
                 <students-mgt></students-mgt>
             </main>
         </div>
