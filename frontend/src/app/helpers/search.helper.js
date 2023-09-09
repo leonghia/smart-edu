@@ -6,5 +6,4 @@ export const searchByName = function(arr, name) {
     //arr = ["Huong", "Phuc", "Quoc", "Nghia"]
     //name = "u" 
     return results;
-
 }
