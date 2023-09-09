@@ -1,0 +1,31 @@
+<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity"></div>
+    <div class="relative inline-block text-left">
+        <div>
+            <button type="button"
+                class="focus-visible:outline-none inline-flex w-full justify-center gap-x-1.5 rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-950"
+                id="se_dropdown_btn" aria-expanded="true" aria-haspopup="true">
+                <span class="w-24">${this.#dropdownOptionState.title}</span>
+                <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+        <div id="se_dropdown_options"
+            class="transform opacity-0 scale-95 transition ease-out duration-1000 absolute left-0 z-10 mt-3 w-56 origin-top-right rounded-md bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="" role="none">
+                <span
+                    class="text-white px-4 py-2 text-sm se-menu-item rounded-t-md h-10 flex items-center hover:bg-gray-700"
+                    role="menuitem" tabindex="-1" id="menu-item-0">${"🆎 Search by name"}</span>
+                <span class="text-white px-4 py-2 text-sm se-menu-item h-10 flex items-center hover:bg-gray-700"
+                    role="menuitem" tabindex="-1" id="menu-item-1">${"🔑 Search by identifier"}</span>
+                <span
+                    class="text-white px-4 py-2 text-sm se-menu-item rounded-b-md h-10 flex items-center hover:bg-gray-700"
+                    role="menuitem" tabindex="-1" id="menu-item-2">${"💌 Search by email"}</span>
+            </div>
+        </div>
+    </div>
+</div>
