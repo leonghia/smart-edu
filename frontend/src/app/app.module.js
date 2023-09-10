@@ -6,3 +6,4 @@ import { AdminMainComponent } from "./components/dashboard/admin-dashboard/admin
 import { StudentsMgtComponent } from "./components/dashboard/admin-dashboard/admin-main/students-management/students-mgt.component.js";
 import { SearchBarComponent } from "./components/search-bar/search-bar.component.js";
 import { OverlayComponent } from "./components/overlay/overlay.component.js";
+import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component.js";
