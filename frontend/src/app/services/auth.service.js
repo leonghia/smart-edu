@@ -47,13 +47,7 @@ class AuthService {
             referrer: "no-referrer",
             body: JSON.stringify(loginUserDTO)
         });
-        const data = await response.json();
-        
-        if (data.data){
-            localStorage.setItem("token", data.data);
-        }else{
-            console.error("Sai ten nguoi dung hoac mat khau.");
-        }
+        return await response.json();
     }
 }
 

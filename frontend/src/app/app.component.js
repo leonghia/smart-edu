@@ -10,8 +10,8 @@ export class AppComponent extends HTMLElement {
 
     // Kich hoat khi <app-root> duoc dua vao DOM
     connectedCallback() {
-        if (false) {
-            // neu token khon ton tai
+        if (true) {
+            // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {
             Promise.resolve({data: {type: 0}})
