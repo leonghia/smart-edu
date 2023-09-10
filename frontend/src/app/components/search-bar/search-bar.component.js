@@ -1,10 +1,9 @@
 import searchBarService from "./search-bar.service.js";
 import { searchByName } from "../../helpers/search.helper.js";
 import { getStudents } from "../../app.store.js";
+import { showDropdown, hideDropdown } from "../../helpers/animation.helper.js";
 
 export class SearchBarComponent extends HTMLElement {
-
-    
 
     #dropdownOptionState = {
         state: false,
@@ -34,9 +33,9 @@ export class SearchBarComponent extends HTMLElement {
 
         this.#dropdownBtn.addEventListener("click", function() {
             if (this.#dropdownOptionState.state) {    
-                this.#hideDropdownOptions();       
+                hideDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);    
             } else {
-                this.#showDropdownOptions();
+                showDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);
             }
         }.bind(this));
 
@@ -55,7 +54,7 @@ export class SearchBarComponent extends HTMLElement {
                     this.#dropdownBtn.firstElementChild.textContent = "💌 Email";
                     break;
             }
-            this.#hideDropdownOptions();
+            hideDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);
         }.bind(this));
 
         this.#searchForm.addEventListener("submit", function(event) {
@@ -125,31 +124,13 @@ export class SearchBarComponent extends HTMLElement {
                         </div>
                         
                         <input id="se_table_search_field"
-                                class="block h-full w-full border-0 bg-transparent py-0 pr-0 text-white focus:ring-0 focus:outline-none sm:text-sm"
+                                class="block h-full w-full border-0 bg-transparent py-0 pr-0 pl-0 text-white focus:ring-0 focus:outline-none sm:text-sm"
                                 placeholder="${"Search for students by name, identifier or email....."}" type="search" name="search">
                     </div>
                 </form>
             </div>
         </div>
         `;
-    }
-
-    #showDropdownOptions() {
-        this.#dropdownOptions.classList.remove("ease-in", "duration-300");
-        this.#dropdownOptions.classList.add("ease-out", "duration-700");
-        this.#dropdownOptions.classList.remove("transform", "opacity-0" , "scale-95");
-        this.#dropdownOptions.classList.add("transform", "opacity-100", "scale-100");  
-        this.#dropdownOptionState.state = true;
-        this.#menuItemsArr.forEach(mI => mI.classList.add("cursor-pointer"));
-    }
-
-    #hideDropdownOptions() {
-        this.#dropdownOptions.classList.remove("ease-out", "duration-700");
-        this.#dropdownOptions.classList.add("ease-in", "duration-300");
-        this.#dropdownOptions.classList.remove("transform", "opacity-100", "scale-100");
-        this.#dropdownOptions.classList.add("transform", "opacity-0" , "scale-95");          
-        this.#dropdownOptionState.state = false;
-        this.#menuItemsArr.forEach(mI => mI.classList.remove("cursor-pointer"));
     }
 }
 

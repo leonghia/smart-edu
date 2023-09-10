@@ -1,4 +1,13 @@
+import { showDropdown, hideDropdown } from "../../../../helpers/animation.helper.js";
+
 export class AdminSidebarComponent extends HTMLElement {
+
+    #settingDropdown;
+    #settingBtn;
+    #settingItems;
+    #settingState = {
+        state: false
+    }
 
     constructor() {
         super();
@@ -6,6 +15,30 @@ export class AdminSidebarComponent extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = this.#render();
+        this.#settingDropdown = document.querySelector("#se_setting_dropdown");
+        this.#settingBtn = document.querySelector("#se_setting_btn");
+        this.#settingItems = document.querySelectorAll(".se-setting-item");
+        const settingItemsArr = Array.from(this.#settingItems);
+
+        this.#settingBtn.addEventListener("click", function() {
+            if (this.#settingState.state) {
+                hideDropdown(this.#settingDropdown, settingItemsArr, this.#settingState);
+                this.#unHighlightSettingBtn();
+                return;
+            }
+            this.#highlightSettingBtn();
+            showDropdown(this.#settingDropdown, settingItemsArr, this.#settingState);
+        }.bind(this));
+
+        this.#settingDropdown.addEventListener("click", function(event) {
+            const clicked = event.target.closest(".se-setting-item");
+            if (!clicked) {
+                return;
+            }
+            hideDropdown(this.#settingDropdown, settingItemsArr, this.#settingState);
+            this.#unHighlightSettingBtn();
+        }.bind(this));
+
     }
 
     disconnectedCallback() {
@@ -167,7 +200,7 @@ export class AdminSidebarComponent extends HTMLElement {
             </div>
 
         <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col se-sidebar">
-            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
+            <div id="se_sidebar" class="flex grow flex-col gap-y-5 bg-black/10 px-6 ring-1 ring-white/5">
                 <div class="flex h-16 shrink-0 items-center">
                     <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=fuchsia&shade=500"
                         alt="Your Company">
@@ -279,20 +312,41 @@ export class AdminSidebarComponent extends HTMLElement {
                                     <span aria-hidden="true">Hi, Quoc 👋</span>
                                 </div>
                                 <div class="flex items-center gap-x-3">
-                                    <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#d946ef" viewBox="0 0 24 24" stroke-width="0" stroke="currentColor" class="w-6 h-6 shrink-0">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                                        </svg>                                      
-                                    </span>
-                                    <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
-                                        <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                    </span>
+                                    <div>
+                                        <span class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#d946ef" viewBox="0 0 24 24" stroke-width="0" stroke="currentColor" class="w-6 h-6 shrink-0">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                                            </svg>                                      
+                                        </span>
+                                    </div>
+                                    <div class="relative inline-block text-left">
+                                        <div>
+                                            <span id="se_setting_btn" class="text-gray-400 hover:text-fuchsia-400 cursor-pointer">
+                                                <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                            </span>                                    
+                                        </div>
+                                        <div id="se_setting_dropdown"
+                                        class="bottom-10 transform opacity-0 scale-95 transition ease-out duration-700 absolute z-10 w-52 origin-top-right rounded-md bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                        role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                            <div class="" role="none">
+                                                <span
+                                                    class="text-white px-4 py-2 text-sm se-setting-item rounded-t-md h-10 flex items-center hover:bg-gray-700"
+                                                    role="menuitem" tabindex="-1" id="setting-item-0">${"🏆 Your profile"}</span>
+                                                <span class="text-white px-4 py-2 text-sm se-setting-item h-10 flex items-center hover:bg-gray-700"
+                                                    role="menuitem" tabindex="-1" id="setting-item-1">${"🔧 Settings"}</span>
+                                                <span
+                                                    class="text-white px-4 py-2 text-sm se-setting-item rounded-b-md h-10 flex items-center hover:bg-gray-700"
+                                                    role="menuitem" tabindex="-1" id="setting-item-2">${"⛔ Log out"}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>                                
                             </div>
                         </li>
@@ -301,6 +355,16 @@ export class AdminSidebarComponent extends HTMLElement {
             </div>
         </div>
         `;
+    }
+
+    #highlightSettingBtn() {
+        this.#settingBtn.classList.remove("text-gray-400");
+        this.#settingBtn.classList.add("text-fuchsia-400");
+    }
+
+    #unHighlightSettingBtn() {
+        this.#settingBtn.classList.remove("text-fuchsia-400");
+        this.#settingBtn.classList.add("text-gray-400");
     }
 
 }
