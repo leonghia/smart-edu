@@ -1,6 +1,7 @@
 import authService from "./services/auth.service.js";
 import { getToken } from "./helpers/token.helper.js";
 
+
 export class AppComponent extends HTMLElement {
 
     // Dung de tao ra the <app-root> chua duoc dua vao DOM
@@ -10,11 +11,11 @@ export class AppComponent extends HTMLElement {
 
     // Kich hoat khi <app-root> duoc dua vao DOM
     connectedCallback() {
-        if (false) {
+        if (true) {
             // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {
-            Promise.resolve({data: {type: 0}})
+            Promise.resolve({ data: { type: 0 } })
                 .then(res => {
                     const user = res.data;
                     switch (user.type) {
@@ -44,7 +45,7 @@ export class AppComponent extends HTMLElement {
     }
 
     renderAdminDashboard() {
-        
+
     }
 }
 
