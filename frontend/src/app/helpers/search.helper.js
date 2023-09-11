@@ -1,4 +1,4 @@
-export const searchByName = function(arr, name) {
+export const searchByName = function (arr, name) {
     //Buoc 1: Tao mang chua ket qua
     let results = [];
     //Buoc 2: Duyet vong lap qua mang loc ra nhung phan tu co ten chua name va de no vao trong mang ket qua
@@ -6,4 +6,12 @@ export const searchByName = function(arr, name) {
     //arr = ["Huong", "Phuc", "Quoc", "Nghia"]
     //name = "u" 
     return results;
+}
+
+export const searchById = function (arr, id) {
+    return arr.filter(e => e.identifier.toLowerCase().includes(id.toLowerCase()));
+}
+
+export const searchByEmail = function (arr, email) {
+    return arr.filter(e => e.email.toLowerCase().includes(email.toLowerCase()));
 }
