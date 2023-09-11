@@ -1,5 +1,5 @@
 import { BASE_URL } from "../app.config.js";
-import { getToken } from "../helpers/token.helper.js";
+import { getTokenFromLocal } from "../helpers/token.helper.js";
 
 class AuthService {
 

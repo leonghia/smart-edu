@@ -1,6 +1,6 @@
 import authService from "../../services/auth.service.js";
 import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG, USERNAME_LIMIT, PWD_LIMIT } from "../../app.config.js";
-import { saveToken, saveTokenToSession } from "../../helpers/token.helper.js";
+import { saveTokenToLocal, saveTokenToSession } from "../../helpers/token.helper.js";
 
 
 export class LoginComponent extends HTMLElement {
@@ -59,7 +59,7 @@ export class LoginComponent extends HTMLElement {
         .then(data => {
           this.#loginBtn.children[0].remove();
           if (this.#isRememberMe) {
-            saveToken(data.data);
+            saveTokenToLocal(data.data);
           } else {
             saveTokenToSession(data.data);
           }
