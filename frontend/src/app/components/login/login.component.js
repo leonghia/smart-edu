@@ -1,5 +1,5 @@
 import authService from "../../services/auth.service.js";
-import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG } from "../../app.config.js";
+import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG, USERNAME_LIMIT, PWD_LIMIT } from "../../app.config.js";
 import { saveToken, saveTokenToSession } from "../../helpers/token.helper.js";
 
 
@@ -31,14 +31,26 @@ export class LoginComponent extends HTMLElement {
 
     this.#loginBtn.addEventListener("click", function () {
 
-      if (this.#usernameInput.value.trim().length === 0 && !this.#usernameInput.classList.contains("text-fuchsia-400")) {
+
+      if (this.#usernameInput.value.trim().length === 0) {
         this.#showError(this.#usernameInput, USERNAME_REQUIRED_MSG);
 
       }
 
-      if (this.#passwordInput.value.trim().length === 0 && !this.#passwordInput.classList.contains("text-fuchsia-400")) {
+      if ((this.#usernameInput.value.trim().length < 3 || this.#usernameInput.value.trim().length > 30)) {
+
+        this.#showError(this.#usernameInput, USERNAME_LIMIT);
+      }
+
+      if (this.#passwordInput.value.trim().length === 0) {
         this.#showError(this.#passwordInput, PWD_REQUIRED_MSG);
       }
+
+      if ((this.#passwordInput.value.trim().length < 6 || this.#passwordInput.value.trim().length > 64)) {
+
+        this.#showError(this.#passwordInput, PWD_LIMIT);
+      }
+
       if (this.#usernameInput.value.trim().length === 0 || this.#passwordInput.value.trim().length === 0) {
         return;
       }
@@ -52,8 +64,17 @@ export class LoginComponent extends HTMLElement {
             saveTokenToSession(data.data);
           }
 
-          location.reload();
-        })
+          if (data.succeeded) {
+            location.reload();
+
+          }
+          else {
+            this.#showError(document.querySelector('.quoc-error'), INVALID_CRE_MSG);
+
+
+          }
+
+        });
 
       this.#loginBtn.insertAdjacentHTML("afterbegin", `<loading-spinner></loading-spinner>`);
       this.#loginBtn.children[1].textContent = "Singning in";
@@ -80,14 +101,28 @@ export class LoginComponent extends HTMLElement {
     }.bind(this));
   }
 
-  #showError(input, errorMessage) {
-    input.classList.remove("text-white");
-    input.classList.add("text-fuchsia-400");
-    input.classList.add("outline", "outline-offset-0", "outline-1", "outline-fuchsia-500");
-    const p = document.createElement("p");
-    p.classList.add("mt-2", "text-fuchsia-400", "text-sm");
-    p.textContent = errorMessage;
-    input.after(p);
+  #showError(input = this.#usernameInput, errorMessage = '') {
+    console.log(input.children);
+    if (input.classList.contains("text-fuchsia-400") || input.children.length > 0) {
+      return;
+    }
+    if (input === this.#usernameInput || input === this.#passwordInput) {
+      input.classList.remove("text-white");
+      input.classList.add("text-fuchsia-400");
+      input.classList.add("outline", "outline-offset-0", "outline-1", "outline-fuchsia-500");
+      const p = document.createElement("p");
+      p.classList.add("mt-2", "text-fuchsia-400", "text-sm");
+      p.textContent = errorMessage;
+      input.after(p);
+    }
+    else {
+      const p = document.createElement("p");
+      p.classList.add("mt-2", "text-fuchsia-400", "text-sm");
+      p.textContent = errorMessage;
+
+      input.insertAdjacentElement("beforeend", p);
+    }
+
   }
 
   #hideError(input) {
@@ -137,7 +172,10 @@ export class LoginComponent extends HTMLElement {
                 <a href="#" class="font-semibold text-fuchsia-400 hover:text-fuchsia-300">Forgot password?</a>
             </div>
           </div>
-    
+          <div class="quoc-error">
+
+
+          </div>
           <div>
             <button id="se_login_btn" type="button" class="flex w-full justify-center items-center rounded-md bg-fuchsia-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fuchsia-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500">
               
