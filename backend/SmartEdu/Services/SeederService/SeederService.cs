@@ -2120,6 +2120,66 @@ namespace SmartEdu.Services.SeederService
                 {
                     Name = "10C",
                     TeacherId = 3
+                },
+                new MainClass
+                {
+                    Name = "10D",
+                    TeacherId = 4
+                },
+                new MainClass
+                {
+                    Name = "10E",
+                    TeacherId = 5
+                },
+                new MainClass
+                {
+                    Name = "11A",
+                    TeacherId = 6
+                },
+                new MainClass
+                {
+                    Name = "11B",
+                    TeacherId = 7
+                },
+                new MainClass
+                {
+                    Name = "10C",
+                    TeacherId = 8
+                },
+                new MainClass
+                {
+                    Name = "11D",
+                    TeacherId = 9
+                },
+                new MainClass
+                {
+                    Name = "11E",
+                    TeacherId = 10
+                },
+                new MainClass
+                {
+                    Name = "12A",
+                    TeacherId = 11
+                },
+                new MainClass
+                {
+                    Name = "12B",
+                    TeacherId = 12
+                },
+                new MainClass
+                {
+                    Name = "12C",
+                    TeacherId = 13
+                },
+                new MainClass
+                {
+                    Name = "12D",
+                    TeacherId = 14
+                },
+                new MainClass
+                {
+                    Name = "12E",
+                    TeacherId = 15
                 }
             };
             await _unitOfWork.MainClassRepository.AddRange(mainClasses);
