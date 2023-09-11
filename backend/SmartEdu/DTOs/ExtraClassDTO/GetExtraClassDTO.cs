@@ -1,4 +1,5 @@
-﻿using SmartEdu.Entities;
+﻿using SmartEdu.DTOs.SubjectDTO;
+using SmartEdu.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartEdu.DTOs.ExtraClassDTO
@@ -7,6 +8,6 @@ namespace SmartEdu.DTOs.ExtraClassDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int SubjectId { get; set; }
+        public GetSubjectDTO Subject { get; set; }
     }
 }

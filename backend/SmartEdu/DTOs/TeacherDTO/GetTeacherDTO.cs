@@ -1,4 +1,7 @@
-﻿using SmartEdu.Entities;
+﻿using SmartEdu.DTOs.MainClassDTO;
+using SmartEdu.DTOs.SubjectDTO;
+using SmartEdu.DTOs.UserDTO;
+using SmartEdu.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartEdu.DTOs.TeacherDTO
@@ -6,8 +9,8 @@ namespace SmartEdu.DTOs.TeacherDTO
     public class GetTeacherDTO
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public int? MainClassId { get; set; }
-        public int SubjectId { get; set; }
+        public GetUserDTO User { get; set; }
+        public GetMainClassDTO? MainClass { get; set; }
+        public GetSubjectDTO Subject { get; set; }
     }
 }
