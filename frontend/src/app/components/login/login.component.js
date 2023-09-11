@@ -1,5 +1,6 @@
 import authService from "../../services/auth.service.js";
 import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG } from "../../app.config.js";
+import { saveToken, saveTokenToSession } from "../../helpers/token.helper.js";
 
 
 export class LoginComponent extends HTMLElement {
@@ -7,7 +8,8 @@ export class LoginComponent extends HTMLElement {
   #usernameInput;
   #passwordInput;
   #loginBtn;
-
+  #rememberMeInput;
+  #isRememberMe = false;
   constructor() {
     super();
   }
@@ -19,18 +21,45 @@ export class LoginComponent extends HTMLElement {
     this.#usernameInput = document.querySelector("#username");
     this.#passwordInput = document.querySelector("#password");
     this.#loginBtn = document.querySelector("#se_login_btn");
+    this.#rememberMeInput = document.querySelector("#remember-me");
+
+    this.#rememberMeInput.addEventListener("click", function () {
+      this.#isRememberMe = !this.#isRememberMe;
+
+    }.bind(this));
 
 
     this.#loginBtn.addEventListener("click", function () {
 
       if (this.#usernameInput.value.trim().length === 0 && !this.#usernameInput.classList.contains("text-fuchsia-400")) {
         this.#showError(this.#usernameInput, USERNAME_REQUIRED_MSG);
+
       }
 
       if (this.#passwordInput.value.trim().length === 0 && !this.#passwordInput.classList.contains("text-fuchsia-400")) {
         this.#showError(this.#passwordInput, PWD_REQUIRED_MSG);
       }
+      if (this.#usernameInput.value.trim().length === 0 || this.#passwordInput.value.trim().length === 0) {
+        return;
+      }
+
+      authService.login({ username: this.#usernameInput.value, password: this.#passwordInput.value })
+        .then(data => {
+          this.#loginBtn.children[0].remove();
+          if (this.#isRememberMe) {
+            saveToken(data.data);
+          } else {
+            saveTokenToSession(data.data);
+          }
+
+          location.reload();
+        })
+
+      this.#loginBtn.insertAdjacentHTML("afterbegin", `<loading-spinner></loading-spinner>`);
+      this.#loginBtn.children[1].textContent = "Singning in";
+
     }.bind(this));
+
 
     this.#usernameInput.addEventListener("input", function () {
 
@@ -112,7 +141,7 @@ export class LoginComponent extends HTMLElement {
           <div>
             <button id="se_login_btn" type="button" class="flex w-full justify-center items-center rounded-md bg-fuchsia-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fuchsia-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuchsia-500">
               
-              Sign in
+              <span>Sign in</span>
             </button>
           </div>
         </form>
