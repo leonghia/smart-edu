@@ -1,4 +1,5 @@
 import { showDropdown, hideDropdown } from "../../../../helpers/animation.helper.js";
+import authService from "../../../../services/auth.service.js";
 
 export class AdminSidebarComponent extends HTMLElement {
 
@@ -8,6 +9,7 @@ export class AdminSidebarComponent extends HTMLElement {
     #settingState = {
         state: false
     }
+    #logoutBtn;
 
     constructor() {
         super();
@@ -19,6 +21,7 @@ export class AdminSidebarComponent extends HTMLElement {
         this.#settingBtn = document.querySelector("#se_setting_btn");
         this.#settingItems = document.querySelectorAll(".se-setting-item");
         const settingItemsArr = Array.from(this.#settingItems);
+        this.#logoutBtn = document.querySelector("#setting-item-2");
 
         this.#settingBtn.addEventListener("click", function() {
             if (this.#settingState.state) {
@@ -38,6 +41,10 @@ export class AdminSidebarComponent extends HTMLElement {
             hideDropdown(this.#settingDropdown, settingItemsArr, this.#settingState);
             this.#unHighlightSettingBtn();
         }.bind(this));
+
+        this.#logoutBtn.addEventListener("click",function(){
+            authService.logout();
+        });
 
     }
 
