@@ -1,6 +1,7 @@
 import authService from "../../services/auth.service.js";
 import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG } from "../../app.config.js";
 
+
 export class LoginComponent extends HTMLElement {
 
   #usernameInput;
@@ -11,11 +12,43 @@ export class LoginComponent extends HTMLElement {
     super();
   }
 
+
+
   connectedCallback() {
     this.innerHTML = this.#render();
     this.#usernameInput = document.querySelector("#username");
     this.#passwordInput = document.querySelector("#password");
     this.#loginBtn = document.querySelector("#se_login_btn");
+
+
+    this.#loginBtn.addEventListener("click", function () {
+
+      if (this.#usernameInput.value.trim().length === 0 && !this.#usernameInput.classList.contains("text-fuchsia-400")) {
+        this.#showError(this.#usernameInput, USERNAME_REQUIRED_MSG);
+      }
+
+      if (this.#passwordInput.value.trim().length === 0 && !this.#passwordInput.classList.contains("text-fuchsia-400")) {
+        this.#showError(this.#passwordInput, PWD_REQUIRED_MSG);
+      }
+    }.bind(this));
+
+    this.#usernameInput.addEventListener("input", function () {
+
+      if (this.#usernameInput.value.trim().length === 0 && !this.#usernameInput.classList.contains("text-fuchsia-400")) {
+        this.#showError(this.#usernameInput, USERNAME_REQUIRED_MSG);
+      } else {
+        this.#hideError(this.#usernameInput, USERNAME_REQUIRED_MSG);
+      }
+    }.bind(this));
+
+    this.#passwordInput.addEventListener("input", function () {
+
+      if (this.#passwordInput.value.trim().length === 0 && !this.#passwordInput.classList.contains("text-fuchsia-400")) {
+        this.#showError(this.#passwordInput, USERNAME_REQUIRED_MSG);
+      } else {
+        this.#hideError(this.#passwordInput, USERNAME_REQUIRED_MSG);
+      }
+    }.bind(this));
   }
 
   #showError(input, errorMessage) {
@@ -52,7 +85,7 @@ export class LoginComponent extends HTMLElement {
           <div>
             <label for="username" class="block text-sm font-medium leading-6 text-white">Username</label>
             <div class="mt-2 se-username-container">
-              <input id="username" name="username" type="text" autocomplete="username" required class="peer block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-fuchsia-500 sm:text-sm sm:leading-6">
+              <input id="username" name="username" type="text" autocomplete="username" class="peer block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-fuchsia-500 sm:text-sm sm:leading-6">
               
             </div>
           </div>
@@ -62,7 +95,7 @@ export class LoginComponent extends HTMLElement {
               <label for="password" class="block text-sm font-medium leading-6 text-white">Password</label>            
             </div>
             <div class="mt-2 se-password-container">
-              <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-fuchsia-500 sm:text-sm sm:leading-6">
+              <input id="password" name="password" type="password" autocomplete="current-password" class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-fuchsia-500 sm:text-sm sm:leading-6">
             </div>
           </div>
           
