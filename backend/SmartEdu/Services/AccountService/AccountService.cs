@@ -301,7 +301,7 @@ namespace SmartEdu.Services.AccountService
             if (!await _authService.ValidateUser(loginUserDTO))
             {
                 serverResponse.Succeeded = false;
-                serverResponse.Message = "Invalid username or password. Please try again.";
+                serverResponse.Message = "Invalid username or password.";
                 return serverResponse;
             }
 

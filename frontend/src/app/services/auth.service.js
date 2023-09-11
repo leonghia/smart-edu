@@ -1,18 +1,10 @@
 import { BASE_URL } from "../app.config.js";
-
+import { getToken } from "../helpers/token.helper.js";
 
 class AuthService {
 
     constructor() {
 
-    }
-
-    checkToken() { // public boolean checkToken
-        // Kiem tra xem token co tren trinh duyet khong
-        // neu cos tra ve token
-        // neu khong tra ve null
-
-            return localStorage.getItem("token");
     }
 
     // kiem tra thong tin ve nguoi dung di cung token (ket noi voi server)
@@ -27,7 +19,7 @@ class AuthService {
             cache: "no-cache",
             credentials: "same-origin",
             headers:{
-                "Authorization": `Bearer ${this.checkToken()}`
+                "Authorization": `Bearer ${getToken()}`
             },
             redirect: "follow",
             referrerPolicy: "no-referrer"
@@ -55,13 +47,7 @@ class AuthService {
             referrer: "no-referrer",
             body: JSON.stringify(loginUserDTO)
         });
-        const data = await response.json();
-        
-        if (data.data){
-            localStorage.setItem("token", data.data);
-        }else{
-            console.error("Sai ten nguoi dung hoac mat khau.");
-        }
+        return await response.json();
     }
 }
 

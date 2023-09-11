@@ -4,3 +4,9 @@ export const getToken = function () { // public string | null getToken
     // neu khong tra ve null
     return localStorage.getItem("token");
 }
+
+export const saveToken = function (value) {
+
+    localStorage.setItem("token", value);
+
+}

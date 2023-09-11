@@ -1,4 +1,4 @@
-import { getToken } from "../helpers/data.helper.js";
+import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 
 class DataService {
