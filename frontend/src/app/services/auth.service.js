@@ -49,6 +49,21 @@ class AuthService {
         });
         return await response.json();
     }
+
+    logout() {
+        // buoc 1: xoa token o session storage
+        sessionStorage.removeItem("token");
+        sessionStorage.clear();
+
+        // buoc 2 : xoa token o local storage
+        localStorage.removeItem("token");
+
+        // buoc 3: tai lai trang web
+        location.reload();
+
+
+    };
+
 }
 
 export default new AuthService();
