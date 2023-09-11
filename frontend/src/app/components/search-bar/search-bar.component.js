@@ -1,13 +1,14 @@
 import searchBarService from "./search-bar.service.js";
-import { searchByName } from "../../helpers/search.helper.js";
+import { searchByName, searchById, searchByEmail } from "../../helpers/search.helper.js";
 import { getStudents } from "../../app.store.js";
 import { showDropdown, hideDropdown } from "../../helpers/animation.helper.js";
+
 
 export class SearchBarComponent extends HTMLElement {
 
     #dropdownOptionState = {
         state: false,
-        active: "",
+        active: "name",
         title: "🆎 Fullname"
     };
 
@@ -31,35 +32,52 @@ export class SearchBarComponent extends HTMLElement {
         this.#searchField = document.querySelector("#se_table_search_field");
         this.#searchForm = document.querySelector("#se_table_search_form");
 
-        this.#dropdownBtn.addEventListener("click", function() {
-            if (this.#dropdownOptionState.state) {    
-                hideDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);    
+        this.#dropdownBtn.addEventListener("click", function () {
+            if (this.#dropdownOptionState.state) {
+                hideDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);
             } else {
                 showDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);
             }
         }.bind(this));
 
-        this.#dropdownOptions.addEventListener("click", function(event) {
+        this.#dropdownOptions.addEventListener("click", function (event) {
             if (!event.target.classList.contains("se-menu-item")) {
                 return;
             }
             switch (event.target.id) {
                 case "menu-item-0":
                     this.#dropdownBtn.firstElementChild.textContent = "🆎 Fullname";
+                    this.#dropdownOptionState.active = "name";
                     break;
                 case "menu-item-1":
                     this.#dropdownBtn.firstElementChild.textContent = "🔑 Identifier";
+                    this.#dropdownOptionState.active = "id";
                     break;
                 case "menu-item-2":
                     this.#dropdownBtn.firstElementChild.textContent = "💌 Email";
+                    this.#dropdownOptionState.active = "email";
                     break;
             }
             hideDropdown(this.#dropdownOptions, this.#menuItemsArr, this.#dropdownOptionState);
         }.bind(this));
 
-        this.#searchForm.addEventListener("submit", function(event) {
+        this.#searchForm.addEventListener("submit", function (event) {
             event.preventDefault();
-            const results = searchByName(getStudents(), this.#searchField.value);
+            let results;
+            switch (this.#dropdownOptionState.active) {
+                case "name":
+                    results = searchByName(getStudents(), this.#searchField.value);
+                    break;
+                case "id":
+                    results = searchById(getStudents(), this.#searchField.value);
+                    break;
+                case "email":
+                    console.log(getStudents());
+
+                    results = searchByEmail(getStudents(), this.#searchField.value);
+                    break;
+            }
+
             searchBarService.trigger("search", results);
         }.bind(this));
     }
