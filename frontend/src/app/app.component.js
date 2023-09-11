@@ -11,7 +11,7 @@ export class AppComponent extends HTMLElement {
 
     // Kich hoat khi <app-root> duoc dua vao DOM
     connectedCallback() {
-        if (true) {
+        if (!getToken()) {
             // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {
