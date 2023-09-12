@@ -4,7 +4,7 @@ import { BASE_URL } from "../app.config.js";
 class DataService {
 
     async getStudents() {
-        const response = await fetch(`${BASE_URL}/Account?pageSize=50`,{
+        const response = await fetch(`${BASE_URL}/Student`,{
             method: "GET",
             mode: "cors",
             cache: "no-cache",
@@ -15,10 +15,22 @@ class DataService {
             redirect: "follow",
             referrerPolicy: "no-referrer"
         });
-        const data = await response.json();
-        const students = data.data.filter(user => user.type === 1);
-        
-        return students;
+        return await response.json();
+    }
+
+    async getMainClasses() {
+        const response = await fetch(`${BASE_URL}/MainClass`,{
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers:{
+                "Authorization": `Bearer ${getToken()}`
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
+        });
+        return await response.json();
     }
 }
 

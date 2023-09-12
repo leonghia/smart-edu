@@ -1,7 +1,7 @@
 import { formatDate } from "../../../../../helpers/datetime.helper.js";
-import { refreshStudents, getStudents } from "../../../../../app.store.js";
 import searchBarService from "../../../../search-bar/search-bar.service.js";
 import { hideDropdown, showDropdown } from "../../../../../helpers/animation.helper.js";
+import dataService from "../../../../../services/data.service.js";
 
 export class StudentsMgtComponent extends HTMLElement {
 
@@ -19,6 +19,8 @@ export class StudentsMgtComponent extends HTMLElement {
     #sortDropdownState = {
         state: false,
     }
+
+    #mainClassFilterContainer;
 
     constructor() {
         super();
@@ -39,6 +41,11 @@ export class StudentsMgtComponent extends HTMLElement {
         this.#sortDropdown = document.querySelector("#se_sort_dropdown");
         this.#sortDropdownItems = document.querySelectorAll(".se-sort-dropdown-item");
         const sortDropdownItemsArr = Array.from(this.#sortDropdownItems);
+        this.#mainClassFilterContainer = document.querySelector("#se_main_class_filter_container");
+        this.#displayClassesFilterDropdown();
+        this.#tableBody = document.querySelector("tbody");
+
+        
 
         this.#filterBtn.addEventListener("click", function() {
             if (this.#filterDropdownState.state) {
@@ -62,13 +69,10 @@ export class StudentsMgtComponent extends HTMLElement {
             }
         }.bind(this))
 
-        this.#tableBody = document.querySelector("tbody");
-        if (getStudents().length === 0) {
-            refreshStudents()
-                .then(() => {
-                    this.#displayStudents(getStudents());
-                });
-        }
+        dataService.getStudents()
+            .then(res => {
+                this.#displayStudents(res.data);
+            });
 
         this.#sortDropdown.addEventListener("click", function(event) {
             const clicked = event.target.closest(".se-sort-dropdown-item");
@@ -85,6 +89,7 @@ export class StudentsMgtComponent extends HTMLElement {
     }
 
     #displayStudents(students) {
+        
         students.forEach((currentValue, currentIndex) => {
             this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
         });
@@ -124,63 +129,8 @@ export class StudentsMgtComponent extends HTMLElement {
                                     <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white pl-1">
                                     Main Class
                                   </h6>
-                                  <ul class="space-y-2 text-sm max-h-44 overflow-scroll mr-1 pl-1" aria-labelledby="dropdownDefault">
-                                    <li class="flex items-center">
-                                      <input id="apple" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        10A (45)
-                                      </label>
-                                    </li>
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        10B (39)
-                                      </label>
-                                    </li>   
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        10C (42)
-                                      </label>
-                                    </li> 
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        10D (38)
-                                      </label>
-                                    </li> 
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        10E (42)
-                                      </label>
-                                    </li> 
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        11A (44)
-                                      </label>
-                                    </li> 
-                                    <li class="flex items-center">
-                                      <input id="fitbit" type="checkbox" value=""
-                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                              
-                                      <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        11B (48)
-                                      </label>
-                                    </li>                        
+                                  <ul id="se_main_class_filter_container" class="-mb-3 space-y-2 text-sm max-h-44 overflow-scroll mr-1 pl-1" aria-labelledby="dropdownDefault">
+                                                                                            
                                   </ul>
                                     </div>
                                 </div>
@@ -262,8 +212,8 @@ export class StudentsMgtComponent extends HTMLElement {
             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-300">${currentIndex + 1}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white sm:pl-0">
                 <div class="flex items-center gap-x-4">
-                    <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${currentValue.fullName}" class="h-8 w-8 rounded-full bg-gray-800">
-                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${currentValue.fullName}</div>
+                    <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${currentValue.user.fullName}" class="h-8 w-8 rounded-full bg-gray-800">
+                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${currentValue.user.fullName}</div>
                 </div>
             </td>
             <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-400">${"STU04.002589"}</td>
@@ -275,10 +225,10 @@ export class StudentsMgtComponent extends HTMLElement {
                     <div class="hidden text-sm leading-6 text-gray-400 sm:block">${true ? "Online" : "Offline"}</div>
                 </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${"10A"}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDate(currentValue.dateOfBirth)}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.email}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${"La Trong Nghia"}</span></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.mainClass.name}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDate(currentValue.user.dateOfBirth)}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.user.email}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${currentValue.parent.user.fullName}</span></td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                 <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${currentValue.fullName}</span></a>
             </td>
@@ -286,6 +236,28 @@ export class StudentsMgtComponent extends HTMLElement {
                 <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${currentValue.fullName}</span></a>
             </td>
         </tr>
+        `;
+    }
+
+    #displayClassesFilterDropdown() {
+        dataService.getMainClasses()
+            .then(data => {
+                const mainClasses = data.data;
+                mainClasses.forEach(mC => {
+                    this.#mainClassFilterContainer.insertAdjacentHTML("beforeend", this.#renderClassesFilterDropdownItem(mC));
+                });
+            });
+    }
+
+    #renderClassesFilterDropdownItem(mainClass) {
+        return `
+        <li class="flex items-center">
+            <input id="${mainClass.id}" type="radio" value="${mainClass.name}" name="main-classes"
+            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+            <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            ${mainClass.name} (45)
+            </label>
+        </li> 
         `;
     }
 }
