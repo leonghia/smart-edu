@@ -3,6 +3,8 @@ import searchBarService from "../../../../search-bar/search-bar.service.js";
 import { hideDropdown, showDropdown } from "../../../../../helpers/animation.helper.js";
 import dataService from "../../../../../services/data.service.js";
 import { getStudents, saveStudents } from "../../../../../app.store.js";
+import { filterStudentByMainClass } from "../../../../../helpers/filter.helper.js";
+import { sortByName } from "../../../../../helpers/sort.helper.js";
 
 export class StudentsMgtComponent extends HTMLElement {
 
@@ -46,7 +48,42 @@ export class StudentsMgtComponent extends HTMLElement {
         this.#displayClassesFilterDropdown();
         this.#tableBody = document.querySelector("tbody");
 
+        // Gan su kien cho cac the input
+        this.#mainClassFilterContainer.addEventListener("click",function() {
+            const clicked = event.target.closest("input");
+            if(!clicked){
+                return;  //khong lam gi nua 
+            }
+            // Buoc 1: Lay id lop hoc tu the input
+            const mainClassId = clicked.id;
+            // Buoc 2: Truyen id lop hoc vao ham loc hoc sinh theo id lop 
+            const students = getStudents();
+            const results = filterStudentByMainClass(students,+mainClassId);
+            // lam trong bang 
+            this.#tableBody.innerHTML = "";
+            // hien thi ket qua loc
+            this.#displayStudents(results);
+        }.bind(this));
         
+        this.#sortDropdown.addEventListener("click", function(event) {
+            const clicked = event.target.closest(".se-sort-dropdown-item");
+            if (!clicked) {
+                return;
+            }
+
+            const id = clicked.id;
+            switch (id){
+                case "menu-item-0":
+                    const results = sortByName(getStudents());
+                    this.#tableBody.innerHTML = "";
+                    this.#displayStudents(results);
+                    break;
+                case "menu-item-1":
+                    console.log("sap xep theo ngay thang nam sinh");
+                    break;
+            }
+        }.bind(this));
+
 
         this.#filterBtn.addEventListener("click", function() {
             if (this.#filterDropdownState.state) {
