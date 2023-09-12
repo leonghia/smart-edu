@@ -81,7 +81,7 @@ export class LoginComponent extends HTMLElement {
           <loading-spinner se-class="mr-3 w-4 h-4 text-gray-100"></loading-spinner>
         </span>
       `);
-      this.#loginBtn.children[1].textContent = "Singning in....";
+      this.#loginBtn.children[1].textContent = "Signing in....";
 
     }.bind(this));
 

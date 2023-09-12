@@ -77,6 +77,18 @@ export class StudentsMgtComponent extends HTMLElement {
                 return;
             }
 
+            const menuItems = this.#sortDropdown.querySelectorAll(".se-sort-dropdown-item");
+            Array.from(menuItems).forEach(e => {
+                e.classList.remove("text-fuchsia-500");
+                e.classList.remove("font-medium");
+                e.classList.add("text-white");
+            });
+
+            clicked.classList.remove("text-white");
+            clicked.classList.add("text-fuchsia-500");
+            clicked.classList.add("font-medium");
+
+
             const id = clicked.id;
             switch (id){
                 case "menu-item-0":
@@ -150,8 +162,8 @@ export class StudentsMgtComponent extends HTMLElement {
                     <div class="px-4 sm:px-6 lg:px-8 h-full">
                         <div class="sm:flex sm:items-center h-16">
                             <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-white">Students</h1>
-                            <p class="mt-2 text-sm text-gray-300">A list of all the students in your application including their identifiers, names, dates of birth, emails, classes and parents.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">Students</h1>
+                            <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">A list of all the students in your application including their identifiers, names, dates of birth, emails, classes and parents.</p>
                             </div>
                             <div class="sm:ml-6 relative">
                                 <div>
@@ -169,7 +181,7 @@ export class StudentsMgtComponent extends HTMLElement {
                                     class="transform opacity-0 scale-95 transition ease-out duration-700 absolute right-0 z-10 mt-3 w-52 origin-top-right rounded-lg bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="w-56 p-3" role="none">
-                                    <h6 class="underline underline-offset-8 decoration-2 decoration-fuchsia-500 mb-3 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                    <h6 class="underline underline-offset-4 decoration-2 decoration-fuchsia-500 mb-3 text-sm font-medium text-white dark:text-white pl-1">
                                     Main Class
                                     </h6>
                                   <ul id="se_main_class_filter_container" class="-mb-3 space-y-2 text-sm max-h-44 overflow-scroll mr-1 pl-1" aria-labelledby="dropdownDefault">
@@ -196,21 +208,21 @@ export class StudentsMgtComponent extends HTMLElement {
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="">
                                         <div
-                                        class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-t-md h-10 flex items-center hover:bg-gray-700"
+                                        class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-t-md h-10 flex items-center"
                                         role="menuitem" tabindex="-1" id="menu-item-0">${"Sort by Full name"}
                                         </div>
-                                        <div class="text-white px-4 py-2 text-sm se-sort-dropdown-item h-10 flex items-center hover:bg-gray-700"
+                                        <div class="text-white px-4 py-2 text-sm se-sort-dropdown-item h-10 flex items-center"
                                             role="menuitem" tabindex="-1" id="menu-item-1">${"Sort by Date of birth"}
                                         </div>     
                                         <div class="text-white px-4 py-6 text-sm se-sort-dropdown-item rounded-b-md h-10 flex items-center justify-between border-t-2 border-fuchsia-500"
                                             role="menuitem" tabindex="-1">
                                             <span class="flex items-center">
-                                                <input type="radio" name="order" value="asc" id="asc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="asc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Ascend.</label>
+                                                <input type="radio" name="order" value="asc" checked id="asc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                <label for="asc" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">Ascend.</label>
                                             </span>
                                             <span class="flex items-center">
                                                 <input type="radio" name="order" value="desc" id="desc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="desc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Descend.</label>
+                                                <label for="desc" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">Descend.</label>
                                             </span>
                                         </div>        
                                     </div>
@@ -230,17 +242,17 @@ export class StudentsMgtComponent extends HTMLElement {
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 h-full">
                                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-full relative">
 
-                                    <table class="min-w-full divide-y divide-gray-700">
+                                    <table class="min-w-full divide-y divide-dashed divide-gray-500 dark:divide-gray-600">
                                         <thead>
                                             <tr>
-                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">No.</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Identifier</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Class</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date Of Birth</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Parent</th>
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white">No.</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-0">Full Name</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Identifier</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Status</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Class</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Date Of Birth</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Email</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Parent</th>
                                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -249,7 +261,7 @@ export class StudentsMgtComponent extends HTMLElement {
                                             </th>
                                             </tr>
                                         </thead>
-                                        <tbody class="divide-y divide-gray-800">
+                                        <tbody class="divide-y divide-dashed divide-gray-500 dark:divide-gray-600">
                                             
                                         </tbody>
                                     </table>                                  
@@ -266,28 +278,28 @@ export class StudentsMgtComponent extends HTMLElement {
     #renderStudentsRow(currentValue, currentIndex) {
         return `
         <tr>
-            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-300">${currentIndex + 1}</td>
+            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-600 dark:text-gray-400">${currentIndex + 1}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white sm:pl-0">
                 <div class="flex items-center gap-x-4">
                     <img src="https://nghia.b-cdn.net/smart-edu/images/users/default-pfp.webp" alt="${currentValue.user.fullName}" class="h-8 w-8 rounded-full bg-gray-800">
-                <div class="truncate text-sm font-medium leading-6 text-white hover:text-fuchsia-400 cursor-pointer">${currentValue.user.fullName}</div>
+                <div class="truncate text-sm font-medium leading-6 text-gray-900 dark:text-white hover:text-fuchsia-500 dark:hover:text-fuchsia-400 cursor-pointer">${currentValue.user.fullName}</div>
                 </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-400">${"STU04.002589"}</td>
+            <td class="whitespace-nowrap px-3 py-4 font-mono text-sm leading-6 text-gray-600 dark:text-gray-400">${"STU04.002589"}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6">
                 <div class="flex items-center justify-end gap-x-2 sm:justify-start">
-                    <div class="flex-none rounded-full p-1 ${true ? "text-green-400 bg-green-400/10" : "text-gray-500 bg-gray-100/10"}">
+                    <div class="flex-none rounded-full p-1 ${true ? "text-green-400 bg-green-600/50 dark:text-green-400 dark:bg-green-400/10" : "text-gray-500 bg-gray-100/10"}">
                         <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
                     </div>
-                    <div class="hidden text-sm leading-6 text-gray-400 sm:block">${true ? "Online" : "Offline"}</div>
+                    <div class="hidden text-sm leading-6 text-gray-600 dark:text-gray-400 sm:block">${true ? "Online" : "Offline"}</div>
                 </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.mainClass.name}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${formatDate(currentValue.user.dateOfBirth)}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400">${currentValue.user.email}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${currentValue.parent.user.fullName}</span></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.mainClass.name}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${formatDate(currentValue.user.dateOfBirth)}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.user.email}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${currentValue.parent.user.fullName}</span></td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                <a href="#" class="text-emerald-400 hover:text-emerald-300">Edit<span class="sr-only">, ${currentValue.fullName}</span></a>
+                <a href="#" class="text-emerald-500 dark:text-emerald-400 hover:text-emerald-400 dark:hover:text-emerald-300">Edit<span class="sr-only">, ${currentValue.fullName}</span></a>
             </td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                 <a href="#" class="text-rose-400 hover:text-rose-300">Delete<span class="sr-only">, ${currentValue.fullName}</span></a>
@@ -311,7 +323,7 @@ export class StudentsMgtComponent extends HTMLElement {
         <li class="flex items-center">
             <input id="${mainClass.id}" type="radio" value="${mainClass.name}" name="main-classes"
             class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-0 dark:bg-gray-600 dark:border-gray-500" />
-            <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            <label for="apple" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">
             ${mainClass.name} (45)
             </label>
         </li> 
