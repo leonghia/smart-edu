@@ -2143,7 +2143,7 @@ namespace SmartEdu.Services.SeederService
                 },
                 new MainClass
                 {
-                    Name = "10C",
+                    Name = "11C",
                     TeacherId = 8
                 },
                 new MainClass
