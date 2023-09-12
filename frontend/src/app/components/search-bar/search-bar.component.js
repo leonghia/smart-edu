@@ -1,5 +1,5 @@
 import searchBarService from "./search-bar.service.js";
-import { searchByName, searchById, searchByEmail } from "../../helpers/search.helper.js";
+import { searchByName, searchByIdentifier, searchByEmail } from "../../helpers/search.helper.js";
 import { getStudents } from "../../app.store.js";
 import { showDropdown, hideDropdown } from "../../helpers/animation.helper.js";
 
@@ -72,8 +72,6 @@ export class SearchBarComponent extends HTMLElement {
                     results = searchById(getStudents(), this.#searchField.value);
                     break;
                 case "email":
-                    console.log(getStudents());
-
                     results = searchByEmail(getStudents(), this.#searchField.value);
                     break;
             }

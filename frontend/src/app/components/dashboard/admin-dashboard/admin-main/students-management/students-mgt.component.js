@@ -2,6 +2,7 @@ import { formatDate } from "../../../../../helpers/datetime.helper.js";
 import searchBarService from "../../../../search-bar/search-bar.service.js";
 import { hideDropdown, showDropdown } from "../../../../../helpers/animation.helper.js";
 import dataService from "../../../../../services/data.service.js";
+import { getStudents, saveStudents } from "../../../../../app.store.js";
 
 export class StudentsMgtComponent extends HTMLElement {
 
@@ -71,7 +72,8 @@ export class StudentsMgtComponent extends HTMLElement {
 
         dataService.getStudents()
             .then(res => {
-                this.#displayStudents(res.data);
+                saveStudents(res.data);
+                this.#displayStudents(getStudents());
             });
 
         this.#sortDropdown.addEventListener("click", function(event) {
