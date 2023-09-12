@@ -31,7 +31,6 @@ export default class EventService {
             return;
         }
         this.#events[event].forEach(component => {
-            console.log(component);
             component.eventHandler.call(component.component, data);
         });
     }
