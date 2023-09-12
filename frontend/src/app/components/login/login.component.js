@@ -1,6 +1,6 @@
 import authService from "../../services/auth.service.js";
 import { USERNAME_REQUIRED_MSG, PWD_REQUIRED_MSG, INVALID_CRE_MSG, USERNAME_LIMIT, PWD_LIMIT } from "../../app.config.js";
-import { saveToken, saveTokenToSession } from "../../helpers/token.helper.js";
+import { saveTokenToLocal, saveTokenToSession } from "../../helpers/token.helper.js";
 
 
 export class LoginComponent extends HTMLElement {
@@ -59,7 +59,7 @@ export class LoginComponent extends HTMLElement {
         .then(data => {
           this.#loginBtn.children[0].remove();
           if (this.#isRememberMe) {
-            saveToken(data.data);
+            saveTokenToLocal(data.data);
           } else {
             saveTokenToSession(data.data);
           }
@@ -76,8 +76,12 @@ export class LoginComponent extends HTMLElement {
 
         });
 
-      this.#loginBtn.insertAdjacentHTML("afterbegin", `<loading-spinner></loading-spinner>`);
-      this.#loginBtn.children[1].textContent = "Singning in";
+      this.#loginBtn.insertAdjacentHTML("afterbegin", `
+        <span class="flex items-center">
+          <loading-spinner se-class="mr-3 w-4 h-4 text-gray-100"></loading-spinner>
+        </span>
+      `);
+      this.#loginBtn.children[1].textContent = "Singning in....";
 
     }.bind(this));
 
@@ -102,7 +106,6 @@ export class LoginComponent extends HTMLElement {
   }
 
   #showError(input = this.#usernameInput, errorMessage = '') {
-    console.log(input.children);
     if (input.classList.contains("text-fuchsia-400") || input.children.length > 0) {
       return;
     }

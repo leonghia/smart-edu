@@ -1,5 +1,5 @@
 import authService from "./services/auth.service.js";
-import { getToken } from "./helpers/token.helper.js";
+import { getTokenFromLocal, getTokenFromSession } from "./helpers/token.helper.js";
 
 
 export class AppComponent extends HTMLElement {
@@ -11,7 +11,8 @@ export class AppComponent extends HTMLElement {
 
     // Kich hoat khi <app-root> duoc dua vao DOM
     connectedCallback() {
-        if (!getToken()) {
+        const token = getTokenFromLocal() || getTokenFromSession();
+        if (!token) {
             // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {

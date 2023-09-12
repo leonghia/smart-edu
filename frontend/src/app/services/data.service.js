@@ -1,4 +1,4 @@
-import { getToken } from "../helpers/token.helper.js";
+import { getTokenFromLocal } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 
 class DataService {
@@ -10,7 +10,7 @@ class DataService {
             cache: "no-cache",
             credentials: "same-origin",
             headers:{
-                "Authorization": `Bearer ${getToken()}`
+                "Authorization": `Bearer ${getTokenFromLocal()}`
             },
             redirect: "follow",
             referrerPolicy: "no-referrer"
@@ -25,7 +25,7 @@ class DataService {
             cache: "no-cache",
             credentials: "same-origin",
             headers:{
-                "Authorization": `Bearer ${getToken()}`
+                "Authorization": `Bearer ${getTokenFromLocal()}`
             },
             redirect: "follow",
             referrerPolicy: "no-referrer"

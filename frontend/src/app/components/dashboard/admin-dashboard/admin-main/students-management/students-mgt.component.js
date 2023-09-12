@@ -4,7 +4,7 @@ import { hideDropdown, showDropdown } from "../../../../../helpers/animation.hel
 import dataService from "../../../../../services/data.service.js";
 import { getStudents, saveStudents } from "../../../../../app.store.js";
 import { filterStudentByMainClass } from "../../../../../helpers/filter.helper.js";
-import { sortByName } from "../../../../../helpers/sort.helper.js";
+import { sortByMainClass, sortByName } from "../../../../../helpers/sort.helper.js";
 
 export class StudentsMgtComponent extends HTMLElement {
 
@@ -24,6 +24,14 @@ export class StudentsMgtComponent extends HTMLElement {
     }
 
     #mainClassFilterContainer;
+    #tableBody;
+    #table;
+
+    #loadingSpinner = `
+    <div role="status" class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        <loading-spinner se-class="w-10 h-10 text-gray-200 dark:text-gray-600 mr-12"></loading-spinner>                                     
+    </div>
+    `;
 
     constructor() {
         super();
@@ -34,7 +42,6 @@ export class StudentsMgtComponent extends HTMLElement {
         })
     }
 
-    #tableBody;
 
     connectedCallback() {
         this.innerHTML = this.#render();
@@ -47,9 +54,10 @@ export class StudentsMgtComponent extends HTMLElement {
         this.#mainClassFilterContainer = document.querySelector("#se_main_class_filter_container");
         this.#displayClassesFilterDropdown();
         this.#tableBody = document.querySelector("tbody");
+        this.#table = document.querySelector("table");
 
         // Gan su kien cho cac the input
-        this.#mainClassFilterContainer.addEventListener("click",function() {
+        this.#mainClassFilterContainer.addEventListener("click",function(event) {
             const clicked = event.target.closest("input");
             if(!clicked){
                 return;  //khong lam gi nua 
@@ -59,8 +67,6 @@ export class StudentsMgtComponent extends HTMLElement {
             // Buoc 2: Truyen id lop hoc vao ham loc hoc sinh theo id lop 
             const students = getStudents();
             const results = filterStudentByMainClass(students,+mainClassId);
-            // lam trong bang 
-            this.#tableBody.innerHTML = "";
             // hien thi ket qua loc
             this.#displayStudents(results);
         }.bind(this));
@@ -75,7 +81,6 @@ export class StudentsMgtComponent extends HTMLElement {
             switch (id){
                 case "menu-item-0":
                     const results = sortByName(getStudents());
-                    this.#tableBody.innerHTML = "";
                     this.#displayStudents(results);
                     break;
                 case "menu-item-1":
@@ -109,26 +114,25 @@ export class StudentsMgtComponent extends HTMLElement {
 
         dataService.getStudents()
             .then(res => {
-                saveStudents(res.data);
+                saveStudents(sortByMainClass(sortByName(res.data)));
                 this.#displayStudents(getStudents());
             });
 
-        this.#sortDropdown.addEventListener("click", function(event) {
-            const clicked = event.target.closest(".se-sort-dropdown-item");
-            if (!clicked) {
-                return;
-            }
-            hideDropdown(this.#sortDropdown, sortDropdownItemsArr, this.#sortDropdownState);
-        }.bind(this));
+        // this.#sortDropdown.addEventListener("click", function(event) {
+        //     const clicked = event.target.closest(".se-sort-dropdown-item");
+        //     if (!clicked) {
+        //         return;
+        //     }
+        //     hideDropdown(this.#sortDropdown, sortDropdownItemsArr, this.#sortDropdownState);
+        // }.bind(this));
     }
 
     handleSearch(data) {
-        this.#tableBody.innerHTML = "";
         this.#displayStudents(data);
     }
 
     #displayStudents(students) {
-        
+        this.#tableBody.innerHTML = "";
         students.forEach((currentValue, currentIndex) => {
             this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
         });
@@ -165,9 +169,9 @@ export class StudentsMgtComponent extends HTMLElement {
                                     class="transform opacity-0 scale-95 transition ease-out duration-700 absolute right-0 z-10 mt-3 w-52 origin-top-right rounded-lg bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="w-56 p-3" role="none">
-                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                    <h6 class="underline underline-offset-8 decoration-2 decoration-fuchsia-500 mb-3 text-sm font-medium text-gray-900 dark:text-white pl-1">
                                     Main Class
-                                  </h6>
+                                    </h6>
                                   <ul id="se_main_class_filter_container" class="-mb-3 space-y-2 text-sm max-h-44 overflow-scroll mr-1 pl-1" aria-labelledby="dropdownDefault">
                                                                                             
                                   </ul>
@@ -191,11 +195,24 @@ export class StudentsMgtComponent extends HTMLElement {
                                     class="transform opacity-0 scale-95 transition ease-out duration-700 absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-lg bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="">
-                                        <span
+                                        <div
                                         class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-t-md h-10 flex items-center hover:bg-gray-700"
-                                        role="menuitem" tabindex="-1" id="menu-item-0">${"Sort by Full name"}</span>
-                                        <span class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-b-md h-10 flex items-center hover:bg-gray-700"
-                                            role="menuitem" tabindex="-1" id="menu-item-1">${"Sort by Date of birth"}</span>             
+                                        role="menuitem" tabindex="-1" id="menu-item-0">${"Sort by Full name"}
+                                        </div>
+                                        <div class="text-white px-4 py-2 text-sm se-sort-dropdown-item h-10 flex items-center hover:bg-gray-700"
+                                            role="menuitem" tabindex="-1" id="menu-item-1">${"Sort by Date of birth"}
+                                        </div>     
+                                        <div class="text-white px-4 py-6 text-sm se-sort-dropdown-item rounded-b-md h-10 flex items-center justify-between border-t-2 border-fuchsia-500"
+                                            role="menuitem" tabindex="-1">
+                                            <span class="flex items-center">
+                                                <input type="radio" name="order" value="asc" id="asc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                <label for="asc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Ascend.</label>
+                                            </span>
+                                            <span class="flex items-center">
+                                                <input type="radio" name="order" value="desc" id="desc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                <label for="desc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Descend.</label>
+                                            </span>
+                                        </div>        
                                     </div>
                                 </div>
                             </div>
@@ -211,30 +228,31 @@ export class StudentsMgtComponent extends HTMLElement {
                         </div>
                         <div class="mt-8 flow-root h-full" style="height: calc(100% - 4rem);">
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 h-full">
-                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-full">
+                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-full relative">
+
                                     <table class="min-w-full divide-y divide-gray-700">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">No.</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Identifier</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Class</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date Of Birth</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Parent</th>
-                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                                            <span class="sr-only">Delete</span>
-                                        </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-800">
-                                        
-                                    </tbody>
-                                    </table>
+                                        <thead>
+                                            <tr>
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white">No.</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white sm:pl-0">Full Name</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Identifier</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Class</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date Of Birth</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Parent</th>
+                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                                <span class="sr-only">Delete</span>
+                                            </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-800">
+                                            
+                                        </tbody>
+                                    </table>                                  
                                 </div>
                             </div>
                         </div>
@@ -292,7 +310,7 @@ export class StudentsMgtComponent extends HTMLElement {
         return `
         <li class="flex items-center">
             <input id="${mainClass.id}" type="radio" value="${mainClass.name}" name="main-classes"
-            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-0 dark:bg-gray-600 dark:border-gray-500" />
             <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
             ${mainClass.name} (45)
             </label>
