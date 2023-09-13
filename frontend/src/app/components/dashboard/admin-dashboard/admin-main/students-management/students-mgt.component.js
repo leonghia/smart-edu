@@ -159,10 +159,17 @@ export class StudentsMgtComponent extends HTMLElement {
     }
 
     #displayStudents(students) {
+        setTimeout(function(){
+            this.#tableBody.innerHTML = "";
+            students.forEach((currentValue, currentIndex) => {
+                this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
+            });
+        }.bind(this), 500);
         this.#tableBody.innerHTML = "";
-        students.forEach((currentValue, currentIndex) => {
-            this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
-        });
+        this.#tableBody.innerHTML = `
+            <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
+        `;
+        
     } 
 
     disconnectedCallback() {
