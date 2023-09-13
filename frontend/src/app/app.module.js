@@ -7,3 +7,4 @@ import { StudentsMgtComponent } from "./components/dashboard/admin-dashboard/adm
 import { SearchBarComponent } from "./components/search-bar/search-bar.component.js";
 import { OverlayComponent } from "./components/overlay/overlay.component.js";
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component.js";
+import { CreateStudentModalComponent } from "./components/modal/create-modal/create-student-modal.component.js";
