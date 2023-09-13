@@ -8,7 +8,6 @@ export const getTokenFromLocal = function () { // public string | null getToken
 export const saveTokenToLocal = function (value) {
 
     localStorage.setItem("token", value);
-
 }
 
 export const getTokenFromSession = function () {
