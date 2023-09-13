@@ -65,7 +65,6 @@ export class StudentsMgtComponent extends HTMLElement {
         this.#sortDropdownItems = document.querySelectorAll(".se-sort-dropdown-item");
         const sortDropdownItemsArr = Array.from(this.#sortDropdownItems);
         this.#mainClassFilterContainer = document.querySelector("#se_main_class_filter_container");
-        this.#displayClassesFilterDropdown();
         this.#tableBody = document.querySelector("tbody");
         this.#table = document.querySelector("table");
         this.#addDtoBtn = document.querySelector("#se_add_dto_btn");
@@ -130,13 +129,19 @@ export class StudentsMgtComponent extends HTMLElement {
 
 
         const overlay = new OverlayComponent();
-        // this.#addDtoBtn.parentElement.insertAdjacentHTML("beforeend", overlay._render());
+        // B1: Click the add new student button
+        // B2: Display the overlay and the button on the DOM (connectedCallback)
+        // B3: Wait 100ms
+        // B4: Toggle the classLists of the overlay and the button (opacity-0 to opacity-100)
 
+        // B1: Click the close modal button
+        // B2: Toggle the classLists of the overlay and the button (opacity-0 to opacity-100)
+        // B3: Wait 100ms
+        // B4: Remove the overlay and the button from the DOM (disconnectedCallback)
         // this.#addDtoBtn.addEventListener("click", function() {
-        //     this.#addDtoBtn.parentElement.insertAdjacentHTML("beforeend", overlay._render());
-        //     setTimeout(function() {
-        //         overlay._entering();
-        //     }.bind(this), 100);
+        //     this.#addDtoBtn.parentElement.insertAdjacentHTML("beforeend", `
+        //         <app-overlay modal="create-student-modal"></app-overlay>
+        //     `);
         // }.bind(this));
 
         // Gan su kien cho cac the input
@@ -211,6 +216,7 @@ export class StudentsMgtComponent extends HTMLElement {
             .then(res => {
                 saveStudents(sortByMainClass(sortByName(res.data)));
                 this.#displayStudents(getStudents());
+                this.#displayClassesFilterDropdown();
             });
 
         // this.#sortDropdown.addEventListener("click", function(event) {
@@ -227,10 +233,20 @@ export class StudentsMgtComponent extends HTMLElement {
     }
 
     #displayStudents(students) {
+        setTimeout(function(){
+            this.#tableBody.innerHTML = "";
+            students.forEach((currentValue, currentIndex) => {
+                this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
+            });
+        }.bind(this), 500);
         this.#tableBody.innerHTML = "";
-        students.forEach((currentValue, currentIndex) => {
-            this.#tableBody.insertAdjacentHTML("beforeend", this.#renderStudentsRow(currentValue, currentIndex));
-        });
+        this.#tableBody.innerHTML = `
+        <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        </div>
+        `;
+        this.#tableBody.firstElementChild.innerHTML = `
+            <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
+        `;    
     }
 
     disconnectedCallback() {
@@ -410,10 +426,14 @@ export class StudentsMgtComponent extends HTMLElement {
             <input id="${mainClass.id}" type="radio" value="${mainClass.name}" name="main-classes"
             class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-0 dark:bg-gray-600 dark:border-gray-500" />
             <label for="apple" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">
-            ${mainClass.name} (45)
+            ${mainClass.name} (${this.#totalStudents(mainClass.id)})
             </label>
         </li> 
         `;
+    }
+
+    #totalStudents(mainClassId) {
+        return getStudents().filter(s => s.mainClass.id === mainClassId).length;
     }
 }
 

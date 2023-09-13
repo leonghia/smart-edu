@@ -12,6 +12,7 @@ export class AdminSidebarComponent extends HTMLElement {
     }
     #logoutBtn;
     #sidebarMenuContainer;
+    #darkModeBtn;
 
     constructor() {
         super();
@@ -25,6 +26,16 @@ export class AdminSidebarComponent extends HTMLElement {
         const settingItemsArr = Array.from(this.#settingItems);
         this.#logoutBtn = document.querySelector("#setting-item-2");
         this.#sidebarMenuContainer = document.querySelector(".se-sidebar-menu-container");
+        this.#darkModeBtn = document.querySelector("#se_dark_mode_btn");
+
+        this.#darkModeBtn.addEventListener("click", function() {
+            state.darkMode = !state.darkMode; //false => true va true => false
+            if (state.darkMode) {
+                this.#enableDarkMode();
+            } else {
+                this.#disableDarkMode();
+            }
+        }.bind(this));
 
         this.#sidebarMenuContainer.addEventListener("click", function(event) {
             const clicked = event.target.closest("a");
@@ -97,6 +108,31 @@ export class AdminSidebarComponent extends HTMLElement {
 
     disconnectedCallback() {
 
+    }
+
+    // Bat che do nen toi
+    #enableDarkMode() {
+        // B1: Them class "dark" vao the <html>
+        document.documentElement.classList.add("dark");
+        this.#darkModeBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+      </svg>
+      
+        `;
+
+        // B2: Cap nhat "darkmode" trong app.store.js thanh true
+    } 
+
+    // Tat che do nen toi
+    #disableDarkMode() {
+        // B1: Xoa class "dark" khoi <html>
+        document.documentElement.classList.remove("dark");
+        this.#darkModeBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+</svg>
+        `;
     }
 
     #render() {
