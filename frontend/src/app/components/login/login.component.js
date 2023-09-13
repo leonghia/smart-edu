@@ -59,6 +59,7 @@ export class LoginComponent extends HTMLElement {
 
       authService.login({ username: this.#usernameInput.value, password: this.#passwordInput.value })
         .then(data => {
+          this.#loginBtn.children[1].textContent = "Sign in";
           this.#loginBtn.children[0].remove();
           if (this.#isRememberMe) {
             saveTokenToLocal(data.data);
@@ -72,8 +73,6 @@ export class LoginComponent extends HTMLElement {
           }
           else {
             this.#showError(document.querySelector('.quoc-error'), INVALID_CRE_MSG);
-
-
           }
 
         });
