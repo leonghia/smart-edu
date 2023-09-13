@@ -4,7 +4,7 @@ import { hideDropdown, showDropdown } from "../../../../../helpers/animation.hel
 import dataService from "../../../../../services/data.service.js";
 import { getStudents, saveStudents } from "../../../../../app.store.js";
 import { filterStudentByMainClass } from "../../../../../helpers/filter.helper.js";
-import { sortByMainClass, sortByName } from "../../../../../helpers/sort.helper.js";
+import { sortByDob, sortByMainClass, sortByName } from "../../../../../helpers/sort.helper.js";
 import studentsMgtService from "./students-mgt.service.js";
 import { OverlayComponent } from "../../../../overlay/overlay.component.js";
 
@@ -37,6 +37,15 @@ export class StudentsMgtComponent extends HTMLElement {
 
     #addDtoBtn;
 
+    #orderOption = {
+        orderBy: "name",
+        asc: true,
+    }
+
+    #sortDropdownContainer;
+    #ascInput;
+    #descInput;
+
     constructor() {
         super();
 
@@ -59,6 +68,65 @@ export class StudentsMgtComponent extends HTMLElement {
         this.#tableBody = document.querySelector("tbody");
         this.#table = document.querySelector("table");
         this.#addDtoBtn = document.querySelector("#se_add_dto_btn");
+        this.#sortDropdownContainer = document.querySelector("#se_sort_dropdown_container");
+        this.#ascInput = document.querySelector("#asc");
+        this.#descInput = document.querySelector("#desc");
+
+        this.#ascInput.addEventListener("click",function(event){
+            const clicked = event.target.closest("#asc");
+            if(!clicked){
+                return;
+            }
+            this.#orderOption.asc = true;
+            switch(this.#orderOption.orderBy){
+                case "name":
+                    const results0 = sortByName(getStudents(),true);
+                    this.#displayStudents(results0);
+                    break;
+                case "dob":
+                    const results1 = sortByDob(getStudents(),true);
+                    this.#displayStudents(results1);
+                    break;
+            }            
+
+        }.bind(this));
+
+        this.#descInput.addEventListener("click",function(event){
+            const clicked = event.target.closest("#desc");
+            if(!clicked){
+                return;
+            }
+            this.#orderOption.asc = false;
+            switch(this.#orderOption.orderBy){
+                case "name":
+                    const results0 = sortByName(getStudents(),false);
+                    this.#displayStudents(results0);
+                    break;
+                case "dob":
+                    const results1 = sortByDob(getStudents(),false);
+                    this.#displayStudents(results1);
+                    break;
+            }
+            
+        }.bind(this));
+
+        this.#sortDropdownContainer.addEventListener("click", function (event) {
+            // kiem tra xem nguoi dung an vao mot trong 2 nut "Sort by date of birth" khong 
+            const clicked = event.target.closest(".se-sort-dropdown-item");
+            if (!clicked){
+                return;
+            }
+
+            switch (clicked.id) {
+                case "menu-item-0":
+                    this.#orderOption.orderBy = "name";
+                    break;
+                case "menu-item-1":
+                    this.#orderOption.orderBy = "dob";
+                    break;
+            }
+        }.bind(this));
+
 
         const overlay = new OverlayComponent();
         // B1: Click the add new student button
@@ -77,21 +145,21 @@ export class StudentsMgtComponent extends HTMLElement {
         // }.bind(this));
 
         // Gan su kien cho cac the input
-        this.#mainClassFilterContainer.addEventListener("click",function(event) {
+        this.#mainClassFilterContainer.addEventListener("click", function (event) {
             const clicked = event.target.closest("input");
-            if(!clicked){
+            if (!clicked) {
                 return;  //khong lam gi nua 
             }
             // Buoc 1: Lay id lop hoc tu the input
             const mainClassId = clicked.id;
             // Buoc 2: Truyen id lop hoc vao ham loc hoc sinh theo id lop 
             const students = getStudents();
-            const results = filterStudentByMainClass(students,+mainClassId);
+            const results = filterStudentByMainClass(students, +mainClassId);
             // hien thi ket qua loc
             this.#displayStudents(results);
         }.bind(this));
-        
-        this.#sortDropdown.addEventListener("click", function(event) {
+
+        this.#sortDropdownContainer.addEventListener("click", function (event) {
             const clicked = event.target.closest(".se-sort-dropdown-item");
             if (!clicked) {
                 return;
@@ -110,19 +178,19 @@ export class StudentsMgtComponent extends HTMLElement {
 
 
             const id = clicked.id;
-            switch (id){
+            switch (id) {
                 case "menu-item-0":
-                    const results = sortByName(getStudents());
-                    this.#displayStudents(results);
+                    // const results = sortByName(getStudents());
+                    // this.#displayStudents(results);
                     break;
                 case "menu-item-1":
-                    console.log("sap xep theo ngay thang nam sinh");
+                    
                     break;
             }
         }.bind(this));
 
 
-        this.#filterBtn.addEventListener("click", function() {
+        this.#filterBtn.addEventListener("click", function () {
             if (this.#filterDropdownState.state) {
                 hideDropdown(this.#filterDropdown, [], this.#filterDropdownState);
                 return;
@@ -133,7 +201,7 @@ export class StudentsMgtComponent extends HTMLElement {
             }
         }.bind(this));
 
-        this.#sortBtn.addEventListener("click", function() {
+        this.#sortBtn.addEventListener("click", function () {
             if (this.#sortDropdownState.state) {
                 hideDropdown(this.#sortDropdown, sortDropdownItemsArr, this.#sortDropdownState);
                 return;
@@ -178,9 +246,8 @@ export class StudentsMgtComponent extends HTMLElement {
         `;
         this.#tableBody.firstElementChild.innerHTML = `
             <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
-        `;
-        
-    } 
+        `;    
+    }
 
     disconnectedCallback() {
 
@@ -238,25 +305,28 @@ export class StudentsMgtComponent extends HTMLElement {
                                 <div id="se_sort_dropdown"
                                     class="transform opacity-0 scale-95 transition ease-out duration-700 absolute right-0 z-10 mt-3 w-56 origin-top-right rounded-lg bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                
                                     <div class="">
-                                        <div
-                                        class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-t-md h-10 flex items-center"
-                                        role="menuitem" tabindex="-1" id="menu-item-0">${"Sort by Full name"}
-                                        </div>
-                                        <div class="text-white px-4 py-2 text-sm se-sort-dropdown-item h-10 flex items-center"
-                                            role="menuitem" tabindex="-1" id="menu-item-1">${"Sort by Date of birth"}
+                                        <div id = "se_sort_dropdown_container">
+                                            <div
+                                            class="text-white px-4 py-2 text-sm se-sort-dropdown-item rounded-t-md h-10 flex items-center"
+                                            role="menuitem" tabindex="-1" id="menu-item-0">${"Sort by Full name"}
+                                            </div>
+                                            <div class="text-white px-4 py-2 text-sm se-sort-dropdown-item h-10 flex items-center"
+                                                role="menuitem" tabindex="-1" id="menu-item-1">${"Sort by Date of birth"}
+                                            </div>     
                                         </div>     
                                         <div class="text-white px-4 py-6 text-sm se-sort-dropdown-item rounded-b-md h-10 flex items-center justify-between border-t-2 border-fuchsia-500"
                                             role="menuitem" tabindex="-1">
                                             <span class="flex items-center">
-                                                <input type="radio" name="order" value="asc" checked id="asc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                <input type="radio" name="order" value="asc" id="asc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                 <label for="asc" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">Ascend.</label>
                                             </span>
                                             <span class="flex items-center">
                                                 <input type="radio" name="order" value="desc" id="desc" class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                 <label for="desc" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">Descend.</label>
                                             </span>
-                                        </div>        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
