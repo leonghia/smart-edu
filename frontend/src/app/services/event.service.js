@@ -8,7 +8,7 @@ export default class EventService {
 
     /**
      * Component A đăng ký theo dõi sự kiện ở component B
-     * @param {string} event Tên sự kiện phát ra ở component B (VD: "add-user", "send-email"). 
+     * @param {string} event Tên sự kiện phát ra ở component B (VD: "addUser", "sendEmail"). 
      * @param {{component: HTMLElement, eventHandler: Function}} component Thông tin về component A 
      * (bao gồm object this và hàm handler).
      * @author La Trong Nghia <leonghiacnn@gmail.com>

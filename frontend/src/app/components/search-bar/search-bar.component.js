@@ -140,7 +140,7 @@ export class SearchBarComponent extends HTMLElement {
                         </div>
                         
                         <input id="se_table_search_field"
-                                class="block h-full w-full border-0 bg-transparent py-0 pr-0 pl-0 text-white focus:ring-0 focus:outline-none sm:text-sm"
+                                class="block h-full w-full border-0 bg-transparent py-0 pr-0 pl-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none sm:text-sm"
                                 placeholder="${"Search for students by name, identifier or email....."}" type="search" name="search">
                     </div>
                 </form>
