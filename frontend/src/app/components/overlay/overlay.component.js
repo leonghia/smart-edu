@@ -13,6 +13,9 @@ export class OverlayComponent extends HTMLElement {
         this.innerHTML = this._render();
         // this.#overlayWrapper = document.querySelector(".se-overlay-wrapper");
         // this.#overlayWrapper.innerHTML = `<create-student-modal></create-student-modal>`;
+        this._overlayWrapper = document.querySelector(".se-overlay-wrapper");
+        const modal = this.getAttribute("modal");
+        console.log(modal);
     }
 
     disconnectedCallback() {
