@@ -167,6 +167,10 @@ export class StudentsMgtComponent extends HTMLElement {
         }.bind(this), 500);
         this.#tableBody.innerHTML = "";
         this.#tableBody.innerHTML = `
+        <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        </div>
+        `;
+        this.#tableBody.firstElementChild.innerHTML = `
             <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
         `;
         
