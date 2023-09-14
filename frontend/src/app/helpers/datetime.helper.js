@@ -1,4 +1,4 @@
- export const formatDate = function(datetime) {
+ export const convertDateTimeToVn = function(datetime) {
     //Buoc 1: Lay 10 ki tu dau cua datetime 
     const dt = datetime.slice(0,10);
 

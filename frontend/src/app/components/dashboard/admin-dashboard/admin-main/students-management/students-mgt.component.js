@@ -1,4 +1,4 @@
-import { formatDate } from "../../../../../helpers/datetime.helper.js";
+import { convertDateTimeToVn } from "../../../../../helpers/datetime.helper.js";
 import searchBarService from "../../../../search-bar/search-bar.service.js";
 import { hideDropdown, showDropdown } from "../../../../../helpers/animation.helper.js";
 import dataService from "../../../../../services/data.service.js";
@@ -396,7 +396,7 @@ export class StudentsMgtComponent extends HTMLElement {
                 </div>
             </td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.mainClass.name}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${formatDate(currentValue.user.dateOfBirth)}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${convertDateTimeToVn(currentValue.user.dateOfBirth)}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.user.email}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${currentValue.parent.user.fullName}</span></td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
