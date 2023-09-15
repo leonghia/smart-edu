@@ -2198,7 +2198,7 @@ namespace SmartEdu.Services.SeederService
                 },
                 new ExtraClass
                 {
-                    Name = "Literature A2208-10",
+                    Name = "Literature M2208-10",
                     SubjectId = 2,
                     TeacherId = 2
                 },
@@ -2207,7 +2207,133 @@ namespace SmartEdu.Services.SeederService
                     Name = "English M2208-10",
                     SubjectId = 3,
                     TeacherId = 3
-                }
+                },
+                new ExtraClass
+                {
+                    Name = "Physics M2208-10",
+                    SubjectId = 4,
+                    TeacherId = 44
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry M2208-10",
+                    SubjectId = 5,
+                    TeacherId = 55
+                },
+                new ExtraClass
+                {
+                    Name = "Biology M2208-10",
+                    SubjectId = 6,
+                    TeacherId = 66
+                },
+                new ExtraClass
+                {
+                    Name = "History M2208-10",
+                    SubjectId = 7,
+                    TeacherId = 76
+                },
+                new ExtraClass
+                {
+                    Name = "Geography M2208-10",
+                    SubjectId = 8,
+                    TeacherId = 78
+                },
+                new ExtraClass
+                {
+                    Name = "Maths M2208-11",
+                    SubjectId = 1,
+                    TeacherId = 1
+                },
+                new ExtraClass
+                {
+                    Name = "Literature M2208-11",
+                    SubjectId = 2,
+                    TeacherId = 2
+                },
+                new ExtraClass
+                {
+                    Name = "English M2208-11",
+                    SubjectId = 3,
+                    TeacherId = 3
+                },
+                new ExtraClass
+                {
+                    Name = "Physics M2208-11",
+                    SubjectId = 4,
+                    TeacherId = 44
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry M2208-11",
+                    SubjectId = 5,
+                    TeacherId = 55
+                },
+                new ExtraClass
+                {
+                    Name = "Biology M2208-11",
+                    SubjectId = 6,
+                    TeacherId = 66
+                },
+                new ExtraClass
+                {
+                    Name = "History M2208-11",
+                    SubjectId = 7,
+                    TeacherId = 76
+                },
+                new ExtraClass
+                {
+                    Name = "Geography M2208-11",
+                    SubjectId = 8,
+                    TeacherId = 78
+                },
+                new ExtraClass
+                {
+                    Name = "Maths M2208-12",
+                    SubjectId = 1,
+                    TeacherId = 1
+                },
+                new ExtraClass
+                {
+                    Name = "Literature M2208-12",
+                    SubjectId = 2,
+                    TeacherId = 2
+                },
+                new ExtraClass
+                {
+                    Name = "English M2208-12",
+                    SubjectId = 3,
+                    TeacherId = 3
+                },
+                new ExtraClass
+                {
+                    Name = "Physics M2208-12",
+                    SubjectId = 4,
+                    TeacherId = 44
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry M2208-12",
+                    SubjectId = 5,
+                    TeacherId = 55
+                },
+                new ExtraClass
+                {
+                    Name = "Biology M2208-12",
+                    SubjectId = 6,
+                    TeacherId = 66
+                },
+                new ExtraClass
+                {
+                    Name = "History M2208-12",
+                    SubjectId = 7,
+                    TeacherId = 76
+                },
+                new ExtraClass
+                {
+                    Name = "Geography M2208-12",
+                    SubjectId = 8,
+                    TeacherId = 78
+                },
             };
 
             await _unitOfWork.ExtraClassRepository.AddRange(extraClasses);
