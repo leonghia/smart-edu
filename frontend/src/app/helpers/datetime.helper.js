@@ -20,6 +20,6 @@ export const convertDateTimeToISO = function(datetime) {
     const temp = dtISOArr[0];
     dtISOArr[0] = dtISOArr[2];
     dtISOArr[2] = temp;
-    return dtISOArr.join("-" + "T00:00:00");
-
+    return dtISOArr.join("-") + "T00:00:00";
 }
+
