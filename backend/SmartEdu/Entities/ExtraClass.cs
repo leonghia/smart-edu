@@ -16,5 +16,10 @@ namespace SmartEdu.Entities
         [ForeignKey("Subject")]
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
+        public string? Description { get; set; }
+        public byte Weekday { get; set; }
+        public TimeSpan From { get; set; }
+        public TimeSpan To { get; set; }
+        public DateTime OpeningDate { get; set; }
     }
 }
