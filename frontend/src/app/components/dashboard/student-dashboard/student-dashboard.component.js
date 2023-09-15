@@ -16,7 +16,7 @@ export class StudentDashboardComponent extends HTMLElement {
         <div class="h-full">
             <student-sidebar></student-sidebar>
             <student-navbar></student-navbar>
-            <student-secondary-col></student-secondary-col>
+            <student-main></student-main>
         </div>
         `;
     }
