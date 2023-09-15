@@ -1,6 +1,14 @@
+import studentSidebarService from "./student-sidebar.service";
 export class StudentMainComponent extends HTMLElement {
+
+    #currentTab;
+
     constructor() {
         super();
+        studentSidebarService.subscribe("switch", {
+            component: this,
+            eventHandler: this.handleSwitch
+        });
     }
 
     connectedCallback() {
@@ -8,15 +16,42 @@ export class StudentMainComponent extends HTMLElement {
     }
 
     disconnectedCallback() {
-
+        studentSidebarService.unSubscribe("switch", this);
     }
 
     #render() {
+        
         return `
-    <div>
-        <timetable-week-view></timetable-week-view>
-    </div>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <student-home></student-home>
+        </div>   
         `;
+    }
+
+    handleSwitch(id) {
+        switch (id) {
+            case 0: 
+                this.firstElementChild.innerHTML = `<student-home></student-home>`;             
+                break;
+            case 1:
+                this.firstElementChild.innerHTML = `<student-ec></student-ec>`;             
+                break;
+            case 2:
+                this.firstElementChild.innerHTML = `<student-material></student-material>`;
+                break;
+            case 3:
+                this.firstElementChild.innerHTML = `<student-assessment></student-assessment>`;
+                break;
+            case 4:
+                this.firstElementChild.innerHTML = `<student-timetable></student-timetable>`;
+                break;
+            case 5:
+                this.firstElementChild.innerHTML = `<student-tool></student-tool>`;
+                break;
+            default:
+                console.log("default");
+                break;
+        }
     }
 }
 

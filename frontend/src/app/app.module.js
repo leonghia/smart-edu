@@ -12,8 +12,4 @@ import { StudentMainComponent } from "./components/dashboard/student-dashboard/s
 import { StudentDashboardComponent } from "./components/dashboard/student-dashboard/student-dashboard.component.js";
 import { StudentSidebarComponent } from "./components/dashboard/student-dashboard/student-sidebar.component.js";
 import { StudentNavbarComponent } from "./components/dashboard/student-dashboard/student-navbar.component.js";
-import { StudentExtraClassComponent } from "./components/dashboard/student-dashboard/student-ec.component.js";
-import { StudentExtraClassStatComponent } from "./components/dashboard/student-dashboard/student-ec-stat.component.js";
-import { StudentExtraClassNewComponent } from "./components/dashboard/student-dashboard/student-ec-new.component.js";
-import { StudentSecondaryColumnComponent } from "./components/dashboard/student-dashboard/student-secondary-col.component.js";
-import { TimetableWeekViewComponent } from "./components/timetable/week-view.component.js";
+import { StudentExtraClassComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec.component.js";

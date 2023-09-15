@@ -6,7 +6,11 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        "nghia": "0 3px 8px rgba(0, 0, 0, 0.24)",
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin'),
