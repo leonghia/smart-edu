@@ -17,5 +17,6 @@ namespace SmartEdu.DTOs.ExtraClassDTO
         public TimeSpan From { get; set; }
         public TimeSpan To { get; set; }
         public DateTime OpeningDate { get; set; }
+        public string Image { get; set; }
     }
 }
