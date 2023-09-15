@@ -16,7 +16,7 @@ export class AppComponent extends HTMLElement {
             // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {
-            Promise.resolve({ data: { type: 0 } })
+            Promise.resolve({ data: { type: 1 } })
                 .then(res => {
                     const user = res.data;
                     switch (user.type) {

@@ -8,3 +8,12 @@ import { SearchBarComponent } from "./components/search-bar/search-bar.component
 import { OverlayComponent } from "./components/overlay/overlay.component.js";
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component.js";
 import { CreateStudentModalComponent } from "./components/modal/create-modal/create-student-modal.component.js";
+import { StudentMainComponent } from "./components/dashboard/student-dashboard/student-main.component.js";
+import { StudentDashboardComponent } from "./components/dashboard/student-dashboard/student-dashboard.component.js";
+import { StudentSidebarComponent } from "./components/dashboard/student-dashboard/student-sidebar.component.js";
+import { StudentNavbarComponent } from "./components/dashboard/student-dashboard/student-navbar.component.js";
+import { StudentExtraClassComponent } from "./components/dashboard/student-dashboard/student-ec.component.js";
+import { StudentExtraClassStatComponent } from "./components/dashboard/student-dashboard/student-ec-stat.component.js";
+import { StudentExtraClassNewComponent } from "./components/dashboard/student-dashboard/student-ec-new.component.js";
+import { StudentSecondaryColumnComponent } from "./components/dashboard/student-dashboard/student-secondary-col.component.js";
+import { TimetableWeekViewComponent } from "./components/timetable/week-view.component.js";
