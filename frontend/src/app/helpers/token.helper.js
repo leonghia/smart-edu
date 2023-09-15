@@ -1,4 +1,4 @@
-export const getTokenFromLocal = function () { // public string | null getToken
+const getTokenFromLocal = function () { // public string | null getToken
     // Kiem tra xem token co tren trinh duyet khong
     // neu co tra ve token: string
     // neu khong tra ve null
@@ -10,7 +10,7 @@ export const saveTokenToLocal = function (value) {
     localStorage.setItem("token", value);
 }
 
-export const getTokenFromSession = function () {
+const getTokenFromSession = function () {
     return sessionStorage.getItem("token");
 }
 
@@ -22,4 +22,8 @@ export const getTokenFromSession = function () {
  */
 export const saveTokenToSession = function (value) {
     sessionStorage.setItem("token", value);
+}
+
+export const getToken = function () {
+    return getTokenFromSession() ?? getTokenFromLocal();
 }
