@@ -21,5 +21,6 @@ namespace SmartEdu.Entities
         public TimeSpan From { get; set; }
         public TimeSpan To { get; set; }
         public DateTime OpeningDate { get; set; }
+        public string Image { get; set; } = "https://nghia.b-cdn.net/smart-edu/images/extra-classes/extra-class-default-image.webp";
     }
 }
