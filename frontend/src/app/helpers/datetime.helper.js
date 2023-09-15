@@ -13,3 +13,13 @@
     return dtArr.join("/");
 
 }
+
+export const convertDateTimeToISO = function(datetime) {
+    //2008-09-21T00:00:00	
+    const dtISOArr = datetime.split("/");
+    const temp = dtISOArr[0];
+    dtISOArr[0] = dtISOArr[2];
+    dtISOArr[2] = temp;
+    return dtISOArr.join("-") + "T00:00:00";
+}
+
