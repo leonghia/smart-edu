@@ -1,9 +1,9 @@
-import { formatDate } from "../../../../../helpers/datetime.helper.js";
+import { convertDateTimeToVn } from "../../../../../helpers/datetime.helper.js";
 import searchBarService from "../../../../search-bar/search-bar.service.js";
 import { hideDropdown, showDropdown } from "../../../../../helpers/animation.helper.js";
 import dataService from "../../../../../services/data.service.js";
 import { getStudents, saveStudents } from "../../../../../app.store.js";
-import { filterStudentByMainClass } from "../../../../../helpers/filter.helper.js";
+import { filterStudentByMainClass, getTotalStudents, renderMainClassesDropdownItem } from "../../../../../helpers/filter.helper.js";
 import { sortByDob, sortByMainClass, sortByName } from "../../../../../helpers/sort.helper.js";
 import studentsMgtService from "./students-mgt.service.js";
 import { OverlayComponent } from "../../../../overlay/overlay.component.js";
@@ -127,22 +127,21 @@ export class StudentsMgtComponent extends HTMLElement {
             }
         }.bind(this));
 
-
-        const overlay = new OverlayComponent();
         // B1: Click the add new student button
         // B2: Display the overlay and the button on the DOM (connectedCallback)
         // B3: Wait 100ms
-        // B4: Toggle the classLists of the overlay and the button (opacity-0 to opacity-100)
+        // B4: After 100ms, toggle the classLists of the overlay and the button (opacity-0 to opacity-100)
+        this.#addDtoBtn.addEventListener("click", function() {
+            this.#addDtoBtn.parentElement.insertAdjacentHTML("beforeend", `
+                <app-overlay modal="create-student-modal"></app-overlay>
+            `);
+        }.bind(this));
 
         // B1: Click the close modal button
         // B2: Toggle the classLists of the overlay and the button (opacity-0 to opacity-100)
         // B3: Wait 100ms
-        // B4: Remove the overlay and the button from the DOM (disconnectedCallback)
-        // this.#addDtoBtn.addEventListener("click", function() {
-        //     this.#addDtoBtn.parentElement.insertAdjacentHTML("beforeend", `
-        //         <app-overlay modal="create-student-modal"></app-overlay>
-        //     `);
-        // }.bind(this));
+        // B4: After 100ms, remove the overlay and the button from the DOM (disconnectedCallback)
+        
 
         // Gan su kien cho cac the input
         this.#mainClassFilterContainer.addEventListener("click", function (event) {
@@ -397,7 +396,7 @@ export class StudentsMgtComponent extends HTMLElement {
                 </div>
             </td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.mainClass.name}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${formatDate(currentValue.user.dateOfBirth)}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${convertDateTimeToVn(currentValue.user.dateOfBirth)}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400">${currentValue.user.email}</td>
             <td class="whitespace-nowrap px-3 py-4 text-sm leading-6 text-gray-600 dark:text-gray-400"><span class="hover:text-fuchsia-400 cursor-pointer"> ${currentValue.parent.user.fullName}</span></td>
             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
@@ -421,19 +420,11 @@ export class StudentsMgtComponent extends HTMLElement {
     }
 
     #renderClassesFilterDropdownItem(mainClass) {
-        return `
-        <li class="flex items-center">
-            <input id="${mainClass.id}" type="radio" value="${mainClass.name}" name="main-classes"
-            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-700 focus:ring-0 dark:bg-gray-600 dark:border-gray-500" />
-            <label for="apple" class="ml-2 text-sm font-medium text-gray-100 dark:text-gray-100">
-            ${mainClass.name} (${this.#totalStudents(mainClass.id)})
-            </label>
-        </li> 
-        `;
+        return renderMainClassesDropdownItem(mainClass);
     }
 
     #totalStudents(mainClassId) {
-        return getStudents().filter(s => s.mainClass.id === mainClassId).length;
+        return getTotalStudents(mainClassId);
     }
 }
 
