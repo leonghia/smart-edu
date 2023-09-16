@@ -1,8 +1,6 @@
 export class PaginationComponent extends HTMLElement {
 
     #paginationContainer;
-    #prevBtn;
-    #nextBtn;
 
     constructor() {
         super();
@@ -11,16 +9,6 @@ export class PaginationComponent extends HTMLElement {
     connectedCallback() {
         this.innerHTML = this.#render();
         this.#paginationContainer = document.querySelector(".pagination-container");
-        this.#prevBtn = document.querySelector(".prev-btn");
-        this.#nextBtn = document.querySelector(".next-btn");
-
-        this.#prevBtn.addEventListener("click", function () {
-          console.log("Prev :)");
-        });
-
-        this.#nextBtn.addEventListener("click", function () {
-          console.log("Next :)");
-        });
 
         this.#paginationContainer.addEventListener("click", function(event) {
             const clicked = event.target.closest("a");
