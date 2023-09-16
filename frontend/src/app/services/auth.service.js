@@ -1,5 +1,5 @@
 import { BASE_URL } from "../app.config.js";
-import { getTokenFromLocal } from "../helpers/token.helper.js";
+import { getToken } from "../helpers/token.helper.js";
 
 class AuthService {
 
@@ -19,7 +19,7 @@ class AuthService {
             cache: "no-cache",
             credentials: "same-origin",
             headers:{
-                "Authorization": `Bearer ${getTokenFromLocal()}`
+                "Authorization": `Bearer ${getToken()}`
             },
             redirect: "follow",
             referrerPolicy: "no-referrer"

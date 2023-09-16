@@ -22,7 +22,7 @@ export class StudentMainComponent extends HTMLElement {
     #render() {
         
         return `
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-full pl-32 pr-10">
             <student-home></student-home>
         </div>   
         `;

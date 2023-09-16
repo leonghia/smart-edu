@@ -4,7 +4,8 @@ export const state = {
 
 const data = {
     students: [],
-    parents: []
+    parents: [],
+    extraClasses: []
 }
 
 export const getStudents = function () {
@@ -13,4 +14,12 @@ export const getStudents = function () {
 
 export const saveStudents = function(students) {
     data.students = students;
+}
+
+export const getExtraClasses = function() {
+    return data.extraClasses;
+}
+
+export const saveExtraClasses = function (extraClasses) {
+    data.extraClasses = extraClasses;
 }

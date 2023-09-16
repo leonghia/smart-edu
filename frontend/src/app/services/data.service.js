@@ -1,4 +1,4 @@
-import { getTokenFromLocal } from "../helpers/token.helper.js";
+import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 import { getData } from "../helpers/ajax.helper.js";
 

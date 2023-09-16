@@ -13,3 +13,4 @@ import { StudentDashboardComponent } from "./components/dashboard/student-dashbo
 import { StudentSidebarComponent } from "./components/dashboard/student-dashboard/student-sidebar.component.js";
 import { StudentNavbarComponent } from "./components/dashboard/student-dashboard/student-navbar.component.js";
 import { StudentExtraClassComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec.component.js";
+import { PaginationComponent } from "./components/pagination/pagination.component.js";

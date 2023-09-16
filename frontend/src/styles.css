@@ -27,3 +27,30 @@ body {
 .light-scrollbar::-webkit-scrollbar-track {
     background-color: #fff;
 }
+
+/* SLIDER */
+.slider {
+    max-width: 100rem;
+    height: 46rem;
+    margin: 0 auto;
+    position: relative;
+
+    /* IN THE END */
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 46rem;
+
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+
+    /* THIS creates the animation! */
+    transition: transform 1s;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
