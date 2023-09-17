@@ -1,6 +1,7 @@
 import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 import { getData, postData } from "../helpers/ajax.helper.js";
+import { data } from "../app.store.js";
 
 class DataService {
 
@@ -22,6 +23,10 @@ class DataService {
 
     async getCurrentUser() {
         return await getData(`${BASE_URL}/Account/user`);
+    }
+
+    async getStudent(id) {
+        return await getData(`${BASE_URL}/Student/${id}`);
     }
 }
 

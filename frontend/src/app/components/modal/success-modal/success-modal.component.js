@@ -18,7 +18,7 @@ export class SuccessModalComponent extends HTMLElement {
 
         this.#goBackBtn = document.querySelector(".go-back-btn");
 
-        this.#goBackBtn.addEventListener("click", function () {
+        this.#goBackBtn.addEventListener("click", function () { 
             this.leaving();
             this.#overlayComponent.leaving();
         }.bind(this));

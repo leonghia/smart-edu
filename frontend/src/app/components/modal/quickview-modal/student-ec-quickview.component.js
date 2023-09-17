@@ -166,6 +166,13 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
           this.#registerBtn.firstElementChild.remove();
           this.#registerBtn.textContent = "Register now";
 
+          dataService.getStudent(data.currentUser.student.id)
+            .then(res => {
+              const extraClasses = res.data.extraClasses;
+              studentEcService.trigger("registered", extraClasses);
+            });
+          
+
           // Close the quickview modal
           this.leaving();
           setTimeout(function () {

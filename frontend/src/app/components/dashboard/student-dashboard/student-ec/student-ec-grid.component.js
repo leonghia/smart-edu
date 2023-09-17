@@ -6,108 +6,114 @@ import { OverlayComponent } from "../../../overlay/overlay.component";
 
 export class StudentExtraClassGridComponent extends HTMLElement {
 
-    #ecList;
+  #ecList;
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    connectedCallback() {
-        this.innerHTML = this.#render();
-        this.#ecList = document.querySelector(".ec-list");
+  connectedCallback() {
+    this.innerHTML = this.#render();
+    this.#ecList = document.querySelector(".ec-list");
 
-        if (getExtraClasses().length === 0) {
-          dataService.getExtraClasses()
-            .then(res => {
-              saveExtraClasses(res.data);
-              this.#displayExtraClasses(getExtraClasses());
-            });
-        } else {
+    if (getExtraClasses().length === 0) {
+      dataService.getExtraClasses()
+        .then(res => {
+          saveExtraClasses(res.data);
           this.#displayExtraClasses(getExtraClasses());
-        }    
-
-        this.#ecList.addEventListener("click", function (event) {
-          const clicked = event.target.closest(".view-detail-btn") || event.target.closest(".register-btn");
-          if (!clicked) {
-            return;
-          }
-          const overlayComponent = new OverlayComponent();
-          overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
-          document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
-          const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
-          document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
-          setTimeout(function() {
-            overlayComponent.entering();
-            studentEcQuickview.entering();
-          }, 100);
-          const extraClass = getExtraClasses().find(ec => ec.id == clicked.dataset.ec);
-          studentEcService.trigger("showQuickview", extraClass);
+          this.parentElement.insertAdjacentHTML("beforeend", `
+              <student-ec-list class="basis-1/4 h-full flex flex-col justify-start gap-y-20"></student-ec-list>
+              `);
         });
-
+    } else {
+      this.#displayExtraClasses(getExtraClasses());
+      this.parentElement.insertAdjacentHTML("beforeend", `
+              <student-ec-list class="basis-1/4 h-full flex flex-col justify-start gap-y-20"></student-ec-list>
+              `);
     }
 
-    disconnectedCallback() {
+    this.#ecList.addEventListener("click", function (event) {
+      const clicked = event.target.closest(".view-detail-btn") || event.target.closest(".register-btn");
+      if (!clicked) {
+        return;
+      }
+      const overlayComponent = new OverlayComponent();
+      overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
+      document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
+      const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
+      document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
+      setTimeout(function () {
+        overlayComponent.entering();
+        studentEcQuickview.entering();
+      }, 100);
+      const extraClass = getExtraClasses().find(ec => ec.id == clicked.dataset.ec);
+      studentEcService.trigger("showQuickview", extraClass);
+    });
 
-    }
+  }
 
-    #render() {
-        return `
+  disconnectedCallback() {
+
+  }
+
+  #render() {
+    return `
         <div class="w-full">
             <div class="ec-list slider flex gap-6 mb-6">
 
             </div>
         </div>
         `;
-    }
+  }
 
-    #displayExtraClasses(extraClasses) {
-      setTimeout(function() {
-        this.#ecList.innerHTML = "";
-        extraClasses.forEach((currentElement, currentIndex) => {
+  #displayExtraClasses(extraClasses) {
+    setTimeout(function () {
+      this.#ecList.innerHTML = "";
+      extraClasses.forEach((currentElement, currentIndex) => {
 
-          if (currentIndex === 0) {
-            this.#ecList.insertAdjacentHTML("beforeend", `
+        if (currentIndex === 0) {
+          this.#ecList.insertAdjacentHTML("beforeend", `
               <div class="slide" style="transform: translateX(0%);">
                 <div class="flex items-center justify-center gap-6 mb-6"><div>
               </div>
             `);
-            this.#ecList.lastElementChild.lastElementChild.firstElementChild.remove();
-          } 
+          this.#ecList.lastElementChild.lastElementChild.firstElementChild.remove();
+        }
 
-          if (currentIndex !== 0 && currentIndex % 9 === 0) {
-            this.#ecList.insertAdjacentHTML("beforeend", `
+        if (currentIndex !== 0 && currentIndex % 9 === 0) {
+          this.#ecList.insertAdjacentHTML("beforeend", `
               <div class="slide" style="transform: translateX(${100 * currentIndex / 9}%);">
                 <div class="flex items-center justify-center gap-6 mb-6"><div>
               </div>
             `);
-            this.#ecList.lastElementChild.lastElementChild.firstElementChild.remove();
-          }
+          this.#ecList.lastElementChild.lastElementChild.firstElementChild.remove();
+        }
 
-          if (currentIndex % 3 === 0 && currentIndex % 9 !== 0) {
-            this.#ecList.lastElementChild.insertAdjacentHTML("beforeend", `
+        if (currentIndex % 3 === 0 && currentIndex % 9 !== 0) {
+          this.#ecList.lastElementChild.insertAdjacentHTML("beforeend", `
               <div class="flex items-center justify-center gap-6 mb-6"></div>
             `);
-          }
+        }
 
-          this.#ecList.lastElementChild.lastElementChild.insertAdjacentHTML("beforeend", this.#renderExtraClass(currentElement));
-        });
+        this.#ecList.lastElementChild.lastElementChild.insertAdjacentHTML("beforeend", this.#renderExtraClass(currentElement));
+      });
 
-        this.#ecList.parentElement.insertAdjacentHTML("beforeend", `<app-pagination></app-pagination>`);
-      }.bind(this), 500);
-      this.#ecList.innerHTML = "";
-      this.#ecList.innerHTML = `
+      this.#ecList.parentElement.insertAdjacentHTML("beforeend", `<app-pagination></app-pagination>`);
+    }.bind(this), 500);
+    this.#ecList.innerHTML = "";
+    this.#ecList.innerHTML = `
         <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
         </div>
         `;
-      this.#ecList.firstElementChild.innerHTML = `
+    this.#ecList.firstElementChild.innerHTML = `
             <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
         `;
-    }
+  }
 
-    #renderExtraClass(extraClass) {
-      extraClass.total = extraClass.students.length;
-      return `
-    <div class="divide-y divide-gray-800 divide-opacity-10 rounded-lg bg-white/60 shadow-nghia basis-1/3">
+  #renderExtraClass(extraClass) {
+    extraClass.total = extraClass.students.length;
+    return `
+    <div class="divide-y divide-gray-200 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 basis-1/3">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
         <div class="w-full">
           <div class="flex items-center justify-between space-x-3">
@@ -134,11 +140,11 @@ export class StudentExtraClassGridComponent extends HTMLElement {
               <img class="h-10 w-10 flex-shrink-0 rounded bg-gray-300" src="${extraClass.image}" alt="${extraClass.name}">
             </div>
           </div>
-          <p class="mt-4 text-sm text-gray-500">${extraClass.description.slice(0, 150)}.....</p>
+          <p class="mt-4 text-sm text-gray-500 line-clamp-3">${extraClass.description}</p>
         </div>
       </div>
       <div>
-        <div class="-mt-px flex">
+        <div class="-mt-px flex divide-x divide-gray-200">
           <div class="flex w-0 flex-1">
             <a href="#" class="view-detail-btn relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg py-4 text-sm font-semibold text-gray-900" data-ec="${extraClass.id}">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sky-500">
@@ -160,7 +166,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
       </div>
     </div>
       `;
-    }
+  }
 }
 
 customElements.define("student-ec-grid", StudentExtraClassGridComponent);

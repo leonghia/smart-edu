@@ -98,11 +98,7 @@ export class StudentNavbarComponent extends HTMLElement {
             </div>
         </div>
 
-        <main class="xl:pl-96">
-            <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-                      
-            </div>
-        </main>
+        
     </div>
         `;
     }

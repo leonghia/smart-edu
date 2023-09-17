@@ -17,7 +17,7 @@ export class StudentExtraClassComponent extends HTMLElement {
         return `
         <div class="w-full flex items-center justify-between gap-8 h-full">
           <student-ec-grid class="basis-3/4 h-full"></student-ec-grid>
-          <student-ec-list class="basis-1/4 h-full"></student-ec-list>
+          
         </div>
         `;
     }

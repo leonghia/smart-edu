@@ -27,14 +27,12 @@ export class AppComponent extends HTMLElement {
                             this.innerHTML = "<admin-dashboard></admin-dashboard>";
                             break;
                         case 1:
-                            if (data.students.length === 0) {
-                                dataService.getStudents()
-                                    .then(res => {
-                                        data.currentUser.student = res.data.find(s => s.user.id == data.currentUser.id);
-                                    });
-                            } else {
-                                data.currentUser.student = data.students.find(s => s.user.id == data.currentUser.id);
-                            }                        
+                            dataService.getStudents()
+                                .then(res => {
+                                    const students = res.data;
+                                    data.currentUser.student = students.find(s => s.user.id == data.currentUser.id);
+                                    
+                                });                        
                             this.innerHTML = "<student-dashboard></student-dashboard>";
                             break;
                         case 2:
