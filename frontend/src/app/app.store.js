@@ -1,11 +1,14 @@
 export const state = {
-    darkMode: false
+    darkMode: false,
 };
 
-const data = {
+export const data = {
     students: [],
     parents: [],
-    extraClasses: []
+    extraClasses: [],
+    currentUser : {
+        
+    }
 }
 
 export const getStudents = function () {

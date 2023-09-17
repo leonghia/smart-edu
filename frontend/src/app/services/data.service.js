@@ -1,6 +1,6 @@
 import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
-import { getData } from "../helpers/ajax.helper.js";
+import { getData, postData } from "../helpers/ajax.helper.js";
 
 class DataService {
 
@@ -14,6 +14,14 @@ class DataService {
 
     async getExtraClasses() {
         return await getData(`${BASE_URL}/ExtraClass`);
+    }
+
+    async addExtraClassStudent(addExtraClassStudentDTO) {
+        return await postData(`${BASE_URL}/ExtraClassStudent`, addExtraClassStudentDTO);
+    }
+
+    async getCurrentUser() {
+        return await getData(`${BASE_URL}/Account/user`);
     }
 }
 

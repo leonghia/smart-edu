@@ -14,3 +14,7 @@ import { StudentSidebarComponent } from "./components/dashboard/student-dashboar
 import { StudentNavbarComponent } from "./components/dashboard/student-dashboard/student-navbar.component.js";
 import { StudentExtraClassComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec.component.js";
 import { PaginationComponent } from "./components/pagination/pagination.component.js";
+import { StudentExtraClassGridComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec-grid.component.js";
+import { StudentExtraClassListComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec.list.component.js";
+import { StudentExtraClassQuickviewComponent } from "./components/modal/quickview-modal/student-ec-quickview.component.js";
+import { SuccessModalComponent } from "./components/modal/success-modal/success-modal.component.js";

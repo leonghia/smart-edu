@@ -87,7 +87,7 @@ export class CreateStudentModalComponent extends HTMLElement {
         this.#closeModalBtn.addEventListener("click", function () {
             this._leaving();
             const overlayComponent = new OverlayComponent();
-            overlayComponent._leaving();
+            overlayComponent.leaving();
         }.bind(this));
 
         setTimeout(function () {

@@ -1,5 +1,7 @@
 import authService from "./services/auth.service.js";
 import { getToken } from "./helpers/token.helper.js";
+import { data, getStudents, state } from "./app.store.js";
+import dataService from "./services/data.service.js";
 
 
 export class AppComponent extends HTMLElement {
@@ -16,14 +18,23 @@ export class AppComponent extends HTMLElement {
             // neu token khong ton tai
             this.innerHTML = `<app-login></app-login>`;
         } else {
-            Promise.resolve({ data: { type: 1 } })
+            dataService.getCurrentUser()
                 .then(res => {
-                    const user = res.data;
-                    switch (user.type) {
+                    data.currentUser = res.data;
+                    const userType = data.currentUser.type;
+                    switch (userType) {
                         case 0:
                             this.innerHTML = "<admin-dashboard></admin-dashboard>";
                             break;
                         case 1:
+                            if (data.students.length === 0) {
+                                dataService.getStudents()
+                                    .then(res => {
+                                        data.currentUser.student = res.data.find(s => s.user.id == data.currentUser.id);
+                                    });
+                            } else {
+                                data.currentUser.student = data.students.find(s => s.user.id == data.currentUser.id);
+                            }                        
                             this.innerHTML = "<student-dashboard></student-dashboard>";
                             break;
                         case 2:

@@ -32,7 +32,7 @@ export class PaginationComponent extends HTMLElement {
     #render() {
         return `
   <div class="w-full">
-    <nav class="flex items-center justify-between border-t-2 border-gray-800 border-opacity-10 mx-5">
+    <nav class="flex items-center justify-between mx-5">
         <div class="-mt-px flex w-0 flex-1">
           <a href="#" class="prev-btn inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-700 hover:border-gray-300 hover:text-gray-800">
             <svg class="mr-3 h-5 w-5 text-gray-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
