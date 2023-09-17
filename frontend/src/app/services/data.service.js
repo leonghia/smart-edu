@@ -1,36 +1,32 @@
-import { getTokenFromLocal } from "../helpers/token.helper.js";
+import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
+import { getData, postData } from "../helpers/ajax.helper.js";
+import { data } from "../app.store.js";
 
 class DataService {
 
     async getStudents() {
-        const response = await fetch(`${BASE_URL}/Student`,{
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers:{
-                "Authorization": `Bearer ${getTokenFromLocal()}`
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        });
-        return await response.json();
+        return await getData(`${BASE_URL}/Student`);
     }
 
     async getMainClasses() {
-        const response = await fetch(`${BASE_URL}/MainClass`,{
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers:{
-                "Authorization": `Bearer ${getTokenFromLocal()}`
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        });
-        return await response.json();
+        return await getData(`${BASE_URL}/MainClass`);
+    }
+
+    async getExtraClasses() {
+        return await getData(`${BASE_URL}/ExtraClass`);
+    }
+
+    async addExtraClassStudent(addExtraClassStudentDTO) {
+        return await postData(`${BASE_URL}/ExtraClassStudent`, addExtraClassStudentDTO);
+    }
+
+    async getCurrentUser() {
+        return await getData(`${BASE_URL}/Account/user`);
+    }
+
+    async getStudent(id) {
+        return await getData(`${BASE_URL}/Student/${id}`);
     }
 }
 

@@ -16,5 +16,12 @@ namespace SmartEdu.Entities
         [ForeignKey("Subject")]
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
+        public string? Description { get; set; }
+        public byte Weekday { get; set; }
+        public TimeSpan From { get; set; }
+        public TimeSpan To { get; set; }
+        public DateTime OpeningDate { get; set; }
+        public string Image { get; set; } = "https://nghia.b-cdn.net/smart-edu/images/extra-classes/extra-class-default-image.webp";
+        public byte Capacity { get; set; }
     }
 }

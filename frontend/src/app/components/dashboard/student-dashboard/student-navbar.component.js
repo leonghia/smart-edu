@@ -1,3 +1,5 @@
+import { data, state } from "../../../app.store";
+
 export class StudentNavbarComponent extends HTMLElement {
     constructor() {
         super();
@@ -15,7 +17,7 @@ export class StudentNavbarComponent extends HTMLElement {
         return `
     <div class="lg:pl-20">
         <div
-            class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-300 bg-transparent px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+            class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 bg-transparent px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
             <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
                 <span class="sr-only">Open sidebar</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -63,7 +65,7 @@ export class StudentNavbarComponent extends HTMLElement {
                                 alt="">
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">👋 Hello,
-                                    Quoc</span>
+                                    ${data.currentUser.fullName}</span>
                                 <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                     aria-hidden="true">
                                     <path fill-rule="evenodd"
@@ -96,11 +98,7 @@ export class StudentNavbarComponent extends HTMLElement {
             </div>
         </div>
 
-        <main class="xl:pl-96">
-            <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-                      
-            </div>
-        </main>
+        
     </div>
         `;
     }

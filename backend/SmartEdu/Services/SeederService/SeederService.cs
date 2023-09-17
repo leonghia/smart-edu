@@ -2192,22 +2192,292 @@ namespace SmartEdu.Services.SeederService
             {
                 new ExtraClass
                 {
-                    Name = "Maths M2208-10",
+                    Name = "Maths A2308-10",
                     SubjectId = 1,
-                    TeacherId = 1
+                    TeacherId = 1,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 1,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 15),
+                    Capacity = 32
                 },
                 new ExtraClass
                 {
-                    Name = "Literature A2208-10",
+                    Name = "Literature A2308-10",
                     SubjectId = 2,
-                    TeacherId = 2
+                    TeacherId = 2,
+                    Description = "Embark on a captivating literary voyage in our high school literature class! Immerse yourself in the enchanting world of classic and contemporary literature as we explore timeless stories, rich poetry, and thought-provoking plays.",
+                    Weekday = 2,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 16),
+                    Capacity = 34
                 },
                 new ExtraClass
                 {
-                    Name = "English M2208-10",
+                    Name = "English A2308-10",
                     SubjectId = 3,
-                    TeacherId = 3
-                }
+                    TeacherId = 3,
+                    Description = "In this class, you'll master the foundations of English grammar, vocabulary, and pronunciation while gaining insight into the rich tapestry of Hispanic heritage. Our enthusiastic and experienced English instructor will guide you through interactive lessons, cultural activities, and immersive conversations that will make learning English a fun and rewarding experience.",
+                    Weekday = 3,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 17),
+                    Capacity = 25
+                },
+                new ExtraClass
+                {
+                    Name = "Physics A2308-10",
+                    SubjectId = 4,
+                    TeacherId = 44,
+                    Description = "Prepare for a thrilling expedition through the fundamental laws that govern our universe in our high school physics class! This class is your gateway to understanding the forces, motion, energy, and mysteries of the physical world.",
+                    Weekday = 4,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 18),
+                    Capacity = 28
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry A2308-10",
+                    SubjectId = 5,
+                    TeacherId = 55,
+                    Description = "Dive into the captivating world of molecules, reactions, and the building blocks of matter in our high school chemistry class! Join us for an exciting journey that demystifies the secrets of the elements, compounds, and the chemical processes that shape our world.",
+                    Weekday = 5,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 19),
+                    Capacity = 26
+                },
+                new ExtraClass
+                {
+                    Name = "Biology A2308-10",
+                    SubjectId = 6,
+                    TeacherId = 66,
+                    Description = "Embark on a thrilling adventure through the wonders of the natural world in our high school biology class! Explore the intricate web of life, from the tiniest microorganisms to the complexity of ecosystems, as we delve into the science of biology.",
+                    Weekday = 6,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 20),
+                    Capacity = 25
+                },
+                new ExtraClass
+                {
+                    Name = "History A2308-10",
+                    SubjectId = 7,
+                    TeacherId = 76,
+                    Description = "Step into the annals of time and embark on a captivating journey through the pages of history in our high school history class! Discover the stories, events, and civilizations that have shaped the world we live in today.",
+                    Weekday = 7,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 21),
+                    Capacity = 20
+                },
+                new ExtraClass
+                {
+                    Name = "Geography A2308-10",
+                    SubjectId = 8,
+                    TeacherId = 78,
+                    Description = "Embark on a thrilling adventure around the globe in our high school geography class! Explore the diverse landscapes, cultures, and environments that make our world a place of wonder and discovery.",
+                    Weekday = 1,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 22),
+                    Capacity = 22
+                },
+                new ExtraClass
+                {
+                    Name = "Maths A2308-11",
+                    SubjectId = 1,
+                    TeacherId = 1,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 2,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 23),
+                    Capacity = 34
+                },
+                new ExtraClass
+                {
+                    Name = "Literature A2308-11",
+                    SubjectId = 2,
+                    TeacherId = 2,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 3,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 24),
+                    Capacity = 32
+                },
+                new ExtraClass
+                {
+                    Name = "English A2308-11",
+                    SubjectId = 3,
+                    TeacherId = 3,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 4,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 25),
+                    Capacity = 36
+                },
+                new ExtraClass
+                {
+                    Name = "Physics A2308-11",
+                    SubjectId = 4,
+                    TeacherId = 44,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 5,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 26),
+                    Capacity = 28
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry A2308-11",
+                    SubjectId = 5,
+                    TeacherId = 55,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 6,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 27),
+                    Capacity = 30
+                },
+                new ExtraClass
+                {
+                    Name = "Biology A2308-11",
+                    SubjectId = 6,
+                    TeacherId = 66,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 7,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 28),
+                    Capacity = 26
+                },
+                new ExtraClass
+                {
+                    Name = "History A2308-11",
+                    SubjectId = 7,
+                    TeacherId = 76,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 1,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 29),
+                    Capacity = 22
+                },
+                new ExtraClass
+                {
+                    Name = "Geography A2308-11",
+                    SubjectId = 8,
+                    TeacherId = 78,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 2,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 9, 30),
+                    Capacity = 24
+                },
+                new ExtraClass
+                {
+                    Name = "Maths A2308-12",
+                    SubjectId = 1,
+                    TeacherId = 1,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 3,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 1),
+                    Capacity = 38
+                },
+                new ExtraClass
+                {
+                    Name = "Literature A2308-12",
+                    SubjectId = 2,
+                    TeacherId = 2,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 4,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 2),
+                    Capacity = 30
+                },
+                new ExtraClass
+                {
+                    Name = "English A2308-12",
+                    SubjectId = 3,
+                    TeacherId = 3,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 5,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 3),
+                    Capacity = 32
+                },
+                new ExtraClass
+                {
+                    Name = "Physics A2308-12",
+                    SubjectId = 4,
+                    TeacherId = 44,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 6,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 4),
+                    Capacity = 28
+                },
+                new ExtraClass
+                {
+                    Name = "Chemistry A2308-12",
+                    SubjectId = 5,
+                    TeacherId = 55,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 7,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 5),
+                    Capacity = 26
+                },
+                new ExtraClass
+                {
+                    Name = "Biology A2308-12",
+                    SubjectId = 6,
+                    TeacherId = 66,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 1,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 6),
+                    Capacity = 24
+                },
+                new ExtraClass
+                {
+                    Name = "History A2308-12",
+                    SubjectId = 7,
+                    TeacherId = 76,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 2,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 7),
+                    Capacity = 20
+                },
+                new ExtraClass
+                {
+                    Name = "Geography A2308-12",
+                    SubjectId = 8,
+                    TeacherId = 78,
+                    Description = "Join us for an exciting journey through the world of mathematics in our high school math class! Designed for students who are ready to take their math skills to the next level, this class will delve into the fascinating realms of algebra, geometry, trigonometry, and calculus.",
+                    Weekday = 3,
+                    From = new TimeSpan(15, 0, 0),
+                    To = new TimeSpan(17, 0, 0),
+                    OpeningDate = new DateTime(2023, 10, 8),
+                    Capacity = 20
+                },
             };
 
             await _unitOfWork.ExtraClassRepository.AddRange(extraClasses);

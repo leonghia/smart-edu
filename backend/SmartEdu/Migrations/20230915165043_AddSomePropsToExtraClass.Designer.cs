@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartEdu.Data;
 
@@ -11,9 +12,11 @@ using SmartEdu.Data;
 namespace SmartEdu.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230915165043_AddSomePropsToExtraClass")]
+    partial class AddSomePropsToExtraClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace SmartEdu.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ExtraClassStudent", b =>
+                {
+                    b.Property<int>("ExtraClassesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExtraClassesId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("ExtraClassStudent");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -222,9 +240,6 @@ namespace SmartEdu.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte>("Capacity")
-                        .HasColumnType("tinyint");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -261,24 +276,6 @@ namespace SmartEdu.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("ExtraClasses");
-                });
-
-            modelBuilder.Entity("SmartEdu.Entities.ExtraClassStudent", b =>
-                {
-                    b.Property<int>("ExtraClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RegisteredOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ExtraClassId", "StudentId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("ExtraClassesStudents");
                 });
 
             modelBuilder.Entity("SmartEdu.Entities.MainClass", b =>
@@ -525,6 +522,21 @@ namespace SmartEdu.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ExtraClassStudent", b =>
+                {
+                    b.HasOne("SmartEdu.Entities.ExtraClass", null)
+                        .WithMany()
+                        .HasForeignKey("ExtraClassesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartEdu.Entities.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -623,25 +635,6 @@ namespace SmartEdu.Migrations
                     b.Navigation("Subject");
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("SmartEdu.Entities.ExtraClassStudent", b =>
-                {
-                    b.HasOne("SmartEdu.Entities.ExtraClass", "ExtraClass")
-                        .WithMany()
-                        .HasForeignKey("ExtraClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartEdu.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ExtraClass");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("SmartEdu.Entities.MainClass", b =>

@@ -1,44 +1,40 @@
+import { data, state } from "../../app.store.js";
 import adminSidebarService from "../dashboard/admin-dashboard/admin-sidebar/admin-sidebar.service.js";
 
 export class OverlayComponent extends HTMLElement {
     #overlayContainer;
     #overlay;
-    #overlayWrapper;
+    overlayWrapper;
 
     constructor() {
         super();
         this.#overlay = document.querySelector(".se-overlay");
-        this.#overlayWrapper = document.querySelector(".se-overlay-wrapper");
+        this.overlayWrapper = document.querySelector(".overlay-wrapper");
         this.#overlayContainer = document.querySelector("app-overlay");
     }
 
     connectedCallback() {
-        adminSidebarService.overlaySidebar();
+        if (state.userType === 0) {
+            adminSidebarService.overlaySidebar();
+        }
         this.innerHTML = this._render();
         this.#overlay = document.querySelector(".se-overlay");
-        this.#overlayWrapper = document.querySelector(".se-overlay-wrapper");
+        this.overlayWrapper = document.querySelector(".overlay-wrapper");
         const modal = this.getAttribute("modal");
-        switch (modal) {
-            case "create-student-modal":
-                this.#overlayWrapper.innerHTML = `<create-student-modal></create-student-modal>`;
-                break;
-            case "update-student-modal":
-                break;
-            case "delete-student-modal":
-                this.#overlayWrapper.innerHTML = `<delete-modal se-entity="student"></delete-modal>`;
-                break;
+        const classes = this.getAttribute("se-class");
+
+        if (classes) {
+            this.firstElementChild.firstElementChild.classList.remove(..."bg-gray-800 dark:bg-gray-600 bg-opacity-75 dark:bg-opacity-75".split(" "));
+            this.firstElementChild.firstElementChild.classList.add(...classes.split(" "));
         }
-        setTimeout(function() {
-            this._entering();
+        
+        setTimeout(function () {
+            this.entering();
         }.bind(this), 100);
     }
 
     disconnectedCallback() {
-        
-    }
 
-    _remove() {
-        this.#overlayContainer.remove();
     }
 
     _render() {
@@ -46,7 +42,7 @@ export class OverlayComponent extends HTMLElement {
         <div class="relative z-[998]" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="inset-0 bg-gray-800 dark:bg-gray-600 bg-opacity-75 dark:bg-opacity-75 transition-opacity opacity-0 se-overlay"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
-                <div class="se-overlay-wrapper flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="overlay-wrapper flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
                 </div>
             </div>
@@ -54,7 +50,7 @@ export class OverlayComponent extends HTMLElement {
         `;
     }
 
-    _entering() {
+    entering() {
         this.#overlay.classList.add("fixed");
         this.#overlay.classList.remove("ease-in", "duration-500");
         this.#overlay.classList.add("ease-out", "duration-700");
@@ -62,15 +58,17 @@ export class OverlayComponent extends HTMLElement {
         this.#overlay.classList.add("opacity-100");
     }
 
-    _leaving() {
+    leaving() {
         this.#overlay.classList.remove("ease-out", "duration-700");
         this.#overlay.classList.add("ease-in", "duration-500");
         this.#overlay.classList.remove("opacity-100");
         this.#overlay.classList.add("opacity-0");
-        setTimeout(function() {
-            this.#overlay.classList.remove("fixed"); 
-            adminSidebarService.unOverlaySidebar();
-            this._remove();
+        setTimeout(function () {
+            this.#overlay.classList.remove("fixed");
+            if (data.currentUser.type === 0) {
+                adminSidebarService.unOverlaySidebar();
+            }
+            this.remove();
         }.bind(this), 500);
     }
 }

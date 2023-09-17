@@ -1,10 +1,14 @@
 export const state = {
-    darkMode: false
+    darkMode: false,
 };
 
-const data = {
+export const data = {
     students: [],
-    parents: []
+    parents: [],
+    extraClasses: [],
+    currentUser : {
+        
+    }
 }
 
 export const getStudents = function () {
@@ -13,4 +17,12 @@ export const getStudents = function () {
 
 export const saveStudents = function(students) {
     data.students = students;
+}
+
+export const getExtraClasses = function() {
+    return data.extraClasses;
+}
+
+export const saveExtraClasses = function (extraClasses) {
+    data.extraClasses = extraClasses;
 }
