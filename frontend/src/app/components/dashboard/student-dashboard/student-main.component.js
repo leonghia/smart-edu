@@ -34,13 +34,13 @@ export class StudentMainComponent extends HTMLElement {
                 this.firstElementChild.innerHTML = `<student-home></student-home>`;             
                 break;
             case 1:
-                this.firstElementChild.innerHTML = `<student-ec></student-ec>`;             
+                this.firstElementChild.innerHTML = `<student-ec class="w-full"></student-ec>`;             
                 break;
             case 2:
                 this.firstElementChild.innerHTML = `<student-material></student-material>`;
                 break;
             case 3:
-                this.firstElementChild.innerHTML = `<student-assessment></student-assessment>`;
+                this.firstElementChild.innerHTML = `<student-ma></student-ma>`;
                 break;
             case 4:
                 this.firstElementChild.innerHTML = `<student-timetable></student-timetable>`;

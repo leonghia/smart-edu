@@ -18,3 +18,5 @@ import { StudentExtraClassGridComponent } from "./components/dashboard/student-d
 import { StudentExtraClassListComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec.list.component.js";
 import { StudentExtraClassQuickviewComponent } from "./components/modal/quickview-modal/student-ec-quickview.component.js";
 import { SuccessModalComponent } from "./components/modal/success-modal/success-modal.component.js";
+import { StudentMarkAssessmentComponent } from "./components/dashboard/student-dashboard/student-ma/student-ma.component.js";
+import { MarkTableComponent } from "./components/table/mark-table.component.js";

@@ -27,26 +27,26 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
     #render() {
         return `
-<div>
+<div class="h-1/2 mb-12">
     <div class="border-b border-gray-400 border-dashed pb-5">
-        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📁 Your Extra Classes</h3>
+        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📁 Registered Classes</h3>
         <p class="mt-2 max-w-4xl text-sm text-gray-500">Listing all the extra classes you have successfully registered. From here you can cancel any class you would want to. Note that sometimes, the teacher can also remove you from the class if you don't behave properly.</p>
     </div>
     <div>
-        <ul role="list" class="your-registered-ec divide-y divide-dashed divide-gray-400">
+        <ul role="list" class="relative your-registered-ec divide-y divide-dashed divide-gray-400 overflow-x-hidden overflow-y-scroll">
             
             
         </ul>
     </div>   
 </div>   
 
-<div class="">
+<div class="h-1/2">
     <div class="border-b border-gray-400 border-dashed pb-5">
-        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📌 Your Favorite Classes</h3>
+        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📌 Favorite Classes</h3>
         <p class="mt-2 max-w-4xl text-sm text-gray-500">Discover and curate your learning journey with our 'Favorite Courses' feature. Easily mark and organize the courses that inspire you the most, making it simple to revisit and continue your educational adventure at your own pace.</p>
     </div>
     <div>
-        <ul role="list" class="your-favorite-ec divide-y divide-dashed divide-gray-400">
+        <ul role="list" class="relative your-favorite-ec divide-y divide-dashed divide-gray-400">
             
             
         </ul>
@@ -56,9 +56,13 @@ export class StudentExtraClassListComponent extends HTMLElement {
     }
 
     #displayRegisteredExtraClasses(extraClasses = []) {
-        const ul = this.querySelector(".your-registered-ec ");
-        if (extraClasses.length === 0) {
-            ul.insertAdjacentHTML("beforeend", `
+        const ul = this.querySelector(".your-registered-ec");
+
+        setTimeout(function () {
+            ul.classList.remove("h-32");
+            ul.innerHTML = "";
+            if (extraClasses.length === 0) {
+                ul.insertAdjacentHTML("beforeend", `
         <div class="text-center mt-4">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -68,18 +72,34 @@ export class StudentExtraClassListComponent extends HTMLElement {
         </div>
           
             `);
-            return;
-        }
-        ul.innerHTML = "";
-        extraClasses.forEach(ec => {
-            ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
-        });
+                return;
+            }
+            extraClasses.forEach(ec => {
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+            });
+        }.bind(this), 480);
+
+        ul.classList.add("h-32");
+
+        ul.innerHTML = `
+        <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        </div>
+        `;
+
+        ul.firstElementChild.innerHTML = `
+            <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
+        `;
+
     }
 
     #displayFavoriteExtraClasses(extraClasses = []) {
-        const ul = this.querySelector(".your-favorite-ec ");
-        if (extraClasses.length === 0) {
-            ul.insertAdjacentHTML("beforeend", `
+        const ul = this.querySelector(".your-favorite-ec");
+
+        setTimeout(function () {
+            ul.classList.remove("h-32");
+            ul.innerHTML = "";
+            if (extraClasses.length === 0) {
+                ul.insertAdjacentHTML("beforeend", `
         <div class="text-center mt-4">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -89,12 +109,23 @@ export class StudentExtraClassListComponent extends HTMLElement {
         </div>
           
             `);
-            return;
-        }
-        ul.innerHTML = "";
-        extraClasses.forEach(ec => {
-            ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
-        });
+                return;
+            }
+            extraClasses.forEach(ec => {
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+            });
+        }.bind(this), 480);
+
+        ul.classList.add("h-32");
+
+        ul.innerHTML = `
+        <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        </div>
+        `;
+
+        ul.firstElementChild.innerHTML = `
+            <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
+        `;
     }
 
     #renderItem(extraClass) {
