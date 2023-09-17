@@ -2199,7 +2199,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 1,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 15)
+                    OpeningDate = new DateTime(2023, 9, 15),
+                    Capacity = 32
                 },
                 new ExtraClass
                 {
@@ -2210,7 +2211,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 2,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 16)
+                    OpeningDate = new DateTime(2023, 9, 16),
+                    Capacity = 34
                 },
                 new ExtraClass
                 {
@@ -2221,7 +2223,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 3,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 17)
+                    OpeningDate = new DateTime(2023, 9, 17),
+                    Capacity = 25
                 },
                 new ExtraClass
                 {
@@ -2232,7 +2235,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 4,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 18)
+                    OpeningDate = new DateTime(2023, 9, 18),
+                    Capacity = 28
                 },
                 new ExtraClass
                 {
@@ -2243,7 +2247,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 5,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 19)
+                    OpeningDate = new DateTime(2023, 9, 19),
+                    Capacity = 26
                 },
                 new ExtraClass
                 {
@@ -2254,7 +2259,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 6,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 20)
+                    OpeningDate = new DateTime(2023, 9, 20),
+                    Capacity = 25
                 },
                 new ExtraClass
                 {
@@ -2265,7 +2271,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 7,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 21)
+                    OpeningDate = new DateTime(2023, 9, 21),
+                    Capacity = 20
                 },
                 new ExtraClass
                 {
@@ -2276,7 +2283,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 1,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 22)
+                    OpeningDate = new DateTime(2023, 9, 22),
+                    Capacity = 22
                 },
                 new ExtraClass
                 {
@@ -2287,7 +2295,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 2,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 23)
+                    OpeningDate = new DateTime(2023, 9, 23),
+                    Capacity = 34
                 },
                 new ExtraClass
                 {
@@ -2298,7 +2307,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 3,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 24)
+                    OpeningDate = new DateTime(2023, 9, 24),
+                    Capacity = 32
                 },
                 new ExtraClass
                 {
@@ -2309,7 +2319,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 4,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 25)
+                    OpeningDate = new DateTime(2023, 9, 25),
+                    Capacity = 36
                 },
                 new ExtraClass
                 {
@@ -2320,7 +2331,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 5,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 26)
+                    OpeningDate = new DateTime(2023, 9, 26),
+                    Capacity = 28
                 },
                 new ExtraClass
                 {
@@ -2331,7 +2343,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 6,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 27)
+                    OpeningDate = new DateTime(2023, 9, 27),
+                    Capacity = 30
                 },
                 new ExtraClass
                 {
@@ -2342,7 +2355,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 7,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 28)
+                    OpeningDate = new DateTime(2023, 9, 28),
+                    Capacity = 26
                 },
                 new ExtraClass
                 {
@@ -2353,7 +2367,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 1,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 29)
+                    OpeningDate = new DateTime(2023, 9, 29),
+                    Capacity = 22
                 },
                 new ExtraClass
                 {
@@ -2364,7 +2379,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 2,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 9, 30)
+                    OpeningDate = new DateTime(2023, 9, 30),
+                    Capacity = 24
                 },
                 new ExtraClass
                 {
@@ -2375,7 +2391,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 3,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 1)
+                    OpeningDate = new DateTime(2023, 10, 1),
+                    Capacity = 38
                 },
                 new ExtraClass
                 {
@@ -2386,7 +2403,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 4,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 2)
+                    OpeningDate = new DateTime(2023, 10, 2),
+                    Capacity = 30
                 },
                 new ExtraClass
                 {
@@ -2397,7 +2415,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 5,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 3)
+                    OpeningDate = new DateTime(2023, 10, 3),
+                    Capacity = 32
                 },
                 new ExtraClass
                 {
@@ -2408,7 +2427,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 6,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 4)
+                    OpeningDate = new DateTime(2023, 10, 4),
+                    Capacity = 28
                 },
                 new ExtraClass
                 {
@@ -2419,7 +2439,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 7,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 5)
+                    OpeningDate = new DateTime(2023, 10, 5),
+                    Capacity = 26
                 },
                 new ExtraClass
                 {
@@ -2430,7 +2451,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 1,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 6)
+                    OpeningDate = new DateTime(2023, 10, 6),
+                    Capacity = 24
                 },
                 new ExtraClass
                 {
@@ -2441,7 +2463,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 2,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 7)
+                    OpeningDate = new DateTime(2023, 10, 7),
+                    Capacity = 20
                 },
                 new ExtraClass
                 {
@@ -2452,7 +2475,8 @@ namespace SmartEdu.Services.SeederService
                     Weekday = 3,
                     From = new TimeSpan(15, 0, 0),
                     To = new TimeSpan(17, 0, 0),
-                    OpeningDate = new DateTime(2023, 10, 8)
+                    OpeningDate = new DateTime(2023, 10, 8),
+                    Capacity = 20
                 },
             };
 

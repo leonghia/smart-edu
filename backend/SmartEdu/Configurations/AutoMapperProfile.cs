@@ -2,6 +2,7 @@
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.ExamDTO;
 using SmartEdu.DTOs.ExtraClassDTO;
+using SmartEdu.DTOs.ExtraClassStudentDTO;
 using SmartEdu.DTOs.MainClassDTO;
 using SmartEdu.DTOs.ParentDTO;
 using SmartEdu.DTOs.StudentDTO;
@@ -44,6 +45,7 @@ namespace SmartEdu.Configurations
             CreateMap<AddSubjectDTO, Subject>();
             CreateMap<Subject, GetSubjectDTO>();
             CreateMap<UpdateSubjectDTO, Subject>();
+            CreateMap<AddExtraClassStudentDTO, ExtraClassStudent>();
         }
     }
 }

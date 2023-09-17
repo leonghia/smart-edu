@@ -24,7 +24,7 @@ namespace SmartEdu.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
         {
-            return await base.GetAll<GetExtraClassDTO>(requestParams, null, null, new List<string> { "Teacher.User", "Subject" });
+            return await base.GetAll<GetExtraClassDTO>(requestParams, null, null, new List<string> { "Teacher.User", "Subject", "Students" });
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace SmartEdu.Controllers
         [HttpGet("{id:int}", Name = "GetExtraClassById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await base.GetSingle<GetExtraClassDTO>(ec => ec.Id == id, new List<string> { "Teacher.User", "Subject" });
+            return await base.GetSingle<GetExtraClassDTO>(ec => ec.Id == id, new List<string> { "Teacher.User", "Subject", "Students" });
         }
 
         /// <summary>
