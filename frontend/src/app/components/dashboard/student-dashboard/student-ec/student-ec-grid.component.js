@@ -22,13 +22,13 @@ export class StudentExtraClassGridComponent extends HTMLElement {
           saveExtraClasses(res.data);
           this.#displayExtraClasses(getExtraClasses());
           this.parentElement.insertAdjacentHTML("beforeend", `
-              <student-ec-list class="basis-1/4 h-full flex flex-col justify-start gap-y-20"></student-ec-list>
+              <student-ec-list class="h-full w-1/4"></student-ec-list>
               `);
         });
     } else {
       this.#displayExtraClasses(getExtraClasses());
       this.parentElement.insertAdjacentHTML("beforeend", `
-              <student-ec-list class="basis-1/4 h-full flex flex-col justify-start gap-y-20"></student-ec-list>
+              <student-ec-list class="h-full w-1/4"></student-ec-list>
               `);
     }
 
@@ -113,7 +113,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
   #renderExtraClass(extraClass) {
     extraClass.total = extraClass.students.length;
     return `
-    <div class="divide-y divide-gray-200 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 basis-1/3">
+    <div class="divide-y divide-gray-200 bg-white bg-opacity-70 shadow-md sm:rounded-md basis-1/3">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
         <div class="w-full">
           <div class="flex items-center justify-between space-x-3">
