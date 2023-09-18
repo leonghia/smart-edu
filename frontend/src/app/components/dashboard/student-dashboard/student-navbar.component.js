@@ -1,4 +1,5 @@
 import { data, state } from "../../../app.store";
+import { lastNameFromFullName } from "../../../helpers/util.helper";
 
 export class StudentNavbarComponent extends HTMLElement {
     constructor() {
@@ -65,7 +66,7 @@ export class StudentNavbarComponent extends HTMLElement {
                                 alt="">
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">👋 Hello,
-                                    ${data.currentUser.fullName}</span>
+                                    ${lastNameFromFullName(data.currentUser.fullName)}</span>
                                 <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                     aria-hidden="true">
                                     <path fill-rule="evenodd"
