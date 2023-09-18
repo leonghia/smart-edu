@@ -52,16 +52,16 @@ export class SuccessModalComponent extends HTMLElement {
     }
 
     entering() {
-        this.firstElementChild.classList.remove(..."ease-in duration-500".split(" "));
-        this.firstElementChild.classList.add(..."ease-out duration-700".split(" "));
+        this.firstElementChild.classList.remove(..."ease-in duration-300".split(" "));
+        this.firstElementChild.classList.add(..."ease-out duration-500".split(" "));
         this.firstElementChild.classList.remove(..."opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95".split(" "));
         this.firstElementChild.classList.add(..."opacity-100 translate-y-0 sm:scale-100".split(" "));
 
     }
 
     leaving() {
-        this.firstElementChild.classList.remove(..."ease-out duration-700".split(" "));
-        this.firstElementChild.classList.add(..."ease-in duration-500".split(" "));
+        this.firstElementChild.classList.remove(..."ease-out duration-500".split(" "));
+        this.firstElementChild.classList.add(..."ease-in duration-300".split(" "));
         this.firstElementChild.classList.remove(..."opacity-100 translate-y-0 sm:scale-100".split(" "));
         this.firstElementChild.classList.add(..."opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95".split(" "));
 

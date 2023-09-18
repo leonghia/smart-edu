@@ -123,9 +123,9 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                     <button type="button" id="register_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-600 px-8 py-3 text-base font-medium text-white hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Register now</button>
                   </div>
 
-                  <p class="absolute left-4 top-4 text-center sm:static sm:mt-6">
-                    <a href="#" class="font-medium text-fuchsia-600 hover:text-fuchsia-500">Save to favorites</a>
-                  </p>
+                  <div class="mt-6">
+                    <button type="button" id="bookmark_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-50 px-8 py-3 text-base font-medium text-fuchsia-600 hover:bg-fuchsia-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Save to bookmarks</button>
+                  </div>
                 </form>
               </section>
             </div>
@@ -137,15 +137,15 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
 
   entering() {
 
-    this.#modal.classList.remove(..."ease-in duration-500".split(" "));
-    this.#modal.classList.add(..."ease-out duration-700".split(" "));
+    this.#modal.classList.remove(..."ease-in duration-300".split(" "));
+    this.#modal.classList.add(..."ease-out duration-500".split(" "));
     this.#modal.classList.remove(..."opacity-0 translate-y-4 md:translate-y-0 md:scale-95".split(" "));
     this.#modal.classList.add(..."opacity-100 translate-y-0 md:scale-100".split(" "));
   }
 
   leaving() {
-    this.#modal.classList.remove(..."ease-out duration-700".split(" "));
-    this.#modal.classList.add(..."ease-in duration-500".split(" "));
+    this.#modal.classList.remove(..."ease-out duration-500".split(" "));
+    this.#modal.classList.add(..."ease-in duration-300".split(" "));
     this.#modal.classList.remove(..."opacity-100 translate-y-0 md:scale-100".split(" "));
     this.#modal.classList.add(..."opacity-0 translate-y-4 md:translate-y-0 md:scale-95".split(" "));
 

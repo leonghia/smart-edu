@@ -6,26 +6,34 @@ body {
     background-image: url(./assets/images/background.jpg);
 }
 
-.dark-scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
+    border-radius: 50px;
+    background-color: rgb(17 24 39 / 0.05);
+}
+
+.dark::-webkit-scrollbar-track {
+    border-radius: 50px;
     background-color: rgb(17 24 39 / 0.05);
 }
 
 ::-webkit-scrollbar {
+    border-radius: 50px;
     width: .7rem;
     background-color: rgb(17 24 39 / 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 50px;
+    background-color: #eee;
+}
+
+.dark::-webkit-scrollbar-thumb {
+    border-radius: 50px;
     background-color: #666;
 }
 
 ::-webkit-scrollbar-corner {
     background: rgba(0, 0, 0, 0);
-}
-
-.light-scrollbar::-webkit-scrollbar-track {
-    background-color: #fff;
 }
 
 /* SLIDER */

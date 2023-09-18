@@ -1,3 +1,4 @@
+import studentEcService from "./student-ec/student-ec.service";
 import studentSidebarService from "./student-sidebar.service";
 
 export class StudentSidebarComponent extends HTMLElement {
@@ -15,6 +16,7 @@ export class StudentSidebarComponent extends HTMLElement {
         this.#sidebarContainer = document.querySelector(".sidebar-container");
         
         this.#sidebarContainer.addEventListener("click", function (event) {
+            
             const clicked = event.target.closest("a");
             if (!clicked) {
                 return;

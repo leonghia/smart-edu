@@ -1,5 +1,5 @@
 import dataService from "../../../../services/data.service";
-import { getExtraClasses, saveExtraClasses } from "../../../../app.store";
+import { data } from "../../../../app.store";
 import studentEcService from "./student-ec.service";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
 import { OverlayComponent } from "../../../overlay/overlay.component";
@@ -7,30 +7,19 @@ import { OverlayComponent } from "../../../overlay/overlay.component";
 export class StudentExtraClassGridComponent extends HTMLElement {
 
   #ecList;
+  #extraClasses;
 
   constructor() {
     super();
+    this.#extraClasses = data.extraClasses;
   }
 
   connectedCallback() {
     this.innerHTML = this.#render();
     this.#ecList = document.querySelector(".ec-list");
 
-    if (getExtraClasses().length === 0) {
-      dataService.getExtraClasses()
-        .then(res => {
-          saveExtraClasses(res.data);
-          this.#displayExtraClasses(getExtraClasses());
-          this.parentElement.insertAdjacentHTML("beforeend", `
-              <student-ec-list class="h-full w-1/4"></student-ec-list>
-              `);
-        });
-    } else {
-      this.#displayExtraClasses(getExtraClasses());
-      this.parentElement.insertAdjacentHTML("beforeend", `
-              <student-ec-list class="h-full w-1/4"></student-ec-list>
-              `);
-    }
+    
+    this.#displayExtraClasses(this.#extraClasses);   
 
     this.#ecList.addEventListener("click", function (event) {
       const clicked = event.target.closest(".view-detail-btn") || event.target.closest(".register-btn");
@@ -46,9 +35,9 @@ export class StudentExtraClassGridComponent extends HTMLElement {
         overlayComponent.entering();
         studentEcQuickview.entering();
       }, 100);
-      const extraClass = getExtraClasses().find(ec => ec.id == clicked.dataset.ec);
+      const extraClass = this.#extraClasses.find(ec => ec.id == clicked.dataset.ec);
       studentEcService.trigger("showQuickview", extraClass);
-    });
+    }.bind(this));
 
   }
 
@@ -99,7 +88,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
       });
 
       this.#ecList.parentElement.insertAdjacentHTML("beforeend", `<app-pagination></app-pagination>`);
-    }.bind(this), 500);
+    }.bind(this), 100);
     this.#ecList.innerHTML = "";
     this.#ecList.innerHTML = `
         <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">

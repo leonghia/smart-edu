@@ -16,8 +16,21 @@ export default class EventService {
     subscribe(event, component) {
         if (!this.#events[event]) {
             this.#events[event] = [];
+            this.#events[event].push(component);
+            return;
         }
-        this.#events[event].push(component);
+
+        let isDuplicated = false;
+
+        this.#events[event].forEach((currentElement, currentIndex) => {           
+            if (currentElement.component.constructor.name === component.component.constructor.name) {
+                isDuplicated = true;
+            }
+        });
+
+        if (!isDuplicated) {
+            this.#events[event].push(component);
+        }
     }
 
     /**
@@ -27,6 +40,7 @@ export default class EventService {
      * @author La Trong Nghia <leonghiacnn@gmail.com>
      */
     trigger(event, data) {
+        
         if (!this.#events[event]) {
             return;
         }
@@ -41,7 +55,7 @@ export default class EventService {
         }
 
         this.#events[event].forEach((currentElement, currentIndex) => {
-            if (currentElement.component.constructor.name === component.constructor.name) {
+            if (currentElement.component.constructor.name === component.component.constructor.name) {
                 this.#events[event].splice(currentIndex, 1);
             }
         })

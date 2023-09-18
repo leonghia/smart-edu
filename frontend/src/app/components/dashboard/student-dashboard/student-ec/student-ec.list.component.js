@@ -9,16 +9,17 @@ export class StudentExtraClassListComponent extends HTMLElement {
     constructor() {
         super();
         this.#extraClasses = data.currentUser.student.extraClasses;
-        studentEcService.subscribe("registered", {
-            component: this,
-            eventHandler: this.#displayRegisteredExtraClasses
-        });
+        
+        // studentEcService.subscribe("bookmarked", {
+        //     component: this,
+        //     eventHandler: this.#displayBookmarkedExtraClasses
+        // });
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
         this.#displayRegisteredExtraClasses(this.#extraClasses);
-        this.#displayFavoriteExtraClasses();
+        this.#displayBookmarkedExtraClasses();
     }
 
     disconnectedCallback() {
@@ -27,26 +28,26 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
     #render() {
         return `
-<div class="h-1/2 mb-12">
-    <div class="border-b border-gray-400 border-dashed pb-5">
+<div class="h-1/2 overflow-x-hidden overflow-y-scroll">
+    <div class="pb-1">
         <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📁 Registered Classes</h3>
         <p class="mt-2 max-w-4xl text-sm text-gray-500">Listing all the extra classes you have successfully registered. From here you can cancel any class you would want to. Note that sometimes, the teacher can also remove you from the class if you don't behave properly.</p>
     </div>
     <div>
-        <ul role="list" class="relative your-registered-ec divide-y divide-dashed divide-gray-400 overflow-x-hidden overflow-y-scroll">
+        <ul role="list" class="relative your-registered-ec divide-y divide-dashed divide-gray-400">
             
             
         </ul>
     </div>   
 </div>   
 
-<div class="h-1/2">
-    <div class="border-b border-gray-400 border-dashed pb-5">
-        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📌 Favorite Classes</h3>
-        <p class="mt-2 max-w-4xl text-sm text-gray-500">Discover and curate your learning journey with our 'Favorite Courses' feature. Easily mark and organize the courses that inspire you the most, making it simple to revisit and continue your educational adventure at your own pace.</p>
+<div class="h-1/2 overflow-x-hidden overflow-y-scroll">
+    <div class="pb-1">
+        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📌 Bookmarked Classes</h3>
+        <p class="mt-2 max-w-4xl text-sm text-gray-500">Discover and curate your learning journey with our Bookmarked feature. Easily mark and organize the classes that inspire you the most, making it simple to revisit and continue your educational adventure at your own pace.</p>
     </div>
     <div>
-        <ul role="list" class="relative your-favorite-ec divide-y divide-dashed divide-gray-400">
+        <ul role="list" class="relative your-bookmarked-ec divide-y divide-dashed divide-gray-400">
             
             
         </ul>
@@ -56,6 +57,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
     }
 
     #displayRegisteredExtraClasses(extraClasses = []) {
+        
         const ul = this.querySelector(".your-registered-ec");
 
         setTimeout(function () {
@@ -70,30 +72,27 @@ export class StudentExtraClassListComponent extends HTMLElement {
             <h3 class="mt-2 text-sm font-semibold text-gray-900">No extra classes</h3>
             <p class="mt-1 text-sm text-gray-500">Get started by registering an extra class.</p>      
         </div>
-          
             `);
                 return;
             }
             extraClasses.forEach(ec => {
                 ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
             });
-        }.bind(this), 480);
+        }.bind(this), 100);
 
         ul.classList.add("h-32");
-
         ul.innerHTML = `
         <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
         </div>
         `;
-
         ul.firstElementChild.innerHTML = `
             <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
         `;
 
     }
 
-    #displayFavoriteExtraClasses(extraClasses = []) {
-        const ul = this.querySelector(".your-favorite-ec");
+    #displayBookmarkedExtraClasses(extraClasses = []) {
+        const ul = this.querySelector(".your-bookmarked-ec");
 
         setTimeout(function () {
             ul.classList.remove("h-32");
@@ -104,8 +103,8 @@ export class StudentExtraClassListComponent extends HTMLElement {
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             </svg>
-            <h3 class="mt-2 text-sm font-semibold text-gray-900">No favorite extra classes</h3>
-            <p class="mt-1 text-sm text-gray-500">Get started by adding a favorite class.</p>      
+            <h3 class="mt-2 text-sm font-semibold text-gray-900">No bookmarked extra classes</h3>
+            <p class="mt-1 text-sm text-gray-500">Get started by adding a bookmarked class.</p>      
         </div>
           
             `);
@@ -114,7 +113,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
             extraClasses.forEach(ec => {
                 ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
             });
-        }.bind(this), 480);
+        }.bind(this), 100);
 
         ul.classList.add("h-32");
 
@@ -129,7 +128,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
     }
 
     #renderItem(extraClass) {
-        const e = data.extraClasses.find(ec => ec.id === extraClass.id);
+        const e = data.extraClasses.find(ec => ec.id == extraClass.id);
         return `
     <li class="flex items-center justify-between gap-x-6 py-5">
         <div class="min-w-0">
