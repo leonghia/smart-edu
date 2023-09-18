@@ -157,6 +157,19 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
     this.#registerBtn = this.querySelector("#register_btn");
 
     this.#registerBtn.addEventListener("click", function () {
+
+      data.currentUser.student.extraClasses.forEach(currentElement => {
+        //Kiem tra xem co bi trung weekday khong
+        if (extraClass.weekday == currentElement.weekday) {
+          return;
+        }
+        
+        //Neu bi trung weekday, kiem tra tiep thoi gian
+        if (extraClass.from == currentElement.from && extraClass.to == currentElement.to) {
+          return;
+        }
+      });
+
       const addExtraClassStudentDTO = {
         studentId: data.currentUser.student.id,
         extraClassId: extraClass.id
