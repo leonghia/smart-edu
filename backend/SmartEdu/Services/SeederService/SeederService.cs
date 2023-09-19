@@ -2032,8 +2032,7 @@ namespace SmartEdu.Services.SeederService
             {
                 if (registerUserDTO.Type == 3 && registerUserDTO.SubjectId > 0)
                 {
-                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
-                    Console.WriteLine("DFSDFDSFSDFSDFSDFSDFSDFSDFSDFSDF" + user.FullName);
+                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);               
                     var teacher = new Teacher
                     {
                         UserId = user.Id,                      
@@ -2049,26 +2048,43 @@ namespace SmartEdu.Services.SeederService
 
         public async Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
         {           
-            var students = new List<Student>();
 
+            var length = registerUserDTOs.Count(registerUserDTO => registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0);
+
+            var ecBookmarks = new List<EcBookmark>();
+
+            for (var i = 0; i < length; i++) {
+                ecBookmarks.Add(new EcBookmark());
+            }
+
+            await _unitOfWork.EcBookmarkRepository.AddRange(ecBookmarks);
+            await _unitOfWork.Save();
+
+            var students = new List<Student>();
+            int index = 0;
             foreach (var registerUserDTO in registerUserDTOs)
             {
                 if (registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0)
                 {
+                    
                     var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
+
                     var student = new Student
                     {
                         UserId = user.Id,
                         ParentId = registerUserDTO.ParentId,
                         MainClassId = registerUserDTO.MainClassId,
-                        Identifier = registerUserDTO.Identifier
+                        Identifier = registerUserDTO.Identifier,
+                        EcBookmarkId = ++index
                     };
                     students.Add(student);
+                    
                 }
             }
 
             await _unitOfWork.StudentRepository.AddRange(students);
             await _unitOfWork.Save();
+            
         }
 
         public async Task SeedingParents(List<RegisterUserDTO> registerUserDTOs)

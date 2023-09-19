@@ -23,5 +23,6 @@ namespace SmartEdu.Entities
         public DateTime OpeningDate { get; set; }
         public string Image { get; set; } = "https://nghia.b-cdn.net/smart-edu/images/extra-classes/extra-class-default-image.webp";
         public byte Capacity { get; set; }
+        public ICollection<EcBookmark> EcBookmarks { get; set; }
     }
 }
