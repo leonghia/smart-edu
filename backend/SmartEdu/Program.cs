@@ -8,6 +8,7 @@ using Serilog;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using System.Text.Json;
+using SmartEdu.Services.SeederService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,5 +114,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 //app.MapHangfireDashboard();
+
+Console.Write("Do you want to re-create the database? (Y/n): ");
+var selection = Console.ReadLine();
+if (selection is not null)
+{
+    selection = selection.Trim().ToUpper();
+    if (selection == "Y")
+    {
+        var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+        await context.Database.EnsureDeletedAsync();
+        await context.Database.MigrateAsync();
+        Console.WriteLine("Database re-created.");
+        var seederService = scope.ServiceProvider.GetRequiredService<ISeederService>();
+        await seederService.SeedingData();
+        Console.WriteLine("Seeding data successfully.");
+    }
+}
 
 app.Run();
