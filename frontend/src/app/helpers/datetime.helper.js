@@ -15,7 +15,7 @@
 }
 
 export const trimMillisecondsFromTime = function(time) {
-    return time.slice(-3);
+    return time.slice(0, 5);
 }
 
 export const convertDateTimeToISO = function(datetime) {
