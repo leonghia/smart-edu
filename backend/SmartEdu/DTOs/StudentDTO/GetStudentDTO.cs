@@ -1,4 +1,5 @@
-﻿using SmartEdu.DTOs.ExtraClassDTO;
+﻿using SmartEdu.DTOs.EcBookmarkDTO;
+using SmartEdu.DTOs.ExtraClassDTO;
 using SmartEdu.DTOs.MainClassDTO;
 using SmartEdu.DTOs.ParentDTO;
 using SmartEdu.DTOs.UserDTO;
@@ -14,5 +15,6 @@ namespace SmartEdu.DTOs.StudentDTO
         public GetParentDTO Parent { get; set; }
         public GetMainClassDTO MainClass { get; set; }
         public ICollection<GetExtraClassDTO> ExtraClasses { get; set; }
+        public GetEcBookmarkDTO EcBookmark { get; set; }
     }
 }
