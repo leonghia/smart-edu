@@ -14,6 +14,7 @@ namespace SmartEdu.UnitOfWork
         IGenericRepository<MainClass> MainClassRepository { get; }
         IGenericRepository<Subject> SubjectRepository { get; }
         IGenericRepository<ExtraClassStudent> ExtraClassStudentRepository { get; }
+        IGenericRepository<EcBookmark> EcBookmarkRepository { get; }
         Task Save();
     }
 }
