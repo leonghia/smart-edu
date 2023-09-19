@@ -36,39 +36,59 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
 
         this.#ul.addEventListener("click", function (event) {
-            const clicked = event.target.closest("button");
+
+            const clicked = event.target.closest("button") || event.target.closest(".registered-ec-details") || event.target.closest(".registered-ec-unregister");
             if (!clicked) {
                 return;
             }
-            const dropdown = clicked.nextElementSibling;
-            const items = dropdown.querySelectorAll("a");
 
-            const links = Array.from(items);
-            const detailsBtn = links[0];
-            const extraClass = data.extraClasses.find(ec => ec.id === +detailsBtn.dataset.ec);
-            detailsBtn.addEventListener("click", function () {
-                const overlayComponent = new OverlayComponent();
-                overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
-                document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
-                const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
-                document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
-                setTimeout(function () {
-                    overlayComponent.entering();
-                    studentEcQuickview.entering();
-                }, 100);      
-                studentEcService.trigger("showQuickview", extraClass);
-                hideDropdown(dropdown, items, this.#state);
-            }.bind(this));
-
-            this.#state.state = !this.#state.state;
-
-            if (this.#state.state) {
-                showDropdown(dropdown, items, this.#state);
-            } else {
-                hideDropdown(dropdown, items, this.#state);
+            if (event.target.closest("button")) {
+                const dropdown = clicked.nextElementSibling;
+                const items = Array.from(dropdown.querySelectorAll("a"));
+                if (this.#state.state === false) {
+                    showDropdown(dropdown, items, this.#state);
+                } else {
+                    hideDropdown(dropdown, items, this.#state);
+                }
+                return;
             }
 
+            if (event.target.closest(".registered-ec-details")) {
+                const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
+                document.querySelector("student-ec").insertAdjacentHTML("afterend", `
+        <app-overlay se-class="bg-gray-900/[.85] dark:bg-gray-600/75"></app-overlay>
+      `);
+                const studentEcQuickview = new StudentExtraClassQuickviewComponent(document.querySelector("app-overlay"));
+                document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
+                setTimeout(function () {
+                    studentEcQuickview.entering();
+                }, 100);
+                studentEcService.trigger("showQuickviewRegistered", extraClass);
+            }
+            // detailsBtn.addEventListener("click", function () {
+            //     // const overlayComponent = new OverlayComponent();
+            //     // overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
+            //     // document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
+            //     // const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
+            //     // document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
+            //     // setTimeout(function () {
+
+            //     //     overlayComponent.entering();
+            //     //     studentEcQuickview.entering();
+
+            //     // }, 100);      
+            //     // studentEcService.trigger("showQuickviewRegistered", extraClass);
+
+            //     hideDropdown(dropdown, items, this.#state);
+            // }.bind(this));
+
+
+
+
+
         }.bind(this));
+
+
 
     }
 
@@ -230,8 +250,8 @@ export class StudentExtraClassListComponent extends HTMLElement {
             -->
             <div class="opacity-0 absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
                 <!-- Active: "bg-gray-50", Not Active: "" -->
-                <a href="#" data-ec="${extraClass.id}" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">Details<span class="sr-only">, Details</span></a>
-                <a href="#" data-ec="${extraClass.id}" class="block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Unregister<span class="sr-only">, Unregister</span></a>          
+                <a href="#" data-ec="${extraClass.id}" class="registered-ec-details block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">Details<span class="sr-only">, Details</span></a>
+                <a href="#" data-ec="${extraClass.id}" class="registered-ec-unregister block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Unregister<span class="sr-only">, Unregister</span></a>          
             </div>
             </div>
         </div>

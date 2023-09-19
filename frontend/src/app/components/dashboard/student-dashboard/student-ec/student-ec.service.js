@@ -5,6 +5,7 @@ class StudentExtraClassService extends EventService {
     constructor() {
         super({
             showQuickview: [],
+            showQuickviewRegistered: [],
             refreshEcGrid: [],
             refreshEcListReg: [],
             refreshEcListBook: [],

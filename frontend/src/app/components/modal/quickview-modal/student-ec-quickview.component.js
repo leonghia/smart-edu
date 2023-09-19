@@ -20,15 +20,19 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
       component: this,
       eventHandler: this.handleShowQuickview
     });
+    studentEcService.subscribe("showQuickviewRegistered", {
+      component: this,
+      eventHandler: this.handleShowQuickview
+    });
   }
 
   connectedCallback() {
 
-
   }
 
   disconnectedCallback() {
-
+    studentEcService.unSubscribe("showQuickview", this);
+    studentEcService.unSubscribe("showQuickviewRegistered", this);
   }
 
   #render(extraClass) {
@@ -139,7 +143,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
   }
 
   entering() {
-
+    this.#modal = this.querySelector(".modal");
     this.#modal.classList.remove(..."ease-in duration-300".split(" "));
     this.#modal.classList.add(..."ease-out duration-500".split(" "));
     this.#modal.classList.remove(..."opacity-0 translate-y-4 md:translate-y-0 md:scale-95".split(" "));

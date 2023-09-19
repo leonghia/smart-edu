@@ -32,13 +32,12 @@ export class StudentExtraClassGridComponent extends HTMLElement {
       if (!clicked) {
         return;
       }
-      const overlayComponent = new OverlayComponent();
-      overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
-      document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
-      const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
+      document.querySelector("student-ec").insertAdjacentHTML("afterend", `
+        <app-overlay se-class="bg-gray-900/[.85] dark:bg-gray-600/75"></app-overlay>
+      `);
+      const studentEcQuickview = new StudentExtraClassQuickviewComponent(document.querySelector("app-overlay"));
       document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
       setTimeout(function () {
-        overlayComponent.entering();
         studentEcQuickview.entering();
       }, 100);
       const extraClass = this.#extraClasses.find(ec => ec.id == clicked.dataset.ec);
