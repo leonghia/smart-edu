@@ -4,6 +4,7 @@ import studentEcService from "../../dashboard/student-dashboard/student-ec/stude
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
 import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
 import { convertWeekday } from "../../../helpers/datetime.helper.js";
+import { isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
 
@@ -31,6 +32,9 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
   }
 
   #render(extraClass) {
+    const isRegisterDisabled = isExtraClassFull(extraClass) || isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
+    const isExtraClassAvailable = !isExtraClassFull(extraClass);
+    const isExtraClassNotRegistered = !isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
     return `
     <div class="modal opacity-0 translate-y-4 md:translate-y-0 md:scale-95 flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
         <div class="rounded-lg relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
@@ -50,11 +54,11 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
             <div class="sm:col-span-8 lg:col-span-7">
               <h2 class="text-2xl font-bold text-gray-900 sm:pr-12 flex items-center gap-x-4">
               ${extraClass.name}
-              <span class="inline-flex items-center gap-x-1.5 rounded-md ${extraClass.total < extraClass.capacity ? "bg-green-100" : "bg-red-100"} px-2 py-1 text-xs font-medium ${extraClass.total < extraClass.capacity ? "text-green-700" : "text-red-700"}">
-                <svg class="h-1.5 w-1.5 ${extraClass.total < extraClass.capacity ? "fill-green-500" : "fill-red-500"}" viewBox="0 0 6 6" aria-hidden="true">
+              <span class="inline-flex items-center gap-x-1.5 rounded-md ${isExtraClassAvailable ? "bg-green-100" : "bg-red-100"} px-2 py-1 text-xs font-medium ${isExtraClassAvailable ? "text-green-700" : "text-red-700"}">
+                <svg class="h-1.5 w-1.5 ${isExtraClassAvailable ? "fill-green-500" : "fill-red-500"}" viewBox="0 0 6 6" aria-hidden="true">
                   <circle cx="3" cy="3" r="3" />
                 </svg>
-                ${extraClass.total < extraClass.capacity ? "Available" : "Fullslot"}
+                ${isExtraClassAvailable ? "Available" : "Fullslot"}
               </span>
               </h2>
               
@@ -119,7 +123,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                   
 
                   <div class="mt-6">
-                    <button type="button" id="register_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-600 px-8 py-3 text-base font-medium text-white hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Register now</button>
+                    <button type="button" id="register_btn" class="flex w-full items-center justify-center rounded-md border border-transparent ${isRegisterDisabled ? "bg-gray-400 pointer-events-none" : "bg-fuchsia-600 hover:bg-fuchsia-700"} px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">${isExtraClassNotRegistered ? "Register now" : "Already registered"}</button>
                   </div>
 
                   <div class="mt-6">
@@ -183,7 +187,9 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
           dataService.getStudent(data.currentUser.student.id)
             .then(res => {
               const extraClasses = res.data.extraClasses;
-              studentEcService.trigger("registered", extraClasses);
+              data.currentUser.student.extraClasses = extraClasses;
+              studentEcService.trigger("refreshEcListReg", extraClasses);
+              studentEcService.trigger("refreshEcGrid", data.extraClasses);
             });
           
 
