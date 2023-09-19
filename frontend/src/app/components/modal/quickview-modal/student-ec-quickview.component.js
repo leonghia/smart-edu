@@ -85,7 +85,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                       </svg>
 
                     </dt>
-                    <dd class="text-sm font-medium leading-6 text-gray-900">${convertTime(extraClass.from)} - ${convertTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
+                    <dd class="text-sm font-medium leading-6 text-gray-900">${convertTime(extraClass.from)} - ${convertTime(extraClass.to)} (${convertWeekday[extraClass.weekday]})</dd>
                   </div>
                  
                 </div>
