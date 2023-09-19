@@ -1,9 +1,8 @@
-import { data, getExtraClasses } from "../../../app.store";
+import { data } from "../../../app.store";
 import dataService from "../../../services/data.service";
 import studentEcService from "../../dashboard/student-dashboard/student-ec/student-ec.service";
-import { OverlayComponent } from "../../overlay/overlay.component";
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
-import { convertTime } from "../../../helpers/datetime.helper.js";
+import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
 import { convertWeekday } from "../../../helpers/datetime.helper.js";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
@@ -85,7 +84,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                       </svg>
 
                     </dt>
-                    <dd class="text-sm font-medium leading-6 text-gray-900">${convertTime(extraClass.from)} - ${convertTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
+                    <dd class="text-sm font-medium leading-6 text-gray-900">${trimMillisecondsFromTime(extraClass.from)} - ${trimMillisecondsFromTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
                   </div>
                  
                 </div>

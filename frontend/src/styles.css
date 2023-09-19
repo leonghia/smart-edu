@@ -8,7 +8,7 @@ body {
 
 ::-webkit-scrollbar-track {
     border-radius: 50px;
-    background-color: rgb(17 24 39 / 0.05);
+    background: none;
 }
 
 .dark::-webkit-scrollbar-track {
@@ -19,12 +19,18 @@ body {
 ::-webkit-scrollbar {
     border-radius: 50px;
     width: .7rem;
+    background: none;
+}
+
+.dark::-webkit-scrollbar {
+    border-radius: 50px;
+    width: .7rem;
     background-color: rgb(17 24 39 / 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 50px;
-    background-color: #eee;
+    background-color: rgb(17 24 39 / 0.05);
 }
 
 .dark::-webkit-scrollbar-thumb {

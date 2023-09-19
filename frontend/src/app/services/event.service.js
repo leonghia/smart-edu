@@ -16,21 +16,8 @@ export default class EventService {
     subscribe(event, component) {
         if (!this.#events[event]) {
             this.#events[event] = [];
-            this.#events[event].push(component);
-            return;
         }
-
-        let isDuplicated = false;
-
-        this.#events[event].forEach((currentElement, currentIndex) => {           
-            if (currentElement.component.constructor.name === component.component.constructor.name) {
-                isDuplicated = true;
-            }
-        });
-
-        if (!isDuplicated) {
-            this.#events[event].push(component);
-        }
+        this.#events[event].push(component);
     }
 
     /**

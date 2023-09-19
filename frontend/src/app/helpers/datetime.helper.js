@@ -14,6 +14,10 @@
 
 }
 
+export const trimMillisecondsFromTime = function(time) {
+    return time.slice(-3);
+}
+
 export const convertDateTimeToISO = function(datetime) {
     //2008-09-21T00:00:00	
     const dtISOArr = datetime.split("/");
@@ -21,11 +25,6 @@ export const convertDateTimeToISO = function(datetime) {
     dtISOArr[0] = dtISOArr[2];
     dtISOArr[2] = temp;
     return dtISOArr.join("-") + "T00:00:00";
-}
-
-export const convertTime = function(time) {
-    const t = time.slice(0,5);
-    return t;
 }
 
 export const convertWeekday = function(weekday) {
