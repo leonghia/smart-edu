@@ -32,7 +32,13 @@ namespace SmartEdu.Repository
         {
             TEntity entityToDelete = await _table.FindAsync(id);
             _table.Remove(entityToDelete);
-        }      
+        }     
+
+        public async Task Delete(object id1, object id2)
+        {
+            TEntity entityToDelete = await _table.FindAsync(id1, id2);
+            _table.Remove(entityToDelete);
+        } 
 
         public async Task<IEnumerable<TEntity>> GetAll(RequestParams requestParams, Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, List<string> includeProperties = null)
         {

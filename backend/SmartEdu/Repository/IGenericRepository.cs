@@ -13,6 +13,7 @@ namespace SmartEdu.Repository
         Task Add(TEntity entity);
         Task AddRange(IEnumerable<TEntity> entities);
         Task Delete(object id);
+        Task Delete(object id1, object id2);
         void Update(TEntity entityToUpdate);
     }
 }

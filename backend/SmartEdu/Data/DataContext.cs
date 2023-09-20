@@ -34,6 +34,11 @@ namespace SmartEdu.Data
                 .WithMany(s => s.ExtraClasses)
                 .UsingEntity<ExtraClassStudent>();
 
+            modelBuilder.Entity<EcBookmark>()
+                .HasMany(b => b.ExtraClasses)
+                .WithMany(ec => ec.EcBookmarks)
+                .UsingEntity<ExtraClassEcBookmark>();
+
         }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ExtraClass> ExtraClasses { get; set; }
@@ -44,6 +49,7 @@ namespace SmartEdu.Data
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<ExtraClassStudent> ExtraClassesStudents { get; set; }
-
+        public DbSet<EcBookmark> EcBookmarks { get; set; }
+        public DbSet<ExtraClassEcBookmark> ExtraClassesEcBookmarks { get; set; }
     }
 }

@@ -29,7 +29,7 @@ export class OverlayComponent extends HTMLElement {
         }
         
         setTimeout(function () {
-            this.entering();
+            this.#entering();
         }.bind(this), 100);
     }
 
@@ -50,17 +50,17 @@ export class OverlayComponent extends HTMLElement {
         `;
     }
 
-    entering() {
+    #entering() {
         this.#overlay.classList.add("fixed");
-        this.#overlay.classList.remove("ease-in", "duration-500");
-        this.#overlay.classList.add("ease-out", "duration-700");
+        this.#overlay.classList.remove("ease-in", "duration-300");
+        this.#overlay.classList.add("ease-out", "duration-500");
         this.#overlay.classList.remove("opacity-0");
         this.#overlay.classList.add("opacity-100");
     }
 
     leaving() {
-        this.#overlay.classList.remove("ease-out", "duration-700");
-        this.#overlay.classList.add("ease-in", "duration-500");
+        this.#overlay.classList.remove("ease-out", "duration-500");
+        this.#overlay.classList.add("ease-in", "duration-300");
         this.#overlay.classList.remove("opacity-100");
         this.#overlay.classList.add("opacity-0");
         setTimeout(function () {

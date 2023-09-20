@@ -1,9 +1,9 @@
 export default class EventService {
 
-    #events;
+    events;
 
     constructor(events) {
-        this.#events = events;
+        this.events = events;
     }
 
     /**
@@ -14,10 +14,23 @@ export default class EventService {
      * @author La Trong Nghia <leonghiacnn@gmail.com>
      */
     subscribe(event, component) {
-        if (!this.#events[event]) {
-            this.#events[event] = [];
+        if (!this.events[event]) {
+            this.events[event] = [];
+            this.events[event].push(component);
+        } else {
+            let isDuplicated = false
+            this.events[event].forEach((currentElement, currentIndex) => {
+                
+                if (currentElement.component.constructor.name == component.component.constructor.name) {
+                    
+                    isDuplicated = true;
+                    return;
+                }
+            });
+            if (!isDuplicated) {
+                this.events[event].push(component);
+            }
         }
-        this.#events[event].push(component);
     }
 
     /**
@@ -27,22 +40,22 @@ export default class EventService {
      * @author La Trong Nghia <leonghiacnn@gmail.com>
      */
     trigger(event, data) {
-        if (!this.#events[event]) {
+        if (!this.events[event]) {
             return;
         }
-        this.#events[event].forEach(component => {
+        this.events[event].forEach(component => {
             component.eventHandler.call(component.component, data);
         });
     }
 
     unSubscribe(event, component) {
-        if (!this.#events[event]) {
+        if (!this.events[event]) {
             return;
         }
 
-        this.#events[event].forEach((currentElement, currentIndex) => {
+        this.events[event].forEach((currentElement, currentIndex) => {
             if (currentElement.component.constructor.name === component.constructor.name) {
-                this.#events[event].splice(currentIndex, 1);
+                this.events[event].splice(currentIndex, 1);
             }
         })
     }

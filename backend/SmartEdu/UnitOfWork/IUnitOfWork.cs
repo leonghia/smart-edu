@@ -1,4 +1,4 @@
-﻿using SmartEdu.Entities;
+using SmartEdu.Entities;
 using SmartEdu.Repository;
 
 namespace SmartEdu.UnitOfWork
@@ -14,6 +14,8 @@ namespace SmartEdu.UnitOfWork
         IGenericRepository<MainClass> MainClassRepository { get; }
         IGenericRepository<Subject> SubjectRepository { get; }
         IGenericRepository<ExtraClassStudent> ExtraClassStudentRepository { get; }
+        IGenericRepository<EcBookmark> EcBookmarkRepository { get; }
+        IGenericRepository<ExtraClassEcBookmark> ExtraClassEcBookmarkRepository { get; }
         Task Save();
     }
 }

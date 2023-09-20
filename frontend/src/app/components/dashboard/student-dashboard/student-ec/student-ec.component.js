@@ -1,3 +1,6 @@
+import { data } from "../../../../app.store";
+import dataService from "../../../../services/data.service";
+
 export class StudentExtraClassComponent extends HTMLElement {
 
 
@@ -6,7 +9,15 @@ export class StudentExtraClassComponent extends HTMLElement {
     }
 
     connectedCallback() {
-        this.innerHTML = this.#render();
+        if (data.extraClasses.length === 0) {
+            dataService.getExtraClasses()
+                .then(res => {
+                    data.extraClasses = res.data;
+                    this.innerHTML = this.#render();
+                });
+        } else {
+            this.innerHTML = this.#render();
+        } 
     }
 
     disconnectedCallback() {
@@ -15,9 +26,9 @@ export class StudentExtraClassComponent extends HTMLElement {
 
     #render() {
         return `
-        <div class="w-full flex items-center justify-between gap-10 h-full">
+        <div class="w-full flex justify-between gap-10 h-full">
           <student-ec-grid class="w-3/4 h-full"></student-ec-grid>
-          
+          <student-ec-list class="h-full w-1/4 flex flex-col gap-y-12"></student-ec-list>
         </div>
         `;
     }
