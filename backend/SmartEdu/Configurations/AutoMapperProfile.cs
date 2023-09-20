@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SmartEdu.DTOs.DocumentDTO;
+using SmartEdu.DTOs.EcBookmarkDTO;
 using SmartEdu.DTOs.ExamDTO;
 using SmartEdu.DTOs.ExtraClassDTO;
 using SmartEdu.DTOs.ExtraClassStudentDTO;
@@ -46,6 +47,8 @@ namespace SmartEdu.Configurations
             CreateMap<Subject, GetSubjectDTO>();
             CreateMap<UpdateSubjectDTO, Subject>();
             CreateMap<AddExtraClassStudentDTO, ExtraClassStudent>();
+            CreateMap<EcBookmark, GetEcBookmarkDTO>();
+            CreateMap<AddExtraClassEcBookmarkDTO, ExtraClassEcBookmark>();
         }
     }
 }
