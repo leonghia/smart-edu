@@ -1,4 +1,5 @@
 using SmartEdu.DTOs.EcBookmarkDTO;
+using SmartEdu.DTOs.ExtraClassStudentDTO;
 using SmartEdu.Models;
 using SmartEdu.UnitOfWork;
 
@@ -27,5 +28,25 @@ public class ClassService : IClassService
         await _unitOfWork.ExtraClassEcBookmarkRepository.Delete(deleteExtraClassEcBookmarkDTO.EcBookmarkId, deleteExtraClassEcBookmarkDTO.ExtraClassId);
         await _unitOfWork.Save();
         return serverResponse;
+    }
+
+    public async Task<ServerResponse<object>> UnRegister(DeleteExtraClassStudentDTO deleteExtraClassStudentDTO)
+    {
+        var serverResponse = new ServerResponse<Object>();
+
+        //Kiem tra xem du lieu co ton tai khong 
+        var result = await _unitOfWork.ExtraClassStudentRepository.GetSingle(ecs => ecs.ExtraClassId == deleteExtraClassStudentDTO.ExtraClassId && ecs.StudentId == deleteExtraClassStudentDTO.StudentId);
+
+        if (result is null)
+        {
+            serverResponse.Succeeded = false;
+            serverResponse.Message = "Cannot find the ExtraClassId with that StudentId.";
+            return serverResponse;
+        }
+
+        await _unitOfWork.ExtraClassStudentRepository.Delete(deleteExtraClassStudentDTO.ExtraClassId, deleteExtraClassStudentDTO.StudentId);
+        await _unitOfWork.Save();
+        return serverResponse;
+
     }
 }
