@@ -22,7 +22,7 @@ export class StudentMainComponent extends HTMLElement {
     #render() {
         
         return `
-        <div class="mx-auto w-full pl-32 pr-10 py-12" style="height:calc(100% - 4rem);">
+        <div class="mx-auto w-full flex items-center justify-center" style="height:calc(100% - 4rem);">
             <student-home></student-home>
         </div>   
         `;

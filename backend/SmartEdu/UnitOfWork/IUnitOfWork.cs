@@ -1,4 +1,4 @@
-﻿using SmartEdu.Entities;
+using SmartEdu.Entities;
 using SmartEdu.Repository;
 
 namespace SmartEdu.UnitOfWork

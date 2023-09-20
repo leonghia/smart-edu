@@ -1,4 +1,4 @@
-﻿using SmartEdu.Data;
+using SmartEdu.Data;
 using SmartEdu.Entities;
 using SmartEdu.Repository;
 
