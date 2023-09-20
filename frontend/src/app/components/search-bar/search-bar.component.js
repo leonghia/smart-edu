@@ -1,6 +1,5 @@
 import searchBarService from "./search-bar.service.js";
 import { searchByName, searchByIdentifier, searchByEmail } from "../../helpers/search.helper.js";
-import { getStudents } from "../../app.store.js";
 import { showDropdown, hideDropdown } from "../../helpers/animation.helper.js";
 
 

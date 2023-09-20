@@ -1,10 +1,10 @@
-import { data, getExtraClasses } from "../../../app.store";
+import { data } from "../../../app.store";
 import dataService from "../../../services/data.service";
 import studentEcService from "../../dashboard/student-dashboard/student-ec/student-ec.service";
-import { OverlayComponent } from "../../overlay/overlay.component";
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
-import { convertTime } from "../../../helpers/datetime.helper.js";
+import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
 import { convertWeekday } from "../../../helpers/datetime.helper.js";
+import { isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
 
@@ -20,18 +20,25 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
       component: this,
       eventHandler: this.handleShowQuickview
     });
+    studentEcService.subscribe("showQuickviewRegistered", {
+      component: this,
+      eventHandler: this.handleShowQuickview
+    });
   }
 
   connectedCallback() {
 
-
   }
 
   disconnectedCallback() {
-
+    studentEcService.unSubscribe("showQuickview", this);
+    studentEcService.unSubscribe("showQuickviewRegistered", this);
   }
 
   #render(extraClass) {
+    const isRegisterDisabled = isExtraClassFull(extraClass) || isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
+    const isExtraClassAvailable = !isExtraClassFull(extraClass);
+    const isExtraClassNotRegistered = !isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
     return `
     <div class="modal opacity-0 translate-y-4 md:translate-y-0 md:scale-95 flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
         <div class="rounded-lg relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
@@ -51,11 +58,11 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
             <div class="sm:col-span-8 lg:col-span-7">
               <h2 class="text-2xl font-bold text-gray-900 sm:pr-12 flex items-center gap-x-4">
               ${extraClass.name}
-              <span class="inline-flex items-center gap-x-1.5 rounded-md ${extraClass.total < extraClass.capacity ? "bg-green-100" : "bg-red-100"} px-2 py-1 text-xs font-medium ${extraClass.total < extraClass.capacity ? "text-green-700" : "text-red-700"}">
-                <svg class="h-1.5 w-1.5 ${extraClass.total < extraClass.capacity ? "fill-green-500" : "fill-red-500"}" viewBox="0 0 6 6" aria-hidden="true">
+              <span class="inline-flex items-center gap-x-1.5 rounded-md ${isExtraClassAvailable ? "bg-green-100" : "bg-red-100"} px-2 py-1 text-xs font-medium ${isExtraClassAvailable ? "text-green-700" : "text-red-700"}">
+                <svg class="h-1.5 w-1.5 ${isExtraClassAvailable ? "fill-green-500" : "fill-red-500"}" viewBox="0 0 6 6" aria-hidden="true">
                   <circle cx="3" cy="3" r="3" />
                 </svg>
-                ${extraClass.total < extraClass.capacity ? "Available" : "Fullslot"}
+                ${isExtraClassAvailable ? "Available" : "Fullslot"}
               </span>
               </h2>
               
@@ -85,7 +92,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                       </svg>
 
                     </dt>
-                    <dd class="text-sm font-medium leading-6 text-gray-900">${convertTime(extraClass.from)} - ${convertTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
+                    <dd class="text-sm font-medium leading-6 text-gray-900">${trimMillisecondsFromTime(extraClass.from)} - ${trimMillisecondsFromTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
                   </div>
                  
                 </div>
@@ -120,12 +127,12 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                   
 
                   <div class="mt-6">
-                    <button type="button" id="register_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-600 px-8 py-3 text-base font-medium text-white hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Register now</button>
+                    <button type="button" id="register_btn" class="flex w-full items-center justify-center rounded-md border border-transparent ${isRegisterDisabled ? "bg-gray-400 pointer-events-none" : "bg-fuchsia-600 hover:bg-fuchsia-700"} px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">${isExtraClassNotRegistered ? "Register now" : "Already registered"}</button>
                   </div>
 
-                  <p class="absolute left-4 top-4 text-center sm:static sm:mt-6">
-                    <a href="#" class="font-medium text-fuchsia-600 hover:text-fuchsia-500">Save to favorites</a>
-                  </p>
+                  <div class="mt-6">
+                    <button type="button" id="bookmark_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-50 px-8 py-3 text-base font-medium text-fuchsia-600 hover:bg-fuchsia-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Save to bookmarks</button>
+                  </div>
                 </form>
               </section>
             </div>
@@ -136,16 +143,16 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
   }
 
   entering() {
-
-    this.#modal.classList.remove(..."ease-in duration-500".split(" "));
-    this.#modal.classList.add(..."ease-out duration-700".split(" "));
+    this.#modal = this.querySelector(".modal");
+    this.#modal.classList.remove(..."ease-in duration-300".split(" "));
+    this.#modal.classList.add(..."ease-out duration-500".split(" "));
     this.#modal.classList.remove(..."opacity-0 translate-y-4 md:translate-y-0 md:scale-95".split(" "));
     this.#modal.classList.add(..."opacity-100 translate-y-0 md:scale-100".split(" "));
   }
 
   leaving() {
-    this.#modal.classList.remove(..."ease-out duration-700".split(" "));
-    this.#modal.classList.add(..."ease-in duration-500".split(" "));
+    this.#modal.classList.remove(..."ease-out duration-500".split(" "));
+    this.#modal.classList.add(..."ease-in duration-300".split(" "));
     this.#modal.classList.remove(..."opacity-100 translate-y-0 md:scale-100".split(" "));
     this.#modal.classList.add(..."opacity-0 translate-y-4 md:translate-y-0 md:scale-95".split(" "));
 
@@ -184,7 +191,9 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
           dataService.getStudent(data.currentUser.student.id)
             .then(res => {
               const extraClasses = res.data.extraClasses;
-              studentEcService.trigger("registered", extraClasses);
+              data.currentUser.student.extraClasses = extraClasses;
+              studentEcService.trigger("refreshEcListReg", extraClasses);
+              studentEcService.trigger("refreshEcGrid", data.extraClasses);
             });
           
 

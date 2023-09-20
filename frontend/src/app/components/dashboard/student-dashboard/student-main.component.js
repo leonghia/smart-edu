@@ -22,8 +22,10 @@ export class StudentMainComponent extends HTMLElement {
     #render() {
         
         return `
-        <div class="mx-auto w-full flex items-center justify-center" style="height:calc(100% - 4rem);">
-            <student-home></student-home>
+        <div class="lg:pl-20" style="height: calc(100% - 4rem);">
+            <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6 h-full">
+                <student-home></student-home>
+            </div>
         </div>   
         `;
     }
@@ -31,22 +33,22 @@ export class StudentMainComponent extends HTMLElement {
     handleSwitch(id) {
         switch (id) {
             case 0: 
-                this.firstElementChild.innerHTML = `<student-home></student-home>`;             
+                this.firstElementChild.firstElementChild.innerHTML = `<student-home></student-home>`;             
                 break;
             case 1:
-                this.firstElementChild.innerHTML = `<student-ec class="w-full"></student-ec>`;             
+                this.firstElementChild.firstElementChild.innerHTML = `<student-ec></student-ec>`;             
                 break;
             case 2:
-                this.firstElementChild.innerHTML = `<student-material></student-material>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-material></student-material>`;
                 break;
             case 3:
-                this.firstElementChild.innerHTML = `<student-ma></student-ma>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-ma></student-ma>`;
                 break;
             case 4:
-                this.firstElementChild.innerHTML = `<student-timetable></student-timetable>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-timetable></student-timetable>`;
                 break;
             case 5:
-                this.firstElementChild.innerHTML = `<student-tool></student-tool>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-tool></student-tool>`;
                 break;
             default:
                 console.log("default");

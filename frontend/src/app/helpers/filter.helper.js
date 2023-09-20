@@ -1,4 +1,3 @@
-import { getStudents } from "../app.store";
 import dataService from "../services/data.service";
 // Hàm lọc học sinh theo Id lơp học
 export const filterStudentByMainClass = function(students, mainClassId){
