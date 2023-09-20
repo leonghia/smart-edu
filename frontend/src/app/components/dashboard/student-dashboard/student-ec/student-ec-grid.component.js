@@ -20,12 +20,17 @@ export class StudentExtraClassGridComponent extends HTMLElement {
     
   }
 
+  // calculateTranslateX(step) {
+  //   const currentIndex = parseInt(this.#ecList.style.transform.match(/translateX\((.*?)%\)/)[1]) || 0;
+  //   const newIndex = currentIndex + step * 100; // Di chuyển mỗi lần một slide (100%)
+  //   return Math.max(Math.min(newIndex, 0), -((extraClasses.length - 1) / 9) * 100); // Giới hạn giá trị translateX
+  // }
+
   connectedCallback() {
     this.innerHTML = this.#render();
     this.#ecList = document.querySelector(".ec-list");
-
     
-    this.#displayExtraClasses(this.#extraClasses);   
+    this.#displayExtraClasses(this.#extraClasses);
 
     this.#ecList.addEventListener("click", function (event) {
       const clicked = event.target.closest(".view-detail-btn") || event.target.closest(".register-btn");
