@@ -3,15 +3,15 @@ import dataService from "../../../services/data.service";
 import studentEcService from "../../dashboard/student-dashboard/student-ec/student-ec.service";
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
 import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
-import { convertWeekday } from "../../../helpers/datetime.helper.js";
 import { isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
+import { WEEKDAYS } from "../../../helpers/enum.helper";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
 
   #modal;
   #closeBtn;
   #registerBtn;
-  #overlayComponent
+  #overlayComponent;
 
   constructor(overlayComponent) {
     super();
@@ -92,7 +92,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                       </svg>
 
                     </dt>
-                    <dd class="text-sm font-medium leading-6 text-gray-900">${trimMillisecondsFromTime(extraClass.from)} - ${trimMillisecondsFromTime(extraClass.to)} (${convertWeekday(extraClass.weekday)})</dd>
+                    <dd class="text-sm font-medium leading-6 text-gray-900">${trimMillisecondsFromTime(extraClass.from)} - ${trimMillisecondsFromTime(extraClass.to)} (${WEEKDAYS[extraClass.weekday]})</dd>
                   </div>
                  
                 </div>
@@ -179,11 +179,18 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
         }
       });
 
+      const isDuplicated = data.currentUser.student.extraClasses.some(currentElement => currentElement.weekday === extraClass.weekday && currentElement.from === extraClass.from && currentElement.to === extraClass.to);
+
+      if (isDuplicated) {
+        alert("Register failed 😭: Duplicated schedule");
+        return;
+      }
+
       const addExtraClassStudentDTO = {
         studentId: data.currentUser.student.id,
         extraClassId: extraClass.id
       };
-      dataService.addExtraClassStudent(addExtraClassStudentDTO)
+      dataService.registerExtraClass(addExtraClassStudentDTO)
         .then(res => {
           this.#registerBtn.firstElementChild.remove();
           this.#registerBtn.textContent = "Register now";

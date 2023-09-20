@@ -1,93 +1,93 @@
 
 export class PaginationComponent extends HTMLElement {
 
-    #paginationContainer;
-    #next;
-    #previous;
-    #slides;
-    #currentPage = 0;
-    #totalPages;
+  #paginationContainer;
+  #next;
+  #previous;
+  #slides;
+  #currentPage = 0;
+  #totalPages;
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    // calculateTranslateX(step) {
-    //   const currentIndex = parseInt(this.#ecList.style.transform.match(/translateX\((.*?)%\)/)[1]) || 0;
-    //   const newIndex = currentIndex + step * 100; // Di chuyển mỗi lần một slide (100%)
-    //   return Math.max(Math.min(newIndex, 0), -((extraClasses.length - 1) / 9) * 100); // Giới hạn giá trị translateX
-    // }
+  // calculateTranslateX(step) {
+  //   const currentIndex = parseInt(this.#ecList.style.transform.match(/translateX\((.*?)%\)/)[1]) || 0;
+  //   const newIndex = currentIndex + step * 100; // Di chuyển mỗi lần một slide (100%)
+  //   return Math.max(Math.min(newIndex, 0), -((extraClasses.length - 1) / 9) * 100); // Giới hạn giá trị translateX
+  // }
 
-    connectedCallback() {
-        this.innerHTML = this.#render();
-        this.#paginationContainer = document.querySelector(".pagination-container");
-        this.#previous = document.querySelector("#previous");
-        this.#next = document.querySelector("#next");
-        this.#slides = document.querySelectorAll(".slide");
-        this.#totalPages = this.#slides.length;
-        
-
-        this.#previous.addEventListener("click", function(event){
-
-          if(this.#currentPage - 1 < 0 ){
-            return;
-          }else{
-            this.#currentPage--;
-          }
-
-          this.#slides.forEach(currentElemet => {
-            const temp = currentElemet.style.transform.split("(")[1];
-            const length = temp.length;
-            const value = temp.slice(0,length -2 );
-            const num = Number(value);
-            currentElemet.style.transform = `translateX(${num + 100}%)`;
-
-          });
-          
-        }.bind(this));
-
-        this.#next.addEventListener("click", function(event){
-
-          if(this.#currentPage + 1 == this.#totalPages){
-            return;
-          }else{
-            this.#currentPage++;
-          }
-
-          this.#slides.forEach(currentElemet =>{
-            const temp = currentElemet.style.transform.split("(")[1];
-            const length = temp.length;
-            const value = temp.slice(0,length -2 );
-            const num = Number(value);
-            currentElemet.style.transform = `translateX(${num - 100}%)`;
+  connectedCallback() {
+    this.innerHTML = this.#render();
+    this.#paginationContainer = document.querySelector(".pagination-container");
+    this.#previous = document.querySelector("#previous");
+    this.#next = document.querySelector("#next");
+    this.#slides = document.querySelectorAll(".slide");
+    this.#totalPages = this.#slides.length;
 
 
-          });
+    this.#previous.addEventListener("click", function (event) {
 
-        }.bind(this));
+      if (this.#currentPage - 1 < 0) {
+        return;
+      } else {
+        this.#currentPage--;
+      }
+
+      this.#slides.forEach(currentElemet => {
+        const temp = currentElemet.style.transform.split("(")[1];
+        const length = temp.length;
+        const value = temp.slice(0, length - 2);
+        const num = Number(value);
+        currentElemet.style.transform = `translateX(${num + 100}%)`;
+
+      });
+
+    }.bind(this));
+
+    this.#next.addEventListener("click", function (event) {
+
+      if (this.#currentPage + 1 == this.#totalPages) {
+        return;
+      } else {
+        this.#currentPage++;
+      }
+
+      this.#slides.forEach(currentElemet => {
+        const temp = currentElemet.style.transform.split("(")[1];
+        const length = temp.length;
+        const value = temp.slice(0, length - 2);
+        const num = Number(value);
+        currentElemet.style.transform = `translateX(${num - 100}%)`;
 
 
-        this.#paginationContainer.addEventListener("click", function(event) {
-            const clicked = event.target.closest("a");
-            if (!clicked) {
-                return;
-            }
-            const linksArr = this.#paginationContainer.querySelectorAll("a");
-            linksArr.forEach(a => {
-                a.classList.remove(..."border-fuchsia-500 text-fuchsia-600".split(" "));
-                a.classList.add(..."border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300".split(" "));
-            });
-            clicked.classList.remove(..."border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300".split(" "));
-            clicked.classList.add(..."border-fuchsia-500 text-fuchsia-600".split(" "));
-        }.bind(this));
-    }
+      });
 
-    disconnectedCallback() {
+    }.bind(this));
 
-    }
 
-    #render() {
-        return `
+    this.#paginationContainer.addEventListener("click", function (event) {
+      const clicked = event.target.closest("a");
+      if (!clicked) {
+        return;
+      }
+      const linksArr = this.#paginationContainer.querySelectorAll("a");
+      linksArr.forEach(a => {
+        a.classList.remove(..."border-fuchsia-500 text-fuchsia-600".split(" "));
+        a.classList.add(..."border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300".split(" "));
+      });
+      clicked.classList.remove(..."border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300".split(" "));
+      clicked.classList.add(..."border-fuchsia-500 text-fuchsia-600".split(" "));
+    }.bind(this));
+  }
+
+  disconnectedCallback() {
+
+  }
+
+  #render() {
+    return `
   <div class="w-full">
     <nav class="flex items-center justify-between mx-5">
         <div class="-mt-px flex w-0 flex-1">
@@ -119,7 +119,7 @@ export class PaginationComponent extends HTMLElement {
     </nav>
   </div>
         `;
-    }
+  }
 }
 
 customElements.define("app-pagination", PaginationComponent);

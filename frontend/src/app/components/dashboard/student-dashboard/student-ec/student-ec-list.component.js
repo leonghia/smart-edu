@@ -1,9 +1,10 @@
 import { data } from "../../../../app.store";
 import { hideDropdown, showDropdown } from "../../../../helpers/animation.helper";
-import { convertDateTimeToVn, convertWeekday, trimMillisecondsFromTime } from "../../../../helpers/datetime.helper";
+import { trimMillisecondsFromTime } from "../../../../helpers/datetime.helper";
 import studentEcService from "./student-ec.service";
-import { OverlayComponent } from "../../../overlay/overlay.component";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
+import { WEEKDAYS } from "../../../../helpers/enum.helper";
+import { DeleteModalComponent } from "../../../modal/delete-modal/delete-modal.component";
 
 export class StudentExtraClassListComponent extends HTMLElement {
 
@@ -53,17 +54,32 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
 
-            if (event.target.closest(".registered-ec-details")) {
-                const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
-                document.querySelector("student-ec").insertAdjacentHTML("afterend", `
+            const dropdown = clicked.parentElement;
+            const items = Array.from(dropdown.querySelectorAll("a"));
+            const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
+            document.querySelector("student-ec").insertAdjacentHTML("afterend", `
         <app-overlay se-class="bg-gray-900/[.85] dark:bg-gray-600/75"></app-overlay>
-      `);
-                const studentEcQuickview = new StudentExtraClassQuickviewComponent(document.querySelector("app-overlay"));
-                document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
+            `);
+
+            const overlay = document.querySelector("app-overlay");
+            const overlayWrapper = document.querySelector(".overlay-wrapper");
+
+            if (event.target.closest(".registered-ec-details")) {
+                const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlay);
+                overlayWrapper.insertAdjacentElement("beforeend", studentEcQuickview);
                 setTimeout(function () {
                     studentEcQuickview.entering();
                 }, 100);
                 studentEcService.trigger("showQuickviewRegistered", extraClass);
+                hideDropdown(dropdown, items, this.#state);
+                return;
+            }
+
+            if (event.target.closest(".registered-ec-unregister")) {
+                const deleteModal = new DeleteModalComponent(overlay, "Unregister extra class", "Are you sure you want to unregister this extra class? Please note that your parent and the teacher will also know about it. This action cannot be undone.", "Unregister");
+                overlayWrapper.insertAdjacentElement("beforeend", deleteModal);
+                hideDropdown(dropdown, items, this.#state);
+                return;
             }
             // detailsBtn.addEventListener("click", function () {
             //     // const overlayComponent = new OverlayComponent();
@@ -214,7 +230,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                             <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
                         </svg>                  
                     </span>
-                    <p class="whitespace-nowrap">Scheduled on <time datetime="">${trimMillisecondsFromTime(e.from)} - ${trimMillisecondsFromTime(e.to)} (${convertWeekday(e.weekday)})</time></p>
+                    <p class="whitespace-nowrap">Scheduled on <time datetime="">${trimMillisecondsFromTime(e.from)} - ${trimMillisecondsFromTime(e.to)} (${WEEKDAYS[e.weekday]})</time></p>
                 </div>
                 <div class="flex items-center gap-x-2">
                     <span>
