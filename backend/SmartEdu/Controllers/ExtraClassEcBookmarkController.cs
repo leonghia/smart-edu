@@ -32,6 +32,6 @@ public class ExtraClassEcBookmarkController : BaseController<ExtraClassEcBookmar
         {
             return BadRequest(serverResponse);
         }
-        return NoContent();
+        return Ok(serverResponse);
     }
 }
