@@ -3,7 +3,7 @@ import dataService from "../../../services/data.service";
 import studentEcService from "../../dashboard/student-dashboard/student-ec/student-ec.service";
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
 import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
-import { isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
+import { checkIfEcIsBookmarked, isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
 import { WEEKDAYS } from "../../../helpers/enum.helper";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
@@ -12,6 +12,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
   #closeBtn;
   #registerBtn;
   #overlayComponent;
+  #bookmarkBtn;
 
   constructor(overlayComponent) {
     super();
@@ -39,6 +40,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
     const isRegisterDisabled = isExtraClassFull(extraClass) || isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
     const isExtraClassAvailable = !isExtraClassFull(extraClass);
     const isExtraClassNotRegistered = !isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
+    const isExtraClassBookmarked = checkIfEcIsBookmarked(extraClass, data.currentUser.student.ecBookmark);
     return `
     <div class="modal opacity-0 translate-y-4 md:translate-y-0 md:scale-95 flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
         <div class="rounded-lg relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
@@ -131,7 +133,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
                   </div>
 
                   <div class="mt-6">
-                    <button type="button" id="bookmark_btn" class="flex w-full items-center justify-center rounded-md border border-transparent bg-fuchsia-50 px-8 py-3 text-base font-medium text-fuchsia-600 hover:bg-fuchsia-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">Save to bookmarks</button>
+                    <button type="button" id="bookmark_btn" class="${isExtraClassBookmarked ? "pointer-events-none" : ""} flex w-full items-center justify-center rounded-md border border-transparent ${isExtraClassBookmarked ? "bg-gray-400" : "bg-fuchsia-50"} px-8 py-3 text-base font-medium ${isExtraClassBookmarked ? "text-white" : "text-fuchsia-600"} hover:bg-fuchsia-100 focus:outline-none focus:ring-fuchsia-500 focus:ring-offset-2 focus:ring-offset-gray-50">${isExtraClassBookmarked ? "Already saved to bookmark" : "Save to bookmark"}</button>
                   </div>
                 </form>
               </section>
@@ -164,6 +166,37 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
     this.#modal = this.querySelector(".modal");
     this.#closeBtn = this.querySelector(".close-quickview-btn");
     this.#registerBtn = this.querySelector("#register_btn");
+    this.#bookmarkBtn = this.querySelector("#bookmark_btn");
+
+    this.#bookmarkBtn.addEventListener("click", function () {
+
+      setTimeout(() => {
+        dataService.bookmarkExtraClass({
+          ecBookmarkId: data.currentUser.student.ecBookmark.id,
+          extraClassId: extraClass.id
+        }).then(res => {
+          if (res.succeeded) {
+            this.#bookmarkBtn.innerHTML = `
+        <span class="flex items-center mr-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-fuchsia-500">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        </span>
+        Saved to bookmark
+        `;
+            this.#bookmarkBtn.classList.add("pointer-events-none");
+          }
+        });
+
+      }, 500);
+
+      this.#bookmarkBtn.textContent = "Saving...";
+      this.#bookmarkBtn.insertAdjacentHTML("afterbegin", `
+      <span class="flex items-center">
+        <loading-spinner se-class="mr-3 w-4 h-4 text-gray-300"></loading-spinner>
+      </span>
+      `);
+    }.bind(this));
 
     this.#registerBtn.addEventListener("click", function () {
 
@@ -172,7 +205,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
         if (extraClass.weekday == currentElement.weekday) {
           return;
         }
-        
+
         //Neu bi trung weekday, kiem tra tiep thoi gian
         if (extraClass.from == currentElement.from && extraClass.to == currentElement.to) {
           return;
@@ -202,7 +235,7 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
               studentEcService.trigger("refreshEcListReg", extraClasses);
               studentEcService.trigger("refreshEcGrid", data.extraClasses);
             });
-          
+
 
           // Close the quickview modal
           this.leaving();

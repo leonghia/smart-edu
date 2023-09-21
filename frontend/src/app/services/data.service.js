@@ -32,6 +32,14 @@ class DataService {
     async getStudent(id) {
         return await getData(`${BASE_URL}/Student/${id}`);
     }
+
+    async bookmarkExtraClass(addExtraClassEcBookmarkDTO) {
+        return await postData(`${BASE_URL}/ExtraClassEcBookmark`, addExtraClassEcBookmarkDTO);
+    }
+
+    async unbookmarkExtraClass(deleteExtraClassEcBookmarkDTO) {
+        return await updateData(`${BASE_URL}/ExtraClassEcBookmark`, deleteExtraClassEcBookmarkDTO);
+    }
 }
 
 export default new DataService();
