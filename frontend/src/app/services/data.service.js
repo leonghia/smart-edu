@@ -1,6 +1,6 @@
 import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
-import { getData, postData } from "../helpers/ajax.helper.js";
+import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
 
 class DataService {
@@ -17,8 +17,16 @@ class DataService {
         return await getData(`${BASE_URL}/ExtraClass`);
     }
 
-    async addExtraClassStudent(addExtraClassStudentDTO) {
+    async getSubjects() {
+        return await getData(`${BASE_URL}/Subject`);
+    }
+
+    async registerExtraClass(addExtraClassStudentDTO) {
         return await postData(`${BASE_URL}/ExtraClassStudent`, addExtraClassStudentDTO);
+    }
+
+    async unregisterExtraClass(deleteExtraClassStudentDTO) {
+        return await updateData(`${BASE_URL}/ExtraClassStudent`, deleteExtraClassStudentDTO);
     }
 
     async getCurrentUser() {
@@ -27,6 +35,14 @@ class DataService {
 
     async getStudent(id) {
         return await getData(`${BASE_URL}/Student/${id}`);
+    }
+
+    async bookmarkExtraClass(addExtraClassEcBookmarkDTO) {
+        return await postData(`${BASE_URL}/ExtraClassEcBookmark`, addExtraClassEcBookmarkDTO);
+    }
+
+    async unbookmarkExtraClass(deleteExtraClassEcBookmarkDTO) {
+        return await updateData(`${BASE_URL}/ExtraClassEcBookmark`, deleteExtraClassEcBookmarkDTO);
     }
 }
 

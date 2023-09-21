@@ -6,6 +6,7 @@ export const data = {
     students: [],
     parents: [],
     extraClasses: [],
+    subjects: [],
     currentUser : {
         
     }

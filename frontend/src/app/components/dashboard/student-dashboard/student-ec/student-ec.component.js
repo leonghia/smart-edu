@@ -18,6 +18,7 @@ export class StudentExtraClassComponent extends HTMLElement {
         } else {
             this.innerHTML = this.#render();
         } 
+
     }
 
     disconnectedCallback() {
@@ -28,7 +29,7 @@ export class StudentExtraClassComponent extends HTMLElement {
         return `
         <div class="w-full flex justify-between gap-10 h-full">
           <student-ec-grid class="w-3/4 h-full"></student-ec-grid>
-          <student-ec-list class="h-full w-1/4 flex flex-col gap-y-12"></student-ec-list>
+          <student-ec-list class="h-full w-1/4 flex flex-col gap-y-12 py-3"></student-ec-list>
         </div>
         `;
     }

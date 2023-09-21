@@ -22,3 +22,7 @@ import { StudentMarkAssessmentComponent } from "./components/dashboard/student-d
 import { MarkTableComponent } from "./components/table/mark-table.component.js";
 import { TimetableWeekViewComponent } from "./components/timetable/timetable-weekview.component.js";
 import { StudentTimetableComponent } from "./components/dashboard/student-dashboard/student-timetable/student-timetable.component.js";
+import { DeleteModalComponent } from "./components/modal/delete-modal/delete-modal.component.js";
+import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
+import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";
+import { StudentExtraClassFilterComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec-filter.component.js";

@@ -1,43 +1,109 @@
 import { data } from "../../../../app.store";
 import { hideDropdown, showDropdown } from "../../../../helpers/animation.helper";
-import { convertDateTimeToVn, convertWeekday, trimMillisecondsFromTime } from "../../../../helpers/datetime.helper";
+import { trimMillisecondsFromTime } from "../../../../helpers/datetime.helper";
 import studentEcService from "./student-ec.service";
-import { OverlayComponent } from "../../../overlay/overlay.component";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
+import { WEEKDAYS } from "../../../../app.enum";
+import { DeleteModalComponent } from "../../../modal/delete-modal/delete-modal.component";
+import { BASE_URL } from "../../../../app.config";
+import { UnregisterExtraClassModalComponent } from "./unregister-ec-modal.component";
+import dataService from "../../../../services/data.service";
 
 export class StudentExtraClassListComponent extends HTMLElement {
 
     #extraClasses;
-    #ul;
+    #registeredUl;
+    #bookmarkedUl;
     #state = {
         state: false,
     }
+    #ecBookmark;
 
     constructor() {
         super();
         this.#extraClasses = data.currentUser.student.extraClasses;
+        this.#ecBookmark = data.currentUser.student.ecBookmark;
 
         studentEcService.subscribe("refreshEcListReg", {
             component: this,
             eventHandler: this.#displayRegisteredExtraClasses
         });
 
-        // studentEcService.subscribe("bookmarked", {
-        //     component: this,
-        //     eventHandler: this.#displayBookmarkedExtraClasses
-        // });
+        studentEcService.subscribe("refreshEcListBook", {
+            component: this,
+            eventHandler: this.#displayBookmarkedExtraClasses
+        });
+
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
         this.#displayRegisteredExtraClasses(this.#extraClasses);
-        this.#displayBookmarkedExtraClasses();
-        this.#ul = this.querySelector(".your-registered-ec");
+        this.#displayBookmarkedExtraClasses(this.#ecBookmark.extraClasses);
+        this.#registeredUl = this.querySelector(".your-registered-ec");
+        this.#bookmarkedUl = this.querySelector(".your-bookmarked-ec");
 
+        this.#bookmarkedUl.addEventListener("click", function (event) {
+            const clicked = event.target.closest("button") || event.target.closest(".registered-ec-details") || event.target.closest(".registered-ec-action");
+            if (!clicked) {
+                return;
+            }
 
-        this.#ul.addEventListener("click", function (event) {
+            const extraClassId = Number(clicked.dataset.ec);
 
-            const clicked = event.target.closest("button") || event.target.closest(".registered-ec-details") || event.target.closest(".registered-ec-unregister");
+            if (event.target.closest("button")) {
+                const dropdown = clicked.nextElementSibling;
+                const items = Array.from(dropdown.querySelectorAll("a"));
+                if (this.#state.state === false) {
+                    showDropdown(dropdown, items, this.#state);
+                } else {
+                    hideDropdown(dropdown, items, this.#state);
+                }
+                return;
+            }
+
+            const dropdown = clicked.parentElement;
+            const items = Array.from(dropdown.querySelectorAll("a"));
+            const extraClass = data.extraClasses.find(ec => ec.id === extraClassId);
+
+            if (event.target.closest(".registered-ec-details")) {
+                document.querySelector("student-ec").insertAdjacentHTML("afterend", `
+        <app-overlay se-class="bg-gray-900/[.85] dark:bg-gray-600/75"></app-overlay>
+            `);
+                const overlay = document.querySelector("app-overlay");
+                const overlayWrapper = document.querySelector(".overlay-wrapper");
+                const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlay);
+                overlayWrapper.insertAdjacentElement("beforeend", studentEcQuickview);
+                setTimeout(function () {
+                    studentEcQuickview.entering();
+                }, 100);
+                studentEcService.trigger("showQuickviewRegistered", extraClass);
+                hideDropdown(dropdown, items, this.#state);
+                return;
+            }
+
+            if (event.target.closest(".registered-ec-action")) {
+                const deleteExtraClassEcBookmarkDTO = {
+                    ecBookmarkId: data.currentUser.student.ecBookmark.id,
+                    extraClassId: extraClassId
+                };
+                dataService.unbookmarkExtraClass(deleteExtraClassEcBookmarkDTO)
+                    .then(res => {
+                        if (res.succeeded) {
+                            const index = data.currentUser.student.ecBookmark.extraClasses.findIndex(ec => ec.id === extraClassId);
+                            data.currentUser.student.ecBookmark.extraClasses.splice(index, 1);
+                            this.#displayBookmarkedExtraClasses(data.currentUser.student.ecBookmark.extraClasses);
+                        }
+                    });
+                hideDropdown(dropdown, items, this.#state);
+                return;
+            }
+
+        }.bind(this));
+
+        this.#registeredUl.addEventListener("click", function (event) {
+
+            const clicked = event.target.closest("button") || event.target.closest(".registered-ec-details") || event.target.closest(".registered-ec-action");
             if (!clicked) {
                 return;
             }
@@ -53,47 +119,52 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
 
-            if (event.target.closest(".registered-ec-details")) {
-                const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
-                document.querySelector("student-ec").insertAdjacentHTML("afterend", `
+            const dropdown = clicked.parentElement;
+            const items = Array.from(dropdown.querySelectorAll("a"));
+            const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
+            document.querySelector("student-ec").insertAdjacentHTML("afterend", `
         <app-overlay se-class="bg-gray-900/[.85] dark:bg-gray-600/75"></app-overlay>
-      `);
-                const studentEcQuickview = new StudentExtraClassQuickviewComponent(document.querySelector("app-overlay"));
-                document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
+            `);
+
+            const overlay = document.querySelector("app-overlay");
+            const overlayWrapper = document.querySelector(".overlay-wrapper");
+
+            if (event.target.closest(".registered-ec-details")) {
+                const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlay);
+                overlayWrapper.insertAdjacentElement("beforeend", studentEcQuickview);
                 setTimeout(function () {
                     studentEcQuickview.entering();
                 }, 100);
                 studentEcService.trigger("showQuickviewRegistered", extraClass);
+                hideDropdown(dropdown, items, this.#state);
+                return;
             }
-            // detailsBtn.addEventListener("click", function () {
-            //     // const overlayComponent = new OverlayComponent();
-            //     // overlayComponent.setAttribute("se-class", "bg-gray-900/[.85] dark:bg-gray-600/75");
-            //     // document.querySelector("student-ec").insertAdjacentElement("afterend", overlayComponent);
-            //     // const studentEcQuickview = new StudentExtraClassQuickviewComponent(overlayComponent);
-            //     // document.querySelector(".overlay-wrapper").insertAdjacentElement("beforeend", studentEcQuickview);
-            //     // setTimeout(function () {
 
-            //     //     overlayComponent.entering();
-            //     //     studentEcQuickview.entering();
-
-            //     // }, 100);      
-            //     // studentEcService.trigger("showQuickviewRegistered", extraClass);
-
-            //     hideDropdown(dropdown, items, this.#state);
-            // }.bind(this));
-
-
-
-
+            if (event.target.closest(".registered-ec-action")) {
+                const option = {
+                    overlay: overlay,
+                    title: "Unregister extra class",
+                    description: "Are you sure want to unregister this extra class? Please note that your parent and the teacher will also know about it. This action cannot be undone.",
+                    cta: "Unregister",
+                    url: `${BASE_URL}/`,
+                    deleteDataDTO: {
+                        studentId: data.currentUser.student.id,
+                        extraClassId: Number(clicked.dataset.ec)
+                    },
+                };
+                const unregisterEcModal = new UnregisterExtraClassModalComponent(option);
+                overlayWrapper.insertAdjacentElement("beforeend", unregisterEcModal);
+                hideDropdown(dropdown, items, this.#state);
+                return;
+            }
 
         }.bind(this));
-
-
 
     }
 
     disconnectedCallback() {
         studentEcService.unSubscribe("refreshEcListReg", this);
+        studentEcService.unSubscribe("refreshEcListBook", this);
     }
 
     #render() {
@@ -146,7 +217,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
             extraClasses.forEach(ec => {
-                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec, 0));
             });
         }.bind(this), 100);
 
@@ -181,7 +252,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
             extraClasses.forEach(ec => {
-                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec, 1));
             });
         }.bind(this), 100);
 
@@ -197,7 +268,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
         `;
     }
 
-    #renderItem(extraClass) {
+    #renderItem(extraClass, regOrBook = 0) {
         const e = data.extraClasses.find(ec => ec.id == extraClass.id);
         return `
     <li class="flex items-center justify-between gap-x-6 py-5">
@@ -214,7 +285,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                             <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
                         </svg>                  
                     </span>
-                    <p class="whitespace-nowrap">Scheduled on <time datetime="">${trimMillisecondsFromTime(e.from)} - ${trimMillisecondsFromTime(e.to)} (${convertWeekday(e.weekday)})</time></p>
+                    <p class="whitespace-nowrap">Scheduled on <time datetime="">${trimMillisecondsFromTime(e.from)} - ${trimMillisecondsFromTime(e.to)} (${WEEKDAYS[e.weekday]})</time></p>
                 </div>
                 <div class="flex items-center gap-x-2">
                     <span>
@@ -251,7 +322,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
             <div class="opacity-0 absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
                 <!-- Active: "bg-gray-50", Not Active: "" -->
                 <a href="#" data-ec="${extraClass.id}" class="registered-ec-details block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">Details<span class="sr-only">, Details</span></a>
-                <a href="#" data-ec="${extraClass.id}" class="registered-ec-unregister block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Unregister<span class="sr-only">, Unregister</span></a>          
+                <a href="#" data-ec="${extraClass.id}" class="registered-ec-action block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">${regOrBook === 0 ? "Unregister" : "Unbookmark"}<span class="sr-only">, ${regOrBook === 0 ? "Unregister" : "Unbookmark"}</span></a>          
             </div>
             </div>
         </div>
