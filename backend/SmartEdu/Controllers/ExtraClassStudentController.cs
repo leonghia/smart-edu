@@ -30,7 +30,7 @@ public class ExtraClassStudentController : BaseController<ExtraClassStudent>
         var response = await _classService.UnRegister(deleteExtraClassStudentDTO);
         if (response.Succeeded)
         {
-            return StatusCode(204); // Da xoa thanh cong
+            return Ok(response); // Da xoa thanh cong
         }
         return StatusCode(400, response); //Xoa that bai
     }
