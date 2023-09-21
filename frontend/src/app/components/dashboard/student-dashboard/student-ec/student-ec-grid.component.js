@@ -4,6 +4,7 @@ import studentEcService from "./student-ec.service";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
 import { OverlayComponent } from "../../../overlay/overlay.component";
 import { isExtraClassFull, isExtraClassFull, isExtraClassRegistered } from "../../../../helpers/util.helper";
+import paginationService from "../../../pagination/pagination.service";
 
 export class StudentExtraClassGridComponent extends HTMLElement {
 
@@ -98,6 +99,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
       });
 
       this.#ecList.nextElementSibling ?? this.#ecList.parentElement.insertAdjacentHTML("beforeend", `<app-pagination></app-pagination>`);
+      paginationService.trigger("reset", null);
     }.bind(this), 100);
 
     

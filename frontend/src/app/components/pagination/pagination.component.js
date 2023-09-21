@@ -1,3 +1,4 @@
+import paginationService from "./pagination.service";
 
 export class PaginationComponent extends HTMLElement {
 
@@ -10,6 +11,10 @@ export class PaginationComponent extends HTMLElement {
 
   constructor() {
     super();
+    paginationService.subscribe("reset", {
+      component: this,
+      eventHandler: this.#reset
+    })
   }
 
   // calculateTranslateX(step) {
@@ -47,7 +52,7 @@ export class PaginationComponent extends HTMLElement {
     }.bind(this));
 
     this.#next.addEventListener("click", function (event) {
-
+      
       if (this.#currentPage + 1 == this.#totalPages) {
         return;
       } else {
@@ -83,7 +88,12 @@ export class PaginationComponent extends HTMLElement {
   }
 
   disconnectedCallback() {
+    paginationService.unSubscribe("reset", this);
+  }
 
+  #reset(data) {
+    this.#currentPage = 0;
+    this.#slides = document.querySelectorAll(".slide");
   }
 
   #render() {

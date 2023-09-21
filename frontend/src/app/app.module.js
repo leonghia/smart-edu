@@ -24,3 +24,4 @@ import { TimetableWeekViewComponent } from "./components/timetable/timetable-wee
 import { StudentTimetableComponent } from "./components/dashboard/student-dashboard/student-timetable/student-timetable.component.js";
 import { DeleteModalComponent } from "./components/modal/delete-modal/delete-modal.component.js";
 import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
+import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";

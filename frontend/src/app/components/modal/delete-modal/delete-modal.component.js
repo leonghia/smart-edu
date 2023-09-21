@@ -1,10 +1,11 @@
 import { data } from "../../../app.store";
 import dataService from "../../../services/data.service";
 import { SuccessAlertComponent } from "../../alert/success-alert.component";
+import studentEcService from "../../dashboard/student-dashboard/student-ec/student-ec.service";
 
 export class DeleteModalComponent extends HTMLElement {
 
-    #option = {
+    _option = {
         overlay: undefined,
         title: undefined,
         description: undefined,
@@ -14,23 +15,21 @@ export class DeleteModalComponent extends HTMLElement {
     }
 
     #modal;
-    #proceedBtn;
+    _proceedBtn;
     #cancelBtn;
-    #reasonInput;
-    #inputErrorMessage;
+    
 
     constructor(option) {
         super();
-        this.#option = option;
+        this._option = option;
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
         this.#modal = this.firstElementChild;
-        this.#proceedBtn = this.querySelector(".proceed-btn");
+        this._proceedBtn = this.querySelector(".proceed-btn");
         this.#cancelBtn = this.querySelector(".cancel-btn");
-        this.#reasonInput = this.querySelector("#reason");
-        this.#inputErrorMessage = this.querySelector("#input_error_message");
+        
 
         setTimeout(function () {
             this.#entering();
@@ -38,47 +37,9 @@ export class DeleteModalComponent extends HTMLElement {
 
         this.#cancelBtn.addEventListener("click", function () {
             this.#leaving();
-            this.#option.overlay.leaving();
+            this._option.overlay.leaving();
         }.bind(this));
 
-        this.#reasonInput.addEventListener("input", function () {
-            this.#inputErrorMessage.classList.add("hidden");
-            this.#reasonInput.classList.remove(..."ring-red-300".split(" "));
-            this.#reasonInput.nextElementSibling.classList.add("invisible");
-        }.bind(this));
-
-        this.#proceedBtn.addEventListener("click", function () {
-            if (this.#reasonInput.value.trim() === "" || this.#reasonInput.value.trim().length < 20) {
-                this.#reasonInput.classList.add(..."ring-red-300".split(" "));
-                this.#reasonInput.nextElementSibling.classList.remove("invisible");
-                if (this.#reasonInput.value.trim() === "") {
-                    this.#inputErrorMessage.textContent = "This field is required.";
-                } else {
-                    this.#inputErrorMessage.textContent = "This field needs to be at least 20 characters.";
-                }
-                this.#inputErrorMessage.classList.remove("hidden");
-                return;
-            }
-            setTimeout(() => {
-                dataService.unregisterExtraClass(this.#option.deleteDataDTO)
-                    .then(res => {
-                        this.#proceedBtn.innerHTML = "";
-                        this.#proceedBtn.textContent = `${this.#option.cta}`;
-                        if (res.succeeded) {
-                            this.#proceedBtn.classList.add("pointer-events-none");
-                            const successAlert = new SuccessAlertComponent("unregistered");
-                            this.#proceedBtn.parentElement.after(successAlert);
-                        }
-                    });
-
-            }, 500);
-            this.#proceedBtn.textContent = `${this.#option.cta}...`;
-            this.#proceedBtn.insertAdjacentHTML("afterbegin", `
-        <span class="flex items-center">
-          <loading-spinner se-class="mr-2 w-4 h-4 text-gray-100"></loading-spinner>
-        </span>
-            `);
-        }.bind(this));
     }
 
     disconnectedCallback() {
@@ -96,9 +57,9 @@ export class DeleteModalComponent extends HTMLElement {
               </svg>
             </div>
             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${this.#option.title}</h3>
+                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${this._option.title}</h3>
                 <div class="mt-2">
-                    <p class="text-sm text-gray-500">${this.#option.description}</p>
+                    <p class="text-sm text-gray-500">${this._option.description}</p>
                 </div>
                 <div class="mt-3">
                     <label for="reason" class="block text-sm font-medium leading-6 text-gray-900">Input your reason</label>
@@ -118,7 +79,7 @@ export class DeleteModalComponent extends HTMLElement {
         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse justify-between sm:px-6 items-center">
             
             <div class="sm:flex sm:flex-row-reverse">
-                <button type="button" class="proceed-btn inline-flex w-full justify-center items-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 sm:ml-3 sm:w-auto">${this.#option.cta}</button>
+                <button type="button" class="proceed-btn inline-flex w-full justify-center items-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 sm:ml-3 sm:w-auto">${this._option.cta}</button>
                 <button type="button" class="cancel-btn mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
             </div>
        

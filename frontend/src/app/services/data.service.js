@@ -32,7 +32,6 @@ class DataService {
     async getStudent(id) {
         return await getData(`${BASE_URL}/Student/${id}`);
     }
-    
 }
 
 export default new DataService();

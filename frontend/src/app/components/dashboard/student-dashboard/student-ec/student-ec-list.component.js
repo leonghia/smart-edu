@@ -6,6 +6,7 @@ import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-mo
 import { WEEKDAYS } from "../../../../helpers/enum.helper";
 import { DeleteModalComponent } from "../../../modal/delete-modal/delete-modal.component";
 import { BASE_URL } from "../../../../app.config";
+import { UnregisterExtraClassModalComponent } from "./unregister-ec-modal.component";
 
 export class StudentExtraClassListComponent extends HTMLElement {
 
@@ -88,8 +89,8 @@ export class StudentExtraClassListComponent extends HTMLElement {
                         extraClassId: Number(clicked.dataset.ec)
                     },
                 };
-                const deleteModal = new DeleteModalComponent(option);
-                overlayWrapper.insertAdjacentElement("beforeend", deleteModal);
+                const unregisterEcModal = new UnregisterExtraClassModalComponent(option);
+                overlayWrapper.insertAdjacentElement("beforeend", unregisterEcModal);
                 hideDropdown(dropdown, items, this.#state);
                 return;
             }
