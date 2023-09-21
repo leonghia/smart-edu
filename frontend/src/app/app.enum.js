@@ -14,3 +14,15 @@ export const HTTP_METHODS = {
     3: "PUT",
     4: "DELETE",
 }
+
+export const GRADES = {
+    0: 10,
+    1: 11,
+    2: 12
+}
+
+export const SHIFTS = {
+    M: "Morning",
+    A: "Afternoon",
+    E: "Evening"
+}

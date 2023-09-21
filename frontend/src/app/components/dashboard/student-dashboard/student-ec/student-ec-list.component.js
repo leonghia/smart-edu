@@ -3,7 +3,7 @@ import { hideDropdown, showDropdown } from "../../../../helpers/animation.helper
 import { trimMillisecondsFromTime } from "../../../../helpers/datetime.helper";
 import studentEcService from "./student-ec.service";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
-import { WEEKDAYS } from "../../../../helpers/enum.helper";
+import { WEEKDAYS } from "../../../../app.enum";
 import { DeleteModalComponent } from "../../../modal/delete-modal/delete-modal.component";
 import { BASE_URL } from "../../../../app.config";
 import { UnregisterExtraClassModalComponent } from "./unregister-ec-modal.component";

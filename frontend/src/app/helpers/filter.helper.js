@@ -51,3 +51,17 @@ export const displayMainClassFilterDropdown = function (dropdownContainer) {
             });
         });
 }
+
+export const filterExtraClasses = function (extraClasses = [], filterOption = {}) {
+    let result = extraClasses;
+    if (filterOption.subject) {
+        result = result.filter(ec => ec.subject.id === filterOption.subject);
+    }
+    if (filterOption.grade) {
+        result = result.filter(ec => Number(ec.name.slice(-2)) === filterOption.grade);
+    }
+    if (filterOption.shift) {
+        result = result.filter(ec => ec.name.split(" ")[1].slice(0, 1) === filterOption.shift);
+    }
+    return result;
+}

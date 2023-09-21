@@ -59,6 +59,9 @@ export class StudentExtraClassGridComponent extends HTMLElement {
   #render() {
     return `
         <div class="w-full">
+
+            <student-ec-filter></student-ec-filter>
+
             <div class="ec-list slider flex gap-6 mb-6">
 
             </div>

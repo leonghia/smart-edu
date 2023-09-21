@@ -4,7 +4,7 @@ import studentEcService from "../../dashboard/student-dashboard/student-ec/stude
 import { SuccessModalComponent } from "../success-modal/success-modal.component";
 import { trimMillisecondsFromTime } from "../../../helpers/datetime.helper.js";
 import { checkIfEcIsBookmarked, isExtraClassFull, isExtraClassRegistered } from "../../../helpers/util.helper";
-import { WEEKDAYS } from "../../../helpers/enum.helper";
+import { WEEKDAYS } from "../../../app.enum";
 
 export class StudentExtraClassQuickviewComponent extends HTMLElement {
 

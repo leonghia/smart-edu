@@ -17,6 +17,10 @@ class DataService {
         return await getData(`${BASE_URL}/ExtraClass`);
     }
 
+    async getSubjects() {
+        return await getData(`${BASE_URL}/Subject`);
+    }
+
     async registerExtraClass(addExtraClassStudentDTO) {
         return await postData(`${BASE_URL}/ExtraClassStudent`, addExtraClassStudentDTO);
     }

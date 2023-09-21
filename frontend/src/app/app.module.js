@@ -25,3 +25,4 @@ import { StudentTimetableComponent } from "./components/dashboard/student-dashbo
 import { DeleteModalComponent } from "./components/modal/delete-modal/delete-modal.component.js";
 import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
 import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";
+import { StudentExtraClassFilterComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec-filter.component.js";
