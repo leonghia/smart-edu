@@ -29,10 +29,11 @@ export class StudentExtraClassListComponent extends HTMLElement {
             eventHandler: this.#displayRegisteredExtraClasses
         });
 
-        // studentEcService.subscribe("bookmarked", {
-        //     component: this,
-        //     eventHandler: this.#displayBookmarkedExtraClasses
-        // });
+        studentEcService.subscribe("refreshEcListBook", {
+            component: this,
+            eventHandler: this.#displayBookmarkedExtraClasses
+        });
+
     }
 
     connectedCallback() {
@@ -48,6 +49,8 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
 
+            const extraClassId = Number(clicked.dataset.ec);
+
             if (event.target.closest("button")) {
                 const dropdown = clicked.nextElementSibling;
                 const items = Array.from(dropdown.querySelectorAll("a"));
@@ -61,7 +64,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
             const dropdown = clicked.parentElement;
             const items = Array.from(dropdown.querySelectorAll("a"));
-            const extraClass = data.extraClasses.find(ec => ec.id === Number(clicked.dataset.ec));
+            const extraClass = data.extraClasses.find(ec => ec.id === extraClassId);
 
             if (event.target.closest(".registered-ec-details")) {
                 document.querySelector("student-ec").insertAdjacentHTML("afterend", `
@@ -82,12 +85,14 @@ export class StudentExtraClassListComponent extends HTMLElement {
             if (event.target.closest(".registered-ec-action")) {
                 const deleteExtraClassEcBookmarkDTO = {
                     ecBookmarkId: data.currentUser.student.ecBookmark.id,
-                    extraClassId: Number(clicked.dataset.ec)
+                    extraClassId: extraClassId
                 };
                 dataService.unbookmarkExtraClass(deleteExtraClassEcBookmarkDTO)
                     .then(res => {
                         if (res.succeeded) {
-                            console.log("unbookmarked :)");
+                            const index = data.currentUser.student.ecBookmark.extraClasses.findIndex(ec => ec.id === extraClassId);
+                            data.currentUser.student.ecBookmark.extraClasses.splice(index, 1);
+                            this.#displayBookmarkedExtraClasses(data.currentUser.student.ecBookmark.extraClasses);
                         }
                     });
                 hideDropdown(dropdown, items, this.#state);
@@ -159,6 +164,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
     disconnectedCallback() {
         studentEcService.unSubscribe("refreshEcListReg", this);
+        studentEcService.unSubscribe("refreshEcListBook", this);
     }
 
     #render() {
@@ -211,7 +217,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
             extraClasses.forEach(ec => {
-                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec, 0));
             });
         }.bind(this), 100);
 
@@ -246,7 +252,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
                 return;
             }
             extraClasses.forEach(ec => {
-                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec));
+                ul.insertAdjacentHTML("beforeend", this.#renderItem(ec, 1));
             });
         }.bind(this), 100);
 
@@ -262,7 +268,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
         `;
     }
 
-    #renderItem(extraClass) {
+    #renderItem(extraClass, regOrBook = 0) {
         const e = data.extraClasses.find(ec => ec.id == extraClass.id);
         return `
     <li class="flex items-center justify-between gap-x-6 py-5">
@@ -316,7 +322,7 @@ export class StudentExtraClassListComponent extends HTMLElement {
             <div class="opacity-0 absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button" tabindex="-1">
                 <!-- Active: "bg-gray-50", Not Active: "" -->
                 <a href="#" data-ec="${extraClass.id}" class="registered-ec-details block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="options-menu-0-item-0">Details<span class="sr-only">, Details</span></a>
-                <a href="#" data-ec="${extraClass.id}" class="registered-ec-action block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">Unregister<span class="sr-only">, Unregister</span></a>          
+                <a href="#" data-ec="${extraClass.id}" class="registered-ec-action block px-3 py-1 text-sm leading-6 text-red-500" role="menuitem" tabindex="-1" id="options-menu-0-item-1">${regOrBook === 0 ? "Unregister" : "Unbookmark"}<span class="sr-only">, ${regOrBook === 0 ? "Unregister" : "Unbookmark"}</span></a>          
             </div>
             </div>
         </div>

@@ -185,6 +185,8 @@ export class StudentExtraClassQuickviewComponent extends HTMLElement {
         Saved to bookmark
         `;
             this.#bookmarkBtn.classList.add("pointer-events-none");
+            data.currentUser.student.ecBookmark.extraClasses.push(extraClass);
+            studentEcService.trigger("refreshEcListBook", data.currentUser.student.ecBookmark.extraClasses);
           }
         });
 
