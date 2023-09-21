@@ -1,5 +1,6 @@
 import { async } from "regenerator-runtime";
 import { getToken } from "./token.helper";
+import { HTTP_METHODS } from "./enum.helper";
 
 const handleError = function(message) {
     alert("Operation failed 😭: " + message);

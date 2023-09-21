@@ -7,3 +7,10 @@ export const WEEKDAYS = {
     5: "Friday",
     6: "Saturday",
 }
+
+export const HTTP_METHODS = {
+    0: "GET",
+    1: "POST",
+    3: "PUT",
+    4: "DELETE",
+}

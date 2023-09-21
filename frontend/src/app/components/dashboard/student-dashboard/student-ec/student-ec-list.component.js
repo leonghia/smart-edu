@@ -5,6 +5,7 @@ import studentEcService from "./student-ec.service";
 import { StudentExtraClassQuickviewComponent } from "../../../modal/quickview-modal/student-ec-quickview.component";
 import { WEEKDAYS } from "../../../../helpers/enum.helper";
 import { DeleteModalComponent } from "../../../modal/delete-modal/delete-modal.component";
+import { BASE_URL } from "../../../../app.config";
 
 export class StudentExtraClassListComponent extends HTMLElement {
 
@@ -76,7 +77,18 @@ export class StudentExtraClassListComponent extends HTMLElement {
             }
 
             if (event.target.closest(".registered-ec-unregister")) {
-                const deleteModal = new DeleteModalComponent(overlay, "Unregister extra class", "Are you sure you want to unregister this extra class? Please note that your parent and the teacher will also know about it. This action cannot be undone.", "Unregister");
+                const option = {
+                    overlay: overlay,
+                    title: "Unregister extra class",
+                    description: "Are you sure want to unregister this extra class? Please note that your parent and the teacher will also know about it. This action cannot be undone.",
+                    cta: "Unregister",
+                    url: `${BASE_URL}/`,
+                    deleteDataDTO: {
+                        studentId: data.currentUser.student.id,
+                        extraClassId: Number(clicked.dataset.ec)
+                    },
+                };
+                const deleteModal = new DeleteModalComponent(option);
                 overlayWrapper.insertAdjacentElement("beforeend", deleteModal);
                 hideDropdown(dropdown, items, this.#state);
                 return;

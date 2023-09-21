@@ -21,7 +21,7 @@ class DataService {
         return await postData(`${BASE_URL}/ExtraClassStudent`, addExtraClassStudentDTO);
     }
 
-    async unRegisterExtraClass(deleteExtraClassStudentDTO) {
+    async unregisterExtraClass(deleteExtraClassStudentDTO) {
         return await updateData(`${BASE_URL}/ExtraClassStudent`, deleteExtraClassStudentDTO);
     }
 
@@ -32,6 +32,7 @@ class DataService {
     async getStudent(id) {
         return await getData(`${BASE_URL}/Student/${id}`);
     }
+    
 }
 
 export default new DataService();

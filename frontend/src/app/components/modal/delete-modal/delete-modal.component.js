@@ -1,44 +1,79 @@
-export class DeleteModalComponent extends HTMLElement {
-    
-    #overlayComponent;
-    #title;
-    #description;
-    #cta;
-    #modal;
-    #unregisterBtn;
-    #cancelBtn;
+import { data } from "../../../app.store";
+import dataService from "../../../services/data.service";
+import { SuccessAlertComponent } from "../../alert/success-alert.component";
 
-    constructor(overlayComponent, title, description, cta) {
+export class DeleteModalComponent extends HTMLElement {
+
+    #option = {
+        overlay: undefined,
+        title: undefined,
+        description: undefined,
+        cta: undefined,
+        url: undefined,
+        deleteDataDTO: undefined
+    }
+
+    #modal;
+    #proceedBtn;
+    #cancelBtn;
+    #reasonInput;
+    #inputErrorMessage;
+
+    constructor(option) {
         super();
-        this.#overlayComponent = overlayComponent;
-        this.#title = title;
-        this.#description = description;
-        this.#cta = cta;
+        this.#option = option;
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
         this.#modal = this.firstElementChild;
-        this.#unregisterBtn = this.querySelector(".unregister-btn");
+        this.#proceedBtn = this.querySelector(".proceed-btn");
         this.#cancelBtn = this.querySelector(".cancel-btn");
+        this.#reasonInput = this.querySelector("#reason");
+        this.#inputErrorMessage = this.querySelector("#input_error_message");
 
-        setTimeout(function() {
+        setTimeout(function () {
             this.#entering();
         }.bind(this), 100);
 
         this.#cancelBtn.addEventListener("click", function () {
             this.#leaving();
-            this.#overlayComponent.leaving();
+            this.#option.overlay.leaving();
         }.bind(this));
 
-        this.#unregisterBtn.addEventListener("click", function () {
+        this.#reasonInput.addEventListener("input", function () {
+            this.#inputErrorMessage.classList.add("hidden");
+            this.#reasonInput.classList.remove(..."ring-red-300".split(" "));
+            this.#reasonInput.nextElementSibling.classList.add("invisible");
+        }.bind(this));
+
+        this.#proceedBtn.addEventListener("click", function () {
+            if (this.#reasonInput.value.trim() === "" || this.#reasonInput.value.trim().length < 20) {
+                this.#reasonInput.classList.add(..."ring-red-300".split(" "));
+                this.#reasonInput.nextElementSibling.classList.remove("invisible");
+                if (this.#reasonInput.value.trim() === "") {
+                    this.#inputErrorMessage.textContent = "This field is required.";
+                } else {
+                    this.#inputErrorMessage.textContent = "This field needs to be at least 20 characters.";
+                }
+                this.#inputErrorMessage.classList.remove("hidden");
+                return;
+            }
             setTimeout(() => {
-                this.#unregisterBtn.innerHTML = "";
-                this.#unregisterBtn.textContent = "Unregister";
-                this.#unregisterBtn.classList.add("pointer-events-none");
-            }, 2000);
-            this.#unregisterBtn.textContent = "Unregistering...";
-            this.#unregisterBtn.insertAdjacentHTML("afterbegin", `
+                dataService.unregisterExtraClass(this.#option.deleteDataDTO)
+                    .then(res => {
+                        this.#proceedBtn.innerHTML = "";
+                        this.#proceedBtn.textContent = `${this.#option.cta}`;
+                        if (res.succeeded) {
+                            this.#proceedBtn.classList.add("pointer-events-none");
+                            const successAlert = new SuccessAlertComponent("unregistered");
+                            this.#proceedBtn.parentElement.after(successAlert);
+                        }
+                    });
+
+            }, 500);
+            this.#proceedBtn.textContent = `${this.#option.cta}...`;
+            this.#proceedBtn.insertAdjacentHTML("afterbegin", `
         <span class="flex items-center">
           <loading-spinner se-class="mr-2 w-4 h-4 text-gray-100"></loading-spinner>
         </span>
@@ -61,32 +96,32 @@ export class DeleteModalComponent extends HTMLElement {
               </svg>
             </div>
             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-              <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${this.#title}</h3>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">${this.#description}</p>
-              </div>
+                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">${this.#option.title}</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">${this.#option.description}</p>
+                </div>
+                <div class="mt-3">
+                    <label for="reason" class="block text-sm font-medium leading-6 text-gray-900">Input your reason</label>
+                    <div class="mt-2 relative">
+                        <textarea rows="3" name="reason" id="reason" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-fuchsia-600 sm:text-sm sm:leading-6" placeholder="Tell us why do you unregister?"></textarea>
+                        <div class="invisible pointer-events-none absolute top-2 right-0 flex items-center pr-3">
+                            <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="hidden mt-2 text-sm text-red-600" id="input_error_message"></p>
+                </div>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse justify-between sm:px-6 items-center">
             
             <div class="sm:flex sm:flex-row-reverse">
-                <button type="button" class="unregister-btn inline-flex w-full justify-center items-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 sm:ml-3 sm:w-auto">${this.#cta}</button>
+                <button type="button" class="proceed-btn inline-flex w-full justify-center items-center rounded-md bg-fuchsia-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-fuchsia-500 sm:ml-3 sm:w-auto">${this.#option.cta}</button>
                 <button type="button" class="cancel-btn mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
             </div>
-
-            <div class="rounded-md">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-green-800">Successfully unregistered</p>
-                    </div>          
-                </div>
-            </div>
+       
         </div>
     </div>
         `;

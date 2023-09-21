@@ -23,3 +23,4 @@ import { MarkTableComponent } from "./components/table/mark-table.component.js";
 import { TimetableWeekViewComponent } from "./components/timetable/timetable-weekview.component.js";
 import { StudentTimetableComponent } from "./components/dashboard/student-dashboard/student-timetable/student-timetable.component.js";
 import { DeleteModalComponent } from "./components/modal/delete-modal/delete-modal.component.js";
+import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
