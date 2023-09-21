@@ -1,4 +1,4 @@
-import { data, state } from "../../../app.store";
+import { data } from "../../../app.store";
 import { lastNameFromFullName } from "../../../helpers/util.helper";
 
 export class StudentNavbarComponent extends HTMLElement {
@@ -45,12 +45,29 @@ export class StudentNavbarComponent extends HTMLElement {
                         placeholder="Search..." type="search" name="search">
                 </form>
                 <div class="flex items-center gap-x-4 lg:gap-x-6">
-                    <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+
+                    <button type="button" class="inline-flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">View messages</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-violet-400">
+                            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <button type="button" class="inline-flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">View messages</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-400">
+                            <path fill-rule="evenodd" d="M12 2.25c-2.429 0-4.817.178-7.152.521C2.87 3.061 1.5 4.795 1.5 6.741v6.018c0 1.946 1.37 3.68 3.348 3.97.877.129 1.761.234 2.652.316V21a.75.75 0 001.28.53l4.184-4.183a.39.39 0 01.266-.112c2.006-.05 3.982-.22 5.922-.506 1.978-.29 3.348-2.023 3.348-3.97V6.741c0-1.947-1.37-3.68-3.348-3.97A49.145 49.145 0 0012 2.25zM8.25 8.625a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zm2.625 1.125a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <button type="button" class="inline-flex items-center -m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                         <span class="sr-only">View notifications</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-orange-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-amber-400">
                             <path fill-rule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clip-rule="evenodd" />
                         </svg>
-
+                        <div class="relative flex">
+                            <div class="relative inline-flex w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-2 right-3 dark:border-gray-900"></div>
+                        </div>
                     </button>
 
                     <!-- Separator -->
@@ -62,8 +79,8 @@ export class StudentNavbarComponent extends HTMLElement {
                             aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
                             <img class="h-8 w-8 rounded-full bg-gray-50"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt="">
+                                src="${data.currentUser.profileImage}"
+                                alt="${data.currentUser.fullName}">
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">👋 Hello,
                                     ${lastNameFromFullName(data.currentUser.fullName)}</span>
