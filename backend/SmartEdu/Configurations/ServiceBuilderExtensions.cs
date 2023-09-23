@@ -26,12 +26,13 @@ using SmartEdu.Entities;
 using SmartEdu.Services.BunnyService;
 using SmartEdu.Services.SeederService;
 using SmartEdu.Services.ClassService;
+using SmartEdu.Services.CrawlerService;
 
 namespace SmartEdu.Configurations
 {
     public static class ServiceBuilderExtensions
     {
-        
+
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
 
@@ -104,6 +105,7 @@ namespace SmartEdu.Configurations
             services.AddScoped<IBunnyService, BunnyService>();
             services.AddScoped<ISeederService, SeederService>();
             services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<ICrawlerService, CrawlerService>();
             services.AddHttpClient();
         }
 
@@ -136,7 +138,7 @@ namespace SmartEdu.Configurations
         {
             var clientAppConfig = configuration.GetSection("ClientAppConfiguration").Get<ClientAppOptions>();
             services.AddSingleton(clientAppConfig);
-        }      
+        }
 
         //public static void ConfigureHangfire(this IServiceCollection services, IConfiguration config)
         //{
@@ -155,7 +157,7 @@ namespace SmartEdu.Configurations
         //        DisableGlobalLocks = true,
         //    };
 
-            
+
         //    var connectionString = config.GetConnectionString("HangfireConnection");
         //    GlobalConfiguration.Configuration.UseSqlServerStorage(connectionString, options);
 
@@ -210,7 +212,7 @@ namespace SmartEdu.Configurations
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
-            
+
         }
 
         public static void ConfigureExceptionHandler(this IApplicationBuilder app)
@@ -224,7 +226,7 @@ namespace SmartEdu.Configurations
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature is not null)
                     {
-                        Log.Error($"Something went wrong in the {contextFeature.Error}");                       
+                        Log.Error($"Something went wrong in the {contextFeature.Error}");
                         await context.Response.WriteAsync(new ServerResponse<object>
                         {
                             Succeeded = false,
@@ -280,6 +282,40 @@ namespace SmartEdu.Configurations
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
+
+        public static async Task PromptDatabase(this WebApplication app)
+        {
+            var scope = app.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+            var seederService = scope.ServiceProvider.GetRequiredService<ISeederService>();
+            Console.Write("Do you want to re-create the database and seeding initial data? (Y/n): ");
+            var selection = Console.ReadLine();
+            if (selection is not null)
+            {
+                selection = selection.Trim().ToUpper();
+                if (selection == "Y")
+                {
+                    await context.Database.EnsureDeletedAsync();
+                    await context.Database.MigrateAsync();
+                    Console.WriteLine("Database re-created."); 
+
+                    await seederService.SeedingData();
+                    Console.WriteLine("Seeding initial data successfully.");                
+                }
+            }
+
+            Console.Write("Do you want to seeding the documents? (Y/n): ");
+            selection = Console.ReadLine();
+            if (selection is not null)
+            {
+                selection = selection.Trim().ToUpper();
+                if (selection == "Y")
+                {
+                    await seederService.SeedingDocuments();
+                    Console.WriteLine("Seeding documents successfully");
+                }
+            }
         }
     }
 }

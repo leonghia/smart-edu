@@ -48,6 +48,36 @@ namespace SmartEdu.Configurations
                 {
                     Id = 8,
                     Name = "Geography"
+                },
+                new Subject
+                {
+                    Id = 9,
+                    Name = "Information Technology"
+                },
+                new Subject
+                {
+                    Id = 10,
+                    Name = "Civic Education"
+                },
+                new Subject
+                {
+                    Id = 11,
+                    Name = "Military Education"
+                },
+                new Subject
+                {
+                    Id = 12,
+                    Name = "Physical Education"
+                },
+                new Subject
+                {
+                    Id = 13,
+                    Name = "Japanese"
+                },
+                new Subject
+                {
+                    Id = 14,
+                    Name = "Japanese"
                 }
                 );
         }
