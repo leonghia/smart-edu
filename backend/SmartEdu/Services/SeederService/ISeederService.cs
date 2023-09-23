@@ -19,5 +19,7 @@ namespace SmartEdu.Services.SeederService
         Task SeedingMainClasses();
         // Them du lieu lop hoc them
         Task SeedingExtraClasses();
+        Task SeedingDocumentsBySubject(DocumentSeederOptions options);
+        Task SeedingDocuments();
     }
 }
