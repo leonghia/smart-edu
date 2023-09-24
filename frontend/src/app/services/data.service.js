@@ -44,6 +44,10 @@ class DataService {
     async unbookmarkExtraClass(deleteExtraClassEcBookmarkDTO) {
         return await updateData(`${BASE_URL}/ExtraClassEcBookmark`, deleteExtraClassEcBookmarkDTO);
     }
+
+    async getDocuments() {
+        return await getData(`${BASE_URL}/Document`);
+    }
 }
 
 export default new DataService();

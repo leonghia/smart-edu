@@ -122,7 +122,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
     const isExtraClassAvailable = !isExtraClassFull(extraClass);
     const isExtraClassNotRegistered = !isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
     return `
-    <div class="divide-y divide-gray-200 bg-white bg-opacity-70 shadow-md sm:rounded-md basis-1/3">
+    <div class="divide-y divide-gray-200 rounded-lg bg-white shadow basis-1/3">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
         <div class="w-full">
           <div class="flex items-center justify-between space-x-3">

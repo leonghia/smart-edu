@@ -28,6 +28,13 @@ export class StudentExtraClassFilterComponent extends HTMLElement {
 
     constructor() {
         super();
+        
+    }
+
+    connectedCallback() {
+        this.innerHTML = this.#render();
+        this.#container = this.querySelector(".container");
+
         if (data.subjects.length === 0) {
             dataService.getSubjects()
                 .then(res => {
@@ -39,11 +46,6 @@ export class StudentExtraClassFilterComponent extends HTMLElement {
             this.#subjects = data.subjects;
             this.querySelector(".subject-filter-form").innerHTML = this.#renderSubjects(this.#subjects);
         }
-    }
-
-    connectedCallback() {
-        this.innerHTML = this.#render();
-        this.#container = this.querySelector(".container");
 
         this.#container.addEventListener("click", function(event) {
             

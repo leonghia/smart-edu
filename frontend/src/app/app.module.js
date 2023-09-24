@@ -26,3 +26,4 @@ import { DeleteModalComponent } from "./components/modal/delete-modal/delete-mod
 import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
 import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";
 import { StudentExtraClassFilterComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec-filter.component.js";
+import { StudentDocumentComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc.component.js";
