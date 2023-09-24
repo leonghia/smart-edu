@@ -2,23 +2,24 @@ import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
+import { RequestParams } from "../models/request-params.model.js";
 
 class DataService {
 
-    async getStudents() {
-        return await getData(`${BASE_URL}/Student`);
+    async getStudents(requestParams = new RequestParams()) {
+        return await getData(`${BASE_URL}/Student?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
     }
 
-    async getMainClasses() {
-        return await getData(`${BASE_URL}/MainClass`);
+    async getMainClasses(requestParams = new RequestParams()) {
+        return await getData(`${BASE_URL}/MainClass?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
     }
 
-    async getExtraClasses() {
-        return await getData(`${BASE_URL}/ExtraClass`);
+    async getExtraClasses(requestParams = new RequestParams()) {
+        return await getData(`${BASE_URL}/ExtraClass?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
     }
 
-    async getSubjects() {
-        return await getData(`${BASE_URL}/Subject`);
+    async getSubjects(requestParams = new RequestParams()) {
+        return await getData(`${BASE_URL}/Subject?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
     }
 
     async registerExtraClass(addExtraClassStudentDTO) {
@@ -45,8 +46,8 @@ class DataService {
         return await updateData(`${BASE_URL}/ExtraClassEcBookmark`, deleteExtraClassEcBookmarkDTO);
     }
 
-    async getDocuments() {
-        return await getData(`${BASE_URL}/Document`);
+    async getDocuments(requestParams = new RequestParams()) {
+        return await getData(`${BASE_URL}/Document?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
     }
 }
 

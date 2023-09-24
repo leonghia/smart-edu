@@ -64,7 +64,7 @@ namespace SmartEdu.Repository
 
             if (requestParams is not null)
             {
-                return await query.AsNoTracking().ToListAsync();
+                return await query.AsNoTracking().ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
             }
 
             return await query.AsNoTracking().ToListAsync();
