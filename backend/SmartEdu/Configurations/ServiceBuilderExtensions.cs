@@ -302,8 +302,7 @@ namespace SmartEdu.Configurations
                     await context.Database.MigrateAsync();
                     Console.WriteLine("Database re-created."); 
 
-                    await seederService.SeedingData();
-                    Console.WriteLine("Seeding initial data successfully.");                
+                    await seederService.SeedingData();                
                 }
             }
 
@@ -314,8 +313,7 @@ namespace SmartEdu.Configurations
                 selection = selection.Trim().ToUpper();
                 if (selection == "Y")
                 {
-                    await seederService.SeedingDocuments();
-                    Console.WriteLine("Seeding documents successfully");
+                    await seederService.SeedingDocuments();                 
                 }
             }
         }
