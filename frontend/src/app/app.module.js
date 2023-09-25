@@ -27,3 +27,6 @@ import { SuccessAlertComponent } from "./components/alert/success-alert.componen
 import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";
 import { StudentExtraClassFilterComponent } from "./components/dashboard/student-dashboard/student-ec/student-ec-filter.component.js";
 import { StudentDocumentComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc.component.js";
+import { StudentDocumentGridComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-grid.component.js";
+import { StudentDocumentFilterComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-filter.component.js";
+import { StudentDocumentPaginationComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-pagination.component.js";

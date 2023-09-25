@@ -3,6 +3,7 @@ import { BASE_URL } from "../app.config.js";
 import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
 import { RequestParams } from "../models/request-params.model.js";
+import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.js";
 
 class DataService {
 
@@ -46,8 +47,8 @@ class DataService {
         return await updateData(`${BASE_URL}/ExtraClassEcBookmark`, deleteExtraClassEcBookmarkDTO);
     }
 
-    async getDocuments(requestParams = new RequestParams()) {
-        return await getData(`${BASE_URL}/Document?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}`);
+    async getDocuments(requestParams = new RequestParams(), documentFilterRequestParams = new DocumentFilterRequestParams()) {
+        return await getData(`${BASE_URL}/Document?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}&SubjectId=${documentFilterRequestParams.subjectId}&FromNumbersOfRating=${documentFilterRequestParams.fromNumbersOfRating}&ToNumbersOfRating=${documentFilterRequestParams.toNumbersOfRating}&FromRating=${documentFilterRequestParams.fromRating}&ToRating=${documentFilterRequestParams.toRating}`);
     }
 }
 

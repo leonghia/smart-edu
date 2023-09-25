@@ -9,7 +9,7 @@ export class StudentExtraClassComponent extends HTMLElement {
     }
 
     connectedCallback() {
-        document.querySelector("student-main").firstElementChild.classList.toggle("bg-gray-100");
+        
         if (data.extraClasses.length === 0) {
             dataService.getExtraClasses()
                 .then(res => {
@@ -23,7 +23,7 @@ export class StudentExtraClassComponent extends HTMLElement {
     }
 
     disconnectedCallback() {
-        document.querySelector("student-main").firstElementChild.classList.toggle("bg-gray-100");
+        
     }
 
     #render() {
