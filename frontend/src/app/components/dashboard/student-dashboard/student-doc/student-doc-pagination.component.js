@@ -20,13 +20,17 @@ export class StudentDocumentPaginationComponent extends HTMLElement {
         this.#nextBtn = this.querySelector(".next-btn");
         this.#prevBtn = this.querySelector(".prev-btn");
 
-        this.#nextBtn.addEventListener("click", function() {
-            console.log("next :)");
-        }.bind(this));
+        this.#nextBtn.addEventListener("click", () => {
+            if (this.#currentPage + 1 > this.#totalPages) return;
+            this.#currentPage++;
+            studentDocService.trigger("next", this.#currentPage);
+        });
 
-        this.#prevBtn.addEventListener("click", function() {
-            console.log("prev :)");
-        }.bind(this));
+        this.#prevBtn.addEventListener("click", () => {
+            if (this.#currentPage - 1 < 1) return;
+            this.#currentPage--;
+            studentDocService.trigger("prev", this.#currentPage);
+        });
     }
 
     disconnectedCallback() {

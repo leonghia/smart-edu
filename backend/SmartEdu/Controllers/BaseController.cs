@@ -27,7 +27,7 @@ namespace SmartEdu.Controllers
         protected async Task<IActionResult> Count(Func<TEntity, bool> filter = null)
         {
             var serverResponse = new ServerResponse<object>();
-            var count = _entityRepository.Count(filter);
+            var count = await _entityRepository.Count(filter);
             serverResponse.Data = count;
             return Ok(serverResponse);
         }
