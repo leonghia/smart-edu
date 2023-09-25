@@ -57,4 +57,30 @@ public class DocumentService : IDocumentService
         serverReponse.Data = documentsDTO;
         return serverReponse;
     }
+
+    public async Task<ServerResponse<object>> GetCountOfEachSubject()
+    {
+        var serverReponse = new ServerResponse<object>();
+        var dictionary = new Dictionary<string, int>(); // HashMap trong Java
+        IQueryable<Document> query = _table;
+        query = query.Include("Teacher.Subject"); // đính kèm môn học của tài liệu
+
+        // {"Maths": 5, "English": 48, "Physics": 48} // dictionary
+        var documents = await query.AsNoTracking().ToListAsync();
+
+        foreach (var d in documents)
+        {
+            var key = d.Teacher.Subject.Name;
+            if (dictionary.TryGetValue(key, out int currentNumbers))
+            {
+                dictionary[key] = currentNumbers + 1;
+            }
+            else
+            {
+                dictionary.TryAdd(key, 1);
+            }
+        }
+        serverReponse.Data = dictionary;
+        return serverReponse;
+    }
 }
