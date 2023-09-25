@@ -24,6 +24,14 @@ namespace SmartEdu.Controllers
             _entityRepository = (GenericRepository<TEntity>)_unitOfWork.GetType().GetProperty($"{_entityName}Repository").GetValue(_unitOfWork, null);
         }
 
+        protected async Task<IActionResult> Count(Func<TEntity, bool> filter = null)
+        {
+            var serverResponse = new ServerResponse<object>();
+            var count = _entityRepository.Count(filter);
+            serverResponse.Data = count;
+            return Ok(serverResponse);
+        }
+
         protected async Task<IActionResult> GetAll<TDTO>(RequestParams requestParams, Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, List<string> includeProperties = null)
         {
             var serverResponse = new ServerResponse<IEnumerable<TDTO>>();

@@ -28,6 +28,11 @@ namespace SmartEdu.Repository
             await _table.AddRangeAsync(entities);
         }
 
+        public async Task<int> Count(Func<TEntity, bool> filter = null)
+        {
+            return _table.Count(filter);
+        }
+
         public async Task Delete(object id)
         {
             TEntity entityToDelete = await _table.FindAsync(id);

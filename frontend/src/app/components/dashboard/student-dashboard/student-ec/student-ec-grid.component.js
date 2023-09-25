@@ -122,7 +122,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
     const isExtraClassAvailable = !isExtraClassFull(extraClass);
     const isExtraClassNotRegistered = !isExtraClassRegistered(extraClass, data.currentUser.student.extraClasses);
     return `
-    <div class="divide-y divide-gray-200 rounded-lg bg-white shadow basis-1/3">
+    <div class="rounded-lg bg-gray-100/60 basis-1/3">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
         <div class="w-full">
           <div class="flex items-center justify-between space-x-3">
@@ -153,7 +153,7 @@ export class StudentExtraClassGridComponent extends HTMLElement {
         </div>
       </div>
       <div>
-        <div class="-mt-px flex divide-x divide-gray-200">
+        <div class="-mt-px flex">
           <div class="flex w-0 flex-1">
             <a href="#" class="view-detail-btn relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg py-4 text-sm font-semibold text-gray-900" data-ec="${extraClass.id}">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-sky-500">

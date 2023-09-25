@@ -27,6 +27,7 @@ using SmartEdu.Services.BunnyService;
 using SmartEdu.Services.SeederService;
 using SmartEdu.Services.ClassService;
 using SmartEdu.Services.CrawlerService;
+using SmartEdu.Services.DocumentService;
 
 namespace SmartEdu.Configurations
 {
@@ -106,6 +107,7 @@ namespace SmartEdu.Configurations
             services.AddScoped<ISeederService, SeederService>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<ICrawlerService, CrawlerService>();
+            services.AddScoped<IDocumentService, DocumentService>();
             services.AddHttpClient();
         }
 

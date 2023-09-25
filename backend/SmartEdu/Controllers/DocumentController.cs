@@ -1,8 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Linq.Expressions;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.Entities;
+using SmartEdu.Helpers.FilterParamsAppender;
 using SmartEdu.Models;
+using SmartEdu.Services.DocumentService;
 using SmartEdu.UnitOfWork;
 
 
@@ -12,22 +15,40 @@ namespace SmartEdu.Controllers
     [Route("api/[controller]")]
     public class DocumentController : BaseController<Document>
     {
-        public DocumentController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        private readonly IDocumentService _documentService;
+
+        public DocumentController(IUnitOfWork unitOfWork, IMapper mapper, IDocumentService documentService) : base(unitOfWork, mapper)
         {
+            _documentService = documentService;
         }
+
+        /// <summary>
+        /// Đếm tổng số tài liệu mà thỏa mãn tiêu chí lọc
+        /// </summary>
+        /// <param name="filterDocumentParams"></param>
+        /// <returns></returns>
+        [HttpGet("count")]
+        public async Task<IActionResult> Count([FromQuery] FilterDocumentParams filterDocumentParams)
+        {
+            var func = FilterParamsAppender.AppendDocumentFilterParams(filterDocumentParams);
+            return await base.Count(func);
+        }
+
         /// <summary>
         /// Truy xuất toàn bộ tài liệu.
         /// </summary>
         /// <param name="requestParams"></param>
+        /// <param name="filterDocumentParams"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams)
+        public async Task<IActionResult> GetAll([FromQuery] RequestParams requestParams, [FromQuery] FilterDocumentParams filterDocumentParams)
         {
-            return await base.GetAll<GetDocumentDTO>(requestParams, null, null, new List<string> { "Teacher.User", "Teacher.Subject" });
+            var response = await _documentService.GetAll(requestParams, filterDocumentParams, null, new List<string> {"Teacher.User", "Teacher.Subject"});
+            return Ok(response);
         }
 
         /// <summary>
-        /// Truy xuất dữ liệu theo id
+        /// Truy xuất 1 tài liệu hiện có theo id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

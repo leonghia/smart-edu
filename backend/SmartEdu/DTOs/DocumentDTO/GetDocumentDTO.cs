@@ -13,6 +13,6 @@ namespace SmartEdu.DTOs.DocumentDTO
         public string? Link { get; set; }
         public GetTeacherDTO Teacher { get; set; }
         public double Rating { get; set; } = 0;
-        public int NumbersOfRaing { get; set; } = 0;
+        public int NumbersOfRating { get; set; } = 0;
     }
 }

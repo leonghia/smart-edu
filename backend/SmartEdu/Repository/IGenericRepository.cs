@@ -7,6 +7,7 @@ namespace SmartEdu.Repository
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {       
+        Task<int> Count(Func<TEntity, bool> filter = null);
         Task<IEnumerable<TEntity>> GetAll(RequestParams requestParams, Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, List<string> includeProperties = null);
         Task<IPagedList<TEntity>> GetPagedList(RequestParams requestParams, List<string> includeProperties = null);
         Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, List<string> includeProperties = null);
