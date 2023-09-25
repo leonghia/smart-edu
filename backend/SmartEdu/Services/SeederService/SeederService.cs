@@ -2025,6 +2025,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingStudents(registerUserDTOs);
 
             serverResponse.Message = "Seeding data successfully.";
+            Console.WriteLine("Seeding initial data successfully.");
             return serverResponse;
         }
 
@@ -2527,6 +2528,14 @@ namespace SmartEdu.Services.SeederService
 
         public async Task SeedingDocuments()
         {
+            var count = _unitOfWork.DocumentRepository.Count(d => true);
+            if (count > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Documents had been seeded before. No need to seed anymore.");
+                Console.ForegroundColor = ConsoleColor.White;
+                return;
+            }
             // Seeding math documents
             await SeedingDocumentsBySubject(new DocumentSeederOptions
             {
@@ -2601,6 +2610,7 @@ namespace SmartEdu.Services.SeederService
             });
             // Seeding IT documents
 
+            Console.WriteLine("Seeding documents successfully");
         }
     }
 }
