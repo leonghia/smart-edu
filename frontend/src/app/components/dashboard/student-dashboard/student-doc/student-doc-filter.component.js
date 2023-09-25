@@ -1,3 +1,5 @@
+import dataService from "../../../../services/data.service";
+
 export class StudentDocumentFilterComponent extends HTMLElement {
     constructor() {
         super();
@@ -5,10 +7,32 @@ export class StudentDocumentFilterComponent extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = this.#render();
+        dataService.getDocumentsCountEachSubject()
+            .then(res => {
+                const dictionary = res.data;
+                // C# dictionary => JS array
+                const arr = Object.entries(dictionary);
+                arr.forEach(a => {
+                    this.querySelector(".subject-container").insertAdjacentHTML("beforeend", this.#renderSubject(a));
+                });
+            });
     }
 
     disconnectedCallback() {
 
+    }
+
+    #renderSubject(a) {
+        return `
+    <div class="flex items-center">
+        <input id="${a[0]}" type="radio" value="${a[0]}" name="subjects"
+            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+
+        <label for="${a[0]}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            ${a[0]} (${a[1]})
+        </label>
+    </div>  
+        `;
     }
 
     #render() {
@@ -21,102 +45,12 @@ export class StudentDocumentFilterComponent extends HTMLElement {
         <div class="flex flex-col justify-between flex-1 bg-violet-100/70 rounded-xl p-6">
             <div class="space-y-6">
                 <!-- Categories -->
-                <div class="space-y-2">
+                <div class="space-y-2 subject-container">
                     <h6 class="text-base font-medium text-fuchsia-600">
                         Subjects
                     </h6>
     
-                    <div class="flex items-center">
-                        <input id="tv" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="tv" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            TV, Audio-Video
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="desktop" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="dektop" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Desktop PC
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="gaming" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="gaming" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Gaming
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="monitors" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="monitors" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Monitors
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="laptops" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="laptops" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Laptops
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="console" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="console" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Console
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="tablet" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="tablet" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Tablets
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="foto" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="foto" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Foto
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="fashion" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="fashion" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Fashion
-                        </label>
-                    </div>
-    
-                    <div class="flex items-center">
-                        <input id="books" type="radio" value=""
-                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    
-                        <label for="books" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Books
-                        </label>
-                    </div>
-    
-                    
+                                   
                 </div>
     
                 <!-- Prices -->

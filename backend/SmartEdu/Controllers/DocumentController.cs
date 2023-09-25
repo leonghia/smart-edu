@@ -35,6 +35,17 @@ namespace SmartEdu.Controllers
         }
 
         /// <summary>
+        /// Đếm tổng số tài liệu của từng môn học.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("count-each")]
+        public async Task<IActionResult> CountEach()
+        {
+            var response = await _documentService.GetCountOfEachSubject();
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Truy xuất toàn bộ tài liệu.
         /// </summary>
         /// <param name="requestParams"></param>
