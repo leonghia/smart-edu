@@ -23,6 +23,10 @@ export class StudentDocumentGridComponent extends HTMLElement {
 
     connectedCallback() {
         this.#display(1);
+        dataService.getDocumentsCount()
+            .then(res => {
+                studentDocService.trigger("totalPages", Math.ceil(res.data / 10));
+            });
     }
 
     disconnectedCallback() {
@@ -31,17 +35,20 @@ export class StudentDocumentGridComponent extends HTMLElement {
     }
 
     #display(page) {
-        if (data.documents.length === 0) {
-            dataService.getDocuments(new RequestParams(10, page), new DocumentFilterRequestParams())
-                .then(res => {
-                    data.documents = res.data;
-                    this.#documents = data.documents;
-                    this.innerHTML = this.#render();                   
-                });
-        } else {
-            this.#documents = data.documents;
-            this.innerHTML = this.#render();
-        }
+        dataService.getDocuments(new RequestParams(10, page), new DocumentFilterRequestParams())
+            .then(res => {
+                data.documents = res.data;
+                this.#documents = data.documents;
+                this.innerHTML = this.#render();
+            });
+        this.innerHTML = "";
+        this.innerHTML = `
+        <div class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-[60%]">
+        </div>        
+        `;
+        this.firstElementChild.innerHTML = `
+        <loading-spinner se-class ="w-10 h-10 mr-10 text-gray-400"></loading-spinner>
+        `;
     }
 
     #render() {
@@ -58,7 +65,7 @@ export class StudentDocumentGridComponent extends HTMLElement {
 
     #renderDocument(document) {
         return `
-    <article class="relative isolate flex flex-col gap-8 lg:flex-row">
+    <article class="relative isolate flex flex-col gap-8 lg:flex-row bg-gray-100/60 p-6 rounded-xl">
         <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
             <img src="${document.image}"
                 alt="" class="absolute right-0 h-full rounded bg-gray-50 object-cover">
@@ -68,7 +75,7 @@ export class StudentDocumentGridComponent extends HTMLElement {
             <div class="flex items-center gap-x-4 text-xs">
                 <time datetime="2020-03-16" class="text-gray-500">Sep 16, 2023</time>
                 <a href="#"
-                    class="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">${document.teacher.subject.name}</a>
+                    class="relative z-10 rounded-md bg-indigo-100 px-3 py-1.5 font-medium text-indigo-700">${document.teacher.subject.name}</a>
             </div>
             <div class="group relative max-w-xl">
                 <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">

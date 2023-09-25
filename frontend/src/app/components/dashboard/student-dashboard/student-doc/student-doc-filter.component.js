@@ -14,11 +14,11 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     #render() {
         return `
     <form action="#" method="get" id="drawer-example"
-        class="fixed top-20 left-24 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform bg-white dark:bg-gray-800"
+        class="fixed top-20 left-24 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform"
         tabindex="-1" aria-labelledby="drawer-label">
     
     
-        <div class="flex flex-col justify-between flex-1">
+        <div class="flex flex-col justify-between flex-1 bg-violet-100/70 rounded-xl p-6">
             <div class="space-y-6">
                 <!-- Categories -->
                 <div class="space-y-2">
@@ -27,8 +27,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </h6>
     
                     <div class="flex items-center">
-                        <input id="tv" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="tv" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="tv" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             TV, Audio-Video
@@ -36,8 +36,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="desktop" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="desktop" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="dektop" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Desktop PC
@@ -45,8 +45,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="gaming" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="gaming" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="gaming" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Gaming
@@ -54,8 +54,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="monitors" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="monitors" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="monitors" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Monitors
@@ -63,8 +63,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="laptops" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="laptops" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="laptops" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Laptops
@@ -72,8 +72,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="console" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="console" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="console" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Console
@@ -81,8 +81,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="tablet" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="tablet" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="tablet" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Tablets
@@ -90,8 +90,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="foto" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="foto" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="foto" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Foto
@@ -99,8 +99,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="fashion" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="fashion" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="fashion" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Fashion
@@ -108,8 +108,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                     </div>
     
                     <div class="flex items-center">
-                        <input id="books" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="books" type="radio" value=""
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     
                         <label for="books" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Books
@@ -156,7 +156,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                     <div class="flex items-center">
                         <input id="five-stars" type="radio" value="" name="rating"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="five-stars" class="flex items-center ml-2">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -198,7 +198,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                     <div class="flex items-center">
                         <input id="four-stars" type="radio" value="" name="rating"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="four-stars" class="flex items-center ml-2">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +240,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                     <div class="flex items-center">
                         <input id="three-stars" type="radio" value="" name="rating"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="three-stars" class="flex items-center ml-2">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -282,7 +282,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                     <div class="flex items-center">
                         <input id="two-stars" type="radio" value="" name="rating"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="two-stars" class="flex items-center ml-2">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -324,7 +324,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                     <div class="flex items-center">
                         <input id="one-star" type="radio" value="" name="rating"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="one-star" class="flex items-center ml-2">
                             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -370,7 +370,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
             <div class="flex justify-center w-full pb-4 mt-6 space-x-4">
                 <button type="submit"
                     class="w-full px-5 py-2 text-sm font-medium text-center text-white rounded-lg bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:bg-fuchsia-700 dark:hover:bg-fuchsia-800 dark:focus:ring-fuchsia-800">
-                    Apply filters
+                    Apply
                 </button>
                 <button type="reset"
                     class="w-full px-5 py-2 text-sm font-medium text-fuchsia-600 bg-fuchsia-50 hover:bg-fuchsia-100 rounded-lg focus:outline-none hover:text-fuchsia-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">

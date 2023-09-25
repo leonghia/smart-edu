@@ -26,7 +26,7 @@ export class StudentDocumentComponent extends HTMLElement {
             <div class="w-1/6 h-full">
                 <student-doc-filter></student-doc-filter>
             </div>
-            <div class="w-5/6 h-max	pt-4 pb-10">             
+            <div class="w-5/6 h-max	pt-2 pb-10">             
                 <student-doc-grid></student-doc-grid>
                 <student-doc-pagination></student-doc-pagination>
             </div>

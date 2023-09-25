@@ -98,7 +98,7 @@ export class PaginationComponent extends HTMLElement {
 
   #render() {
     return `
-  <div class="w-full">
+  <div class="w-full -mt-2">
     <nav class="flex items-center justify-between mx-5">
         <div class="-mt-px flex w-0 flex-1">
           <a href="#" id="previous" class="prev-btn inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-700 hover:border-gray-300 hover:text-gray-800">

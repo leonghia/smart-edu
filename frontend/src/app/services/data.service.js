@@ -50,6 +50,10 @@ class DataService {
     async getDocuments(requestParams = new RequestParams(), documentFilterRequestParams = new DocumentFilterRequestParams()) {
         return await getData(`${BASE_URL}/Document?PageSize=${requestParams.pageSize}&PageNumber=${requestParams.pageNumber}&SubjectId=${documentFilterRequestParams.subjectId}&FromNumbersOfRating=${documentFilterRequestParams.fromNumbersOfRating}&ToNumbersOfRating=${documentFilterRequestParams.toNumbersOfRating}&FromRating=${documentFilterRequestParams.fromRating}&ToRating=${documentFilterRequestParams.toRating}`);
     }
+
+    async getDocumentsCount(documentFilterRequestParams = new DocumentFilterRequestParams()) {
+        return await getData(`${BASE_URL}/Document/count?SubjectId=${documentFilterRequestParams.subjectId}&FromNumbersOfRating=${documentFilterRequestParams.fromNumbersOfRating}&ToNumbersOfRating=${documentFilterRequestParams.toNumbersOfRating}&FromRating=${documentFilterRequestParams.fromRating}&ToRating=${documentFilterRequestParams.toRating}`);
+    }
 }
 
 export default new DataService();
