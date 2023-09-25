@@ -54,6 +54,11 @@ class DataService {
     async getDocumentsCount(documentFilterRequestParams = new DocumentFilterRequestParams()) {
         return await getData(`${BASE_URL}/Document/count?SubjectId=${documentFilterRequestParams.subjectId}&FromNumbersOfRating=${documentFilterRequestParams.fromNumbersOfRating}&ToNumbersOfRating=${documentFilterRequestParams.toNumbersOfRating}&FromRating=${documentFilterRequestParams.fromRating}&ToRating=${documentFilterRequestParams.toRating}`);
     }
+
+    async getDocumentsCountEachsubject()
+    {
+        return await getData(`${BASE_URL}/Document/count-each`);
+    }
 }
 
 export default new DataService();
