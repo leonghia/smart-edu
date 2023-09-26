@@ -1,11 +1,15 @@
 export class MarkTableComponent extends HTMLElement {
 
+    #tableBody;
+    #subjectNames = ["Maths", "Literature", "English", "Physics", "Chemistry", "Biology", "Information Technology", "History", "Geography", "Civic Education", "Military Education", "Physical Education", "Japanese", "French"];
+
     constructor() {
         super();
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
+        this.#tableBody = this.querySelector("tbody");
         this.#displayRows();
     }
 
@@ -85,8 +89,8 @@ export class MarkTableComponent extends HTMLElement {
     } 
 
     #displayRows() {
-        const subjectNames = ["Maths", "Literature", "English", "Physics", "Chemistry", "Biology", "Information Technology", "History", "Geography", "Civic Education", "Military Education", "Physical Education", "Japanese", "French"];
-        subjectNames.forEach(sN => this.querySelector("tbody").insertAdjacentHTML("beforeend", this.#renderRow(sN)));
+        this.#subjectNames.forEach(sN => this.#tableBody.insertAdjacentHTML("beforeend", this.#renderRow(sN)));
+        this.#tableBody.lastElementChild.classList.remove(..."border-b border-dashed border-gray-400".split(" "));
     }
 }
 

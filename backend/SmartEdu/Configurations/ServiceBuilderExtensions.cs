@@ -291,7 +291,7 @@ namespace SmartEdu.Configurations
             var scope = app.Services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<DataContext>();
             var seederService = scope.ServiceProvider.GetRequiredService<ISeederService>();
-            Console.Write("Do you want to re-create the database and seeding initial data? (Y/n): ");
+            Console.Write("Do you want to re-create the database (Y/n): ");
             var selection = Console.ReadLine();
             if (selection is not null)
             {
@@ -300,22 +300,10 @@ namespace SmartEdu.Configurations
                 {
                     await context.Database.EnsureDeletedAsync();
                     await context.Database.MigrateAsync();
-                    Console.WriteLine("Database re-created."); 
-
-                    await seederService.SeedingData();                
+                    Console.WriteLine("Database re-created.");                
                 }
             }
-
-            Console.Write("Do you want to seeding the documents? (Y/n): ");
-            selection = Console.ReadLine();
-            if (selection is not null)
-            {
-                selection = selection.Trim().ToUpper();
-                if (selection == "Y")
-                {
-                    await seederService.SeedingDocuments();                 
-                }
-            }
+            await seederService.SeedingData();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace SmartEdu.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Parent> Parents { get; set; }
-        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Mark> Marks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<ExtraClassStudent> ExtraClassesStudents { get; set; }
         public DbSet<EcBookmark> EcBookmarks { get; set; }

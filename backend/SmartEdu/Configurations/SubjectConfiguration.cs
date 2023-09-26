@@ -77,7 +77,7 @@ namespace SmartEdu.Configurations
                 new Subject
                 {
                     Id = 14,
-                    Name = "Japanese"
+                    Name = "French"
                 }
                 );
         }

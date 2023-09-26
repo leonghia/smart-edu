@@ -24,9 +24,10 @@ namespace SmartEdu.Entities
 
         public ICollection<ExtraClass> ExtraClasses { get; set; }
 
-        public ICollection<Exam> Exams { get; set; }
         [ForeignKey("EcBookmark")]
         public int EcBookmarkId { get; set; }
         public EcBookmark EcBookmark { get; set; }
+        
+        public ICollection<Mark> Marks { get; set; }
     }
 }
