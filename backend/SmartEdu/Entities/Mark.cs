@@ -12,6 +12,8 @@ namespace SmartEdu.Entities
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
         public byte Semester { get; set; } = 1;
+        public int FromYear { get; set; }
+        public int ToYear { get; set; }
         public int? Oral_1 { get; set; }
         public int? Oral_2 { get; set; }
         public int? Test15_1 { get; set; }
