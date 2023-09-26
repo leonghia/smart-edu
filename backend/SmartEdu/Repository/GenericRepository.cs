@@ -28,9 +28,10 @@ namespace SmartEdu.Repository
             await _table.AddRangeAsync(entities);
         }
 
-        public int Count(Func<TEntity, bool> filter)
+        public int Count(Func<TEntity, bool> filter = null)
         {
-            return _table.Count(filter);
+            if (filter is not null) return _table.Count(filter);
+            return _table.Count();
         }
 
         public async Task Delete(object id)

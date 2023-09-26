@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.EcBookmarkDTO;
-using SmartEdu.DTOs.ExamDTO;
 using SmartEdu.DTOs.ExtraClassDTO;
 using SmartEdu.DTOs.ExtraClassStudentDTO;
 using SmartEdu.DTOs.MainClassDTO;
+using SmartEdu.DTOs.MarkDTO;
 using SmartEdu.DTOs.ParentDTO;
 using SmartEdu.DTOs.StudentDTO;
 using SmartEdu.DTOs.SubjectDTO;
@@ -25,9 +25,6 @@ namespace SmartEdu.Configurations
             CreateMap<AddDocumentDTO, Document>();
             CreateMap<Document, GetDocumentDTO>();
             CreateMap<UpdateDocumentDTO, Document>();
-            CreateMap<AddExamDTO, Exam>();
-            CreateMap<Exam, GetExamDTO>();
-            CreateMap<UpdateExamDTO, Exam>();
             CreateMap<AddExtraClassDTO, ExtraClass>();
             CreateMap<ExtraClass, GetExtraClassDTO>();
             CreateMap<UpdateExtraClassDTO, ExtraClass>();
@@ -49,6 +46,9 @@ namespace SmartEdu.Configurations
             CreateMap<AddExtraClassStudentDTO, ExtraClassStudent>();
             CreateMap<EcBookmark, GetEcBookmarkDTO>();
             CreateMap<AddExtraClassEcBookmarkDTO, ExtraClassEcBookmark>();
+            CreateMap<Mark, GetMarkDTO>();
+            CreateMap<AddMarkDTO, Mark>();
+            CreateMap<UpdateMarkDTO, Mark>();
         }
     }
 }

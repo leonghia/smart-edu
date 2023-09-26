@@ -6,7 +6,7 @@ using SmartEdu.Entities;
 using SmartEdu.Models;
 using SmartEdu.Services.CrawlerService;
 using SmartEdu.UnitOfWork;
- 
+
 namespace SmartEdu.Services.SeederService
 {
     public class SeederService : ISeederService
@@ -27,15 +27,6 @@ namespace SmartEdu.Services.SeederService
         public async Task<ServerResponse<object>> SeedingData()
         {
             var serverResponse = new ServerResponse<object>();
-            
-            var count = await _userManager.Users.CountAsync();
-
-            if (count > 0)
-            {
-                serverResponse.Succeeded = false;
-                serverResponse.Message = "Data had been seeded before. No need to seed anymore.";
-                return serverResponse;
-            }
 
             var roles = new List<string> { "User" };
 
@@ -52,7 +43,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 3,
                     SubjectId = 1
-                },              
+                },
                 new RegisterUserDTO // 2
                 {
                     FullName = "Pham Thi Nguyet Anh",
@@ -873,7 +864,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = new List<string> { "Admin" },
                     Type = 0
                 },
-                new RegisterUserDTO 
+                new RegisterUserDTO
                 {
                     FullName = "Trinh Van Phuc",
                     UserName = "phucadmin",
@@ -2023,24 +2014,36 @@ namespace SmartEdu.Services.SeederService
             await SeedingExtraClasses();
             await SeedingParents(registerUserDTOs);
             await SeedingStudents(registerUserDTOs);
+            await SeedingMarks();
+            await SeedingDocuments();
 
             serverResponse.Message = "Seeding data successfully.";
-            Console.WriteLine("Seeding initial data successfully.");
+            
             return serverResponse;
         }
 
         public async Task SeedingTeachers(List<RegisterUserDTO> registerUserDTOs)
-        {                 
+        {
+
+            var count = _unitOfWork.TeacherRepository.Count();
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Teachers had been seeded before. Aborting...");
+                
+                return;
+            }
+
             var teachers = new List<Teacher>();
 
             foreach (var registerUserDTO in registerUserDTOs)
             {
                 if (registerUserDTO.Type == 3 && registerUserDTO.SubjectId > 0)
                 {
-                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);               
+                    var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
                     var teacher = new Teacher
                     {
-                        UserId = user.Id,                      
+                        UserId = user.Id,
                         SubjectId = registerUserDTO.SubjectId
                     };
                     teachers.Add(teacher);
@@ -2049,16 +2052,27 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.TeacherRepository.AddRange(teachers);
             await _unitOfWork.Save();
+            
+            Console.WriteLine("Seeding teachers successfully :)");
+            
         }
 
         public async Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
-        {           
-
+        {
+            var count = _unitOfWork.StudentRepository.Count();
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Students had been seeded before. Aborting...");
+                
+                return;
+            }
             var length = registerUserDTOs.Count(registerUserDTO => registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0);
 
             var ecBookmarks = new List<EcBookmark>();
 
-            for (var i = 0; i < length; i++) {
+            for (var i = 0; i < length; i++)
+            {
                 ecBookmarks.Add(new EcBookmark());
             }
 
@@ -2071,7 +2085,7 @@ namespace SmartEdu.Services.SeederService
             {
                 if (registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0)
                 {
-                    
+
                     var user = await _userManager.FindByNameAsync(registerUserDTO.UserName);
 
                     var student = new Student
@@ -2083,17 +2097,29 @@ namespace SmartEdu.Services.SeederService
                         EcBookmarkId = ++index
                     };
                     students.Add(student);
-                    
+
                 }
             }
 
             await _unitOfWork.StudentRepository.AddRange(students);
             await _unitOfWork.Save();
             
+            Console.WriteLine("Seeding students successfully :)");
+            
         }
 
         public async Task SeedingParents(List<RegisterUserDTO> registerUserDTOs)
         {
+            var count = _unitOfWork.ParentRepository.Count();
+
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Parents had been seeded before. Aborting...");
+                
+                return;
+            }
+
             var parents = new List<Parent>();
 
             foreach (var registerUserDTO in registerUserDTOs)
@@ -2111,20 +2137,44 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.ParentRepository.AddRange(parents);
             await _unitOfWork.Save();
+            
+            Console.WriteLine("Seeding parents successfully :)");
+            
         }
 
         public async Task SeedingUsers(List<RegisterUserDTO> registerUserDTOs)
         {
+            // Guard clause
+            var count = await _userManager.Users.CountAsync();
+            if (count > 0)
+            {
+                
+                Console.WriteLine("Users had been seeeded before. Aborting...");
+                
+                return;
+            }
+
             foreach (var registerUserDTO in registerUserDTOs)
             {
                 var user = _mapper.Map<User>(registerUserDTO);
                 await _userManager.CreateAsync(user, registerUserDTO.Password);
                 await _userManager.AddToRolesAsync(user, registerUserDTO.Roles);
             }
+            
+            Console.WriteLine("Seeding users successfully :)");
+            
         }
 
         public async Task SeedingMainClasses()
         {
+            var count = _unitOfWork.MainClassRepository.Count();
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Main classes had been seeded before. Aborting...");
+                
+                return;
+            }
             var mainClasses = new List<MainClass>
             {
                 new MainClass
@@ -2205,10 +2255,21 @@ namespace SmartEdu.Services.SeederService
             };
             await _unitOfWork.MainClassRepository.AddRange(mainClasses);
             await _unitOfWork.Save();
+            
+            Console.WriteLine("Seeding main classes successfully :)");
+            
         }
 
         public async Task SeedingExtraClasses()
         {
+            var count = _unitOfWork.ExtraClassRepository.Count();
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Extra classes had been seeded before. Aborting...");
+                
+                return;
+            }
             var extraClasses = new List<ExtraClass>
             {
                 new ExtraClass
@@ -2503,6 +2564,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.ExtraClassRepository.AddRange(extraClasses);
             await _unitOfWork.Save();
+            
+            Console.WriteLine("Seeding extra classes successfully :)");
+            
         }
 
         public async Task SeedingDocumentsBySubject(DocumentSeederOptions options)
@@ -2531,9 +2595,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.DocumentRepository.Count(d => true);
             if (count > 0)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Documents had been seeded before. No need to seed anymore.");
-                Console.ForegroundColor = ConsoleColor.White;
+                
+                Console.WriteLine("Documents had been seeded before. Aborting...");
+                
                 return;
             }
             // Seeding math documents
@@ -2610,7 +2674,43 @@ namespace SmartEdu.Services.SeederService
             });
             // Seeding IT documents
 
-            Console.WriteLine("Seeding documents successfully");
+            
+            Console.WriteLine("Seeding documents successfully :)");
+            
+        }
+
+        public async Task SeedingMarks()
+        {
+            var count = _unitOfWork.MarkRepository.Count();
+            if (count > 0)
+            {
+                
+                System.Console.WriteLine("Marks had been seeded before. Aborting...");
+                
+                return;
+            }
+            
+            var marks = new List<Mark>();
+            var students = await _unitOfWork.StudentRepository.GetAll(null, null, null, null);
+            var subjects = await _unitOfWork.SubjectRepository.GetAll(null, null, null, null);
+            foreach (var student in students)
+            {
+                foreach (var subject in subjects)
+                {
+                    var mark = new Mark
+                    {
+                        StudentId = student.Id,
+                        SubjectId = subject.Id,
+                        Semester = 1
+                    };
+                    marks.Add(mark);
+                }
+            }
+            await _unitOfWork.MarkRepository.AddRange(marks);
+            await _unitOfWork.Save();
+            
+            System.Console.WriteLine("Seeding marks successfully :)");
+            
         }
     }
 }

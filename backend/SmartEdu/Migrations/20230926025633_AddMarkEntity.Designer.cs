@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartEdu.Data;
 
@@ -11,9 +12,11 @@ using SmartEdu.Data;
 namespace SmartEdu.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230926025633_AddMarkEntity")]
+    partial class AddMarkEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,10 +321,10 @@ namespace SmartEdu.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Oral_1")
+                    b.Property<int>("Oral_1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Oral_2")
+                    b.Property<int>("Oral_2")
                         .HasColumnType("int");
 
                     b.Property<byte>("Semester")
@@ -333,22 +336,22 @@ namespace SmartEdu.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Test15_1")
+                    b.Property<int>("Test15_1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Test15_2")
+                    b.Property<int>("Test15_2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Test15_3")
+                    b.Property<int>("Test15_3")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Test45_1")
+                    b.Property<double>("Test45_1")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Test45_2")
+                    b.Property<double>("Test45_2")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Test60")
+                    b.Property<double>("Test60")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
