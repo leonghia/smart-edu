@@ -65,7 +65,7 @@ export class StudentDocumentGridComponent extends HTMLElement {
 
     #renderDocument(document) {
         return `
-    <article class="relative isolate flex flex-col gap-8 lg:flex-row bg-gray-100/60 p-6 rounded-xl">
+    <article class="relative isolate flex flex-col gap-8 lg:flex-row bg-gray-100/80 p-6 rounded-xl">
         <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
             <img src="${document.image}"
                 alt="" class="absolute right-0 h-full rounded bg-gray-50 object-cover">

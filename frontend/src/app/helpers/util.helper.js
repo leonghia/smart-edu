@@ -18,3 +18,16 @@ export const lastNameFromFullName = function (fullName) {
     const fullNameArr = fullName.split(" ");
     return fullNameArr[fullNameArr.length - 1];
 }
+
+export const getAcademicYears = function(marks) {
+    const subjectId = marks[0].subject.id;
+    const marksOfSameSubject = marks.filter(m => m.subject.id === subjectId && m.semester === 1);
+    return marksOfSameSubject.map(m => ({
+        fromYear: m.fromYear,
+        toYear: m.toYear
+    }));
+}
+
+export const getMarksFromAcademicYearAndSemester = function(marks = [], option = {fromYear: 0, toYear: 0, semester: 0}) {
+    return marks.filter(m => m.fromYear === option.fromYear && m.toYear === option.toYear && m.semester === option.semester);
+}

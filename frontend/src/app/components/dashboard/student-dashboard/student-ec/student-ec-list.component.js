@@ -169,9 +169,9 @@ export class StudentExtraClassListComponent extends HTMLElement {
 
     #render() {
         return `
-<div class="h-1/2 overflow-x-hidden overflow-y-scroll bg-green-100/60 rounded-lg p-6">
+<div class="h-1/2 overflow-x-hidden overflow-y-scroll bg-green-50 rounded-lg p-6">
     <div class="pb-1">
-        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📁 Registered Classes</h3>
+        <h3 class="text-base font-semibold leading-6 text-green-600">Registered Classes</h3>
         <p class="mt-2 max-w-4xl text-sm text-gray-500">Listing all the extra classes you have successfully registered. From here you can cancel any class you would want to. Note that sometimes, the teacher can also remove you from the class if you don't behave properly.</p>
     </div>
     <div>
@@ -182,9 +182,9 @@ export class StudentExtraClassListComponent extends HTMLElement {
     </div>   
 </div>   
 
-<div class="h-1/2 overflow-x-hidden overflow-y-scroll bg-amber-100/50 rounded-lg p-6">
+<div class="h-1/2 overflow-x-hidden overflow-y-scroll bg-blue-50 rounded-lg p-6">
     <div class="pb-1">
-        <h3 class="text-base font-semibold leading-6 text-fuchsia-600">📌 Bookmarked Classes</h3>
+        <h3 class="text-base font-semibold leading-6 text-blue-600">Bookmarked Classes</h3>
         <p class="mt-2 max-w-4xl text-sm text-gray-500">Discover and curate your learning journey with our Bookmarked feature. Easily mark and organize the classes that inspire you the most, making it simple to revisit and continue your educational adventure at your own pace.</p>
     </div>
     <div>

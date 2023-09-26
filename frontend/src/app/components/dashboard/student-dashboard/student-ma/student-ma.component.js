@@ -21,8 +21,11 @@ export class StudentMarkAssessmentComponent extends HTMLElement {
 
     #render() {
         return `
-            <mark-table></mark-table>
-            <student-assessment></student-assessment>
+            <ma-nav></ma-nav>
+            <div class="w-full flex gap-x-10">
+                <mark-table class="w-3/4"></mark-table>
+                <mark-info class="w-1/4"></mark-info>
+            </div>
         `;
     }
 }

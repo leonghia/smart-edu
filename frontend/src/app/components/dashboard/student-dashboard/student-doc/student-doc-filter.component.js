@@ -28,7 +28,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
         <input id="${a[0]}" type="radio" value="${a[0]}" name="subjects"
             class="w-4 h-4 bg-white border-gray-200 text-fuchsia-600 focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 
-        <label for="${a[0]}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+        <label for="${a[0]}" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
             ${a[0]} (${a[1]})
         </label>
     </div>  
@@ -42,11 +42,11 @@ export class StudentDocumentFilterComponent extends HTMLElement {
         tabindex="-1" aria-labelledby="drawer-label">
     
     
-        <div class="flex flex-col justify-between flex-1 bg-violet-100/70 rounded-xl p-6">
+        <div class="flex flex-col justify-between flex-1 bg-purple-50 rounded-xl p-6">
             <div class="space-y-6">
                 <!-- Categories -->
                 <div class="space-y-2 subject-container">
-                    <h6 class="text-base font-medium text-fuchsia-600">
+                    <h6 class="text-xs font-bold leading-6 text-fuchsia-600 uppercase">
                         Subjects
                     </h6>
     
@@ -55,13 +55,13 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                 <!-- Prices -->
                 <div class="space-y-2">
-                    <h6 class="text-base font-medium text-fuchsia-600">
-                        Downloads
+                    <h6 class="text-xs font-bold leading-6 text-fuchsia-600 uppercase">
+                        Numbers of rate
                     </h6>
                     <div class="flex items-center justify-between col-span-2 space-x-3">
                         <div class="w-full">
                             <label for="min-experience-input"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">
                                 From
                             </label>
     
@@ -71,7 +71,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                         </div>
     
                         <div class="w-full">
-                            <label for="price-to" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <label for="price-to" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">
                                 To
                             </label>
     
@@ -84,7 +84,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
                 <!-- Rating -->
                 <div class="space-y-2">
-                    <h6 class="text-base font-medium text-fuchsia-600">
+                    <h6 class="text-xs font-bold leading-6 text-fuchsia-600 uppercase">
                         Rating
                     </h6>
     
@@ -303,11 +303,11 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     
             <div class="flex justify-center w-full pb-4 mt-6 space-x-4">
                 <button type="submit"
-                    class="w-full px-5 py-2 text-sm font-medium text-center text-white rounded-lg bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:bg-fuchsia-700 dark:hover:bg-fuchsia-800 dark:focus:ring-fuchsia-800">
+                    class="w-full px-5 py-2 text-sm font-medium text-center text-white rounded-md bg-fuchsia-700 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:bg-fuchsia-700 dark:hover:bg-fuchsia-800 dark:focus:ring-fuchsia-800">
                     Apply
                 </button>
                 <button type="reset"
-                    class="w-full px-5 py-2 text-sm font-medium text-fuchsia-600 bg-fuchsia-50 hover:bg-fuchsia-100 rounded-lg focus:outline-none hover:text-fuchsia-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    class="w-full px-5 py-2 text-sm font-medium text-fuchsia-600 bg-fuchsia-100 rounded-md focus:outline-none hover:text-fuchsia-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     Clear all
                 </button>
             </div>
