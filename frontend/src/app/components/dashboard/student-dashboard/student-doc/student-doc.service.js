@@ -6,7 +6,8 @@ class StudentDocumentService extends EventService {
         super({
             totalPages: [],
             next: [],
-            prev: []
+            prev: [],
+            displayFilterResult: []
         });
     }
 }

@@ -2673,8 +2673,6 @@ namespace SmartEdu.Services.SeederService
                 JsonFilePath = ".assets/biology.json",
                 SubjectId = 8
             });
-            // Seeding IT documents
-
             
             Console.WriteLine("Seeding documents successfully :)");
             
@@ -2710,15 +2708,27 @@ namespace SmartEdu.Services.SeederService
                             Semester = i % 2 == 0 ? (byte) 1 : (byte) 2,
                             FromYear = 2023 + (i / 2),
                             ToYear = 2024 + (i / 2),
-                            Oral_1 = random.Next(1, 10),
-                            Oral_2 = random.Next(1, 10),
-                            Test15_1 = random.Next(1, 10),
-                            Test15_2 = random.Next(1, 10),
-                            Test15_3 = random.Next(1, 10),
-                            Test45_1 = random.Next(1, 100) / 10.0,
-                            Test45_2 = random.Next(1, 100) / 10.0,
-                            Test60 = random.Next(1, 100) / 10.0
+                            
                         };
+                        if (i <= 1)
+                        {
+                            mark.Oral_1 = random.Next(1, 10);
+                            mark.Oral_2 = random.Next(1, 10);
+                            mark.Test15_1 = random.Next(1, 10);
+                            mark.Test15_2 = random.Next(1, 10);
+                            mark.Test15_3 = random.Next(1, 10);
+                            mark.Test45_1 = random.Next(1, 100) / 10.0;
+                            mark.Test45_2 = random.Next(1, 100) / 10.0;
+                            mark.Test60 = random.Next(1, 100) / 10.0;
+                        }
+                        if (i == 2)
+                        {
+                            mark.Oral_1 = random.Next(1, 10);
+                            mark.Oral_2 = random.Next(1, 10);
+                            mark.Test15_1 = random.Next(1, 10);
+                            mark.Test15_2 = random.Next(1, 10);
+                            mark.Test15_3 = random.Next(1, 10);
+                        }
                         marks.Add(mark);
                     }
                 }
