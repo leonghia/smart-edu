@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartEdu.DTOs.UserDTO;
@@ -2697,13 +2698,18 @@ namespace SmartEdu.Services.SeederService
             {
                 foreach (var subject in subjects)
                 {
-                    var mark = new Mark
+                    for (var i = 0; i < 6; i++)
                     {
-                        StudentId = student.Id,
-                        SubjectId = subject.Id,
-                        Semester = 1
-                    };
-                    marks.Add(mark);
+                        var mark = new Mark
+                        {
+                            StudentId = student.Id,
+                            SubjectId = subject.Id,
+                            Semester = i % 2 == 0 ? (byte) 1 : (byte) 2,
+                            FromYear = 2023 + (i / 2),
+                            ToYear = 2024 + (i / 2)
+                        };
+                        marks.Add(mark);
+                    }
                 }
             }
             await _unitOfWork.MarkRepository.AddRange(marks);

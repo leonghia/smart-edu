@@ -30,3 +30,6 @@ import { StudentDocumentComponent } from "./components/dashboard/student-dashboa
 import { StudentDocumentGridComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-grid.component.js";
 import { StudentDocumentFilterComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-filter.component.js";
 import { StudentDocumentPaginationComponent } from "./components/dashboard/student-dashboard/student-doc/student-doc-pagination.component.js";
+import { MarkAssessmentNavigationComponent } from "./components/navigation/ma-nav.component.js";
+import { StudentAssessmentComponent } from "./components/assessment/student-assessment.component.js";
+import { MarkInfoComponent } from "./components/dashboard/student-dashboard/student-ma/mark-info.component.js";
