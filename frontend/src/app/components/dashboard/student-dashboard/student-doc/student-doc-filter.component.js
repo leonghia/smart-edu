@@ -1,12 +1,46 @@
+import { data } from "../../../../app.store";
+import { getSubjectIdByName } from "../../../../helpers/filter.helper";
+import { DocumentFilterRequestParams } from "../../../../models/docFilterRequestParams";
 import dataService from "../../../../services/data.service";
+import studentDocService from "./student-doc.service";
 
 export class StudentDocumentFilterComponent extends HTMLElement {
+
+    #subjectContainer;
+    #applyBtn;
+    #filterOption = new DocumentFilterRequestParams();
+
     constructor() {
         super();
     }
 
     connectedCallback() {
         this.innerHTML = this.#render();
+        this.#subjectContainer = this.querySelector(".subject-container");
+        this.#applyBtn = this.querySelector(".apply-btn");
+
+        this.#subjectContainer.addEventListener("click", function(event) {
+            const clicked = event.target.closest("input");
+            if (!clicked) {
+                return;
+            }
+            if (data.subjects.length === 0) {
+                dataService.getSubjects()
+                    .then(res => {
+                        data.subjects = res.data;
+                        const subjectId = getSubjectIdByName(data.subjects, clicked.value);
+                        this.#filterOption.subjectId = subjectId;        
+                    });
+            } else {
+                const subjectId = getSubjectIdByName(data.subjects, clicked.value);
+                this.#filterOption.subjectId = subjectId;
+            }
+        }.bind(this));
+
+        this.#applyBtn.addEventListener("click", () => {
+            studentDocService.trigger("displayFilterResult", this.#filterOption);
+        });
+
         dataService.getDocumentsCountEachSubject()
             .then(res => {
                 const dictionary = res.data;
@@ -302,12 +336,12 @@ export class StudentDocumentFilterComponent extends HTMLElement {
             </div>
     
             <div class="flex justify-center w-full pb-4 mt-6 space-x-4">
-                <button type="submit"
-                    class="w-full px-5 py-2 text-sm font-medium text-center text-white rounded-md bg-fuchsia-700 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:bg-fuchsia-700 dark:hover:bg-fuchsia-800 dark:focus:ring-fuchsia-800">
+                <button type="button"
+                    class="apply-btn w-full px-5 py-2 text-sm font-medium text-center text-white rounded-md bg-fuchsia-700 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:bg-fuchsia-700 dark:hover:bg-fuchsia-800 dark:focus:ring-fuchsia-800">
                     Apply
                 </button>
-                <button type="reset"
-                    class="w-full px-5 py-2 text-sm font-medium text-fuchsia-600 bg-fuchsia-100 rounded-md focus:outline-none hover:text-fuchsia-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                <button type="button"
+                    class="clear-btn w-full px-5 py-2 text-sm font-medium text-fuchsia-600 bg-fuchsia-100 rounded-md focus:outline-none hover:text-fuchsia-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     Clear all
                 </button>
             </div>

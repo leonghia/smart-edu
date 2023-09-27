@@ -26,14 +26,17 @@ public class CrawlerService : ICrawlerService
         var doc = new HtmlDocument();
         doc.Load(path);
         var tableRows = doc.DocumentNode.SelectNodes("//tr").ToArray<HtmlNode>();
+
+        var random = new Random();
         
         for (var i = 0; i < 50; i++)
         {
             var document = new Document();
             document.Image = tableRows[i].SelectSingleNode(".//img[@class='bookCover']").GetAttributeValue("src", "def").Replace("SY75", "SY300");
             document.Name = tableRows[i].SelectSingleNode(".//a[@class='bookTitle']").InnerText.Trim();
-            var isDouble = Double.TryParse(tableRows[i].SelectSingleNode(".//span[@class='minirating']").InnerText.Trim().Split(" ").ElementAt(0), out double rating);
-            if (isDouble) document.Rating = rating;
+            // var isDouble = Double.TryParse(tableRows[i].SelectSingleNode(".//span[@class='minirating']").InnerText.Trim().Split(" ").ElementAt(0), out double rating);
+            // if (isDouble) document.Rating = rating;
+            document.Rating = random.Next(1, 50) / 10.0;
             var isInt32 = Int32.TryParse(tableRows[i].SelectSingleNode(".//span[@class='minirating']").InnerText.Trim().Split(" ").ElementAt(4).Replace(",", ""), out int numbersOfRating);
             if (isInt32) document.NumbersOfRating = numbersOfRating;
             var id = tableRows[i].SelectSingleNode(".//div[@class='u-anchorTarget']").GetAttributeValue("id", "def");

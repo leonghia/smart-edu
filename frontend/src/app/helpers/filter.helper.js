@@ -65,3 +65,7 @@ export const filterExtraClasses = function (extraClasses = [], filterOption = {}
     }
     return result;
 }
+
+export const getSubjectIdByName = function (subjects = [], name = "") {
+    return subjects.find(s => s.name === name).id;
+}

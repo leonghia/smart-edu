@@ -9,6 +9,7 @@ import { displayRating } from "../../../../helpers/util.helper";
 export class StudentDocumentGridComponent extends HTMLElement {
 
     #documents = [];
+    #filterOption = new DocumentFilterRequestParams();
 
     constructor() {
         super();
@@ -19,6 +20,10 @@ export class StudentDocumentGridComponent extends HTMLElement {
         studentDocService.subscribe("prev", {
             component: this,
             eventHandler: this.#display
+        });
+        studentDocService.subscribe("displayFilterResult", {
+            component: this,
+            eventHandler: this.#handleDisplayFilterResult
         });
     }
 
@@ -33,10 +38,17 @@ export class StudentDocumentGridComponent extends HTMLElement {
     disconnectedCallback() {
         studentDocService.unSubscribe("next", this);
         studentDocService.unSubscribe("prev", this);
+        studentDocService.unSubscribe("displayFilterResult", this);
     }
 
-    #display(page) {
-        dataService.getDocuments(new RequestParams(10, page), new DocumentFilterRequestParams())
+    #handleDisplayFilterResult(filterOption)
+    {
+        this.#filterOption = filterOption;
+        this.#display();
+    }
+
+    #display(page = 1) {
+        dataService.getDocuments(new RequestParams(10, page), this.#filterOption)
             .then(res => {
                 data.documents = res.data;
                 this.#documents = data.documents;
