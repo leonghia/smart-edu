@@ -2712,22 +2712,22 @@ namespace SmartEdu.Services.SeederService
                         };
                         if (i <= 1)
                         {
-                            mark.Oral_1 = random.Next(1, 10);
-                            mark.Oral_2 = random.Next(1, 10);
-                            mark.Test15_1 = random.Next(1, 10);
-                            mark.Test15_2 = random.Next(1, 10);
-                            mark.Test15_3 = random.Next(1, 10);
-                            mark.Test45_1 = random.Next(10, 100) / 10.0;
-                            mark.Test45_2 = random.Next(10, 100) / 10.0;
-                            mark.Test60 = random.Next(10, 100) / 10.0;
+                            mark.Oral_1 = random.Next(6, 10);
+                            mark.Oral_2 = random.Next(6, 10);
+                            mark.Test15_1 = random.Next(5, 10);
+                            mark.Test15_2 = random.Next(5, 10);
+                            mark.Test15_3 = random.Next(6, 10);
+                            mark.Test45_1 = random.Next(60, 100) / 10.0;
+                            mark.Test45_2 = random.Next(50, 100) / 10.0;
+                            mark.Test60 = random.Next(60, 100) / 10.0;
                         }
                         if (i == 2)
                         {
-                            mark.Oral_1 = random.Next(1, 10);
-                            mark.Oral_2 = random.Next(1, 10);
-                            mark.Test15_1 = random.Next(1, 10);
-                            mark.Test15_2 = random.Next(1, 10);
-                            mark.Test15_3 = random.Next(1, 10);
+                            mark.Oral_1 = random.Next(4, 10);
+                            mark.Oral_2 = random.Next(5, 10);
+                            mark.Test15_1 = random.Next(6, 10);
+                            mark.Test15_2 = random.Next(5, 10);
+                            mark.Test15_3 = random.Next(4, 10);
                         }
                         marks.Add(mark);
                     }
