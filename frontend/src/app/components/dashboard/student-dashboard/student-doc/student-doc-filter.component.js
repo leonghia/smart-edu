@@ -9,6 +9,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
     #subjectContainer;
     #applyBtn;
     #filterOption = new DocumentFilterRequestParams();
+    #numbersFromInput;
+    #numbersToInput;
 
     constructor() {
         super();
@@ -18,6 +20,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
         this.innerHTML = this.#render();
         this.#subjectContainer = this.querySelector(".subject-container");
         this.#applyBtn = this.querySelector(".apply-btn");
+        this.#numbersFromInput = this.querySelector("#numbers_from");
+        this.#numbersToInput = this.querySelector("#numbers_to");
 
         this.#subjectContainer.addEventListener("click", function(event) {
             const clicked = event.target.closest("input");
@@ -38,6 +42,8 @@ export class StudentDocumentFilterComponent extends HTMLElement {
         }.bind(this));
 
         this.#applyBtn.addEventListener("click", () => {
+            this.#filterOption.fromNumbersOfRating = Number(this.#numbersFromInput.value);
+            this.#filterOption.toNumbersOfRating = Number(this.#numbersToInput.value);
             studentDocService.trigger("displayFilterResult", this.#filterOption);
         });
 
@@ -99,7 +105,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                                 From
                             </label>
     
-                            <input type="number" id="price-from" value="300" min="1" max="10000"
+                            <input type="number" id="numbers_from" value="300" min="1" max="10000"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
                                 placeholder="" required>
                         </div>
@@ -109,7 +115,7 @@ export class StudentDocumentFilterComponent extends HTMLElement {
                                 To
                             </label>
     
-                            <input type="number" id="max-experience-input" value="3500" min="1" max="10000"
+                            <input type="number" id="numbers_to" value="3500" min="1" max="10000"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
                                 placeholder="" required>
                         </div>
