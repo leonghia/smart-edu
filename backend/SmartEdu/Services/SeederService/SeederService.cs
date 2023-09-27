@@ -2717,9 +2717,9 @@ namespace SmartEdu.Services.SeederService
                             mark.Test15_1 = random.Next(1, 10);
                             mark.Test15_2 = random.Next(1, 10);
                             mark.Test15_3 = random.Next(1, 10);
-                            mark.Test45_1 = random.Next(1, 100) / 10.0;
-                            mark.Test45_2 = random.Next(1, 100) / 10.0;
-                            mark.Test60 = random.Next(1, 100) / 10.0;
+                            mark.Test45_1 = random.Next(10, 100) / 10.0;
+                            mark.Test45_2 = random.Next(10, 100) / 10.0;
+                            mark.Test60 = random.Next(10, 100) / 10.0;
                         }
                         if (i == 2)
                         {
