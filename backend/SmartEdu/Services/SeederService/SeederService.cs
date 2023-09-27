@@ -2694,6 +2694,9 @@ namespace SmartEdu.Services.SeederService
             var marks = new List<Mark>();
             var students = await _unitOfWork.StudentRepository.GetAll(null, null, null, null);
             var subjects = await _unitOfWork.SubjectRepository.GetAll(null, null, null, null);
+
+            var random = new Random();
+
             foreach (var student in students)
             {
                 foreach (var subject in subjects)
@@ -2706,7 +2709,15 @@ namespace SmartEdu.Services.SeederService
                             SubjectId = subject.Id,
                             Semester = i % 2 == 0 ? (byte) 1 : (byte) 2,
                             FromYear = 2023 + (i / 2),
-                            ToYear = 2024 + (i / 2)
+                            ToYear = 2024 + (i / 2),
+                            Oral_1 = random.Next(1, 10),
+                            Oral_2 = random.Next(1, 10),
+                            Test15_1 = random.Next(1, 10),
+                            Test15_2 = random.Next(1, 10),
+                            Test15_3 = random.Next(1, 10),
+                            Test45_1 = random.Next(1, 100) / 10.0,
+                            Test45_2 = random.Next(1, 100) / 10.0,
+                            Test60 = random.Next(1, 100) / 10.0
                         };
                         marks.Add(mark);
                     }
