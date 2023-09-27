@@ -54,27 +54,27 @@ export class MarkInfoComponent extends HTMLElement {
         </div>
         <div class="border-t border-dashed border-gray-400">
             <dl class="divide-y divide-dashed divide-gray-400">
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">Period</dt>
                     <dd class="semester-name mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"></dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">Full name</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">${this.#user.fullName}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">Main class</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">${this.#student.mainClass.name}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">GPA</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">N/A</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">Qualify</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">N/A</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-900">Ranking</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">N/A</dd>
                 </div>              
