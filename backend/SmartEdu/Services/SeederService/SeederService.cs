@@ -887,7 +887,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 1,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 2
                 {
@@ -900,7 +900,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 2,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 3
                 {
@@ -913,7 +913,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 3,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 4
                 {
@@ -926,7 +926,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 4,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 5
                 {
@@ -939,7 +939,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 5,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 6
                 {
@@ -952,7 +952,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 6,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 7
                 {
@@ -965,7 +965,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 7,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 8
                 {
@@ -978,7 +978,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 8,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 9
                 {
@@ -991,7 +991,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 9,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 10
                 {
@@ -1004,7 +1004,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 10,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 11
                 {
@@ -1017,7 +1017,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 11,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 12
                 {
@@ -1030,7 +1030,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 12,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 13
                 {
@@ -1043,7 +1043,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 13,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 14
                 {
@@ -1056,7 +1056,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 14,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 15
                 {
@@ -1069,7 +1069,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 15,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 16
                 {
@@ -1082,7 +1082,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 16,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 17
                 {
@@ -1095,7 +1095,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 17,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO // 18
                 {
@@ -1108,7 +1108,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 18,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //19
                 {
@@ -1121,7 +1121,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 19,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //20
                 {
@@ -1134,7 +1134,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 20,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //21
                 {
@@ -1147,7 +1147,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 21,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //22
                 {
@@ -1160,7 +1160,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 22,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //23
                 {
@@ -1173,7 +1173,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 23,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //24
                 {
@@ -1186,7 +1186,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 24,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //25
                 {
@@ -1199,7 +1199,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 25,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //26
                 {
@@ -1212,7 +1212,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 26,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //27
                 {
@@ -1225,7 +1225,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 27,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //28
                 {
@@ -1238,7 +1238,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 28,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //29
                 {
@@ -1251,7 +1251,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 29,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //30
                 {
@@ -1264,7 +1264,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 30,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //31
                 {
@@ -1277,7 +1277,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 31,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //32
                 {
@@ -1290,7 +1290,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 32,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //33
                 {
@@ -1303,7 +1303,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 33,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //34
                 {
@@ -1316,7 +1316,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 34,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //35
                 {
@@ -1329,7 +1329,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 35,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //36
                 {
@@ -1342,7 +1342,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 36,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //37
                 {
@@ -1355,7 +1355,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 37,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //38
                 {
@@ -1368,7 +1368,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 38,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //39
                 {
@@ -1381,7 +1381,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 39,
-                    MainClassId = 1
+                    MainClassId = 6
                 },
                 new RegisterUserDTO //40
                 {
@@ -1394,150 +1394,7 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 1,
                     ParentId = 40,
-                    MainClassId = 1
-                },
-                new RegisterUserDTO //41
-                {
-                    FullName = "Dao Tuan Anh",
-                    UserName = "anh04002610",
-                    Email = "anh04002610@gmail.com",
-                    Identifier = "STU04.002610",
-                    DateOfBirth = new DateTime(2008, 10, 14),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 41,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //42
-                {
-                    FullName = "Dang Ngoc Chieu",
-                    UserName = "chieu04002609",
-                    Email = "chieu04002609@gmail.com",
-                    Identifier = "STU04.002609",
-                    DateOfBirth = new DateTime(2008, 12, 7),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 42,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //43
-                {
-                    FullName = "Tran Tien Dung",
-                    UserName = "dung04002616",
-                    Email = "dung04002616@gmail.com",
-                    Identifier = "STU04.002616",
-                    DateOfBirth = new DateTime(2008, 3, 27),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 43,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //44
-                {
-                    FullName = "Tran Minh Duong",
-                    UserName = "duong04002615",
-                    Email = "duong04002615@gmail.com",
-                    Identifier = "STU04.002615",
-                    DateOfBirth = new DateTime(2008, 9, 23),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 44,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //45
-                {
-                    FullName = "Nguyen Minh Hieu",
-                    UserName = "hieu04002614",
-                    Email = "hieu04002614@gmail.com",
-                    Identifier = "STU04.002614",
-                    DateOfBirth = new DateTime(2008, 10, 14),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 45,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //46
-                {
-                    FullName = "Le Van Oai",
-                    UserName = "oai04002612",
-                    Email = "oai04002612@gmail.com",
-                    Identifier = "STU04.002612",
-                    DateOfBirth = new DateTime(2008, 10, 3),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 46,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //47
-                {
-                    FullName = "Le Ngoc Quang",
-                    UserName = "quang04002611",
-                    Email = "quang04002611@gmail.com",
-                    Identifier = "STU04.002611",
-                    DateOfBirth = new DateTime(2008, 11, 29),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 47,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //48
-                {
-                    FullName = "Nguyen Khac Tho",
-                    UserName = "tho04002613",
-                    Email = "tho04002613@gmail.com",
-                    Identifier = "STU04.002613",
-                    DateOfBirth = new DateTime(2008, 9, 5),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 48,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //49
-                {
-                    FullName = "Pham Quang Dai",
-                    UserName = "dai04002620",
-                    Email = "dai04002620@gmail.com",
-                    Identifier = "STU04.002620",
-                    DateOfBirth = new DateTime(2008, 6, 2),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 49,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //50
-                {
-                    FullName = "Nguyen Van Hung",
-                    UserName = "hung04002618",
-                    Email = "hung04002618@gmail.com",
-                    Identifier = "STU04.002618",
-                    DateOfBirth = new DateTime(2008, 11, 4),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 50,
-                    MainClassId = 2
-                },
-                new RegisterUserDTO //51
-                {
-                    FullName = "Vu Tuan Huy",
-                    UserName = "huy04002621",
-                    Email = "huy04002621@gmail.com",
-                    Identifier = "STU04.002621",
-                    DateOfBirth = new DateTime(2008, 4, 29),
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 1,
-                    ParentId = 51,
-                    MainClassId = 2
+                    MainClassId = 6
                 },
                 // Parents
                 new RegisterUserDTO // 1
@@ -1895,114 +1752,6 @@ namespace SmartEdu.Services.SeederService
                     FullName = "Vu Thi Huyen Trang",
                     UserName = "trang03000840",
                     Email = "trang03000840@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //41
-                {
-                    FullName = "Pham Thi Thu Uyen",
-                    UserName = "uyen03000836",
-                    Email = "uyen03000836@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //42
-                {
-                    FullName = "Nguyen Hong Van",
-                    UserName = "van03000825",
-                    Email = "van03000825@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //43
-                {
-                    FullName = "Nguyen Thi Yen Anh",
-                    UserName = "yen03000851",
-                    Email = "yen03000851@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //44
-                {
-                    FullName = "Tran Thi Hai Anh",
-                    UserName = "anh03000854",
-                    Email = "hai03000854@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //45
-                {
-                    FullName = "Pham Kim Chi",
-                    UserName = "chi03000852",
-                    Email = "chi03000852@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //46
-                {
-                    FullName = "Nguyen Minh Hoang",
-                    UserName = "hoang03000845",
-                    Email = "hoang03000845@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //47
-                {
-                    FullName = "Nguyen Thi Truc Linh",
-                    UserName = "linh03000850",
-                    Email = "linh03000850@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //47
-                {
-                    FullName = "Vu My Linh",
-                    UserName = "linh03000856",
-                    Email = "linh03000856@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //48
-                {
-                    FullName = "Le Thi Bich Loan",
-                    UserName = "loan03000842",
-                    Email = "loan03000842@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //49
-                {
-                    FullName = "Nguyen Thi Minh Ly",
-                    UserName = "ly03000847",
-                    Email = "ly03000847@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //50
-                {
-                    FullName = "Ngo Tra My",
-                    UserName = "my03000844",
-                    Email = "my03000844@gmail.com",
-                    Password = "Sm@rtEdu1",
-                    Roles = roles,
-                    Type = 2
-                },
-                new RegisterUserDTO //51
-                {
-                    FullName = "Nguyen Thi Tra My",
-                    UserName = "my03000849",
-                    Email = "my03000849@gmail.com",
                     Password = "Sm@rtEdu1",
                     Roles = roles,
                     Type = 2
