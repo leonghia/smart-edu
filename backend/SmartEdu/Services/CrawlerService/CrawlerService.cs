@@ -36,7 +36,7 @@ public class CrawlerService : ICrawlerService
             document.Name = tableRows[i].SelectSingleNode(".//a[@class='bookTitle']").InnerText.Trim();
             // var isDouble = Double.TryParse(tableRows[i].SelectSingleNode(".//span[@class='minirating']").InnerText.Trim().Split(" ").ElementAt(0), out double rating);
             // if (isDouble) document.Rating = rating;
-            document.Rating = random.Next(1, 50) / 10.0;
+            document.Rating = random.Next(10, 50) / 10.0;
             var isInt32 = Int32.TryParse(tableRows[i].SelectSingleNode(".//span[@class='minirating']").InnerText.Trim().Split(" ").ElementAt(4).Replace(",", ""), out int numbersOfRating);
             if (isInt32) document.NumbersOfRating = numbersOfRating;
             var id = tableRows[i].SelectSingleNode(".//div[@class='u-anchorTarget']").GetAttributeValue("id", "def");
