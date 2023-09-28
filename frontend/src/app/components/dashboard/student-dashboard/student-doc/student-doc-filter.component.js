@@ -1,6 +1,6 @@
 import { data } from "../../../../app.store";
 import { getSubjectIdByName } from "../../../../helpers/filter.helper";
-import { DocumentFilterRequestParams } from "../../../../models/docFilterRequestParams";
+import { DocumentFilterRequestParams } from "../../../../models/docFilterRequestParams.model";
 import dataService from "../../../../services/data.service";
 import studentDocService from "./student-doc.service";
 
