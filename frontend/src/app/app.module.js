@@ -20,8 +20,6 @@ import { StudentExtraClassQuickviewComponent } from "./components/modal/quickvie
 import { SuccessModalComponent } from "./components/modal/success-modal/success-modal.component.js";
 import { StudentMarkAssessmentComponent } from "./components/dashboard/student-dashboard/student-ma/student-ma.component.js";
 import { MarkTableComponent } from "./components/table/mark-table.component.js";
-import { TimetableWeekViewComponent } from "./components/timetable/timetable-weekview.component.js";
-import { StudentTimetableComponent } from "./components/dashboard/student-dashboard/student-timetable/student-timetable.component.js";
 import { DeleteModalComponent } from "./components/modal/delete-modal/delete-modal.component.js";
 import { SuccessAlertComponent } from "./components/alert/success-alert.component.js";
 import { UnregisterExtraClassModalComponent } from "./components/dashboard/student-dashboard/student-ec/unregister-ec-modal.component.js";
@@ -33,3 +31,4 @@ import { StudentDocumentPaginationComponent } from "./components/dashboard/stude
 import { MarkAssessmentNavigationComponent } from "./components/navigation/ma-nav.component.js";
 import { StudentAssessmentComponent } from "./components/assessment/student-assessment.component.js";
 import { MarkInfoComponent } from "./components/dashboard/student-dashboard/student-ma/mark-info.component.js";
+import { AcademicProgressComponent } from "./components/academic-progress/academic-progress.component.js";

@@ -83,22 +83,22 @@ export class MarkInfoComponent extends HTMLElement {
 
     #render() {
         return `
-    <div class="bg-gray-900 mb-8 rounded-xl">
+    <div class="bg-gray-800 mb-8 rounded-xl">
         <div class="mx-auto max-w-7xl">
             <div class="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-3 lg:grid-cols-3">
-                <div class="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8 rounded-l-xl">
+                <div class="bg-gray-800 px-4 py-6 sm:px-6 lg:px-8 rounded-l-xl">
                     <p class="text-sm font-medium leading-6 text-gray-400">GPA</p>
                     <p class="mt-2 flex items-baseline gap-x-2">
                         <span class="text-2xl font-semibold tracking-tight text-white gpa"></span>
                     </p>
                 </div>
-                <div class="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
+                <div class="bg-gray-800 px-4 py-6 sm:px-6 lg:px-8">
                     <p class="text-sm font-medium leading-6 text-gray-400">Ranking</p>
                     <p class="mt-2 flex items-baseline gap-x-2">
                         <span class="text-2xl font-semibold tracking-tight text-white">13/40</span>
                     </p>
                 </div>
-                <div class="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8 rounded-r-xl">
+                <div class="bg-gray-800 px-4 py-6 sm:px-6 lg:px-8 rounded-r-xl">
                     <p class="text-sm font-medium leading-6 text-gray-400">Qualify</p>
                     <p class="mt-2 flex items-baseline gap-x-2">
                         <span class="text-2xl font-semibold tracking-tight text-white qualify"></span>

@@ -36,19 +36,19 @@ export class StudentMainComponent extends HTMLElement {
                 this.firstElementChild.firstElementChild.innerHTML = `<student-home></student-home>`;             
                 break;
             case 1:
-                this.firstElementChild.firstElementChild.innerHTML = `<student-ec></student-ec>`;             
+                this.firstElementChild.firstElementChild.innerHTML = `<academic-progress><academic-progress/>`;
                 break;
             case 2:
-                this.firstElementChild.firstElementChild.innerHTML = `<student-doc></student-doc>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-ma><student-ma/>`;
                 break;
             case 3:
-                this.firstElementChild.firstElementChild.innerHTML = `<student-ma></student-ma>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<timetables-schedules><timetables-schedules/>`;
                 break;
             case 4:
-                this.firstElementChild.firstElementChild.innerHTML = `<student-timetable></student-timetable>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-ec><student-ec/>`;
                 break;
             case 5:
-                this.firstElementChild.firstElementChild.innerHTML = `<student-tool></student-tool>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<student-doc><student-doc/>`;
                 break;
             default:
                 console.log("default");
