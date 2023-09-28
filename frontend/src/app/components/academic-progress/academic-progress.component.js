@@ -21,59 +21,10 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#nextMonthButton = this.querySelector(".next-month-btn");
         this.#prevMonthButton = this.querySelector(".prev-month-btn");
         this.#monthYearDiv = this.querySelector(".month-year-div");
-
-        this.#nextMonthButton.addEventListener("click", () => {
-            const temp = new Date(this.#date);
-            this.#date.setMonth(temp.getMonth() + 1);
-            this.#displayCalendar(this.#date.getFullYear(), this.#date.getMonth());
-            this.#monthYearDiv.textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getFullYear()}`;
-        });
-
-        this.#prevMonthButton.addEventListener("click", () => {
-            const temp = new Date(this.#date);
-            this.#date.setMonth(temp.getMonth() - 1);
-            this.#displayCalendar(this.#date.getFullYear(), this.#date.getMonth());
-            this.#monthYearDiv.textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getFullYear()}`;
-        });
-
-        this.#displayCalendar(this.#date.getFullYear(), this.#date.getMonth());
     }
 
     disconnectedCallback() {
 
-    }
-
-    #displayCalendar(year, month) {
-        let firstDay = getFirstDayOfMonth(year, month);
-        if (firstDay - 1 < 0) firstDay = 7;
-        const lastDate = getLastDateOfMonth(year, month);
-        const temp = new Date(year, month, 1);
-        const previousDate = new Date(temp);
-        previousDate.setDate(temp.getDate() - 1);
-        let lastDateOfPreviousMonth = previousDate.getDate(); 
-        let firstDateOfNextMonth = 1;
-        let start = 1;
-        for (let i = 0; i < this.#dateButtons.length; i++) {
-            if (i >= firstDay - 1 && i < firstDay - 1 + lastDate) {
-                this.#dateButtons[i].firstElementChild.textContent = start++;
-                this.#dateButtons[i].classList.remove("bg-gray-50", "text-gray-400");
-                this.#dateButtons[i].classList.add("bg-white", "text-gray-900");
-                continue;
-            } 
-            if (i < firstDay - 1) {
-                this.#dateButtons[i].firstElementChild.textContent = lastDateOfPreviousMonth - firstDay + 2;
-                this.#dateButtons[i].classList.remove("bg-white", "text-gray-900");
-                this.#dateButtons[i].classList.add("bg-gray-50", "text-gray-400");
-                lastDateOfPreviousMonth++;
-                continue;
-            }
-            if (i >= firstDay - 1 + lastDate) {
-                this.#dateButtons[i].firstElementChild.textContent = firstDateOfNextMonth++;
-                this.#dateButtons[i].classList.remove("bg-white", "text-gray-900");
-                this.#dateButtons[i].classList.add("bg-gray-50", "text-gray-400");
-                continue;
-            }
-        }
     }
 
     #render() {
