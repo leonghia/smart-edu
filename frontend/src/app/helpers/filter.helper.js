@@ -69,3 +69,17 @@ export const filterExtraClasses = function (extraClasses = [], filterOption = {}
 export const getSubjectIdByName = function (subjects = [], name = "") {
     return subjects.find(s => s.name === name).id;
 }
+
+export const getMainClassFromSemester = function(academicYears = [], marks = []) {
+    const index = academicYears.findIndex(y => y.fromYear === marks[0].fromYear && y.toYear === marks[0].toYear);
+    switch (index) {
+        case 0:
+            return 10;
+        case 1:
+            return 11;
+        case 2:
+            return 12;
+        default:
+            return 13;
+    }
+}

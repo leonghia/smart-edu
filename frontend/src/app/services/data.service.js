@@ -3,7 +3,7 @@ import { BASE_URL } from "../app.config.js";
 import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
 import { RequestParams } from "../models/request-params.model.js";
-import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.js";
+import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.model.js";
 
 class DataService {
 
@@ -55,9 +55,12 @@ class DataService {
         return await getData(`${BASE_URL}/Document/count?SubjectId=${documentFilterRequestParams.subjectId}&FromNumbersOfRating=${documentFilterRequestParams.fromNumbersOfRating}&ToNumbersOfRating=${documentFilterRequestParams.toNumbersOfRating}&FromRating=${documentFilterRequestParams.fromRating}&ToRating=${documentFilterRequestParams.toRating}`);
     }
 
-    async getDocumentsCountEachSubject()
-    {
+    async getDocumentsCountEachSubject() {
         return await getData(`${BASE_URL}/Document/count-each`);
+    }
+
+    async getMainClassById(id) {
+        return await getData(`${BASE_URL}/MainClass/${id}`);
     }
 }
 

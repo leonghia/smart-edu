@@ -5,6 +5,7 @@ export const state = {
 export const data = {
     students: [],
     parents: [],
+    mainClasses: [],
     extraClasses: [],
     subjects: [],
     documents: [],

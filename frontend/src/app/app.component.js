@@ -30,10 +30,9 @@ export class AppComponent extends HTMLElement {
                             dataService.getStudents()
                                 .then(res => {
                                     const students = res.data;
-                                    data.currentUser.student = students.find(s => s.user.id == data.currentUser.id);
-                                    
-                                });                        
-                            this.innerHTML = "<student-dashboard></student-dashboard>";
+                                    data.currentUser.student = students.find(s => s.user.id == data.currentUser.id);     
+                                    this.innerHTML = "<student-dashboard></student-dashboard>";        
+                                });                                          
                             break;
                         case 2:
                             this.innerHTML = "<parent-dashboard></parent-dashboard>";

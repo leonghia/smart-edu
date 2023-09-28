@@ -4,7 +4,8 @@ class StudentMarkAssessmentService extends EventService {
     
     constructor() {
         super({
-            switchTable: []
+            switchSemester: [],
+            switchSummary: [],
         });
     }
 }

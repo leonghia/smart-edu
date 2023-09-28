@@ -11,6 +11,7 @@ export class MarkAssessmentNavigationComponent extends HTMLElement {
     #option;
     #dropdown;
     #dropdownBtn;
+    #semsester1Tab;
 
     #dropdownState = {
         state: false
@@ -33,6 +34,7 @@ export class MarkAssessmentNavigationComponent extends HTMLElement {
         this.#semesterTabContainer = this.querySelector(".semester-tab-container");
         this.#dropdown = this.querySelector(".dropdown");
         this.#dropdownBtn = this.querySelector(".dropdown-btn");
+        this.#semsester1Tab = this.querySelector("#semester_1_tab");
         const items = Array.from(this.#dropdown.querySelectorAll("a"));
 
         this.#dropdownBtn.addEventListener("click", () => {
@@ -64,8 +66,15 @@ export class MarkAssessmentNavigationComponent extends HTMLElement {
             clicked.classList.remove(..."text-gray-500 hover:text-gray-700".split(" "));
             clicked.classList.add(..."bg-fuchsia-100 text-fuchsia-700".split(" "));
             this.#option.semester = Number(clicked.dataset.semester);
-            const marks = getMarksFromAcademicYearAndSemester(data.currentUser.student.marks, this.#option);
-            studentMaService.trigger("switchTable", marks);
+            if (this.#option.semester !== 999) {
+                const marks = getMarksFromAcademicYearAndSemester(data.currentUser.student.marks, this.#option);
+                studentMaService.trigger("switchSemester", marks);
+            } else {
+                this.#option.semester = 1;
+                const marksSemester1 = getMarksFromAcademicYearAndSemester(data.currentUser.student.marks, this.#option);
+                studentMaService.trigger("switchSummary", marksSemester1);
+            }
+            
         });
 
         this.#yearTabContainer.addEventListener("click", event => {
@@ -83,7 +92,15 @@ export class MarkAssessmentNavigationComponent extends HTMLElement {
             this.#option.fromYear = Number(clicked.dataset.from);
             this.#option.toYear = Number(clicked.dataset.to);
             const marks = getMarksFromAcademicYearAndSemester(data.currentUser.student.marks, this.#option);
-            studentMaService.trigger("switchTable", marks);
+            studentMaService.trigger("switchSemester", marks);
+
+            const semesterLinks = this.#semesterTabContainer.querySelectorAll("a");
+            semesterLinks.forEach(l => {
+                l.classList.remove(..."bg-fuchsia-100 text-fuchsia-700".split(" "));
+                l.classList.add(..."text-gray-500 hover:text-gray-700".split(" "));
+            });
+            this.#semsester1Tab.classList.remove(..."text-gray-500 hover:text-gray-700".split(" "));
+            this.#semsester1Tab.classList.add(..."bg-fuchsia-100 text-fuchsia-700".split(" "));
         });
     }
 
@@ -132,12 +149,12 @@ export class MarkAssessmentNavigationComponent extends HTMLElement {
             <nav class="flex justify-between" aria-label="Tabs">
                 <div class="flex space-x-4 semester-tab-container">
                     <!-- Current: "bg-fuchsia-100 text-fuchsia-700", Default: "text-gray-500 hover:text-gray-700" -->
-                    <a href="#" data-semester="1" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Semester 1</a>
+                    <a href="#" id="semester_1_tab" data-semester="1" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Semester 1</a>
                     <a href="#" data-semester="2" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Semester 2</a>
-                    <a href="#" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+                    <a href="#" data-semester="999" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
                     aria-current="page">Summary</a> 
                 </div>
-                <div class="relative inline-block text-left">
+                <div class="hidden relative inline-block text-left">
                     <div>
                         <button type="button"
                             class="dropdown-btn inline-flex w-full justify-center gap-x-1.5 rounded-md bg-gray-100 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-0 ring-inset ring-gray-300"
