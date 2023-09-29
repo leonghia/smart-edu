@@ -1,4 +1,5 @@
-﻿using SmartEdu.DTOs.TeacherDTO;
+﻿using SmartEdu.DTOs.StudentDTO;
+using SmartEdu.DTOs.TeacherDTO;
 
 namespace SmartEdu.DTOs.MainClassDTO
 {
@@ -7,5 +8,6 @@ namespace SmartEdu.DTOs.MainClassDTO
         public int Id { get; set; }
         public string Name { get; set; }
         public GetTeacherDTO Teacher { get; set; }
+        public ICollection<GetStudentDTO> Students { get; set; }
     }
 }

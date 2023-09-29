@@ -14,6 +14,26 @@ public class ClassService : IClassService
         this._unitOfWork = unitOfWork;
     }
 
+    public async Task<ServerResponse<MarkRanking>> GetRanking(int id, MarkFilterOption markFilterOption)
+    {
+        var serverResponse = new ServerResponse<MarkRanking>();
+        var results = new List<double>();
+        var student = await _unitOfWork.StudentRepository.GetSingle(s => s.Id == id, new List<string>{ "Marks" });
+        var marks = student.Marks.ToList();
+        var studentGPA = MarkCalculator.CalculateGPA(marks, markFilterOption);
+        results.Add(studentGPA);
+        var students = await _unitOfWork.StudentRepository.GetAll(null, s => s.MainClassId == student.MainClassId, null, new List<string>{ "Marks" });
+        foreach (var s in students)
+        {
+            var otherGPA = MarkCalculator.CalculateGPA(s.Marks.ToList(), markFilterOption);
+            if (!results.Contains(otherGPA)) results.Add(otherGPA);
+        }
+        results.Sort();
+        var ranking = results.FindIndex(r => r == studentGPA);
+        serverResponse.Data = new MarkRanking { Ranking = ranking, NumbersOfStudents = students.Count() };
+        return serverResponse;
+    }
+
     public async Task<ServerResponse<object>> UnBookmark(DeleteExtraClassEcBookmarkDTO deleteExtraClassEcBookmarkDTO)
     {
         var serverResponse = new ServerResponse<object>();

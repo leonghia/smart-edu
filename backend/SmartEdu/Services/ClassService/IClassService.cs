@@ -7,4 +7,5 @@ namespace SmartEdu.Services.ClassService;
 public interface IClassService {
     Task<ServerResponse<object>> UnBookmark(DeleteExtraClassEcBookmarkDTO deleteExtraClassEcBookmarkDTO);
     Task<ServerResponse<object>> UnRegister(DeleteExtraClassStudentDTO deleteExtraClassStudentDTO); 
+    Task<ServerResponse<MarkRanking>> GetRanking(int id, MarkFilterOption markFilterOption);
 }

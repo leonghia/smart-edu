@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartEdu.DTOs.MainClassDTO;
 using SmartEdu.Entities;
 using SmartEdu.Models;
+using SmartEdu.Services.ClassService;
 using SmartEdu.UnitOfWork;
 using System.Buffers.Text;
 
@@ -12,8 +13,11 @@ namespace SmartEdu.Controllers
     [Route("api/[controller]")]
     public class MainClassController : BaseController<MainClass>
     {
+        
+
         public MainClassController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
+            
         }
 
         /// <summary>
@@ -35,7 +39,7 @@ namespace SmartEdu.Controllers
         [HttpGet("{id:int}", Name = "GetMainClassById")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await base.GetSingle<GetMainClassDTO>(m => m.Id == id, new List<string> {"Teacher.User"});
+            return await base.GetSingle<GetMainClassDTO>(m => m.Id == id, new List<string> {"Teacher.User", "Students.Marks"});
         }
 
         /// <summary>
