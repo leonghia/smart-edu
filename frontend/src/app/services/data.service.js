@@ -4,6 +4,7 @@ import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
 import { RequestParams } from "../models/request-params.model.js";
 import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.model.js";
+import { MarkFilterOption } from "../models/markFilterOption.js";
 
 class DataService {
 
@@ -61,6 +62,10 @@ class DataService {
 
     async getMainClassById(id) {
         return await getData(`${BASE_URL}/MainClass/${id}`);
+    }
+
+    async getRanking(id = 0, markFilterOption = new MarkFilterOption()) {
+        return await getData(`${BASE_URL}/Mark/ranking/${id}?Semester=${markFilterOption.semester}&FromYear=${markFilterOption.fromYear}&ToYear=${markFilterOption.toYear}`);
     }
 }
 

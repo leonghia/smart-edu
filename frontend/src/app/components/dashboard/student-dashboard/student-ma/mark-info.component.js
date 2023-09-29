@@ -1,9 +1,11 @@
 import { data } from "../../../../app.store";
 import studentMaService from "./student-ma.service";
-import { calculateGPA, calculateGPASummary, determineQualify, getAcademicYears, lastNameFromFullName } from "../../../../helpers/util.helper";
+import { calculateGPA, calculateGPASummary, calculateRankingSemester1, determineQualify, getAcademicYears, lastNameFromFullName } from "../../../../helpers/util.helper";
 import { getMarksFromAcademicYearAndSemester } from "../../../../helpers/util.helper";
 import { getMainClassFromSemester } from "../../../../helpers/filter.helper";
 import dataService from "../../../../services/data.service";
+import { MarkFilterOption } from "../../../../models/markFilterOption";
+import { mark } from "regenerator-runtime";
 
 export class MarkInfoComponent extends HTMLElement {
 
@@ -16,6 +18,7 @@ export class MarkInfoComponent extends HTMLElement {
     #gpa;
     #qualify;
     #headTeacher;
+    #rankingText;
 
     constructor() {
         super();
@@ -29,8 +32,8 @@ export class MarkInfoComponent extends HTMLElement {
         })
         this.#user = data.currentUser;
         this.#student = data.currentUser.student;
-        
-        
+
+
     }
 
     connectedCallback() {
@@ -40,6 +43,7 @@ export class MarkInfoComponent extends HTMLElement {
         this.#gpa = this.querySelector(".gpa");
         this.#qualify = this.querySelector(".qualify");
         this.#headTeacher = this.querySelector(".head-teacher");
+        this.#rankingText = this.querySelector(".ranking-text");
 
         this.#academicYears = getAcademicYears(data.currentUser.student.marks);
         const marks = getMarksFromAcademicYearAndSemester(data.currentUser.student.marks, {
@@ -68,7 +72,18 @@ export class MarkInfoComponent extends HTMLElement {
         this.#mainClass.textContent = `${getMainClassFromSemester(this.#academicYears, marks)}${this.#student.mainClass.name.slice(-1)}`;
         const gpa = calculateGPA(marks);
         this.#gpa.textContent = gpa || "-";
+        const mainClassId = data.currentUser.student.mainClass.id;
         this.#qualify.textContent = determineQualify(gpa) || "-";
+
+        const markFilterOption = new MarkFilterOption(semester, fromYear, toYear);
+        if (gpa) {
+            dataService.getRanking(data.currentUser.student.id, markFilterOption)
+                .then(res => {
+                    this.#rankingText.firstElementChild.textContent = `${res.data.ranking}/${res.data.numbersOfStudents}`;
+                });
+        } else {
+            this.#rankingText.firstElementChild.textContent = "-";
+        }
     }
 
     #handleSwitchSummary(marksSemester1) {
@@ -79,6 +94,16 @@ export class MarkInfoComponent extends HTMLElement {
         const gpa = calculateGPASummary(data.currentUser.student.marks, marksSemester1);
         this.#gpa.textContent = gpa || "-";
         this.#qualify.textContent = determineQualify(gpa) || "-";
+
+        const markFilterOption = new MarkFilterOption(3, fromYear, toYear);
+        if (gpa) {
+            dataService.getRanking(data.currentUser.student.id, markFilterOption)
+                .then(res => {
+                    this.#rankingText.firstElementChild.textContent = `${res.data.ranking}/${res.data.numbersOfStudents}`;
+                });
+        } else {
+            this.#rankingText.firstElementChild.textContent = "-";
+        }
     }
 
     #render() {
@@ -94,8 +119,8 @@ export class MarkInfoComponent extends HTMLElement {
                 </div>
                 <div class="bg-gray-800 px-4 py-6 sm:px-6 lg:px-8">
                     <p class="text-sm font-medium leading-6 text-gray-400">Ranking</p>
-                    <p class="mt-2 flex items-baseline gap-x-2">
-                        <span class="text-2xl font-semibold tracking-tight text-white">13/40</span>
+                    <p class="ranking-text mt-2 flex items-baseline gap-x-2">
+                        <span class="text-2xl font-semibold tracking-tight text-white"></span>
                     </p>
                 </div>
                 <div class="bg-gray-800 px-4 py-6 sm:px-6 lg:px-8 rounded-r-xl">
