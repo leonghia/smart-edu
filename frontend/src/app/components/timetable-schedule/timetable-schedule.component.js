@@ -1,4 +1,4 @@
-export class StudentTimetableComponent extends HTMLElement {
+export class TimetableScheduleComponent extends HTMLElement {
     constructor() {
         super();
     }
@@ -13,9 +13,9 @@ export class StudentTimetableComponent extends HTMLElement {
 
     #render() {
         return `
-            <timetable-weekview></timetable-weekview>
+<app-timetable></app-timetable>
         `;
     }
 }
 
-customElements.define("student-timetable", StudentTimetableComponent);
+customElements.define("timetable-schedule", TimetableScheduleComponent);

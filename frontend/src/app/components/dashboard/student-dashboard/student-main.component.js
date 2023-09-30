@@ -42,7 +42,7 @@ export class StudentMainComponent extends HTMLElement {
                 this.firstElementChild.firstElementChild.innerHTML = `<student-ma><student-ma/>`;
                 break;
             case 3:
-                this.firstElementChild.firstElementChild.innerHTML = `<timetables-schedules><timetables-schedules/>`;
+                this.firstElementChild.firstElementChild.innerHTML = `<timetable-schedule><timetable-schedule/>`;
                 break;
             case 4:
                 this.firstElementChild.firstElementChild.innerHTML = `<student-ec><student-ec/>`;

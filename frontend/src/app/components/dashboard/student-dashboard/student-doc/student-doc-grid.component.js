@@ -1,9 +1,9 @@
 import { data } from "../../../../app.store";
 import dataService from "../../../../services/data.service";
-import { RequestParams } from "../../../../models/request-params.model";
+import { RequestParams } from "../../../../models/requestParams";
 import { DEFAULT_DOC_DES } from "../../../../app.config";
 import studentDocService from "./student-doc.service";
-import { DocumentFilterRequestParams } from "../../../../models/docFilterRequestParams.model";
+import { DocumentFilterRequestParams } from "../../../../models/docFilterRequestParams";
 import { displayRating } from "../../../../helpers/util.helper";
 
 export class StudentDocumentGridComponent extends HTMLElement {

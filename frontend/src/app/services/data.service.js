@@ -2,8 +2,8 @@ import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
-import { RequestParams } from "../models/request-params.model.js";
-import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.model.js";
+import { RequestParams } from "../models/requestParams.js";
+import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.js";
 import { MarkFilterOption } from "../models/markFilterOption.js";
 
 class DataService {

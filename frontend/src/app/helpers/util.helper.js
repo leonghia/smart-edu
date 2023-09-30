@@ -1,5 +1,4 @@
-import { mark } from "regenerator-runtime";
-import { Mark } from "../models/mark.model";
+import { Mark } from "../models/mark";
 
 
 export const checkDuplicatedSchedule = function (extraClass) {
