@@ -16,6 +16,7 @@ namespace SmartEdu.UnitOfWork
         IGenericRepository<EcBookmark> EcBookmarkRepository { get; }
         IGenericRepository<ExtraClassEcBookmark> ExtraClassEcBookmarkRepository { get; }
         IGenericRepository<Mark> MarkRepository { get; }
+        IGenericRepository<Timetable> TimetableRepository { get; }
         Task Save();
     }
 }

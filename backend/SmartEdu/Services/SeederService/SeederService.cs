@@ -7,6 +7,7 @@ using SmartEdu.Entities;
 using SmartEdu.Models;
 using SmartEdu.Services.CrawlerService;
 using SmartEdu.UnitOfWork;
+using SmartEdu.Helpers.TimetableRandomer;
 
 namespace SmartEdu.Services.SeederService
 {
@@ -1766,6 +1767,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingStudents(registerUserDTOs);
             await SeedingMarks();
             await SeedingDocuments();
+            await SeedingTimetables();
 
             serverResponse.Message = "Seeding data successfully.";
             
@@ -2432,9 +2434,7 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.MarkRepository.Count();
             if (count > 0)
             {
-                
                 System.Console.WriteLine("Marks had been seeded before. Aborting...");
-                
                 return;
             }
             
@@ -2487,6 +2487,66 @@ namespace SmartEdu.Services.SeederService
             
             System.Console.WriteLine("Seeding marks successfully :)");
             
+        }
+
+        public async Task SeedingTimetables()
+        {
+            var count = _unitOfWork.TimetableRepository.Count();
+            if (count > 0)
+            {
+                System.Console.WriteLine("Timetables had been seeded before. Aborting...");
+                return;
+            }
+            var teachers = (await _unitOfWork.TeacherRepository.GetAll(null, null, null, null)).ToArray<Teacher>();
+            var timetables = new List<Timetable>();
+            var random = new Random();
+            
+            var startDate = new DateTime(2023, 9, 1);
+            for (var i = 0; i < 60; i++)
+            {
+                if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    startDate = startDate.AddDays(1);
+                    continue;
+                }
+                var r = random.Next(0, 2);
+                
+                var day = new List<Timetable>();
+                for (var j = 0; j < 4; j++)
+                {
+                    var rrr = random.Next(0, 3);
+                    var rr = random.Next(0, teachers.Length);
+                    if (r == 0)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.MorningTimes[j].From.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.MorningTimes[j].To.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId)][rrr]
+                        };
+                        day.Add(timetable);
+                    } 
+                    else if (r == 1)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].From.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].To.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId)][rrr]
+                        };
+                        day.Add(timetable);
+                    }
+                }
+                timetables.AddRange(day);
+                startDate = startDate.AddDays(1);
+            }
+            await _unitOfWork.TimetableRepository.AddRange(timetables);
+            await _unitOfWork.Save();
+            System.Console.WriteLine("Seeding timetables successfully :)");
         }
     }
 }

@@ -18,6 +18,7 @@ namespace SmartEdu.UnitOfWork
         private IGenericRepository<EcBookmark> _ecBookmarkRepository;
         private IGenericRepository<ExtraClassEcBookmark> _extraClassEcBookmarkRepository;
         private IGenericRepository<Mark> _markRepository;
+        private IGenericRepository<Timetable> _timetableRepository;
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -37,7 +38,7 @@ namespace SmartEdu.UnitOfWork
         public IGenericRepository<EcBookmark> EcBookmarkRepository => _ecBookmarkRepository ??= new GenericRepository<EcBookmark>(_context);
         public IGenericRepository<ExtraClassEcBookmark> ExtraClassEcBookmarkRepository => _extraClassEcBookmarkRepository ??= new GenericRepository<ExtraClassEcBookmark>(_context);
         public IGenericRepository<Mark> MarkRepository => _markRepository ??= new GenericRepository<Mark>(_context);
-
+        public IGenericRepository<Timetable> TimetableRepository => _timetableRepository ??= new GenericRepository<Timetable>(_context);
         public void Dispose()
         {
             _context.Dispose();
