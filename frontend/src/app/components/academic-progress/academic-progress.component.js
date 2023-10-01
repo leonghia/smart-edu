@@ -1,6 +1,6 @@
 import { MONTHS, WEEKDAYS } from "../../app.enum";
 import { data } from "../../app.store";
-import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayTimetables } from "../../helpers/datetime.helper";
+import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayTimetables, toISOVNString } from "../../helpers/datetime.helper";
 import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
 
@@ -115,7 +115,7 @@ export class AcademicProgressComponent extends HTMLElement {
             if (currentIndex >= firstDayOfMonth && currentIndex < lastDateOfMonth + firstDayOfMonth) {
                 currentElement.firstElementChild.textContent = start + 1;
                 temp.setDate(start + 1);
-                currentElement.firstElementChild.dateTime = temp.toISOString().slice(0, 10);
+                currentElement.firstElementChild.dateTime = toISOVNString(temp);
                 currentElement.classList.remove("text-gray-400", "bg-gray-50", "pointer-events-none");
                 currentElement.classList.add("text-gray-900", "bg-white");
                 start++;
@@ -149,7 +149,10 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#selectedDateHeading.children[1].textContent = `${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
         this.#selectedWeekdayText.textContent = `${WEEKDAYS[date.getDay()]}`;
 
-        if (date.getDay() === 0) return;
+        if (date.getDay() === 0) {
+            this.#timetablesOl.innerHTML = "";
+            return;
+        }
 
         this.#timetableRequestParams.from = date;
         temp.setDate(temp.getDate() + 1);

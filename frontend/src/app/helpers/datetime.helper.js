@@ -98,3 +98,9 @@ export const displayTimetables = function (timetablesOl, timetables) {
 
     });
 }
+
+export const toISOVNString = function (date) {
+    let local = new Date(date);
+    local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return local.toISOString().slice(0, 10);
+}
