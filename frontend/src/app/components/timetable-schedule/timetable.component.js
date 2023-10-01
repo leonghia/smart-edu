@@ -1,6 +1,19 @@
+import { SUBJECT_STYLING } from "../../app.enum";
 import { data } from "../../app.store";
+import { calculateTimetableColStart, calculateTimetableGridRow, formatTime } from "../../helpers/datetime.helper";
+import { TimetableRequestParams } from "../../models/timetableRequestParams";
+import dataService from "../../services/data.service";
 
 export class TimetableComponent extends HTMLElement {
+
+    #from = new Date(2023, 9, 2);
+    #dateSpans;
+    #prevWeekBtn;
+    #nextWeekBtn;
+    #currentWeekBtn;
+    #timetablesOl;
+
+    #timetableRequestParams = new TimetableRequestParams(data.currentUser.student.mainClass.id);
 
     constructor() {
         super();
@@ -8,10 +21,72 @@ export class TimetableComponent extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = this.#render();
+        this.#dateSpans = Array.from(this.querySelectorAll(".date-span"));
+        this.#prevWeekBtn = this.querySelector(".prev-week-btn");
+        this.#nextWeekBtn = this.querySelector(".next-week-btn");
+        this.#currentWeekBtn = this.querySelector(".current-week-btn");
+        this.#timetablesOl = this.querySelector(".timetables-ol");
+
+        this.#prevWeekBtn.addEventListener("click", () => {  
+            this.#from.setDate(this.#from.getDate() - 7);
+            this.#displayDates(this.#from);      
+        });
+
+        this.#nextWeekBtn.addEventListener("click", () => {
+            this.#from.setDate(this.#from.getDate() + 7);
+            this.#displayDates(this.#from);
+        });
+        
+        this.#displayDates(this.#from);
     }
 
     disconnectedCallback() {
 
+    }
+
+    #displayDates(from = new Date()) {
+        
+        this.#dateSpans.forEach((currentElement, currentIndex) => {
+            const temp = new Date(from);
+            temp.setDate(temp.getDate() + currentIndex);
+            currentElement.textContent = temp.getDate() + "/" + (temp.getMonth() + 1);
+        });
+        
+        const d = new Date(from);
+        d.setDate(d.getDate() + 7)
+        this.#currentWeekBtn.textContent = `${from.toLocaleDateString("vi-VN")} - ${d.toLocaleDateString("vi-VN")}`;
+
+        this.#timetableRequestParams.from = from;
+        this.#timetableRequestParams.to = d;
+
+        dataService.getTimetableByWeek(this.#timetableRequestParams)
+            .then(res => {
+                this.#displayTimetables(res.data);
+            });
+    }
+
+    #displayTimetables(timetables) {
+        this.#timetablesOl.innerHTML = "";
+        timetables.forEach(t => {
+            const from = new Date(t.from);
+            const to = new Date(t.to);
+            const subjectId = t.teacher.subject.id;
+            const styling = SUBJECT_STYLING[subjectId];
+            const gridRow = calculateTimetableGridRow(from);
+            const colStart = calculateTimetableColStart(from);
+            const colStartClassName = `col-start-${colStart}`;
+            this.#timetablesOl.insertAdjacentHTML("beforeend", `
+            <li class="relative mt-px flex ${colStartClassName}" style="grid-row: ${gridRow} / span 12">
+                <a href="#"
+                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
+                    <p class="order-1 font-semibold ${styling.text700}">${t.teacher.subject.name}</p>
+                    <p class="order-1 ${styling.text600} ${styling.groupHoverText700} italic">Topic: ${t.topic}</p>
+                    <p class="${styling.text500} ${styling.groupHoverText700}"><time
+                            datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time></p>
+                </a>
+            </li>
+            `);
+        });
     }
 
     #render() {
@@ -25,7 +100,7 @@ export class TimetableComponent extends HTMLElement {
             <div class="flex items-center">
                 <div class="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
                     <button type="button"
-                        class="flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
+                        class="prev-week-btn flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
                         <span class="sr-only">Previous week</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -34,10 +109,10 @@ export class TimetableComponent extends HTMLElement {
                         </svg>
                     </button>
                     <button type="button"
-                        class="hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
+                        class="current-week-btn hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
                     <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
                     <button type="button"
-                        class="flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
+                        class="next-week-btn flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
                         <span class="sr-only">Next week</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -155,26 +230,26 @@ export class TimetableComponent extends HTMLElement {
                         class="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
                         <div class="col-end-1 w-14"></div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Mon <span class="items-center justify-center font-semibold text-gray-900">10</span></span>
+                            <span>Mon <span class="date-span items-center justify-center font-semibold text-gray-900">10</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Tue <span class="items-center justify-center font-semibold text-gray-900">11</span></span>
+                            <span>Tue <span class="date-span items-center justify-center font-semibold text-gray-900">11</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
                             <span class="">Wed <span
-                                    class="items-center justify-center font-semibold text-gray-900">12</span></span>
+                                    class="date-span items-center justify-center font-semibold text-gray-900">12</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Thu <span class="items-center justify-center font-semibold text-gray-900">13</span></span>
+                            <span>Thu <span class="date-span items-center justify-center font-semibold text-gray-900">13</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Fri <span class="items-center justify-center font-semibold text-gray-900">14</span></span>
+                            <span>Fri <span class="date-span items-center justify-center font-semibold text-gray-900">14</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Sat <span class="items-center justify-center font-semibold text-gray-900">15</span></span>
+                            <span>Sat <span class="date-span items-center justify-center font-semibold text-gray-900">15</span></span>
                         </div>
                         <div class="flex items-center justify-center py-3">
-                            <span>Sun <span class="items-center justify-center font-semibold text-gray-900">16</span></span>
+                            <span>Sun <span class="date-span items-center justify-center font-semibold text-gray-900">16</span></span>
                         </div>
                     </div>
                 </div>
@@ -273,24 +348,10 @@ export class TimetableComponent extends HTMLElement {
                         </div>
     
                         <!-- Events -->
-                        <ol class="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
+                        <ol class="timetables-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
                             style="grid-template-rows: 1.75rem repeat(144, minmax(0, 1fr)) auto">
-                            <li class="relative mt-px flex sm:col-start-3" style="grid-row: 74 / span 12">
-                                <a href="#"
-                                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
-                                    <p class="order-1 font-semibold text-blue-700">Breakfast</p>
-                                    <p class="text-blue-500 group-hover:text-blue-700"><time
-                                            datetime="2022-01-12T06:00">6:00 AM</time></p>
-                                </a>
-                            </li>
-                            <li class="relative mt-px flex sm:col-start-3" style="grid-row: 92 / span 30">
-                                <a href="#"
-                                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100">
-                                    <p class="order-1 font-semibold text-pink-700">Flight to Paris</p>
-                                    <p class="text-pink-500 group-hover:text-pink-700"><time
-                                            datetime="2022-01-12T07:30">7:30 AM</time></p>
-                                </a>
-                            </li>
+                            
+                            
                         </ol>
                     </div>
                 </div>
