@@ -4,11 +4,17 @@ import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth } from "../..
 export class AcademicProgressComponent extends HTMLElement {
 
     #date = new Date();
+    #today = new Date();
     #calendarContainer;
     #dateButtons;
     #nextMonthButton;
     #prevMonthButton;
     #monthYearDiv;
+    #selectedDateHeading;
+    #selectedWeekdayText;
+    #nextDateButton;
+    #prevDateButton;
+    #currentDateText;
 
     constructor() {
         super();
@@ -21,6 +27,40 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#nextMonthButton = this.querySelector(".next-month-btn");
         this.#prevMonthButton = this.querySelector(".prev-month-btn");
         this.#monthYearDiv = this.querySelector(".month-year-div");
+        this.#selectedDateHeading = this.querySelector(".selected-date-heading");
+        this.#selectedWeekdayText = this.querySelector(".selected-weekday-text");
+        this.#nextDateButton = this.querySelector(".next-date-btn");
+        this.#prevDateButton = this.querySelector(".prev-date-btn");
+        this.#currentDateText = this.querySelector(".current-date-text");
+
+        this.#nextDateButton.addEventListener("click", () => {
+            this.#date.setDate(this.#date.getDate() + 1);
+            this.#displayCalendar(this.#date);
+            this.#highlightCurrentDate(this.#date);
+            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+        });
+
+        this.#prevDateButton.addEventListener("click", () => {
+            this.#date.setDate(this.#date.getDate() - 1);
+            this.#displayCalendar(this.#date);
+            this.#highlightCurrentDate(this.#date);
+            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+        });
+
+        this.#calendarContainer.addEventListener("click", event => {
+            const clicked = event.target.closest("button");
+            if (!clicked) return;
+            this.#dateButtons.forEach(b => {
+                b.classList.remove("font-semibold", "text-white");
+                b.firstElementChild.classList.remove("bg-fuchsia-600");
+            });
+            clicked.classList.add("font-semibold", "text-white");
+            clicked.firstElementChild.classList.add("bg-fuchsia-600");
+
+            this.#date = new Date(clicked.firstElementChild.dateTime);
+            this.#selectedDateHeading.children[1].textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getDate()}, ${this.#date.getFullYear()}`;
+            this.#selectedWeekdayText.textContent = `${WEEKDAYS[this.#date.getDay()]}`;
+        });
 
         this.#nextMonthButton.addEventListener("click", () => {
             this.#date.setDate(1);
@@ -41,6 +81,18 @@ export class AcademicProgressComponent extends HTMLElement {
 
     }
 
+    #highlightCurrentDate(date = new Date()) {
+        this.#dateButtons.forEach(b => {
+            b.classList.remove("font-semibold", "text-white");
+            b.firstElementChild.classList.remove("bg-fuchsia-600");
+            const d = new Date(b.firstElementChild.dateTime);
+            if (date.getFullYear() === d.getFullYear() && date.getMonth() === d.getMonth() && date.getDate() === d.getDate()) {
+                b.classList.add("font-semibold", "text-white");
+                b.firstElementChild.classList.add("bg-fuchsia-600");
+            }
+        });
+    }
+
     #displayCalendar(date = new Date()) {
         const temp = new Date(date);
         this.#monthYearDiv.textContent = MONTHS[date.getMonth()] + " " + date.getFullYear();
@@ -57,7 +109,7 @@ export class AcademicProgressComponent extends HTMLElement {
                 currentElement.firstElementChild.textContent = start + 1;
                 temp.setDate(start + 1);
                 currentElement.firstElementChild.dateTime = temp.toISOString().slice(0, 10);
-                currentElement.classList.remove("text-gray-400", "bg-gray-50");
+                currentElement.classList.remove("text-gray-400", "bg-gray-50", "pointer-events-none");
                 currentElement.classList.add("text-gray-900", "bg-white");
                 start++;
             }
@@ -75,6 +127,14 @@ export class AcademicProgressComponent extends HTMLElement {
                 currentElement.classList.add("text-gray-400", "bg-gray-50", "pointer-events-none");
             }
         });
+
+        this.#dateButtons.forEach(b => {
+            b.classList.remove("font-semibold", "text-white");
+            b.firstElementChild.classList.remove("bg-fuchsia-600");
+        });
+
+        this.#selectedDateHeading.children[1].textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getDate()}, ${this.#date.getFullYear()}`;
+        this.#selectedWeekdayText.textContent = `${WEEKDAYS[this.#date.getDay()]}`;
     }
 
     #render() {
@@ -82,16 +142,16 @@ export class AcademicProgressComponent extends HTMLElement {
     <div class="flex h-full flex-col">
         <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
             <div>
-                <h1 class="text-base font-semibold leading-6 text-gray-900">
+                <h1 class="selected-date-heading text-base font-semibold leading-6 text-gray-900">
                     <time datetime="2022-01-22" class="sm:hidden">Jan 22, 2022</time>
-                    <time datetime="2022-01-22" class="hidden sm:inline">${MONTHS[this.#date.getMonth()]} ${this.#date.getDate()}, ${this.#date.getFullYear()}</time>
+                    <time datetime="2022-01-22" class="hidden sm:inline"></time>
                 </h1>
-                <p class="mt-1 text-sm text-gray-500">${WEEKDAYS[this.#date.getDay()]}</p>
+                <p class="selected-weekday-text mt-1 text-sm text-gray-500"></p>
             </div>
             <div class="flex items-center">
                 <div class="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
                     <button type="button"
-                        class="flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
+                        class="prev-date-btn flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
                         <span class="sr-only">Previous day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -100,10 +160,10 @@ export class AcademicProgressComponent extends HTMLElement {
                         </svg>
                     </button>
                     <button type="button"
-                        class="hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
+                        class="current-date-text hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
                     <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
                     <button type="button"
-                        class="flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
+                        class="next-date-btn flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
                         <span class="sr-only">Next day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -136,7 +196,7 @@ export class AcademicProgressComponent extends HTMLElement {
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                        <div class="opacity-0 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        <div class="opacity-0 hidden absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
