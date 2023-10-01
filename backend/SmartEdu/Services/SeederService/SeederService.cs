@@ -2524,7 +2524,7 @@ namespace SmartEdu.Services.SeederService
                             From = startDate.AddHours(TimetableRandomer.MorningTimes[j].From.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].From.Minute),
                             To = startDate.AddHours(TimetableRandomer.MorningTimes[j].To.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].To.Minute),
                             TeacherId = teachers[rr].Id,
-                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId)][rrr]
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
                         };
                         day.Add(timetable);
                     } 
@@ -2536,7 +2536,7 @@ namespace SmartEdu.Services.SeederService
                             From = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].From.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].From.Minute),
                             To = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].To.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].To.Minute),
                             TeacherId = teachers[rr].Id,
-                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId)][rrr]
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
                         };
                         day.Add(timetable);
                     }
