@@ -1,3 +1,5 @@
+import { SUBJECT_STYLING } from "../app.enum";
+
 export const convertDateTimeToVn = function (datetime) {
     //Buoc 1: Lay 10 ki tu dau cua datetime 
     const dt = datetime.slice(0, 10);
@@ -55,4 +57,44 @@ export const calculateTimetableColStart = function (from = new Date()) {
 
 export const formatTime = function (d = new Date()) {
     return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+export const displayTimetables = function (timetablesOl, timetables) {
+    timetablesOl.innerHTML = "";
+    timetables.forEach(t => {
+        const from = new Date(t.from);
+        const to = new Date(t.to);
+        const subjectId = t.teacher.subject.id;
+        const styling = SUBJECT_STYLING[subjectId];
+        const gridRow = calculateTimetableGridRow(from);
+        const colStart = calculateTimetableColStart(from);
+        const colStartClassName = `col-start-${colStart}`;
+        if (timetablesOl.classList.contains("sm:grid-cols-7")) {
+            timetablesOl.insertAdjacentHTML("beforeend", `
+            <li class="relative mt-px flex ${colStartClassName}" style="grid-row: ${gridRow} / span 12">
+                <a href="#"
+                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
+                    <p class="order-1 font-semibold ${styling.text700}">${t.teacher.subject.name}</p>
+                    <p class="order-1 ${styling.text600} ${styling.groupHoverText700} italic">Topic: ${t.topic}</p>
+                    <p class="${styling.text500} ${styling.groupHoverText700}"><time
+                            datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time></p>
+                </a>
+            </li>
+            `);
+        } else {
+            timetablesOl.insertAdjacentHTML("beforeend", `
+            <li class="relative mt-px flex" style="grid-row: ${gridRow} / span 12">
+                <a href="#"
+                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
+                    <p class="order-1 font-semibold ${styling.text700}">${t.teacher.subject.name}</p>
+                    <p class="order-1 ${styling.text600} ${styling.groupHoverText700} italic">Topic: ${t.topic}</p>
+                    <p class="${styling.text500} ${styling.groupHoverText700}">
+                        <time datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time>
+                    </p>
+                </a>
+            </li>
+            `);
+        }
+
+    });
 }
