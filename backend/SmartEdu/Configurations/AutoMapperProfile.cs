@@ -9,6 +9,7 @@ using SmartEdu.DTOs.ParentDTO;
 using SmartEdu.DTOs.StudentDTO;
 using SmartEdu.DTOs.SubjectDTO;
 using SmartEdu.DTOs.TeacherDTO;
+using SmartEdu.DTOs.TimetableDTO;
 using SmartEdu.DTOs.UserDTO;
 using SmartEdu.Entities;
 
@@ -49,6 +50,7 @@ namespace SmartEdu.Configurations
             CreateMap<Mark, GetMarkDTO>();
             CreateMap<AddMarkDTO, Mark>();
             CreateMap<UpdateMarkDTO, Mark>();
+            CreateMap<Timetable, GetTimetableDTO>();
         }
     }
 }
