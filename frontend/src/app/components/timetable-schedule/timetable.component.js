@@ -1,8 +1,7 @@
-import { SUBJECT_STYLING } from "../../app.enum";
 import { data } from "../../app.store";
-import { calculateTimetableColStart, calculateTimetableGridRow, formatTime } from "../../helpers/datetime.helper";
 import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
+import { displayTimetables } from "../../helpers/datetime.helper";
 
 export class TimetableComponent extends HTMLElement {
 
@@ -66,27 +65,7 @@ export class TimetableComponent extends HTMLElement {
     }
 
     #displayTimetables(timetables) {
-        this.#timetablesOl.innerHTML = "";
-        timetables.forEach(t => {
-            const from = new Date(t.from);
-            const to = new Date(t.to);
-            const subjectId = t.teacher.subject.id;
-            const styling = SUBJECT_STYLING[subjectId];
-            const gridRow = calculateTimetableGridRow(from);
-            const colStart = calculateTimetableColStart(from);
-            const colStartClassName = `col-start-${colStart}`;
-            this.#timetablesOl.insertAdjacentHTML("beforeend", `
-            <li class="relative mt-px flex ${colStartClassName}" style="grid-row: ${gridRow} / span 12">
-                <a href="#"
-                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
-                    <p class="order-1 font-semibold ${styling.text700}">${t.teacher.subject.name}</p>
-                    <p class="order-1 ${styling.text600} ${styling.groupHoverText700} italic">Topic: ${t.topic}</p>
-                    <p class="${styling.text500} ${styling.groupHoverText700}"><time
-                            datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time></p>
-                </a>
-            </li>
-            `);
-        });
+        displayTimetables(this.#timetablesOl, timetables);
     }
 
     #render() {

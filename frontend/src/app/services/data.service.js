@@ -70,8 +70,8 @@ class DataService {
     }
 
     async getTimetableByWeek(timetableRequestParams = new TimetableRequestParams()) {
-        const from = timetableRequestParams.from.toLocaleDateString();
-        const to = timetableRequestParams.to.toLocaleDateString();
+        const from = timetableRequestParams.from.toISOString().slice(0, 10);
+        const to = timetableRequestParams.to.toISOString().slice(0, 10);
         return await getData(`${BASE_URL}/Timetable?MainClassId=${timetableRequestParams.mainClassId}&From=${from}&To=${to}`);
     }
 }

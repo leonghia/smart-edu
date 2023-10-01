@@ -1,5 +1,5 @@
 import { Mark } from "../models/mark";
-
+import { SUBJECT_STYLING } from "../app.enum";
 
 export const checkDuplicatedSchedule = function (extraClass) {
 

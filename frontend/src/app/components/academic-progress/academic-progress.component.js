@@ -1,5 +1,8 @@
 import { MONTHS, WEEKDAYS } from "../../app.enum";
-import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth } from "../../helpers/datetime.helper";
+import { data } from "../../app.store";
+import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayTimetables } from "../../helpers/datetime.helper";
+import { TimetableRequestParams } from "../../models/timetableRequestParams";
+import dataService from "../../services/data.service";
 
 export class AcademicProgressComponent extends HTMLElement {
 
@@ -15,6 +18,9 @@ export class AcademicProgressComponent extends HTMLElement {
     #nextDateButton;
     #prevDateButton;
     #currentDateText;
+    #timetablesOl;
+
+    #timetableRequestParams = new TimetableRequestParams(data.currentUser.student.mainClass.id);
 
     constructor() {
         super();
@@ -32,6 +38,7 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#nextDateButton = this.querySelector(".next-date-btn");
         this.#prevDateButton = this.querySelector(".prev-date-btn");
         this.#currentDateText = this.querySelector(".current-date-text");
+        this.#timetablesOl = this.querySelector(".timetables-ol");
 
         this.#nextDateButton.addEventListener("click", () => {
             this.#date.setDate(this.#date.getDate() + 1);
@@ -58,8 +65,8 @@ export class AcademicProgressComponent extends HTMLElement {
             clicked.firstElementChild.classList.add("bg-fuchsia-600");
 
             this.#date = new Date(clicked.firstElementChild.dateTime);
-            this.#selectedDateHeading.children[1].textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getDate()}, ${this.#date.getFullYear()}`;
-            this.#selectedWeekdayText.textContent = `${WEEKDAYS[this.#date.getDay()]}`;
+
+            this.#displayAcademicProgress(this.#date);
         });
 
         this.#nextMonthButton.addEventListener("click", () => {
@@ -133,8 +140,25 @@ export class AcademicProgressComponent extends HTMLElement {
             b.firstElementChild.classList.remove("bg-fuchsia-600");
         });
 
-        this.#selectedDateHeading.children[1].textContent = `${MONTHS[this.#date.getMonth()]} ${this.#date.getDate()}, ${this.#date.getFullYear()}`;
-        this.#selectedWeekdayText.textContent = `${WEEKDAYS[this.#date.getDay()]}`;
+        this.#displayAcademicProgress(this.#date);
+    }
+
+    #displayAcademicProgress(date = new Date()) {
+        const temp = new Date(date);
+
+        this.#selectedDateHeading.children[1].textContent = `${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+        this.#selectedWeekdayText.textContent = `${WEEKDAYS[date.getDay()]}`;
+
+        if (date.getDay() === 0) return;
+
+        this.#timetableRequestParams.from = date;
+        temp.setDate(temp.getDate() + 1);
+        this.#timetableRequestParams.to = temp;
+
+        dataService.getTimetableByWeek(this.#timetableRequestParams)
+            .then(res => {
+                displayTimetables(this.#timetablesOl, res.data);
+            });
     }
 
     #render() {
@@ -361,35 +385,9 @@ export class AcademicProgressComponent extends HTMLElement {
                         </div>
     
                         <!-- Events -->
-                        <ol class="col-start-1 col-end-2 row-start-1 grid grid-cols-1"
+                        <ol class="timetables-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1"
                             style="grid-template-rows: 1.75rem repeat(144, minmax(0, 1fr)) auto">
-                            <li class="relative mt-px flex" style="grid-row: 74 / span 12">
-                                <a href="#"
-                                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
-                                    <p class="order-1 font-semibold text-blue-700">Breakfast</p>
-                                    <p class="text-blue-500 group-hover:text-blue-700"><time
-                                            datetime="2022-01-22T06:00">6:00 AM</time></p>
-                                </a>
-                            </li>
-                            <li class="relative mt-px flex" style="grid-row: 92 / span 30">
-                                <a href="#"
-                                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100">
-                                    <p class="order-1 font-semibold text-pink-700">Flight to Paris</p>
-                                    <p class="order-1 text-pink-500 group-hover:text-pink-700">John F. Kennedy International
-                                        Airport</p>
-                                    <p class="text-pink-500 group-hover:text-pink-700"><time
-                                            datetime="2022-01-22T07:30">7:30 AM</time></p>
-                                </a>
-                            </li>
-                            <li class="relative mt-px flex" style="grid-row: 134 / span 18">
-                                <a href="#"
-                                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-fuchsia-50 p-2 text-xs leading-5 hover:bg-fuchsia-100">
-                                    <p class="order-1 font-semibold text-fuchsia-700">Sightseeing</p>
-                                    <p class="order-1 text-fuchsia-500 group-hover:text-fuchsia-700">Eiffel Tower</p>
-                                    <p class="text-fuchsia-500 group-hover:text-fuchsia-700"><time
-                                            datetime="2022-01-22T11:00">11:00 AM</time></p>
-                                </a>
-                            </li>
+                            
                         </ol>
                     </div>
                 </div>

@@ -2724,6 +2724,37 @@ namespace SmartEdu.Services.SeederService
                 var day = new List<Timetable>();
                 for (var j = 0; j < 4; j++)
                 {
+                    r = 0;
+                    var rrr = random.Next(0, 3);
+                    var rr = random.Next(0, teachers.Length);
+                    if (r == 0)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.MorningTimes[j].From.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.MorningTimes[j].To.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
+                        };
+                        day.Add(timetable);
+                    } 
+                    else if (r == 1)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].From.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].To.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
+                        };
+                        day.Add(timetable);
+                    }
+                }
+                for (var j = 0; j < 4; j++)
+                {
+                    r = 1;
                     var rrr = random.Next(0, 3);
                     var rr = random.Next(0, teachers.Length);
                     if (r == 0)
