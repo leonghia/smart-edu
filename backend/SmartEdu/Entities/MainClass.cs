@@ -10,5 +10,6 @@ namespace SmartEdu.Entities
         [ForeignKey("Teacher")]
         public int TeacherId { get; set; } //TeacherId la khoa ngoai cua bang teacher
         public Teacher Teacher { get; set; }
+        public ICollection<Timetable> Timetables { get; set; }
     }
 }

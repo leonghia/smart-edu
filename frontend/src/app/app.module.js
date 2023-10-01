@@ -32,3 +32,5 @@ import { MarkAssessmentNavigationComponent } from "./components/navigation/ma-na
 import { StudentAssessmentComponent } from "./components/assessment/student-assessment.component.js";
 import { MarkInfoComponent } from "./components/dashboard/student-dashboard/student-ma/mark-info.component.js";
 import { AcademicProgressComponent } from "./components/academic-progress/academic-progress.component.js";
+import { TimetableScheduleComponent } from "./components/timetable-schedule/timetable-schedule.component.js";
+import { TimetableComponent } from "./components/timetable-schedule/timetable.component.js";

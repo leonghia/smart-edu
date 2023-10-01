@@ -7,6 +7,7 @@ using SmartEdu.Entities;
 using SmartEdu.Models;
 using SmartEdu.Services.CrawlerService;
 using SmartEdu.UnitOfWork;
+using SmartEdu.Helpers.TimetableRandomer;
 
 namespace SmartEdu.Services.SeederService
 {
@@ -854,6 +855,216 @@ namespace SmartEdu.Services.SeederService
                     Roles = roles,
                     Type = 3,
                     SubjectId = 8
+                },
+                new RegisterUserDTO // 83
+                {
+                    FullName = "Nguyen Thi Chang",
+                    UserName = "chang",
+                    Email = "chang@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 9
+                },
+                new RegisterUserDTO // 84
+                {
+                    FullName = "Le Thi Doan",
+                    UserName = "doan",
+                    Email = "doan@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 9
+                },
+                new RegisterUserDTO // 85
+                {
+                    FullName = "Nguyen Xuan Quang",
+                    UserName = "quang",
+                    Email = "quang@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 9
+                },
+                new RegisterUserDTO // 86
+                {
+                    FullName = "Pham Thanh Sam",
+                    UserName = "sam",
+                    Email = "sam@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 9
+                },
+                new RegisterUserDTO // 87
+                {
+                    FullName = "Pham Tuan Tai",
+                    UserName = "tai",
+                    Email = "tai@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 9
+                },
+                new RegisterUserDTO // 88
+                {
+                    FullName = "Nguyen Thi Hiep",
+                    UserName = "hiepnguyenthi",
+                    Email = "hiep.nguyenthi@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 10
+                },
+                new RegisterUserDTO // 89
+                {
+                    FullName = "Nguyen Thi Xuan",
+                    UserName = "xuan",
+                    Email = "xuan@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 10
+                },
+                new RegisterUserDTO // 90
+                {
+                    FullName = "Nguyen Thi Anh",
+                    UserName = "anh",
+                    Email = "anh@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 11
+                },
+                new RegisterUserDTO // 91
+                {
+                    FullName = "Hoang Don Thao",
+                    UserName = "thao",
+                    Email = "thao@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 11
+                },
+                new RegisterUserDTO // 92
+                {
+                    FullName = "Truong Van Binh",
+                    UserName = "vbinh",
+                    Email = "vbinh@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 11
+                },
+                new RegisterUserDTO // 93
+                {
+                    FullName = "Nguyen Xuan Chien",
+                    UserName = "chien",
+                    Email = "chien@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 12
+                },
+                new RegisterUserDTO // 94
+                {
+                    FullName = "Do Thi Thu Huong",
+                    UserName = "huongdo",
+                    Email = "huongdo@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 12
+                },
+                new RegisterUserDTO // 95
+                {
+                    FullName = "Ngo Thi Lan Huong",
+                    UserName = "huongngo",
+                    Email = "huongngo@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 12
+                },
+                new RegisterUserDTO // 96
+                {
+                    FullName = "Nguyen Vu Thai",
+                    UserName = "thai",
+                    Email = "thai@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 12
+                },
+                new RegisterUserDTO // 97
+                {
+                    FullName = "Dinh Thi Thu Thuy",
+                    UserName = "thuydinh",
+                    Email = "thuydinh@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 12
+                },
+                new RegisterUserDTO // 98
+                {
+                    FullName = "Nguyen Thi Thanh Thuy",
+                    UserName = "thuynguyen",
+                    Email = "thuynguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 13
+                },
+                new RegisterUserDTO // 99
+                {
+                    FullName = "Do Trung Duc",
+                    UserName = "dduc",
+                    Email = "dduc@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 14
+                },
+                new RegisterUserDTO // 100
+                {
+                    FullName = "Nguyen Thi Minh Diep",
+                    UserName = "diep",
+                    Email = "diep@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 14
+                },
+                new RegisterUserDTO // 101
+                {
+                    FullName = "Nguyen Thi Hoan",
+                    UserName = "hoanphap",
+                    Email = "hoanphap@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 14
+                },
+                new RegisterUserDTO // 102
+                {
+                    FullName = "Nguyen Thi Van Khanh",
+                    UserName = "khanhnguyen",
+                    Email = "khanhnguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 14
+                },
+                new RegisterUserDTO // 103
+                {
+                    FullName = "Nguyen Thi Thuy Linh",
+                    UserName = "linhnguyen",
+                    Email = "linhnguyen@c3chuvanan.edu.vn",
+                    Password = "Sm@rtEdu1",
+                    Roles = roles,
+                    Type = 3,
+                    SubjectId = 14
                 },
                 // Admins users
                 new RegisterUserDTO
@@ -1766,6 +1977,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingStudents(registerUserDTOs);
             await SeedingMarks();
             await SeedingDocuments();
+            await SeedingTimetables();
 
             serverResponse.Message = "Seeding data successfully.";
             
@@ -2432,9 +2644,7 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.MarkRepository.Count();
             if (count > 0)
             {
-                
                 System.Console.WriteLine("Marks had been seeded before. Aborting...");
-                
                 return;
             }
             
@@ -2487,6 +2697,66 @@ namespace SmartEdu.Services.SeederService
             
             System.Console.WriteLine("Seeding marks successfully :)");
             
+        }
+
+        public async Task SeedingTimetables()
+        {
+            var count = _unitOfWork.TimetableRepository.Count();
+            if (count > 0)
+            {
+                System.Console.WriteLine("Timetables had been seeded before. Aborting...");
+                return;
+            }
+            var teachers = (await _unitOfWork.TeacherRepository.GetAll(null, null, null, null)).ToArray<Teacher>();
+            var timetables = new List<Timetable>();
+            var random = new Random();
+            
+            var startDate = new DateTime(2023, 9, 1);
+            for (var i = 0; i < 90; i++)
+            {
+                if (startDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    startDate = startDate.AddDays(1);
+                    continue;
+                }
+                var r = random.Next(0, 2);
+                
+                var day = new List<Timetable>();
+                for (var j = 0; j < 4; j++)
+                {
+                    var rrr = random.Next(0, 3);
+                    var rr = random.Next(0, teachers.Length);
+                    if (r == 0)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.MorningTimes[j].From.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.MorningTimes[j].To.Hour).AddMinutes(TimetableRandomer.MorningTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
+                        };
+                        day.Add(timetable);
+                    } 
+                    else if (r == 1)
+                    {
+                        var timetable = new Timetable
+                        {
+                            MainClassId = 6,
+                            From = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].From.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].From.Minute),
+                            To = startDate.AddHours(TimetableRandomer.AfternoonTimes[j].To.Hour).AddMinutes(TimetableRandomer.AfternoonTimes[j].To.Minute),
+                            TeacherId = teachers[rr].Id,
+                            Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
+                        };
+                        day.Add(timetable);
+                    }
+                }
+                timetables.AddRange(day);
+                startDate = startDate.AddDays(1);
+            }
+            await _unitOfWork.TimetableRepository.AddRange(timetables);
+            await _unitOfWork.Save();
+            System.Console.WriteLine("Seeding timetables successfully :)");
         }
     }
 }

@@ -51,5 +51,6 @@ namespace SmartEdu.Data
         public DbSet<ExtraClassStudent> ExtraClassesStudents { get; set; }
         public DbSet<EcBookmark> EcBookmarks { get; set; }
         public DbSet<ExtraClassEcBookmark> ExtraClassesEcBookmarks { get; set; }
+        public DbSet<Timetable> Timetables { get; set; }
     }
 }

@@ -1,5 +1,9 @@
+using AutoMapper;
+using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.EcBookmarkDTO;
 using SmartEdu.DTOs.ExtraClassStudentDTO;
+using SmartEdu.DTOs.TimetableDTO;
+using SmartEdu.Entities;
 using SmartEdu.Models;
 using SmartEdu.UnitOfWork;
 
@@ -8,10 +12,12 @@ namespace SmartEdu.Services.ClassService;
 public class ClassService : IClassService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public ClassService(IUnitOfWork unitOfWork)
+    public ClassService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         this._unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public async Task<ServerResponse<MarkRanking>> GetRanking(int id, MarkFilterOption markFilterOption)
@@ -32,6 +38,26 @@ public class ClassService : IClassService
         var ranking = results.FindIndex(r => r == studentGPA);
         serverResponse.Data = new MarkRanking { Ranking = ranking, NumbersOfStudents = students.Count() };
         return serverResponse;
+    }
+
+    public async Task<ServerResponse<IEnumerable<GetTimetableDTO>>> GetTimetableByWeek(TimetableRequestParams timetableRequestParams)
+    {
+        var response = new ServerResponse<IEnumerable<GetTimetableDTO>>();
+
+        var results = await _unitOfWork.TimetableRepository.GetAll(null, t => t.MainClassId == timetableRequestParams.MainClassId && t.From >= timetableRequestParams.From && t.To <= timetableRequestParams.To, null, new List<string>{ "Teacher.Subject" });
+
+        if (results.Count() == 0)
+        {
+            response.Succeeded = false;
+            response.Message = "No timetables found for that datetime ranges.";
+            return response;
+        }
+
+        var resultsDTO = results.Select(r => _mapper.Map<GetTimetableDTO>(r));
+
+        response.Data = resultsDTO;
+
+        return response;
     }
 
     public async Task<ServerResponse<object>> UnBookmark(DeleteExtraClassEcBookmarkDTO deleteExtraClassEcBookmarkDTO)

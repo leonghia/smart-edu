@@ -38,3 +38,21 @@ export const getLastDayOfMonth = function (year, month) {
 export const getLastDateOfMonth = function (year, month) {
     return new Date(year, month + 1, 0).getDate();
 }
+
+export const calculateTimetableGridRow = function (from = new Date()) {
+    const initialTime = new Date(from);
+    initialTime.setHours(7, 0, 0);
+    const minutesPassed = Math.round((from - initialTime) / 1000 / 60);
+    const gridRow = minutesPassed / 5 + 2;
+    return gridRow;
+}
+
+export const calculateTimetableColStart = function (from = new Date()) {
+    const weekday = from.getDay();
+    if (weekday === 0) return 7;
+    return weekday;
+}
+
+export const formatTime = function (d = new Date()) {
+    return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+}

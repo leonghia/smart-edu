@@ -2,9 +2,10 @@ import { getToken } from "../helpers/token.helper.js";
 import { BASE_URL } from "../app.config.js";
 import { getData, postData, updateData } from "../helpers/ajax.helper.js";
 import { data } from "../app.store.js";
-import { RequestParams } from "../models/request-params.model.js";
-import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.model.js";
+import { RequestParams } from "../models/requestParams.js";
+import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.js";
 import { MarkFilterOption } from "../models/markFilterOption.js";
+import { TimetableRequestParams } from "../models/timetableRequestParams.js";
 
 class DataService {
 
@@ -66,6 +67,12 @@ class DataService {
 
     async getRanking(id = 0, markFilterOption = new MarkFilterOption()) {
         return await getData(`${BASE_URL}/Mark/ranking/${id}?Semester=${markFilterOption.semester}&FromYear=${markFilterOption.fromYear}&ToYear=${markFilterOption.toYear}`);
+    }
+
+    async getTimetableByWeek(timetableRequestParams = new TimetableRequestParams()) {
+        const from = timetableRequestParams.from.toLocaleDateString();
+        const to = timetableRequestParams.to.toLocaleDateString();
+        return await getData(`${BASE_URL}/Timetable?MainClassId=${timetableRequestParams.mainClassId}&From=${from}&To=${to}`);
     }
 }
 

@@ -1,5 +1,5 @@
 import { data } from "../../../../app.store";
-import { RequestParams } from "../../../../models/request-params.model";
+import { RequestParams } from "../../../../models/requestParams";
 import dataService from "../../../../services/data.service";
 import { DEFAULT_DOC_DES } from "../../../../app.config";
 
