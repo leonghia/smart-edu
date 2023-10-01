@@ -21,10 +21,60 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#nextMonthButton = this.querySelector(".next-month-btn");
         this.#prevMonthButton = this.querySelector(".prev-month-btn");
         this.#monthYearDiv = this.querySelector(".month-year-div");
+
+        this.#nextMonthButton.addEventListener("click", () => {
+            this.#date.setDate(1);
+            this.#date.setMonth(this.#date.getMonth() + 1);
+            this.#displayCalendar(this.#date);
+        });
+
+        this.#prevMonthButton.addEventListener("click", () => {
+            this.#date.setDate(1);
+            this.#date.setMonth(this.#date.getMonth() - 1);
+            this.#displayCalendar(this.#date);
+        });
+
+        this.#displayCalendar(this.#date);
     }
 
     disconnectedCallback() {
 
+    }
+
+    #displayCalendar(date = new Date()) {
+        const temp = new Date(date);
+        this.#monthYearDiv.textContent = MONTHS[date.getMonth()] + " " + date.getFullYear();
+        let firstDayOfMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth()) - 1;
+        if (firstDayOfMonth < 0) firstDayOfMonth = 6;
+        const lastDateOfMonth = getLastDateOfMonth(date.getFullYear(), date.getMonth());
+        let start = 0;
+        let startOfNextMonth = 0;
+        const d = new Date(date);
+        d.setMonth(d.getMonth() - 1);
+        const lastDateOfPreviousMonth = getLastDateOfMonth(d.getFullYear(), d.getMonth());
+        this.#dateButtons.forEach((currentElement, currentIndex) => {
+            if (currentIndex >= firstDayOfMonth && currentIndex < lastDateOfMonth + firstDayOfMonth) {
+                currentElement.firstElementChild.textContent = start + 1;
+                temp.setDate(start + 1);
+                currentElement.firstElementChild.dateTime = temp.toISOString().slice(0, 10);
+                currentElement.classList.remove("text-gray-400", "bg-gray-50");
+                currentElement.classList.add("text-gray-900", "bg-white");
+                start++;
+            }
+
+            if (currentIndex < firstDayOfMonth) {
+                currentElement.firstElementChild.textContent = lastDateOfPreviousMonth - (firstDayOfMonth - 1) + currentIndex;
+                currentElement.firstElementChild.datetime = "";
+                currentElement.classList.remove("text-gray-900", "bg-white");
+                currentElement.classList.add("text-gray-400", "bg-gray-50", "pointer-events-none");
+            }
+            if (currentIndex >= lastDateOfMonth + firstDayOfMonth) {
+                currentElement.firstElementChild.textContent = ++startOfNextMonth;
+                currentElement.firstElementChild.datetime = "";
+                currentElement.classList.remove("text-gray-900", "bg-white");
+                currentElement.classList.add("text-gray-400", "bg-gray-50", "pointer-events-none");
+            }
+        });
     }
 
     #render() {
