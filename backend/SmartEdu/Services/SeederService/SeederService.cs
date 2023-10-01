@@ -2714,7 +2714,7 @@ namespace SmartEdu.Services.SeederService
             var startDate = new DateTime(2023, 9, 1);
             for (var i = 0; i < 90; i++)
             {
-                if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
+                if (startDate.DayOfWeek == DayOfWeek.Sunday)
                 {
                     startDate = startDate.AddDays(1);
                     continue;
