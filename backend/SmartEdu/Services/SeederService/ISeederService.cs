@@ -23,5 +23,6 @@ namespace SmartEdu.Services.SeederService
         Task SeedingDocuments();
         Task SeedingMarks();
         Task SeedingTimetables();
+        Task SeedingAcademicProgresses();
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartEdu.Data;
 
@@ -11,9 +12,11 @@ using SmartEdu.Data;
 namespace SmartEdu.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231001161405_AddAcademicProgress")]
+    partial class AddAcademicProgress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +172,6 @@ namespace SmartEdu.Migrations
                     b.Property<bool>("IsDoneHomework")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TeacherComment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -180,8 +180,6 @@ namespace SmartEdu.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.HasIndex("TimetableId");
 
@@ -746,19 +744,11 @@ namespace SmartEdu.Migrations
 
             modelBuilder.Entity("SmartEdu.Entities.AcademicProgress", b =>
                 {
-                    b.HasOne("SmartEdu.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SmartEdu.Entities.Timetable", "Timetable")
                         .WithMany()
                         .HasForeignKey("TimetableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Student");
 
                     b.Navigation("Timetable");
                 });

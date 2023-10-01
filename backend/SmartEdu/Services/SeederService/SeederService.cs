@@ -1978,6 +1978,7 @@ namespace SmartEdu.Services.SeederService
             await SeedingMarks();
             await SeedingDocuments();
             await SeedingTimetables();
+            await SeedingAcademicProgresses();
 
             serverResponse.Message = "Seeding data successfully.";
             
@@ -2788,6 +2789,38 @@ namespace SmartEdu.Services.SeederService
             await _unitOfWork.TimetableRepository.AddRange(timetables);
             await _unitOfWork.Save();
             System.Console.WriteLine("Seeding timetables successfully :)");
+        }
+
+        public async Task SeedingAcademicProgresses()
+        {
+            var count = _unitOfWork.AcademicProgressRepository.Count();
+            if (count > 0)
+            {
+                System.Console.WriteLine("Academic progresses had been seeded before. Aborting...");
+                return;
+            }
+
+            var r = new Random();
+            var temp = await _unitOfWork.TimetableRepository.GetAll(null);
+            var timetables = temp.Where(t => t.From <= DateTime.UtcNow && t.To <= DateTime.UtcNow);
+            var academicProgresses = new List<AcademicProgress>();
+            int[] attendances = {-2, -1, 0, 1};
+            foreach (var t in timetables)
+            {
+                var academicProgress = new AcademicProgress
+                {
+                    TimetableId = t.Id,
+                    Attendance = attendances[r.Next(0, 4)],
+                    IsDoneHomework = r.Next(0, 2) == 1,
+                    TeacherComment = "Nothing to comment.",
+                    StudentId = 1
+                };
+                academicProgresses.Add(academicProgress);
+            }
+
+            await _unitOfWork.AcademicProgressRepository.AddRange(academicProgresses);
+            await _unitOfWork.Save();
+            System.Console.WriteLine("Seeding academic progresses successfully :)");
         }
     }
 }
