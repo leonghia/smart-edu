@@ -2810,7 +2810,7 @@ namespace SmartEdu.Services.SeederService
                 var academicProgress = new AcademicProgress
                 {
                     TimetableId = t.Id,
-                    Attendance = attendances[r.Next(0, 4)],
+                    Attendance = r.Next(-2, 2),
                     IsDoneHomework = r.Next(0, 2) == 1,
                     TeacherComment = "Nothing to comment.",
                     StudentId = 1
