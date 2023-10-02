@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using SmartEdu.DTOs.AcademicProgressDTO;
+using SmartEdu.DTOs.AcademicTrackerDTO;
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.EcBookmarkDTO;
 using SmartEdu.DTOs.ExtraClassDTO;
@@ -51,6 +53,8 @@ namespace SmartEdu.Configurations
             CreateMap<AddMarkDTO, Mark>();
             CreateMap<UpdateMarkDTO, Mark>();
             CreateMap<Timetable, GetTimetableDTO>();
+            CreateMap<AcademicProgress, GetAcademicProgressDTO>();
+            CreateMap<AcademicTracker, GetAcademicTrackerDTO>();
         }
     }
 }

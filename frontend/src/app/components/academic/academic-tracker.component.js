@@ -1,13 +1,15 @@
 import { MONTHS, WEEKDAYS } from "../../app.enum";
 import { data } from "../../app.store";
-import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayTimetables } from "../../helpers/datetime.helper";
+import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayAcademicProgresses, toISOVNString } from "../../helpers/datetime.helper";
+import { AcademicProgressRequestParams } from "../../models/academicProgressRequestParams";
 import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
+import { hideDropdown, showDropdown } from "../../helpers/animation.helper";
+import { AcademicTrackerRequestParams } from "../../models/academicTrackerRequestParams";
 
-export class AcademicProgressComponent extends HTMLElement {
+export class AcademicTrackerComponent extends HTMLElement {
 
     #date = new Date();
-    #today = new Date();
     #calendarContainer;
     #dateButtons;
     #nextMonthButton;
@@ -15,10 +17,19 @@ export class AcademicProgressComponent extends HTMLElement {
     #monthYearDiv;
     #selectedDateHeading;
     #selectedWeekdayText;
-    #nextDateButton;
-    #prevDateButton;
+    #nextMonthButton1;
+    #prevMonthButton1;
     #currentDateText;
-    #timetablesOl;
+    #dropdownButton;
+    #dropdown;
+    #dropdownItems;
+    #trackerTab;
+    #progressTab;
+    #trackersWrapper;
+
+    #dropdownState = {
+        state: false
+    }
 
     #timetableRequestParams = new TimetableRequestParams(data.currentUser.student.mainClass.id);
 
@@ -35,69 +46,132 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#monthYearDiv = this.querySelector(".month-year-div");
         this.#selectedDateHeading = this.querySelector(".selected-date-heading");
         this.#selectedWeekdayText = this.querySelector(".selected-weekday-text");
-        this.#nextDateButton = this.querySelector(".next-date-btn");
-        this.#prevDateButton = this.querySelector(".prev-date-btn");
+        this.#nextMonthButton1 = this.querySelector(".next-month-btn-1");
+        this.#prevMonthButton1 = this.querySelector(".prev-month-btn-1");
         this.#currentDateText = this.querySelector(".current-date-text");
-        this.#timetablesOl = this.querySelector(".timetables-ol");
+        this.#dropdownButton = this.querySelector(".dropdown-btn");
+        this.#dropdown = this.querySelector(".dropdown");
+        this.#dropdownItems = Array.from(this.#dropdown.querySelectorAll("a"));
+        this.#trackerTab = this.querySelector("#tracker_tab");
+        this.#progressTab = this.querySelector("#progress_tab");
+        this.#trackersWrapper = this.querySelector(".trackers-wrapper");
 
-        this.#nextDateButton.addEventListener("click", () => {
-            this.#date.setDate(this.#date.getDate() + 1);
-            this.#displayCalendar(this.#date);
-            this.#highlightCurrentDate(this.#date);
-            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+        this.#displayCurrentMonth(this.#date);
+
+        this.#trackerTab.addEventListener("click", () => {
+            document.querySelector(".main-wrapper").innerHTML = "<academic-tracker></academic-tracker>";
         });
 
-        this.#prevDateButton.addEventListener("click", () => {
-            this.#date.setDate(this.#date.getDate() - 1);
-            this.#displayCalendar(this.#date);
-            this.#highlightCurrentDate(this.#date);
-            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+        this.#progressTab.addEventListener("click", () => {
+            document.querySelector(".main-wrapper").innerHTML = "<academic-progress></academic-progress>";
         });
 
-        this.#calendarContainer.addEventListener("click", event => {
-            const clicked = event.target.closest("button");
-            if (!clicked) return;
-            this.#dateButtons.forEach(b => {
-                b.classList.remove("font-semibold", "text-white");
-                b.firstElementChild.classList.remove("bg-fuchsia-600");
-            });
-            clicked.classList.add("font-semibold", "text-white");
-            clicked.firstElementChild.classList.add("bg-fuchsia-600");
+        this.#dropdownButton.addEventListener("click", () => {
+            if (this.#dropdownState.state) hideDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
+            else showDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
+        });
 
-            this.#date = new Date(clicked.firstElementChild.dateTime);
+        this.#nextMonthButton1.addEventListener("click", () => {
+            this.#date.setMonth(this.#date.getMonth() + 1);
+            this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
+        });
 
-            this.#displayAcademicProgress(this.#date);
+        this.#prevMonthButton1.addEventListener("click", () => {
+            this.#date.setMonth(this.#date.getMonth() - 1);
+            this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#nextMonthButton.addEventListener("click", () => {
             this.#date.setDate(1);
             this.#date.setMonth(this.#date.getMonth() + 1);
             this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#prevMonthButton.addEventListener("click", () => {
             this.#date.setDate(1);
             this.#date.setMonth(this.#date.getMonth() - 1);
             this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#displayCalendar(this.#date);
+
+        this.#getAcademicTrackers();
     }
 
     disconnectedCallback() {
 
     }
 
-    #highlightCurrentDate(date = new Date()) {
-        this.#dateButtons.forEach(b => {
-            b.classList.remove("font-semibold", "text-white");
-            b.firstElementChild.classList.remove("bg-fuchsia-600");
-            const d = new Date(b.firstElementChild.dateTime);
-            if (date.getFullYear() === d.getFullYear() && date.getMonth() === d.getMonth() && date.getDate() === d.getDate()) {
-                b.classList.add("font-semibold", "text-white");
-                b.firstElementChild.classList.add("bg-fuchsia-600");
-            }
+    #displayCurrentMonth(date = new Date()) {
+        const temp = new Date();
+        if (date.getMonth() === temp.getMonth() && date.getFullYear() === temp.getFullYear()) {
+            this.#currentDateText.textContent = "This month";
+        } else {
+            this.#currentDateText.textContent = `${MONTHS[date.getMonth()].slice(0, 3)} - ${date.getFullYear()}`;
+        }
+        this.#selectedDateHeading.textContent = `${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    #dipslayAcademicTrackers(academicTrackers = []) {
+        this.#trackersWrapper.innerHTML = "";
+        academicTrackers.forEach(a => {
+            const date = new Date(a.date);
+            this.#trackersWrapper.insertAdjacentHTML("beforeend", `
+        <div class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+            <div
+                class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                
+
+                <div class="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                    <h3 class="text-sm font-medium text-gray-700">Performance & Behavior</h3>
+
+                    <div class="mt-3 space-y-6 text-sm text-gray-500">
+                        <p>${a.attendance.split("|").join("\n")}</p>
+                        <p>${a.homework.split("|").join("\n")}</p>
+                        <p>${a.marks ?? ""}</p>
+                        <p>${a.teacherComment ?? ""}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-6 flex gap-x-1 items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:items-start xl:col-span-3">
+                <span class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-pink-500">
+                        <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+                        <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
+                </svg>
+              
+                </span>
+                <p class="font-medium text-gray-700">${date.toLocaleDateString("vi-VN")}</p>
+                
+            </div>
+        </div>           
+            `);
         });
+    }
+
+    #getAcademicTrackers() {
+        const academicTrackerRequestParams = new AcademicTrackerRequestParams();
+        academicTrackerRequestParams.studentId = data.currentUser.student.id;
+        const from = new Date(this.#date);
+        from.setDate(1);
+        const to = new Date(from);
+        to.setMonth(from.getMonth() + 1);
+        academicTrackerRequestParams.from = from;
+        academicTrackerRequestParams.to = to;
+        dataService.getAcademicTrackersByStudent(academicTrackerRequestParams)
+            .then(res => {
+                this.#dipslayAcademicTrackers(res.data);
+            });    
     }
 
     #displayCalendar(date = new Date()) {
@@ -112,10 +186,13 @@ export class AcademicProgressComponent extends HTMLElement {
         d.setMonth(d.getMonth() - 1);
         const lastDateOfPreviousMonth = getLastDateOfMonth(d.getFullYear(), d.getMonth());
         this.#dateButtons.forEach((currentElement, currentIndex) => {
+            
+            
+
             if (currentIndex >= firstDayOfMonth && currentIndex < lastDateOfMonth + firstDayOfMonth) {
                 currentElement.firstElementChild.textContent = start + 1;
                 temp.setDate(start + 1);
-                currentElement.firstElementChild.dateTime = temp.toISOString().slice(0, 10);
+                currentElement.firstElementChild.dateTime = toISOVNString(temp);
                 currentElement.classList.remove("text-gray-400", "bg-gray-50", "pointer-events-none");
                 currentElement.classList.add("text-gray-900", "bg-white");
                 start++;
@@ -133,32 +210,11 @@ export class AcademicProgressComponent extends HTMLElement {
                 currentElement.classList.remove("text-gray-900", "bg-white");
                 currentElement.classList.add("text-gray-400", "bg-gray-50", "pointer-events-none");
             }
+
+            // Disable click in each date
+            currentElement.classList.add("pointer-events-none");
         });
 
-        this.#dateButtons.forEach(b => {
-            b.classList.remove("font-semibold", "text-white");
-            b.firstElementChild.classList.remove("bg-fuchsia-600");
-        });
-
-        this.#displayAcademicProgress(this.#date);
-    }
-
-    #displayAcademicProgress(date = new Date()) {
-        const temp = new Date(date);
-
-        this.#selectedDateHeading.children[1].textContent = `${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-        this.#selectedWeekdayText.textContent = `${WEEKDAYS[date.getDay()]}`;
-
-        if (date.getDay() === 0) return;
-
-        this.#timetableRequestParams.from = date;
-        temp.setDate(temp.getDate() + 1);
-        this.#timetableRequestParams.to = temp;
-
-        dataService.getTimetableByWeek(this.#timetableRequestParams)
-            .then(res => {
-                displayTimetables(this.#timetablesOl, res.data);
-            });
     }
 
     #render() {
@@ -170,12 +226,12 @@ export class AcademicProgressComponent extends HTMLElement {
                     <time datetime="2022-01-22" class="sm:hidden">Jan 22, 2022</time>
                     <time datetime="2022-01-22" class="hidden sm:inline"></time>
                 </h1>
-                <p class="selected-weekday-text mt-1 text-sm text-gray-500"></p>
+                <p class="selected-weekday-text mt-1 text-sm text-gray-500">Academic tracker</p>
             </div>
             <div class="flex items-center">
                 <div class="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
                     <button type="button"
-                        class="prev-date-btn flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
+                        class="prev-month-btn-1 flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
                         <span class="sr-only">Previous day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -184,10 +240,10 @@ export class AcademicProgressComponent extends HTMLElement {
                         </svg>
                     </button>
                     <button type="button"
-                        class="current-date-text hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
+                        class="current-date-text hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">This month</button>
                     <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
                     <button type="button"
-                        class="next-date-btn flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
+                        class="next-month-btn-1 flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
                         <span class="sr-only">Next day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -199,9 +255,9 @@ export class AcademicProgressComponent extends HTMLElement {
                 <div class="hidden md:ml-4 md:flex md:items-center">
                     <div class="relative">
                         <button type="button"
-                            class="flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            class="dropdown-btn flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             id="menu-button" aria-expanded="false" aria-haspopup="true">
-                            Day view
+                            Tracker
                             <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                 aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -220,18 +276,14 @@ export class AcademicProgressComponent extends HTMLElement {
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                        <div class="opacity-0 hidden absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        <div class="dropdown opacity-0 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-0">Day view</a>
+                                    id="progress_tab">Progress</a>
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-1">Week view</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-2">Month view</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-3">Year view</a>
+                                    id="tracker_tab">Tracker</a>                            
                             </div>
                         </div>
                     </div>
@@ -328,67 +380,14 @@ export class AcademicProgressComponent extends HTMLElement {
                     </button>
                 </div>
                 <div class="flex w-full flex-auto">
-                    <div class="w-14 flex-none bg-white ring-1 ring-gray-100"></div>
-                    <div class="grid flex-auto grid-cols-1 grid-rows-1">
-                        <!-- Horizontal lines -->
-                        <div class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
-                            style="grid-template-rows: repeat(24, minmax(3.5rem, 1fr))">
-                            <div class="row-end-1 h-7"></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7AM</div>
+                    <div class="bg-white">
+                        <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <div class="trackers-wrapper mt-6 space-y-10 divide-y divide-dashed divide-gray-300 border-gray-200 pb-10">
+                                
+                    
+                                <!-- More reviews... -->
                             </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6PM</div>
-                            </div>
-                            <div></div>                        
                         </div>
-    
-                        <!-- Events -->
-                        <ol class="timetables-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1"
-                            style="grid-template-rows: 1.75rem repeat(144, minmax(0, 1fr)) auto">
-                            
-                        </ol>
                     </div>
                 </div>
             </div>
@@ -624,4 +623,4 @@ export class AcademicProgressComponent extends HTMLElement {
     }
 }
 
-customElements.define("academic-progress", AcademicProgressComponent);
+customElements.define("academic-tracker", AcademicTrackerComponent);
