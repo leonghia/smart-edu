@@ -5,6 +5,7 @@ import { AcademicProgressRequestParams } from "../../models/academicProgressRequ
 import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
 import { hideDropdown, showDropdown } from "../../helpers/animation.helper";
+import { AcademicTrackerRequestParams } from "../../models/academicTrackerRequestParams";
 
 export class AcademicTrackerComponent extends HTMLElement {
 
@@ -24,6 +25,7 @@ export class AcademicTrackerComponent extends HTMLElement {
     #dropdownItems;
     #trackerTab;
     #progressTab;
+    #trackersWrapper;
 
     #dropdownState = {
         state: false
@@ -52,6 +54,7 @@ export class AcademicTrackerComponent extends HTMLElement {
         this.#dropdownItems = Array.from(this.#dropdown.querySelectorAll("a"));
         this.#trackerTab = this.querySelector("#tracker_tab");
         this.#progressTab = this.querySelector("#progress_tab");
+        this.#trackersWrapper = this.querySelector(".trackers-wrapper");
 
         this.#displayCurrentMonth(this.#date);
 
@@ -72,12 +75,14 @@ export class AcademicTrackerComponent extends HTMLElement {
             this.#date.setMonth(this.#date.getMonth() + 1);
             this.#displayCalendar(this.#date);
             this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#prevMonthButton1.addEventListener("click", () => {
             this.#date.setMonth(this.#date.getMonth() - 1);
             this.#displayCalendar(this.#date);
             this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#nextMonthButton.addEventListener("click", () => {
@@ -85,6 +90,7 @@ export class AcademicTrackerComponent extends HTMLElement {
             this.#date.setMonth(this.#date.getMonth() + 1);
             this.#displayCalendar(this.#date);
             this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#prevMonthButton.addEventListener("click", () => {
@@ -92,9 +98,12 @@ export class AcademicTrackerComponent extends HTMLElement {
             this.#date.setMonth(this.#date.getMonth() - 1);
             this.#displayCalendar(this.#date);
             this.#displayCurrentMonth(this.#date);
+            this.#getAcademicTrackers();
         });
 
         this.#displayCalendar(this.#date);
+
+        this.#getAcademicTrackers();
     }
 
     disconnectedCallback() {
@@ -109,6 +118,60 @@ export class AcademicTrackerComponent extends HTMLElement {
             this.#currentDateText.textContent = `${MONTHS[date.getMonth()].slice(0, 3)} - ${date.getFullYear()}`;
         }
         this.#selectedDateHeading.textContent = `${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    #dipslayAcademicTrackers(academicTrackers = []) {
+        this.#trackersWrapper.innerHTML = "";
+        academicTrackers.forEach(a => {
+            const date = new Date(a.date);
+            this.#trackersWrapper.insertAdjacentHTML("beforeend", `
+        <div class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+            <div
+                class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                
+
+                <div class="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                    <h3 class="text-sm font-medium text-gray-700">Performance & Behavior</h3>
+
+                    <div class="mt-3 space-y-6 text-sm text-gray-500">
+                        <p>${a.attendance.split("|").join("\n")}</p>
+                        <p>${a.homework.split("|").join("\n")}</p>
+                        <p>${a.marks ?? ""}</p>
+                        <p>${a.teacherComment ?? ""}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-6 flex gap-x-1 items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:items-start xl:col-span-3">
+                <span class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-pink-500">
+                        <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+                        <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
+                </svg>
+              
+                </span>
+                <p class="font-medium text-gray-700">${date.toLocaleDateString("vi-VN")}</p>
+                
+            </div>
+        </div>           
+            `);
+        });
+    }
+
+    #getAcademicTrackers() {
+        const academicTrackerRequestParams = new AcademicTrackerRequestParams();
+        academicTrackerRequestParams.studentId = data.currentUser.student.id;
+        const from = new Date(this.#date);
+        from.setDate(1);
+        const to = new Date(from);
+        to.setMonth(from.getMonth() + 1);
+        academicTrackerRequestParams.from = from;
+        academicTrackerRequestParams.to = to;
+        dataService.getAcademicTrackersByStudent(academicTrackerRequestParams)
+            .then(res => {
+                this.#dipslayAcademicTrackers(res.data);
+            });    
     }
 
     #displayCalendar(date = new Date()) {
@@ -319,66 +382,8 @@ export class AcademicTrackerComponent extends HTMLElement {
                 <div class="flex w-full flex-auto">
                     <div class="bg-white">
                         <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                            <div class="mt-6 space-y-10 divide-y divide-gray-200 border-b border-gray-200 pb-10">
-                                <div class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
-                                    <div
-                                        class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
-                                        <div class="flex items-center xl:col-span-1">
-                                            <div class="flex items-center">
-                                                <!-- Active: "text-yellow-400", Inactive: "text-gray-200" -->
-                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <p class="ml-3 text-sm text-gray-700">5<span class="sr-only"> out of 5 stars</span></p>
-                                        </div>
-                    
-                                        <div class="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                                            <h3 class="text-sm font-medium text-gray-900">Performance & Behavior</h3>
-                    
-                                            <div class="mt-3 space-y-6 text-sm text-gray-500">
-                                                <p>I was really pleased with the overall shopping experience. My order even included a
-                                                    little personal, handwritten note, which delighted me!</p>
-                                                <p>The product quality is amazing, it looks and feel even better than I had anticipated.
-                                                    Brilliant stuff! I would gladly recommend this store to my friends. And, now that I
-                                                    think of it... I actually have, many times!</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                    
-                                    <div
-                                        class="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                                        <p class="font-medium text-fuchsia-600">Risako M</p>
-                                        
-                                    </div>
-                                </div>
+                            <div class="trackers-wrapper mt-6 space-y-10 divide-y divide-dashed divide-gray-300 border-gray-200 pb-10">
+                                
                     
                                 <!-- More reviews... -->
                             </div>

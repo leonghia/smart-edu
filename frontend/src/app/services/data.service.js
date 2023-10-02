@@ -8,6 +8,7 @@ import { MarkFilterOption } from "../models/markFilterOption.js";
 import { TimetableRequestParams } from "../models/timetableRequestParams.js";
 import { toISOVNString } from "../helpers/datetime.helper.js";
 import { AcademicProgressRequestParams } from "../models/academicProgressRequestParams.js";
+import { AcademicTrackerRequestParams } from "../models/academicTrackerRequestParams.js";
 
 class DataService {
 
@@ -82,8 +83,10 @@ class DataService {
         return await getData(`${BASE_URL}/AcademicProgress?StudentId=${academicProgressRequestParams.studentId}&Date=${date}`);
     }
 
-    async getAcademicTrackersByStudent(studentId) {
-        return await getData(`${BASE_URL}/AcademicTracker?studentId=${studentId}`);
+    async getAcademicTrackersByStudent(academicTrackerRequestParams = new AcademicTrackerRequestParams()) {
+        const from = toISOVNString(academicTrackerRequestParams.from);
+        const to = toISOVNString(academicTrackerRequestParams.to);
+        return await getData(`${BASE_URL}/AcademicTracker?StudentId=${academicTrackerRequestParams.studentId}&From=${from}&To=${to}`);
     }
 }
 
