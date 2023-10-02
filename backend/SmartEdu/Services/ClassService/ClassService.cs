@@ -1,5 +1,6 @@
 using AutoMapper;
 using SmartEdu.DTOs.AcademicProgressDTO;
+using SmartEdu.DTOs.AcademicTrackerDTO;
 using SmartEdu.DTOs.DocumentDTO;
 using SmartEdu.DTOs.EcBookmarkDTO;
 using SmartEdu.DTOs.ExtraClassStudentDTO;
@@ -33,6 +34,18 @@ public class ClassService : IClassService
 
         response.Data = academicProgressesDTO;
 
+        return response;
+    }
+
+    public async Task<ServerResponse<IEnumerable<GetAcademicTrackerDTO>>> GetAcademicTrackersByStudent(int studentId)
+    {
+        var response = new ServerResponse<IEnumerable<GetAcademicTrackerDTO>>();
+
+        var academicTrackers = await _unitOfWork.AcademicTrackerRepository.GetAll(null, aT => aT.StudentId == studentId);
+
+        var academicTrackersDTO = academicTrackers.Select(aT => _mapper.Map<GetAcademicTrackerDTO>(aT));
+
+        response.Data = academicTrackersDTO;
         return response;
     }
 
