@@ -8,6 +8,7 @@ using SmartEdu.Models;
 using SmartEdu.Services.CrawlerService;
 using SmartEdu.UnitOfWork;
 using SmartEdu.Helpers.TimetableRandomer;
+using SmartEdu.Helpers.AcademicRandomer;
 
 namespace SmartEdu.Services.SeederService
 {
@@ -1979,9 +1980,10 @@ namespace SmartEdu.Services.SeederService
             await SeedingDocuments();
             await SeedingTimetables();
             await SeedingAcademicProgresses();
+            await SeedingAcademicTracker();
 
             serverResponse.Message = "Seeding data successfully.";
-            
+
             return serverResponse;
         }
 
@@ -1991,9 +1993,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.TeacherRepository.Count();
             if (count > 0)
             {
-                
+
                 System.Console.WriteLine("Teachers had been seeded before. Aborting...");
-                
+
                 return;
             }
 
@@ -2015,9 +2017,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.TeacherRepository.AddRange(teachers);
             await _unitOfWork.Save();
-            
+
             Console.WriteLine("Seeding teachers successfully :)");
-            
+
         }
 
         public async Task SeedingStudents(List<RegisterUserDTO> registerUserDTOs)
@@ -2025,9 +2027,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.StudentRepository.Count();
             if (count > 0)
             {
-                
+
                 System.Console.WriteLine("Students had been seeded before. Aborting...");
-                
+
                 return;
             }
             var length = registerUserDTOs.Count(registerUserDTO => registerUserDTO.Type == 1 && registerUserDTO.ParentId > 0 && registerUserDTO.MainClassId > 0);
@@ -2066,9 +2068,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.StudentRepository.AddRange(students);
             await _unitOfWork.Save();
-            
+
             Console.WriteLine("Seeding students successfully :)");
-            
+
         }
 
         public async Task SeedingParents(List<RegisterUserDTO> registerUserDTOs)
@@ -2077,9 +2079,9 @@ namespace SmartEdu.Services.SeederService
 
             if (count > 0)
             {
-                
+
                 System.Console.WriteLine("Parents had been seeded before. Aborting...");
-                
+
                 return;
             }
 
@@ -2100,9 +2102,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.ParentRepository.AddRange(parents);
             await _unitOfWork.Save();
-            
+
             Console.WriteLine("Seeding parents successfully :)");
-            
+
         }
 
         public async Task SeedingUsers(List<RegisterUserDTO> registerUserDTOs)
@@ -2111,9 +2113,9 @@ namespace SmartEdu.Services.SeederService
             var count = await _userManager.Users.CountAsync();
             if (count > 0)
             {
-                
+
                 Console.WriteLine("Users had been seeeded before. Aborting...");
-                
+
                 return;
             }
 
@@ -2123,9 +2125,9 @@ namespace SmartEdu.Services.SeederService
                 await _userManager.CreateAsync(user, registerUserDTO.Password);
                 await _userManager.AddToRolesAsync(user, registerUserDTO.Roles);
             }
-            
+
             Console.WriteLine("Seeding users successfully :)");
-            
+
         }
 
         public async Task SeedingMainClasses()
@@ -2133,9 +2135,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.MainClassRepository.Count();
             if (count > 0)
             {
-                
+
                 System.Console.WriteLine("Main classes had been seeded before. Aborting...");
-                
+
                 return;
             }
             var mainClasses = new List<MainClass>
@@ -2218,9 +2220,9 @@ namespace SmartEdu.Services.SeederService
             };
             await _unitOfWork.MainClassRepository.AddRange(mainClasses);
             await _unitOfWork.Save();
-            
+
             Console.WriteLine("Seeding main classes successfully :)");
-            
+
         }
 
         public async Task SeedingExtraClasses()
@@ -2228,9 +2230,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.ExtraClassRepository.Count();
             if (count > 0)
             {
-                
+
                 System.Console.WriteLine("Extra classes had been seeded before. Aborting...");
-                
+
                 return;
             }
             var extraClasses = new List<ExtraClass>
@@ -2527,9 +2529,9 @@ namespace SmartEdu.Services.SeederService
 
             await _unitOfWork.ExtraClassRepository.AddRange(extraClasses);
             await _unitOfWork.Save();
-            
+
             Console.WriteLine("Seeding extra classes successfully :)");
-            
+
         }
 
         public async Task SeedingDocumentsBySubject(DocumentSeederOptions options)
@@ -2558,9 +2560,9 @@ namespace SmartEdu.Services.SeederService
             var count = _unitOfWork.DocumentRepository.Count(d => true);
             if (count > 0)
             {
-                
+
                 Console.WriteLine("Documents had been seeded before. Aborting...");
-                
+
                 return;
             }
             // Seeding math documents
@@ -2635,9 +2637,9 @@ namespace SmartEdu.Services.SeederService
                 JsonFilePath = ".assets/biology.json",
                 SubjectId = 8
             });
-            
+
             Console.WriteLine("Seeding documents successfully :)");
-            
+
         }
 
         public async Task SeedingMarks()
@@ -2648,7 +2650,7 @@ namespace SmartEdu.Services.SeederService
                 System.Console.WriteLine("Marks had been seeded before. Aborting...");
                 return;
             }
-            
+
             var marks = new List<Mark>();
             var students = await _unitOfWork.StudentRepository.GetAll(null, null, null, null);
             var subjects = await _unitOfWork.SubjectRepository.GetAll(null, null, null, null);
@@ -2665,10 +2667,10 @@ namespace SmartEdu.Services.SeederService
                         {
                             StudentId = student.Id,
                             SubjectId = subject.Id,
-                            Semester = i % 2 == 0 ? (byte) 1 : (byte) 2,
+                            Semester = i % 2 == 0 ? (byte)1 : (byte)2,
                             FromYear = 2022 + (i / 2),
                             ToYear = 2023 + (i / 2),
-                            
+
                         };
                         if (i <= 1)
                         {
@@ -2695,9 +2697,9 @@ namespace SmartEdu.Services.SeederService
             }
             await _unitOfWork.MarkRepository.AddRange(marks);
             await _unitOfWork.Save();
-            
+
             System.Console.WriteLine("Seeding marks successfully :)");
-            
+
         }
 
         public async Task SeedingTimetables()
@@ -2711,7 +2713,7 @@ namespace SmartEdu.Services.SeederService
             var teachers = (await _unitOfWork.TeacherRepository.GetAll(null, null, null, null)).ToArray<Teacher>();
             var timetables = new List<Timetable>();
             var random = new Random();
-            
+
             var startDate = new DateTime(2023, 9, 1);
             for (var i = 0; i < 90; i++)
             {
@@ -2721,7 +2723,7 @@ namespace SmartEdu.Services.SeederService
                     continue;
                 }
                 var r = random.Next(0, 2);
-                
+
                 var day = new List<Timetable>();
                 for (var j = 0; j < 4; j++)
                 {
@@ -2739,7 +2741,7 @@ namespace SmartEdu.Services.SeederService
                             Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
                         };
                         day.Add(timetable);
-                    } 
+                    }
                     else if (r == 1)
                     {
                         var timetable = new Timetable
@@ -2769,7 +2771,7 @@ namespace SmartEdu.Services.SeederService
                             Topic = TimetableRandomer.Topics[((int)(await _unitOfWork.TeacherRepository.GetSingle(t => t.Id == teachers[rr].Id)).SubjectId) - 1][rrr]
                         };
                         day.Add(timetable);
-                    } 
+                    }
                     else if (r == 1)
                     {
                         var timetable = new Timetable
@@ -2804,7 +2806,7 @@ namespace SmartEdu.Services.SeederService
             var temp = await _unitOfWork.TimetableRepository.GetAll(null);
             var timetables = temp.Where(t => t.From <= DateTime.UtcNow && t.To <= DateTime.UtcNow);
             var academicProgresses = new List<AcademicProgress>();
-            int[] attendances = {-2, -1, 0, 1};
+            int[] attendances = { -2, -1, 0, 1 };
             foreach (var t in timetables)
             {
                 var academicProgress = new AcademicProgress
@@ -2821,6 +2823,46 @@ namespace SmartEdu.Services.SeederService
             await _unitOfWork.AcademicProgressRepository.AddRange(academicProgresses);
             await _unitOfWork.Save();
             System.Console.WriteLine("Seeding academic progresses successfully :)");
+        }
+
+        public async Task SeedingAcademicTracker()
+        {
+            var count = _unitOfWork.AcademicTrackerRepository.Count();
+            if (count > 0)
+            {
+                System.Console.WriteLine("Academic trackers had been seeded before. Aborting...");
+                return;
+            }
+
+            var dictionary = new Dictionary<DateTime, AcademicTracker>();
+            var academicProgresses = await _unitOfWork.AcademicProgressRepository.GetAll(null, null, null, new List<string> { "Timetable.Teacher.Subject", "Timetable" });
+            foreach (var aP in academicProgresses)
+            {
+                if (!dictionary.ContainsDate(aP.Timetable.From))
+                {
+                    dictionary.Add(aP.Timetable.From, new AcademicTracker
+                    {
+                        Date = aP.Timetable.From,
+                        StudentId = aP.StudentId,
+                        Attendance = AcademicRandomer.BuildAttendance(aP),
+                        Homework = AcademicRandomer.BuildHomework(aP),
+                        TeacherComment = AcademicRandomer.BuildTeacherComment(aP)
+                    });
+                }
+                else
+                {
+                    var academicTracker = dictionary.GetAcademicTrackerAtDate(aP.Timetable.From);
+                    if (AcademicRandomer.BuildAttendance(aP) is not null) academicTracker.Attendance += AcademicRandomer.BuildAttendance(aP);
+                    if (AcademicRandomer.BuildHomework(aP) is not null) academicTracker.Homework += AcademicRandomer.BuildHomework(aP);
+                    if (AcademicRandomer.BuildTeacherComment(aP) is not null) academicTracker.TeacherComment += AcademicRandomer.BuildTeacherComment(aP);
+                }
+            }
+            var academicTrackers = dictionary.Values.ToArray<AcademicTracker>();
+
+            await _unitOfWork.AcademicTrackerRepository.AddRange(academicTrackers);
+            await _unitOfWork.Save();
+
+            System.Console.WriteLine("Seeding academic trackers successfully :)");
         }
     }
 }
