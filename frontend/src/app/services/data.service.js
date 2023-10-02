@@ -7,6 +7,7 @@ import { DocumentFilterRequestParams } from "../models/docFilterRequestParams.js
 import { MarkFilterOption } from "../models/markFilterOption.js";
 import { TimetableRequestParams } from "../models/timetableRequestParams.js";
 import { toISOVNString } from "../helpers/datetime.helper.js";
+import { AcademicProgressRequestParams } from "../models/academicProgressRequestParams.js";
 
 class DataService {
 
@@ -74,6 +75,11 @@ class DataService {
         const from = toISOVNString(timetableRequestParams.from);
         const to = toISOVNString(timetableRequestParams.to);
         return await getData(`${BASE_URL}/Timetable?MainClassId=${timetableRequestParams.mainClassId}&From=${from}&To=${to}`);
+    }
+
+    async getAcademicProgressByDate(academicProgressRequestParams = new AcademicProgressRequestParams()) {
+        const date = toISOVNString(academicProgressRequestParams.date);
+        return await getData(`${BASE_URL}/AcademicProgress?StudentId=${academicProgressRequestParams.studentId}&Date=${date}`);
     }
 }
 

@@ -1,4 +1,4 @@
-import { SUBJECT_STYLING } from "../app.enum";
+import { ATTENDANCE, SUBJECT_STYLING } from "../app.enum";
 
 export const convertDateTimeToVn = function (datetime) {
     //Buoc 1: Lay 10 ki tu dau cua datetime 
@@ -62,6 +62,7 @@ export const formatTime = function (d = new Date()) {
 export const displayTimetables = function (timetablesOl, timetables) {
     timetablesOl.innerHTML = "";
     timetables.forEach(t => {
+
         const from = new Date(t.from);
         const to = new Date(t.to);
         const subjectId = t.teacher.subject.id;
@@ -69,8 +70,8 @@ export const displayTimetables = function (timetablesOl, timetables) {
         const gridRow = calculateTimetableGridRow(from);
         const colStart = calculateTimetableColStart(from);
         const colStartClassName = `col-start-${colStart}`;
-        if (timetablesOl.classList.contains("sm:grid-cols-7")) {
-            timetablesOl.insertAdjacentHTML("beforeend", `
+        
+        timetablesOl.insertAdjacentHTML("beforeend", `
             <li class="relative mt-px flex ${colStartClassName}" style="grid-row: ${gridRow} / span 12">
                 <a href="#"
                     class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
@@ -80,22 +81,56 @@ export const displayTimetables = function (timetablesOl, timetables) {
                             datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time></p>
                 </a>
             </li>
-            `);
-        } else {
-            timetablesOl.insertAdjacentHTML("beforeend", `
+        `);
+    });
+}
+
+export const displayAcademicProgresses = function (academicProgressOl, academicProgresses) {
+    academicProgressOl.innerHTML = "";
+    academicProgresses.forEach(aP => {
+        const from = new Date(aP.timetable.from);
+        const to = new Date(aP.timetable.to);
+        const subjectId = aP.timetable.teacher.subject.id;
+        const styling = SUBJECT_STYLING[subjectId];
+        const gridRow = calculateTimetableGridRow(from);
+        const colStart = calculateTimetableColStart(from);
+        const colStartClassName = `col-start-${colStart}`;
+
+        academicProgressOl.insertAdjacentHTML("beforeend", `
             <li class="relative mt-px flex" style="grid-row: ${gridRow} / span 12">
                 <a href="#"
-                    class="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
-                    <p class="order-1 font-semibold ${styling.text700}">${t.teacher.subject.name}</p>
-                    <p class="order-1 ${styling.text600} ${styling.groupHoverText700} italic">Topic: ${t.topic}</p>
-                    <p class="${styling.text500} ${styling.groupHoverText700}">
-                        <time datetime="${t.from}">${formatTime(from)} - ${formatTime(to)}</time>
-                    </p>
+                    class="divide-x ${styling.divideColor} divide-dashed group absolute inset-1 flex justify-between overflow-y-auto rounded-lg ${styling.bg} p-2 text-xs leading-5 ${styling.hoverBg}">
+                    <div class="" style="width: 10%">
+                        <p class="font-semibold ${styling.text700}">Period</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${formatTime(from)} - ${formatTime(to)}</p>                  
+                    </div>  
+                    <div class="pl-4" style="width: 10%">
+                        <p class="font-semibold ${styling.text700}">Subject</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${aP.timetable.teacher.subject.name}</p>                     
+                    </div>
+                    <div class="pl-4" style="width: 13%">
+                        <p class="font-semibold ${styling.text700}">Teacher</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${aP.timetable.teacher.user.fullName}</p>                     
+                    </div>
+                    <div class="pl-4" style="width: 10%">
+                        <p class="font-semibold ${styling.text700}">Attendance</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${ATTENDANCE.get(aP.attendance)}</p>                     
+                    </div>
+                    <div class="pl-4" style="width: 10%">
+                        <p class="font-semibold ${styling.text700}">Homework</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${aP.isDoneHomework ? "Done" : "Not done"}</p>                     
+                    </div>
+                    <div class="pl-4" style="width: 13%">
+                        <p class="font-semibold ${styling.text700}">Marks</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">Empty</p>                     
+                    </div>
+                    <div class="w-1/5 pl-4">
+                        <p class="font-semibold ${styling.text700}">Teacher comment</p>
+                        <p class="${styling.text600} ${styling.groupHoverText700}">${aP.teacherComment}</p>                     
+                    </div>
                 </a>
             </li>
-            `);
-        }
-
+        `);
     });
 }
 

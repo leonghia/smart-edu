@@ -1,8 +1,10 @@
 import { MONTHS, WEEKDAYS } from "../../app.enum";
 import { data } from "../../app.store";
-import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayTimetables, toISOVNString } from "../../helpers/datetime.helper";
+import { getFirstDayOfMonth, getLastDayOfMonth, getLastDateOfMonth, displayAcademicProgresses, toISOVNString } from "../../helpers/datetime.helper";
+import { AcademicProgressRequestParams } from "../../models/academicProgressRequestParams";
 import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
+import { hideDropdown, showDropdown } from "../../helpers/animation.helper";
 
 export class AcademicProgressComponent extends HTMLElement {
 
@@ -18,7 +20,14 @@ export class AcademicProgressComponent extends HTMLElement {
     #nextDateButton;
     #prevDateButton;
     #currentDateText;
-    #timetablesOl;
+    #academicProgressOl;
+    #dropdownButton;
+    #dropdown;
+    #dropdownItems;
+
+    #dropdownState = {
+        state: false
+    }
 
     #timetableRequestParams = new TimetableRequestParams(data.currentUser.student.mainClass.id);
 
@@ -38,7 +47,15 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#nextDateButton = this.querySelector(".next-date-btn");
         this.#prevDateButton = this.querySelector(".prev-date-btn");
         this.#currentDateText = this.querySelector(".current-date-text");
-        this.#timetablesOl = this.querySelector(".timetables-ol");
+        this.#academicProgressOl = this.querySelector(".academic-progresses-ol");
+        this.#dropdownButton = this.querySelector(".dropdown-btn");
+        this.#dropdown = this.querySelector(".dropdown");
+        this.#dropdownItems = Array.from(this.#dropdown.querySelectorAll("a"));
+
+        this.#dropdownButton.addEventListener("click", () => {
+            if (this.#dropdownState.state) hideDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
+            else showDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
+        });
 
         this.#nextDateButton.addEventListener("click", () => {
             this.#date.setDate(this.#date.getDate() + 1);
@@ -67,6 +84,7 @@ export class AcademicProgressComponent extends HTMLElement {
             this.#date = new Date(clicked.firstElementChild.dateTime);
 
             this.#displayAcademicProgress(this.#date);
+            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
         });
 
         this.#nextMonthButton.addEventListener("click", () => {
@@ -135,10 +153,7 @@ export class AcademicProgressComponent extends HTMLElement {
             }
         });
 
-        this.#dateButtons.forEach(b => {
-            b.classList.remove("font-semibold", "text-white");
-            b.firstElementChild.classList.remove("bg-fuchsia-600");
-        });
+        this.#highlightCurrentDate(this.#date);
 
         this.#displayAcademicProgress(this.#date);
     }
@@ -150,7 +165,7 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#selectedWeekdayText.textContent = `${WEEKDAYS[date.getDay()]}`;
 
         if (date.getDay() === 0) {
-            this.#timetablesOl.innerHTML = "";
+            this.#academicProgressOl.innerHTML = "";
             return;
         }
 
@@ -158,9 +173,18 @@ export class AcademicProgressComponent extends HTMLElement {
         temp.setDate(temp.getDate() + 1);
         this.#timetableRequestParams.to = temp;
 
-        dataService.getTimetableByWeek(this.#timetableRequestParams)
+        // dataService.getTimetableByWeek(this.#timetableRequestParams)
+        //     .then(res => {
+        //         displayAcademicProgresses(this.#academicProgressOl, res.data);
+        //     });
+
+        const academicProgressRequestParams = new AcademicProgressRequestParams();
+        academicProgressRequestParams.studentId = data.currentUser.student.id;
+        academicProgressRequestParams.date = this.#timetableRequestParams.from;
+
+        dataService.getAcademicProgressByDate(academicProgressRequestParams)
             .then(res => {
-                displayTimetables(this.#timetablesOl, res.data);
+                if (res.data) displayAcademicProgresses(this.#academicProgressOl, res.data);
             });
     }
 
@@ -202,9 +226,9 @@ export class AcademicProgressComponent extends HTMLElement {
                 <div class="hidden md:ml-4 md:flex md:items-center">
                     <div class="relative">
                         <button type="button"
-                            class="flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            class="dropdown-btn flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             id="menu-button" aria-expanded="false" aria-haspopup="true">
-                            Day view
+                            Detail view
                             <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                 aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -223,18 +247,14 @@ export class AcademicProgressComponent extends HTMLElement {
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                        <div class="opacity-0 hidden absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        <div class="dropdown opacity-0 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-0">Day view</a>
+                                    id="menu-item-0">Detail view</a>
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-1">Week view</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-2">Month view</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-3">Year view</a>
+                                    id="menu-item-1">Short view</a>                            
                             </div>
                         </div>
                     </div>
@@ -388,7 +408,7 @@ export class AcademicProgressComponent extends HTMLElement {
                         </div>
     
                         <!-- Events -->
-                        <ol class="timetables-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1"
+                        <ol class="academic-progresses-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1"
                             style="grid-template-rows: 1.75rem repeat(144, minmax(0, 1fr)) auto">
                             
                         </ol>
