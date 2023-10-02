@@ -37,11 +37,11 @@ public class ClassService : IClassService
         return response;
     }
 
-    public async Task<ServerResponse<IEnumerable<GetAcademicTrackerDTO>>> GetAcademicTrackersByStudent(int studentId)
+    public async Task<ServerResponse<IEnumerable<GetAcademicTrackerDTO>>> GetAcademicTrackersByStudent(AcademicTrackerRequestParams academicTrackerRequestParams)
     {
         var response = new ServerResponse<IEnumerable<GetAcademicTrackerDTO>>();
 
-        var academicTrackers = await _unitOfWork.AcademicTrackerRepository.GetAll(null, aT => aT.StudentId == studentId);
+        var academicTrackers = await _unitOfWork.AcademicTrackerRepository.GetAll(null, aT => aT.StudentId == academicTrackerRequestParams.StudentId && aT.Date.Date >= academicTrackerRequestParams.From.Date && aT.Date.Date < academicTrackerRequestParams.To.Date);
 
         var academicTrackersDTO = academicTrackers.Select(aT => _mapper.Map<GetAcademicTrackerDTO>(aT));
 
