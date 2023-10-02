@@ -18,6 +18,7 @@ namespace SmartEdu.UnitOfWork
         IGenericRepository<Mark> MarkRepository { get; }
         IGenericRepository<Timetable> TimetableRepository { get; }
         IGenericRepository<AcademicProgress> AcademicProgressRepository { get; }
+        IGenericRepository<AcademicTracker> AcademicTrackerRepository { get; }
         Task Save();
     }
 }

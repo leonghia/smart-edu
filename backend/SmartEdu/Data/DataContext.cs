@@ -53,5 +53,6 @@ namespace SmartEdu.Data
         public DbSet<ExtraClassEcBookmark> ExtraClassesEcBookmarks { get; set; }
         public DbSet<Timetable> Timetables { get; set; }
         public DbSet<AcademicProgress> AcademicProgresses { get; set; }
+        public DbSet<AcademicTracker> AcademicTrackers { get; set; }
     }
 }
