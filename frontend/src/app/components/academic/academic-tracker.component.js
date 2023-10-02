@@ -6,10 +6,9 @@ import { TimetableRequestParams } from "../../models/timetableRequestParams";
 import dataService from "../../services/data.service";
 import { hideDropdown, showDropdown } from "../../helpers/animation.helper";
 
-export class AcademicProgressComponent extends HTMLElement {
+export class AcademicTrackerComponent extends HTMLElement {
 
     #date = new Date();
-    #today = new Date();
     #calendarContainer;
     #dateButtons;
     #nextMonthButton;
@@ -17,13 +16,14 @@ export class AcademicProgressComponent extends HTMLElement {
     #monthYearDiv;
     #selectedDateHeading;
     #selectedWeekdayText;
-    #nextDateButton;
-    #prevDateButton;
+    #nextMonthButton1;
+    #prevMonthButton1;
     #currentDateText;
-    #academicProgressOl;
     #dropdownButton;
     #dropdown;
     #dropdownItems;
+    #trackerTab;
+    #progressTab;
 
     #dropdownState = {
         state: false
@@ -44,59 +44,54 @@ export class AcademicProgressComponent extends HTMLElement {
         this.#monthYearDiv = this.querySelector(".month-year-div");
         this.#selectedDateHeading = this.querySelector(".selected-date-heading");
         this.#selectedWeekdayText = this.querySelector(".selected-weekday-text");
-        this.#nextDateButton = this.querySelector(".next-date-btn");
-        this.#prevDateButton = this.querySelector(".prev-date-btn");
+        this.#nextMonthButton1 = this.querySelector(".next-month-btn-1");
+        this.#prevMonthButton1 = this.querySelector(".prev-month-btn-1");
         this.#currentDateText = this.querySelector(".current-date-text");
-        this.#academicProgressOl = this.querySelector(".academic-progresses-ol");
         this.#dropdownButton = this.querySelector(".dropdown-btn");
         this.#dropdown = this.querySelector(".dropdown");
         this.#dropdownItems = Array.from(this.#dropdown.querySelectorAll("a"));
+        this.#trackerTab = this.querySelector("#tracker_tab");
+        this.#progressTab = this.querySelector("#progress_tab");
+
+        this.#displayCurrentMonth(this.#date);
+
+        this.#trackerTab.addEventListener("click", () => {
+            document.querySelector(".main-wrapper").innerHTML = "<academic-tracker></academic-tracker>";
+        });
+
+        this.#progressTab.addEventListener("click", () => {
+            document.querySelector(".main-wrapper").innerHTML = "<academic-progress></academic-progress>";
+        });
 
         this.#dropdownButton.addEventListener("click", () => {
             if (this.#dropdownState.state) hideDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
             else showDropdown(this.#dropdown, this.#dropdownItems, this.#dropdownState);
         });
 
-        this.#nextDateButton.addEventListener("click", () => {
-            this.#date.setDate(this.#date.getDate() + 1);
+        this.#nextMonthButton1.addEventListener("click", () => {
+            this.#date.setMonth(this.#date.getMonth() + 1);
             this.#displayCalendar(this.#date);
-            this.#highlightCurrentDate(this.#date);
-            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+            this.#displayCurrentMonth(this.#date);
         });
 
-        this.#prevDateButton.addEventListener("click", () => {
-            this.#date.setDate(this.#date.getDate() - 1);
+        this.#prevMonthButton1.addEventListener("click", () => {
+            this.#date.setMonth(this.#date.getMonth() - 1);
             this.#displayCalendar(this.#date);
-            this.#highlightCurrentDate(this.#date);
-            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
-        });
-
-        this.#calendarContainer.addEventListener("click", event => {
-            const clicked = event.target.closest("button");
-            if (!clicked) return;
-            this.#dateButtons.forEach(b => {
-                b.classList.remove("font-semibold", "text-white");
-                b.firstElementChild.classList.remove("bg-fuchsia-600");
-            });
-            clicked.classList.add("font-semibold", "text-white");
-            clicked.firstElementChild.classList.add("bg-fuchsia-600");
-
-            this.#date = new Date(clicked.firstElementChild.dateTime);
-
-            this.#displayAcademicProgress(this.#date);
-            this.#currentDateText.textContent = this.#date.toLocaleDateString("vi-VN");
+            this.#displayCurrentMonth(this.#date);
         });
 
         this.#nextMonthButton.addEventListener("click", () => {
             this.#date.setDate(1);
             this.#date.setMonth(this.#date.getMonth() + 1);
             this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
         });
 
         this.#prevMonthButton.addEventListener("click", () => {
             this.#date.setDate(1);
             this.#date.setMonth(this.#date.getMonth() - 1);
             this.#displayCalendar(this.#date);
+            this.#displayCurrentMonth(this.#date);
         });
 
         this.#displayCalendar(this.#date);
@@ -106,16 +101,14 @@ export class AcademicProgressComponent extends HTMLElement {
 
     }
 
-    #highlightCurrentDate(date = new Date()) {
-        this.#dateButtons.forEach(b => {
-            b.classList.remove("font-semibold", "text-white");
-            b.firstElementChild.classList.remove("bg-fuchsia-600");
-            const d = new Date(b.firstElementChild.dateTime);
-            if (date.getFullYear() === d.getFullYear() && date.getMonth() === d.getMonth() && date.getDate() === d.getDate()) {
-                b.classList.add("font-semibold", "text-white");
-                b.firstElementChild.classList.add("bg-fuchsia-600");
-            }
-        });
+    #displayCurrentMonth(date = new Date()) {
+        const temp = new Date();
+        if (date.getMonth() === temp.getMonth() && date.getFullYear() === temp.getFullYear()) {
+            this.#currentDateText.textContent = "This month";
+        } else {
+            this.#currentDateText.textContent = `${MONTHS[date.getMonth()].slice(0, 3)} - ${date.getFullYear()}`;
+        }
+        this.#selectedDateHeading.textContent = `${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
     }
 
     #displayCalendar(date = new Date()) {
@@ -130,6 +123,9 @@ export class AcademicProgressComponent extends HTMLElement {
         d.setMonth(d.getMonth() - 1);
         const lastDateOfPreviousMonth = getLastDateOfMonth(d.getFullYear(), d.getMonth());
         this.#dateButtons.forEach((currentElement, currentIndex) => {
+            
+            
+
             if (currentIndex >= firstDayOfMonth && currentIndex < lastDateOfMonth + firstDayOfMonth) {
                 currentElement.firstElementChild.textContent = start + 1;
                 temp.setDate(start + 1);
@@ -151,41 +147,11 @@ export class AcademicProgressComponent extends HTMLElement {
                 currentElement.classList.remove("text-gray-900", "bg-white");
                 currentElement.classList.add("text-gray-400", "bg-gray-50", "pointer-events-none");
             }
+
+            // Disable click in each date
+            currentElement.classList.add("pointer-events-none");
         });
 
-        this.#highlightCurrentDate(this.#date);
-
-        this.#displayAcademicProgress(this.#date);
-    }
-
-    #displayAcademicProgress(date = new Date()) {
-        const temp = new Date(date);
-
-        this.#selectedDateHeading.children[1].textContent = `${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-        this.#selectedWeekdayText.textContent = `${WEEKDAYS[date.getDay()]}`;
-
-        if (date.getDay() === 0) {
-            this.#academicProgressOl.innerHTML = "";
-            return;
-        }
-
-        this.#timetableRequestParams.from = date;
-        temp.setDate(temp.getDate() + 1);
-        this.#timetableRequestParams.to = temp;
-
-        // dataService.getTimetableByWeek(this.#timetableRequestParams)
-        //     .then(res => {
-        //         displayAcademicProgresses(this.#academicProgressOl, res.data);
-        //     });
-
-        const academicProgressRequestParams = new AcademicProgressRequestParams();
-        academicProgressRequestParams.studentId = data.currentUser.student.id;
-        academicProgressRequestParams.date = this.#timetableRequestParams.from;
-
-        dataService.getAcademicProgressByDate(academicProgressRequestParams)
-            .then(res => {
-                if (res.data) displayAcademicProgresses(this.#academicProgressOl, res.data);
-            });
     }
 
     #render() {
@@ -197,12 +163,12 @@ export class AcademicProgressComponent extends HTMLElement {
                     <time datetime="2022-01-22" class="sm:hidden">Jan 22, 2022</time>
                     <time datetime="2022-01-22" class="hidden sm:inline"></time>
                 </h1>
-                <p class="selected-weekday-text mt-1 text-sm text-gray-500"></p>
+                <p class="selected-weekday-text mt-1 text-sm text-gray-500">Academic tracker</p>
             </div>
             <div class="flex items-center">
                 <div class="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
                     <button type="button"
-                        class="prev-date-btn flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
+                        class="prev-month-btn-1 flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50">
                         <span class="sr-only">Previous day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -211,10 +177,10 @@ export class AcademicProgressComponent extends HTMLElement {
                         </svg>
                     </button>
                     <button type="button"
-                        class="current-date-text hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">Today</button>
+                        class="current-date-text hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block">This month</button>
                     <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
                     <button type="button"
-                        class="next-date-btn flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
+                        class="next-month-btn-1 flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50">
                         <span class="sr-only">Next day</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -228,7 +194,7 @@ export class AcademicProgressComponent extends HTMLElement {
                         <button type="button"
                             class="dropdown-btn flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                             id="menu-button" aria-expanded="false" aria-haspopup="true">
-                            Detail view
+                            Tracker
                             <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                 aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -252,9 +218,9 @@ export class AcademicProgressComponent extends HTMLElement {
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-0">Detail view</a>
+                                    id="progress_tab">Progress</a>
                                 <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                                    id="menu-item-1">Short view</a>                            
+                                    id="tracker_tab">Tracker</a>                            
                             </div>
                         </div>
                     </div>
@@ -351,67 +317,72 @@ export class AcademicProgressComponent extends HTMLElement {
                     </button>
                 </div>
                 <div class="flex w-full flex-auto">
-                    <div class="w-14 flex-none bg-white ring-1 ring-gray-100"></div>
-                    <div class="grid flex-auto grid-cols-1 grid-rows-1">
-                        <!-- Horizontal lines -->
-                        <div class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
-                            style="grid-template-rows: repeat(24, minmax(3.5rem, 1fr))">
-                            <div class="row-end-1 h-7"></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7AM</div>
+                    <div class="bg-white">
+                        <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <div class="mt-6 space-y-10 divide-y divide-gray-200 border-b border-gray-200 pb-10">
+                                <div class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+                                    <div
+                                        class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                                        <div class="flex items-center xl:col-span-1">
+                                            <div class="flex items-center">
+                                                <!-- Active: "text-yellow-400", Inactive: "text-gray-200" -->
+                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <p class="ml-3 text-sm text-gray-700">5<span class="sr-only"> out of 5 stars</span></p>
+                                        </div>
+                    
+                                        <div class="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                                            <h3 class="text-sm font-medium text-gray-900">Performance & Behavior</h3>
+                    
+                                            <div class="mt-3 space-y-6 text-sm text-gray-500">
+                                                <p>I was really pleased with the overall shopping experience. My order even included a
+                                                    little personal, handwritten note, which delighted me!</p>
+                                                <p>The product quality is amazing, it looks and feel even better than I had anticipated.
+                                                    Brilliant stuff! I would gladly recommend this store to my friends. And, now that I
+                                                    think of it... I actually have, many times!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div
+                                        class="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                                        <p class="font-medium text-fuchsia-600">Risako M</p>
+                                        
+                                    </div>
+                                </div>
+                    
+                                <!-- More reviews... -->
                             </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11AM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5PM</div>
-                            </div>
-                            <div></div>
-                            <div>
-                                <div class="-ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6PM</div>
-                            </div>
-                            <div></div>                        
                         </div>
-    
-                        <!-- Events -->
-                        <ol class="academic-progresses-ol col-start-1 col-end-2 row-start-1 grid grid-cols-1"
-                            style="grid-template-rows: 1.75rem repeat(144, minmax(0, 1fr)) auto">
-                            
-                        </ol>
                     </div>
                 </div>
             </div>
@@ -647,4 +618,4 @@ export class AcademicProgressComponent extends HTMLElement {
     }
 }
 
-customElements.define("academic-progress", AcademicProgressComponent);
+customElements.define("academic-tracker", AcademicTrackerComponent);

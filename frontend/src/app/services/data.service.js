@@ -81,6 +81,10 @@ class DataService {
         const date = toISOVNString(academicProgressRequestParams.date);
         return await getData(`${BASE_URL}/AcademicProgress?StudentId=${academicProgressRequestParams.studentId}&Date=${date}`);
     }
+
+    async getAcademicTrackersByStudent(studentId) {
+        return await getData(`${BASE_URL}/AcademicTracker?studentId=${studentId}`);
+    }
 }
 
 export default new DataService();
