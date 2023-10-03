@@ -1,0 +1,69 @@
+[HƯƠNG - Slide 1] Chào mừng thầy cô và các bạn đến với bài thuyết trình của nhóm 1 chúng em. Đề tài của nhóm em có tên là SmartEdu. Đây là một ứng dụng sổ liên lạc điện tử giữa nhà trường và gia đình.
+
+[HƯƠNG - Slide 2] Đầu tiên em xin trình bày hoàn cảnh ra đời của SmartEdu, hay nói cách khác là vì sao nhóm em lại chọn đề tài này. 
+
+[HƯƠNG - SLIDE 2] Hiện nay, nhiều bậc cha mẹ đang bị thiếu một công cụ để theo dõi tiến độ học tập của con em mình, chỉ có thể dựa vào phiếu điểm hoặc các cuộc họp với giáo viên. Sự thiếu minh bạch này khiến phụ huynh gặp khó khăn trong việc cập nhật thông tin về kết quả học tập của các con.
+
+[HƯƠNG - SLIDE 2] Giáo viên phải ghi và tính điểm vào sổ sách cho từng học sinh, việc này có thể tốn thời gian và dễ xảy ra sai sót, thất lạc sổ sách. Quy trình thủ công này cũng cản trở việc phản hồi kịp thời cho học sinh và phụ huynh.
+
+[HƯƠNG - SLIDE 2] Thêm vào đó, khi thời khóa biểu thay đổi bất chợt thì học sinh có thể gặp khó khăn trong việc quản lý lịch trình và thời gian biểu của mình, dẫn đến nhầm lẫn, bỏ lớp và sử dụng thời gian không hiệu quả.
+
+[HƯƠNG - SLIDE 2] Ngoài ra, đại dịch COVID-19 nêu bật sự cần thiết của các công cụ trực tuyến trong quản lý việc dạy và học, số hóa mọi thông tin cần thiết lên internet.
+
+[HƯƠNG - SLIDE 2] Nhóm em chọn SmartEdu vì đây cũng là đề tài khá gần gũi với bối cảnh nhà trường và học sinh, độ thiết thực cao và có khá nhiều tính năng hay để chúng em rèn luyện về code cả backend lẫn frontend.
+
+[HƯƠNG - SLIDE 2] Sau đây em xin điểm qua một số lợi ích thiết thực của website. 
+
+[HƯƠNG - SLIDE 3] Để thu hẹp khoảng cách giao tiếp giữa phụ huynh và tiến độ học tập của con họ, cung cấp cho phụ huynh một nền tảng thuận tiện để theo dõi điểm số, bài tập và thành tích tổng thể.
+
+[HƯƠNG - SLIDE 3] Để tạo điều kiện liên lạc tốt hơn giữa phụ huynh, giáo viên và học sinh, đảm bảo rằng các cập nhật, thông báo và phản hồi quan trọng của nhà trường có thể dễ dàng được chia sẻ và truy cập. 
+
+[HƯƠNG - SLIDE 4] Tiếp theo, em xin giới thiệu các công nghệ chính của đồ án. 
+
+[HƯƠNG - SLIDE 4] Backend của nhóm em được viết bằng ASP.NET, database sử dụng là SQL Server.
+
+[HƯƠNG - SLIDE 4] Frontend viết bằng Javascript thuần, không dùng framework. Ngoài ra bọn em có dùng TailwindCSS để hỗ trợ việc đặt tên class cho CSS.
+
+[HƯƠNG - SLIDE 5] Bên cạnh các công nghệ chính, bọn em có sử dụng một số công nghệ bổ trợ. Đầu tiên là Hangfire, đây là một thư viện của .NET có tác dụng chạy các tác vụ ngầm trên server.
+
+[HƯƠNG - SLIDE 5] Ví dụ như cơ chế tự động gửi mail thông báo tình hình học tập của học sinh về cho phụ huynh: Mỗi 60 phút, tác vụ Hangfire sẽ kiểm tra xem giờ hiện tại đã qua 8 giờ tối chưa. Nếu rồi thì hàm SendEmail() sẽ được kích hoạt, quét qua toàn bộ bảng thông báo trong database và gửi mail về cho phụ huynh.
+
+[HƯƠNG - SLIDE 6] Công nghệ bổ trợ tiếp theo mà nhóm em sử dụng là Parcel, đây là một công cụ bundling trong Javascript. Đại loại là nó sẽ gộp tất cả các file JS thành 2 - 3 file lớn và gửi cho phía client để phục vụ cho người dùng. Điều này giúp giảm tại lượng HTTP request và cải thiện tốc độ load cho website.
+
+[HƯƠNG - SLIDE 7] Công nghệ bổ trợ cuối cùng là Ajax (viết tắt của Asynchronous Javascript). Đặc điểm hữu ích nhất của Ajax là tính chất "không đồng bộ", nghĩa là nó có thể giao tiếp với máy chủ, trao đổi dữ liệu và cập nhật trang mà không cần phải tải lại trang. Điều này mang lại trải nghiệm mượt mà và nhanh chóng cho người dùng.
+
+[HƯƠNG - SLIDE 8] Về phần thành viên thì nhóm em có 5 thành viên và sử dụng tính năng Github Projects để phân công công việc (Chuyển sang slide 9).
+
+[HƯƠNG - SLIDE 9] Cách làm việc của nhóm em sẽ là: anh Nghĩa trưởng nhóm giao việc cho mọi người qua Github Projects. Sau đó, nếu mọi người có trao đổi các thắc mắc, hỏi đáp trực tiếp trên Github mà không cần phải dùng Messenger hay Zalo, tránh thông tin bị trôi. 
+
+[HƯƠNG - SLIDE 10] Tiếp theo, khi bắt tay vào code thì từng thành viên sẽ tạo nhánh (nói cách khác là bản sao của bản code chính). Thực hiện code, chỉnh sửa và test trên nhánh. 
+
+[HƯƠNG - SLIDE 11] Sau khi code xong thì các thành viên sẽ nộp code lên bằng cách tạo Pull Request trên Github. Anh Nghĩa nhận được thông báo trên Github và sẽ vào duyệt code, có vấn đề chỗ nào thì anh Nghĩa sẽ comment góp ý để thành viên về chỉnh lại code. Nếu OK thì anh Nghĩa sẽ ấn Approve và Merge code từ bản sao của thành viên vào bản chính của dự án.
+
+[HƯƠNG - SLIDE 12] Bên cạnh những thuận tiện khi làm đồ án thì nhóm em cũng gặp phải không ít trở ngại và khó khăn.
+
+[HƯƠNG - SLIDE 12] Đầu tiên là khó khăn về kiến thức Javascript. Project của nhóm em thì khá nặng về frontend, do đó việc xử lý Javascript là rất nhiều. Trong khi đó, kiến thức về Javascript của các thành viên gần như là bằng 0, anh Nghĩa trưởng nhóm phải dạy lại cho mọi người từ đầu. Điều này ảnh hưởng đến tiến độ làm đồ án và có nhiều phần (ví dụ như luồng của giáo viên) là chúng em phải bỏ bớt vì chưa kịp làm.
+
+[HƯƠNG - NÓI THÊM] Sau buổi bảo vệ ngày hôm nay thì nhóm em sẽ tiếp tục hoàn thiện đồ án này. Thứ nhất là để đáp ứng yêu cầu project, thứ hai là để rèn luyện nâng cao kỹ năng code, đặc biệt là Javascript.
+
+[HƯƠNG - Slide 13] Trở ngại nữa mà nhóm em gặp phải là vốn tiếng Anh của một số thành viên là khá hạn chế, dẫn đến khó khăn khi research tìm kiếm thông tin trên mạng hoặc là tra cứu documentation.
+
+[HƯƠNG - Slide 14 - Chuyển cảnh] Sau đây là phần demo website của nhóm em sẽ do bạn Phúc đảm nhận. Mời Phúc lên trình bày. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
