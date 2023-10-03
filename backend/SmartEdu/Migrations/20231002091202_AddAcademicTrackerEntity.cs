@@ -19,8 +19,8 @@ namespace SmartEdu.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
-                    Attendance = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Homework = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Attendance = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Homework = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Marks = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TeacherComment = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

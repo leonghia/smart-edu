@@ -35,3 +35,7 @@ import { AcademicProgressComponent } from "./components/academic/academic-progre
 import { TimetableScheduleComponent } from "./components/timetable-schedule/timetable-schedule.component.js";
 import { TimetableComponent } from "./components/timetable-schedule/timetable.component.js";
 import { AcademicTrackerComponent } from "./components/academic/academic-tracker.component.js";
+import { StudentHomeComponent } from "./components/dashboard/student-dashboard/student-home/student-home.component.js";
+import { StudentHomeFeatureComponent } from "./components/dashboard/student-dashboard/student-home/sh-feature.component.js";
+import { StudentHomeGalleryComponent } from "./components/dashboard/student-dashboard/student-home/sh-gallery.component.js";
+import { ThreeColumnBlogComponent } from "./components/blog-section/three-col-blog.component.js";
