@@ -10,8 +10,10 @@ export class LoginComponent extends HTMLElement {
   #loginBtn;
   #rememberMeInput;
   #isRememberMe = false;
+
   constructor() {
     super();
+    document.querySelector("app-root").parentElement.classList.remove("bg-white");
   }
 
 
