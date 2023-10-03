@@ -27,3 +27,11 @@ export const saveTokenToSession = function (value) {
 export const getToken = function () {
     return getTokenFromSession() ?? getTokenFromLocal();
 }
+
+export const removeTokenFromLocal = function () {
+    localStorage.removeItem("token");
+}
+
+export const removeTokenFromSession = function () {
+    sessionStorage.removeItem("token");
+}
